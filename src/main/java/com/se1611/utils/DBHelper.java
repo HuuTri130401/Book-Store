@@ -7,12 +7,11 @@ package com.se1611.utils;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-//import javax.activation.DataSource;
-//import javax.naming.Context;
-//import javax.naming.InitialContext;
-//import javax.naming.NamingException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 /**
  *
@@ -20,11 +19,15 @@ import java.sql.SQLException;
  */
 public class DBHelper implements Serializable {
     public static Connection getConnection() 
-            throws ClassNotFoundException, SQLException {
-        Connection con = null;
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=UserManagement";
-        con = DriverManager.getConnection(url, "sa", "12345");
+            throws SQLException, NamingException {
+        //1. get current context
+        Context context = new InitialContext();
+        //2. get server context
+        Context tomcatContext = (Context) context.lookup("java:comp/env");
+        //3. user datasource
+        DataSource ds = (DataSource) tomcatContext.lookup("DBBOOKSTORE");
+        //4. open connection 
+        Connection con = ds.getConnection();
         return con;
     }
 }
