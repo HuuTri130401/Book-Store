@@ -70,12 +70,12 @@
                     </a>
                 </li>
                 <li>
-                    <form action="bookAction" method="POST">
-                        <a type="submit" href="bookAction">
+                    <!--<form action="bookAction" method="POST">-->
+                        <a type="submit" href="bookAction?action=bookPage1">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
-                    </form>
+                        <!--</form>-->
                 </li>
                 <li>
                     <a href="#">
@@ -98,19 +98,16 @@
             <div class="home-content">
                 <div class="overview-boxes">
                     <div class="box">
-                         <a type="submit" href="bookAction?action=bookPage1">Category  </a> >
-                        <a type="submit" href="bookAction?action=${nameCategory}"> ${nameCategory}</a>
+                        <a type="submit" href="bookAction?action=bookPage1">Category  </a> >
+                         ${nameCategory}
                         <div class="left-side">
-                            <c:forEach items="${listBook}" var="b">
-                                <c:set var="bookId" value="${bookIdServlet}"></c:set>
-                                <c:if test="${b.book_Id==bookId}">
-                                    <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
-                                    Name: ${b.name}<br/>
-                                    Price: ${b.price_Book}<br/>
-                                    Quantity: ${b.quantity_Book}<br/>
-                                    Author: ${b.author}<br/>
-                                    Year Public: ${b.year_Of_Public}
-                                </c:if>
+                            <c:forEach items="${listCategoryBook}" var="b">
+                                <form action="bookAction?action=bookDetail&bookId=${b.book_Id}" method="POST">
+                                    <img src="<c:url value="/images/${b.image_Book}"/>"/>
+                                    ${b.name}
+                                    ${b.price_Book}
+                                    <button type="submit">View Detail</button>
+                                </form>
                             </c:forEach>
                         </div>
                     </div>

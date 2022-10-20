@@ -9,6 +9,7 @@ package com.se1611.book;
  * @author tuan vu
  */
 public class BookDTO {
+
     private int book_Id;
     private String name;
     private String author;
@@ -18,8 +19,24 @@ public class BookDTO {
     private int quantity_Book;
     private String image_Book;
     private boolean status;
+    private String categoryName;
 
     public BookDTO() {
+    }
+
+    
+
+    public BookDTO(int book_Id, String name, String author, int year_Of_Public, int category, float price_Book, int quantity_Book, String image_Book, boolean status, String categoryName) {
+        this.book_Id = book_Id;
+        this.name = name;
+        this.author = author;
+        this.year_Of_Public = year_Of_Public;
+        this.category = category;
+        this.price_Book = price_Book;
+        this.quantity_Book = quantity_Book;
+        this.image_Book = image_Book;
+        this.status = status;
+        this.categoryName = categoryName;
     }
 
     public BookDTO(int book_Id, String name, String author, int year_Of_Public, int category, float price_Book, int quantity_Book, String image_Book, boolean status) {
@@ -105,6 +122,13 @@ public class BookDTO {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
     
 }

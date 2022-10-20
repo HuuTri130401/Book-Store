@@ -73,12 +73,10 @@
                     </a>
                 </li>
                 <li>
-                    <form action="bookAction" method="POST">
-                        <a type="submit" href="bookAction">
-                            <i class='bx bx-book'></i>
-                            <span class="links_name">Books</span>
-                        </a>
-                    </form>
+                    <a type="submit" href="bookAction?action=bookPage1">
+                        <i class='bx bx-book'></i>
+                        <span class="links_name">Books</span>
+                    </a>
                 </li>
                 <li>
                     <a href="#">
@@ -104,16 +102,25 @@
                 <div class="overview-boxes">
                     <div class="box">
                         <div class="left-side">
-                            <h1>List Book</h1>
+                            <form action="bookAction" method="POST">
+                                <select name="action">
+                                    <option value="Romance">Romance</option>
+                                    <option value="Self-help">Self-help</option>
+                                    <option value="Novel">Novel</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                </select>
+                                <button type="submit">-></button>
+                            </form><br/>
                             <c:forEach items="${listBook}" var="b">
-                                <form action="bookAction?action=bookDetail&bookId=${b.book_Id}" method="POST">
+                                <form action="bookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" 
+                                      method="POST">
                                     <img src="<c:url value="/images/${b.image_Book}"/>"/>
                                     ${b.name}
                                     ${b.price_Book}
                                     <button type="submit">View Detail</button>
                                 </form>
                             </c:forEach>
-                             <a type="submit" href="bookAction?action=bookPage1">First</a>
+                            <a type="submit" href="bookAction?action=bookPage1">First</a>
                             <a type="submit" href="bookAction?action=bookPage1">1</a>
                             <a type="submit" href="bookAction?action=bookPage2">2</a>
                             <a type="submit" href="bookAction?action=bookPage3">3</a>
@@ -129,5 +136,5 @@
         <script src="./js/script.js"></script>
 
     </body>
-        
+
 </html>
