@@ -70,12 +70,12 @@
                     </a>
                 </li>
                 <li>
-                    <!--<form action="bookAction" method="POST">-->
-                        <a type="submit" href="bookAction?action=bookPage1">
+                    <form action="bookAction" method="POST">
+                        <a type="submit" href="bookAction">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
-                        <!--</form>-->
+                    </form>
                 </li>
                 <li>
                     <a href="#">
@@ -99,7 +99,17 @@
                 <div class="overview-boxes">
                     <div class="box">
                         <div class="left-side">
-                            Admin Dashboard
+                            <c:forEach items="${listBook}" var="b">
+                                <c:set var="bookId" value="${bookIdServlet}"></c:set>
+                                <c:if test="${b.book_Id==bookId}">
+                                    <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
+                                    Name: ${b.name}<br/>
+                                    Price: ${b.price_Book}<br/>
+                                    Quantity: ${b.quantity_Book}<br/>
+                                    Author: ${b.author}<br/>
+                                    Year Public: ${b.year_Of_Public}
+                                </c:if>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

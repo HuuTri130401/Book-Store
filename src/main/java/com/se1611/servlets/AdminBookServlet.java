@@ -24,33 +24,68 @@ import javax.servlet.http.HttpSession;
  *
  * @author tuan vu
  */
-public class BookServlet extends HttpServlet {
+public class AdminBookServlet extends HttpServlet {
 
     private final String INVALID_PAGE = "invalidPage";
-    private final String BOOK_PAGE = "bookPage";
+    private final String BOOK_PAGE = "adminBookPage";
+    private final String BOOK_DETAIL_PAGE = "adminBookDetailPage";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        String url="";
-        //HttpSession session = request.getSession();
+        String url = INVALID_PAGE;
+        // /lấy Acction Để đưa vào switch vô case chuyển page
+        String action = request.getParameter("action");
+        // Session
+        HttpSession session = request.getSession();
+        // Create list save book
+        List<BookDTO> list = new ArrayList<>();
+        BookDAO dao = new BookDAO();
+        // số book cần lấy, 1 page gồm 4 book
+        int first = 0;
+        int last = 0;
         try {
-            BookDAO dao = new BookDAO();
-            List<BookDTO> list = new ArrayList<>();
-            list = dao.getInformationBook();
-            //session.setAttribute("listBook", list);
-             request.setAttribute("listBook", list);
-            if (list == null) {
-                url = INVALID_PAGE;
-            } else {
-                url = BOOK_PAGE;
-
+            switch (action) {
+                case "bookPage1":
+                    first = 1;
+                    last = 4;
+                    list = dao.getInformationBook(first, last);
+                    session.setAttribute("listBook", list);
+                    url = BOOK_PAGE;
+                    break;
+                case "bookPage2":
+                    first = 5;
+                    last = 8;
+                    list = dao.getInformationBook(first, last);
+                    session.setAttribute("listBook", list);
+                    url = BOOK_PAGE;
+                    break;
+                case "bookPage3":
+                    first = 9;
+                    last = 12;
+                    list = dao.getInformationBook(first, last);
+                    session.setAttribute("listBook", list);
+                    url = BOOK_PAGE;
+                    break;
+                case "bookPage4":
+                    first = 13;
+                    last = 16;
+                    list = dao.getInformationBook(first, last);
+                    session.setAttribute("listBook", list);
+                    url = BOOK_PAGE;
+                    break;
+                    // Page Detail Book khi click vào từng book
+                case "bookDetail":
+                    String bookId = request.getParameter("bookId");
+                    request.setAttribute("bookIdServlet", bookId);
+                    url = BOOK_DETAIL_PAGE;
+                    break;
             }
         } catch (SQLException e) {
             log("BookServlet_SQL_" + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
-            //response.sendRedirect(url);
+            // response.sendRedirect(url);
         }
     }
 
@@ -69,7 +104,7 @@ public class BookServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (NamingException ex) {
-            Logger.getLogger(BookServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminBookServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,7 +122,7 @@ public class BookServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (NamingException ex) {
-            Logger.getLogger(BookServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminBookServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

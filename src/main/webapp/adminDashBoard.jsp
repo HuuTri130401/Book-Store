@@ -70,12 +70,12 @@
                     </a>
                 </li>
                 <li>
-                    <form action="bookAction" method="POST">
-                        <a type="submit" href="bookAction">
+                    <!--<form action="bookAction" method="POST">-->
+                        <a type="submit" href="bookAction?action=bookPage1">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
-                    </form>
+                        <!--</form>-->
                 </li>
                 <li>
                     <a href="#">

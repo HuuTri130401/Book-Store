@@ -19,7 +19,7 @@ import javax.naming.NamingException;
  */
 public class BookDAO {
 
-    public List<BookDTO> getInformationBook() throws SQLException, NamingException {
+    public List<BookDTO> getInformationBook(int first, int last) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         BookDAO bd = null;
@@ -28,10 +28,15 @@ public class BookDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "select book_Id,name_Book,author_Book,year_Of_Public,\n"
-                        + "category,price_Book,quantity_Book,image,status_Book\n"
-                        + "from Book";
+                String sql = "select *\n"
+                        + "from (\n"
+                        + "	select *, ROW_NUMBER()over(Order by [book_Id]) as Rownum\n"
+                        + "	from Book\n"
+                        + ")as BookData\n"
+                        + "where BookData.Rownum between ? and ?";
                 stm = con.prepareStatement(sql);
+                stm.setInt(1, first);
+                stm.setInt(2, last);
                 rs = stm.executeQuery();
                 listBook = new ArrayList<>();
                 while (rs.next()) {
