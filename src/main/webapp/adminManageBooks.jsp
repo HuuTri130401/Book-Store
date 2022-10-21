@@ -109,7 +109,7 @@
                                     <option value="Novel">Novel</option>
                                     <option value="Fantasy">Fantasy</option>
                                 </select>
-                                <button type="submit">-></button>
+                                <button type="submit">Choice</button>
                             </form><br/>
                             <c:forEach items="${listBook}" var="b">
                                 <form action="bookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" 
