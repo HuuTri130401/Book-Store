@@ -12,6 +12,55 @@
         <link rel="stylesheet" href="./css/adminManageBooksStyle.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <style>
+            body{
+                box-sizing: border-box;
+                padding: 0;
+                margin: 0;
+            }
+            .item{
+                width: 50%;
+
+            }
+            .item img{
+                width: 50%;
+            }
+            .left-side .choice{
+                font-size: 15px;
+                margin-left: 10px;
+                height:25px;
+                width: 40px;
+            }
+            .left-side .categoryText{
+                margin-left: 10px;
+                font-size: 20px;
+                height: 40px;
+            }
+            .left-side .comboxCategory{
+                margin-left: 10px;
+                width: 115px;
+                height: 100%;
+                font-size: 18px;
+            }
+            .left-side .formCategory{
+                height: 32px;
+            }
+            .item{
+                padding-left: 100px;
+            }
+            .item img{
+                height: 250px;
+                width: 300px;
+            }
+            .item .name{
+                font-size: 20px;
+            }
+            .item .price{
+                font-size: 20px;
+            }
+        </style>
     </head>
 
     <body>
@@ -102,24 +151,29 @@
                 <div class="overview-boxes">
                     <div class="box">
                         <div class="left-side">
-                            <form action="bookAction" method="POST">
-                                <select name="action">
+                            <form class="formCategory" action="bookAction" method="POST">
+                                <spam class="categoryText">Category</spam>
+                                <select class="comboxCategory" name="action">
                                     <option value="Romance">Romance</option>
                                     <option value="Self-help">Self-help</option>
                                     <option value="Novel">Novel</option>
                                     <option value="Fantasy">Fantasy</option>
                                 </select>
-                                <button type="submit">Choice</button>
+                                <button class="choice btn btn-secondary" type="submit">Go</button>
                             </form><br/>
-                            <c:forEach items="${listBook}" var="b">
-                                <form action="bookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" 
-                                      method="POST">
-                                    <img src="<c:url value="/images/${b.image_Book}"/>"/>
-                                    ${b.name}
-                                    ${b.price_Book}
-                                    <button type="submit">View Detail</button>
-                                </form>
-                            </c:forEach>
+                            <div class="itemList row">
+                                <c:forEach items="${listBook}" var="b">
+                                    <div class="item col-lg-6">
+                                        <form action="bookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" 
+                                              method="POST">
+                                            <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
+                                           <p class="name">${b.name}</p> <br/>
+                                            <p class="price">${b.price_Book}<p ><br/>
+                                            <button type="submit">View Detail</button>
+                                        </form>
+                                    </div>
+                                </c:forEach>
+                            </div>
                             <a type="submit" href="bookAction?action=bookPage1">First</a>
                             <a type="submit" href="bookAction?action=bookPage1">1</a>
                             <a type="submit" href="bookAction?action=bookPage2">2</a>

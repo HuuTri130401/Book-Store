@@ -99,7 +99,7 @@
                 <div class="overview-boxes">
                     <div class="box">
                         <div class="left-side">
-                            Admin Dashboard
+                            Admin Dashboard hihi
                         </div>
                     </div>
                 </div>
