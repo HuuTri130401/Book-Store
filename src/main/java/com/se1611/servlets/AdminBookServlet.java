@@ -40,6 +40,7 @@ public class AdminBookServlet extends HttpServlet {
         // Session
         HttpSession session = request.getSession();
         // Create list save book
+
         List<BookDTO> list = new ArrayList<>();
         BookDAO dao = new BookDAO();
         // số book cần lấy, 1 page gồm 4 book
@@ -107,6 +108,10 @@ public class AdminBookServlet extends HttpServlet {
                     break;
                 // Page Detail Book khi click vào từng book
                 case "bookDetail":
+                    first = 1;
+                    last = 16;
+                    list = dao.getInformationBook(first, last);
+                    session.setAttribute("listBook", list);
                     String bookId = request.getParameter("bookId");
                     int categoryId = Integer.parseInt(request.getParameter("categoryId"));
                     list = dao.getCategoryBook(categoryId);

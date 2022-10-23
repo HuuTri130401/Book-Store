@@ -28,7 +28,7 @@ public class BookDAO {
             con = DBHelper.getConnection();
             if (con != null) {
                 String sql = "select book_Id,name_Book,author_Book,year_Of_Public,category,price_Book,quantity_Book,image\n"
-                        + ",status_Book\n"
+                        + ",status_Book,description_Book\n"
                         + "from (\n"
                         + "	select *, ROW_NUMBER()over(Order by [book_Id]) as Rownum\n"
                         + "	from Book\n"
@@ -50,6 +50,7 @@ public class BookDAO {
                     list.setQuantity_Book(rs.getInt("quantity_Book"));
                     list.setImage_Book(rs.getString("image"));
                     list.setStatus(rs.getBoolean("status_Book"));
+                    list.setDescriptionBook(rs.getString("description_Book"));
                     listBook.add(list);
                 }
             }
@@ -76,7 +77,7 @@ public class BookDAO {
             con = DBHelper.getConnection();
             if (con != null) {
                 String sql = "select book_Id,name_Book,author_Book,year_Of_Public,category,price_Book,quantity_Book,image\n"
-                        + ",status_Book,c.category_Name as nameCate\n"
+                        + ",status_Book,c.category_Name as nameCate,description_Book\n"
                         + "from Book b inner join Category c on b.category=c.category_Id\n"
                         + "where b.category=?";
                 stm = con.prepareStatement(sql);
@@ -95,6 +96,7 @@ public class BookDAO {
                     list.setImage_Book(rs.getString("image"));
                     list.setStatus(rs.getBoolean("status_Book"));
                     list.setCategoryName(rs.getString("nameCate"));
+                    list.setDescriptionBook(rs.getString("description_Book"));
                     listCategoryBook.add(list);
                 }
             }

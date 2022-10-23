@@ -20,11 +20,24 @@ public class BookDTO {
     private String image_Book;
     private boolean status;
     private String categoryName;
+    private String descriptionBook;
 
     public BookDTO() {
     }
 
-    
+    public BookDTO(int book_Id, String name, String author, int year_Of_Public, int category, float price_Book, int quantity_Book, String image_Book, boolean status, String categoryName, String descriptionBook) {
+        this.book_Id = book_Id;
+        this.name = name;
+        this.author = author;
+        this.year_Of_Public = year_Of_Public;
+        this.category = category;
+        this.price_Book = price_Book;
+        this.quantity_Book = quantity_Book;
+        this.image_Book = image_Book;
+        this.status = status;
+        this.categoryName = categoryName;
+        this.descriptionBook = descriptionBook;
+    }
 
     public BookDTO(int book_Id, String name, String author, int year_Of_Public, int category, float price_Book, int quantity_Book, String image_Book, boolean status, String categoryName) {
         this.book_Id = book_Id;
@@ -130,5 +143,12 @@ public class BookDTO {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
-    
+
+    public String getDescriptionBook() {
+        return descriptionBook;
+    }
+
+    public void setDescriptionBook(String descriptionBook) {
+        this.descriptionBook = descriptionBook;
+    }
 }
