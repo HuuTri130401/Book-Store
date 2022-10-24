@@ -4,6 +4,6 @@
               driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
               username="sa"
               password="12345" 
-              url="jdbc:sqlserver://localhost:1433;databaseName=BookStoreManagement" 
+              url="jdbc:sqlserver://localhost:49152;databaseName=BookStoreManagement"
     />
 </Context>

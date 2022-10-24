@@ -4,9 +4,17 @@
         <servlet-name>EmployeeLoginServlet</servlet-name>
         <servlet-class>com.se1611.servlets.EmployeeLoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminBookServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminBookServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeLoginServlet</servlet-name>
         <url-pattern>/EmployeeLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminBookServlet</servlet-name>
+        <url-pattern>/AdminBookServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

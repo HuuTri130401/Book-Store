@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -68,10 +70,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./adminManageBooks.html">
-                        <i class='bx bx-book'></i>
-                        <span class="links_name">Books</span>
-                    </a>
+                    <!--<form action="bookAction" method="POST">-->
+                        <a type="submit" href="bookAction?action=bookPage1">
+                            <i class='bx bx-book'></i>
+                            <span class="links_name">Books</span>
+                        </a>
+                        <!--</form>-->
                 </li>
                 <li>
                     <a href="#">
@@ -95,7 +99,7 @@
                 <div class="overview-boxes">
                     <div class="box">
                         <div class="left-side">
-                            Admin Dashboard
+                            Admin Dashboard hihi
                         </div>
                     </div>
                 </div>
