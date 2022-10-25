@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Dashboard</title>
+        <title>Admin Manage Employees</title>
         <!-- link file CSS -->
         <link rel="stylesheet" href="./css/adminHomeStyle.css">
         <!-- BoxIcon CDN Link -->
@@ -94,51 +94,12 @@
 
                     <div class="overview-boxes">
 
-                        <div class="box">
-                            <div class="left-side">
-                                <div class="boxtopic">Total Order</div>
-                                <div class="number">123,456</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box1'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="left-side">
-                                <div class="boxtopic">Total Sales</div>
-                                <div class="number">1.123.000</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box2'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="left-side">
-                                <div class="boxtopic">Total Profit</div>
-                                <div class="number">400.000</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box3'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="left-side">
-                                <div class="boxtopic">Best - Selling Product</div>
-                                <div class="number">123.333</div>
-                                <div class="name-product">NameBook</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box4'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
+        
         <script src="./js/script.js"></script>
 
     </body>

@@ -1,7 +1,6 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,15 +13,13 @@
     </head>
 
     <body>
-        <!--header-->
-        <header>
+        <div class="header">
             <div class="header-menu">
                 <!-- even menu sidebar -->
                 <div class="sidebar-button__logo">
                     <div class="sidebar-button">
                         <i class='bx bx-menu sidebarBtn'></i>
                     </div>
-
                     <!-- div of logo -->
                     <div class="logo-details">
                         <img src="./images/logo.jpg" alt="Logo Phuong Nam Bookstore">
@@ -33,80 +30,117 @@
                     <div class="wraper_searchbox_profile">
                         <div class="search-box">
                             <input type="text" placeholder="Search...">
-                            <button type="submit"><i class='bx bx-search-alt-2'></i></button>
+                            <button type='submit'><i class='bx bx-search-alt-2'></i></button>
                         </div>
                         <div class="profile_details">
                             <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
-                                <span class="name">Admin Name</span>
+                                <span class="name">Admin Dash </span>
                                 <i class='bx bxs-chevron-down'></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
 
-        <!-- sidebar -->
-        <nav class="sidebar">
-            <!-- link in sidebar -->
-            <ul class="nav-links">
-                <li>
-                    <a href="./adminDashBoard.jsp">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="links_name">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="adminManageEmployees.html">
-                        <i class='bx bx-user'></i>
-                        <span class="links_name">Employees</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-home'></i>
-                        <span class="links_name">Overview</span>
-                    </a>
-                </li>
-                <li>
-                    <!--<form action="bookAction" method="POST">-->
-                        <a type="submit" href="bookAction?action=bookPage1">
+        <div class="wrapper-body">
+            <div class="sidebar">
+                <!-- link in sidebar -->
+                <ul class="nav-links">
+                    <li>
+                        <a href="./adminDashBoard.jsp">
+                            <i class='bx bx-grid-alt'></i>
+                            <span class="links_name">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./adminManageEmployees.jsp">
+                            <i class='bx bx-user'></i>
+                            <span class="links_name">Employees</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-home'></i>
+                            <span class="links_name">Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
-                        <!--</form>-->
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-trending-up'></i>
-                        <span class="links_name">Statistic</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="login.jsp">
-                        <i class='bx bx-log-out'></i>
-                        <span class="links_name">Log out</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-trending-up'></i>
+                            <span class="links_name">Statistic</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.jsp">
+                            <i class='bx bx-log-out'></i>
+                            <span class="links_name">Log out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-        <!-- home content -->
-        <section class="home-section">
-            <!-- home-content -->
-            <div class="home-content">
-                <div class="overview-boxes">
-                    <div class="box">
-                        <div class="left-side">
-                            Admin Dashboard hihi
+            <!-- home content -->
+            <div class="home-section">
+                <!-- home-content -->
+                <div class="home-content">
+
+                    <div class="overview-boxes">
+
+                        <div class="box">
+                            <div class="left-side">
+                                <div class="boxtopic">Total Order</div>
+                                <div class="number">123,456</div>
+                                <div class="indicator">
+                                    <i class='bx bx-up-arrow-alt box1'></i>
+                                    <span class="text">Up from yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="left-side">
+                                <div class="boxtopic">Total Sales</div>
+                                <div class="number">1.123.000</div>
+                                <div class="indicator">
+                                    <i class='bx bx-up-arrow-alt box2'></i>
+                                    <span class="text">Up from yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="left-side">
+                                <div class="boxtopic">Total Profit</div>
+                                <div class="number">400.000</div>
+                                <div class="indicator">
+                                    <i class='bx bx-up-arrow-alt box3'></i>
+                                    <span class="text">Up from yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="left-side">
+                                <div class="boxtopic">Best - Selling Product</div>
+                                <div class="number">123.333</div>
+                                <div class="name-product">NameBook</div>
+                                <div class="indicator">
+                                    <i class='bx bx-up-arrow-alt box4'></i>
+                                    <span class="text">Up from yesterday</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
+        </div>
         <script src="./js/script.js"></script>
 
     </body>
+
 </html>

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 public class EmployeeLoginServlet extends HttpServlet {
 
     private final String INVALID_PAGE = "invalidPage";
-    private final String ADMIN_MANAGE_BOOKS_PAGE = "adminManageBooksPage";
+    private final String ADMIN_MANAGE_BOOKS_PAGE = "adminDashBoardPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
