@@ -146,7 +146,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./adminManageEmployees.html">
+                    <a href="./adminManageEmployees.jsp">
                         <i class='bx bx-user'></i>
                         <span class="links_name">Employees</span>
                     </a>

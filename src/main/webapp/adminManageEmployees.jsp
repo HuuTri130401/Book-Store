@@ -67,7 +67,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a type="submit" href="bookAction?action=bookPage1">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
