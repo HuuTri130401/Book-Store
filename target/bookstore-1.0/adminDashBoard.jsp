@@ -67,7 +67,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./adminManageBooks.jsp">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
@@ -140,7 +140,6 @@
             </div>
         </div>
         <script src="./js/script.js"></script>
-
     </body>
 
 </html>
