@@ -1,7 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 
     <head>
@@ -13,6 +11,7 @@
         <link rel="stylesheet" href="./css/adminHomeStyle.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     </head>
 
     <body>
@@ -70,10 +69,10 @@
                     <li>
                         <c:choose>
                             <c:when test="${role=='ADMIN'}">
-                                <a href="./adminManageEmployees.jsp">
-                                    <i class='bx bx-user'></i>
-                                    <span class="links_name">Employees</span>
-                                </a>
+                        <a href="./adminManageEmployees.jsp">
+                            <i class='bx bx-user'></i>
+                            <span class="links_name">Employees</span>
+                        </a>
                             </c:when>
                             <c:when test="${role=='STAFF'}">
                                 <a href="./adminManageEmployees.jsp">
@@ -101,7 +100,6 @@
 
                     </li>
                     <li>
-
                         <a type="submit" href="bookAction?action=bookPage1">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
@@ -116,7 +114,7 @@
                                 </a>
                             </c:when>
                             <c:when test="${role=='STAFF'}">
-                                <a href="#">
+                                <a href="inventoryAction">
                                     <i class='bx bx-carousel' ></i>
                                     <span class="links_name">Inventory</span>
                                 </a>
