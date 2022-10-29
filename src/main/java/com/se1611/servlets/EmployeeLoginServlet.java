@@ -9,6 +9,7 @@ import com.se1611.employees.EmployeeDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -26,7 +27,7 @@ public class EmployeeLoginServlet extends HttpServlet {
 
     private final String INVALID_PAGE = "invalidPage";
     private final String ADMIN_MANAGE_BOOKS_PAGE = "adminDashBoardPage";
-
+    private final String STAFF_NODIFY_PAGE = "staffNodifyPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,8 +54,14 @@ public class EmployeeLoginServlet extends HttpServlet {
                     //create new session
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", validEmployee);
+                    session.setAttribute("role",validEmployee.getRole().toUpperCase(Locale.ROOT));
                 } else if(validEmployee.getRole().equalsIgnoreCase("staff")) {
                     //login staff screen
+                    url = STAFF_NODIFY_PAGE;
+                    //create new session
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("USER", validEmployee);
+                    session.setAttribute("role",validEmployee.getRole().toUpperCase(Locale.ROOT));
                 } else if(validEmployee.getRole().equalsIgnoreCase("seller")) {
                     //login seller screen
                 }

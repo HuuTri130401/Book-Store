@@ -35,7 +35,7 @@
                         <div class="profile_details">
                             <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
-                                <span class="name">Admin Dash </span>
+                                <span class="name">${role}</span>
                                 <i class='bx bxs-chevron-down'></i>
                             </div>
                         </div>
@@ -67,10 +67,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-book'></i>
-                            <span class="links_name">Books</span>
-                        </a>
+                        <i class='bx bx-book'></i>
+                        <span class="links_name">Books</span>
                     </li>
                     <li>
                         <a href="#">

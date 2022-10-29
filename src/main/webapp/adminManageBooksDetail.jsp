@@ -129,7 +129,7 @@
                 <div class="profile_details">
                     <img src="images/admin1.png" alt="image admin">
                     <div class="name_role">
-                        <span class="name">Admin Name</span>
+                        <span class="name">${role}</span>
                         <i class='bx bxs-chevron-down'></i>
                     </div>
                 </div>
@@ -143,34 +143,76 @@
     <!-- link in sidebar -->
     <ul class="nav-links">
         <li>
-            <a href="./adminDashBoard.jsp">
-                <i class='bx bx-grid-alt'></i>
-                <span class="links_name">Dashboard</span>
-            </a>
+            <c:choose>
+                <c:when test="${role=='ADMIN'}">
+                    <a href="./adminDashBoard.jsp">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                </c:when>
+                <c:when test="${role=='STAFF'}">
+                    <a href="staffNodifyPage">
+                        <i class='bx bxs-bell'></i>
+                        <span class="links_name">Nodify</span>
+                    </a>
+                </c:when>
+            </c:choose>
         </li>
         <li>
-            <a href="adminManageEmployees.html">
-                <i class='bx bx-user'></i>
-                <span class="links_name">Employees</span>
-            </a>
+            <c:choose>
+                <c:when test="${role=='ADMIN'}">
+                    <a href="./adminManageEmployees.jsp">
+                        <i class='bx bx-user'></i>
+                        <span class="links_name">Employees</span>
+                    </a>
+                </c:when>
+                <c:when test="${role=='STAFF'}">
+                    <a href="./adminManageEmployees.jsp">
+                        <i class='bx bx-notification'></i>
+                        <span class="links_name">Request</span>
+                    </a>
+                </c:when>
+            </c:choose>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-home'></i>
-                <span class="links_name">Overview</span>
-            </a>
+            <c:choose>
+                <c:when test="${role=='ADMIN'}">
+                    <a href="#">
+                        <i class='bx bx-home'></i>
+                        <span class="links_name">Overview</span>
+                    </a>
+                </c:when>
+                <c:when test="${role=='STAFF'}">
+                    <a href="#">
+                        <i class='bx bx-add-to-queue'></i>
+                        <span class="links_name">Importation</span>
+                    </a>
+                </c:when>
+            </c:choose>
+
         </li>
         <li>
-            <a href="bookAction?action=bookPage1">
+
+            <a type="submit" href="bookAction?action=bookPage1">
                 <i class='bx bx-book'></i>
                 <span class="links_name">Books</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-trending-up'></i>
-                <span class="links_name">Statistic</span>
-            </a>
+            <c:choose>
+                <c:when test="${role=='ADMIN'}">
+                    <a href="#">
+                        <i class='bx bx-trending-up'></i>
+                        <span class="links_name">Statistic</span>
+                    </a>
+                </c:when>
+                <c:when test="${role=='STAFF'}">
+                    <a href="inventoryAction">
+                        <i class='bx bx-carousel' ></i>
+                        <span class="links_name">Inventory</span>
+                    </a>
+                </c:when>
+            </c:choose>
         </li>
         <li>
             <a href="login.jsp">
@@ -193,8 +235,10 @@
                         <a style="color: #17A2B8" href="bookAction?action=${nameCategory}"> ${nameCategory}</a>
                     </div>
                     <c:forEach items="${listBook}" var="b">
+                        <form action="">
                         <c:set var="bookId" value="${bookIdServlet}"></c:set>
                         <c:if test="${b.book_Id==bookId}">
+<%--                            Item Book Need Show--%>
                             <div class="itemList row">
                                 <div class="border col-lg-4">
                                     <img src="<c:url value="/images/${b.image_Book}"/>" class="rounded"/><br/>
@@ -205,20 +249,22 @@
                                             <fmt:formatNumber value="${b.price_Book}" type="number"/>
                                         <small style="text-decoration:underline">đ</small>
                                     <p><br/>
-                                    <p class="quantity">Số lượng tồn kho: ${b.quantity_Book}</p>
-                                    <p class="author">Tác giả: <u>${b.author}</u></p>
-                                    <p class="yearPublic">Năm xuất bản: ${b.year_Of_Public}</p>
+                                    <p class="quantity">Quantity: ${b.quantity_Book}</p>
+                                    <p class="author">Author: <u>${b.author}</u></p>
+                                    <p class="yearPublic">Year Of Public: ${b.year_Of_Public}</p>
                                     <button class="inventory btn btn-outline-danger">Inventory</button>
                                     <button class="btn btn-success" style="font-size: 30px;">Importation</button>
                                 </div>
                             </div>
                             <div class="boxDescription">
                             <div class="description">
-                                <strong>Thông tin chi tiết</strong><br>
+                                <strong>Information Detail</strong><br>
                                    <p class="text">${b.descriptionBook}</p>
                             </div>
                             </div>
+<%--                            End Show Item Book--%>
                         </c:if>
+                        </form>
                     </c:forEach>
                 </div>
             </div>

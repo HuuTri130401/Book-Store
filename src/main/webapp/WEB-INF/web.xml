@@ -8,6 +8,10 @@
         <servlet-name>AdminBookServlet</servlet-name>
         <servlet-class>com.se1611.servlets.AdminBookServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InventoryServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.InventoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeLoginServlet</servlet-name>
         <url-pattern>/EmployeeLoginServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>AdminBookServlet</servlet-name>
         <url-pattern>/AdminBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InventoryServlet</servlet-name>
+        <url-pattern>/InventoryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
