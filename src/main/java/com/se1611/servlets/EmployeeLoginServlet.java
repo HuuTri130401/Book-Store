@@ -54,7 +54,6 @@ public class EmployeeLoginServlet extends HttpServlet {
                     //create new session
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", validEmployee);
-                    session.setAttribute("role",validEmployee.getRole().toUpperCase(Locale.ROOT));
                 } else if(validEmployee.getRole().equalsIgnoreCase("staff")) {
                     //login staff screen
                     url = STAFF_NODIFY_PAGE;
@@ -62,6 +61,7 @@ public class EmployeeLoginServlet extends HttpServlet {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", validEmployee);
                     session.setAttribute("role",validEmployee.getRole().toUpperCase(Locale.ROOT));
+                    session.setAttribute("employee_Id",validEmployee.getEmployee_Id());
                 } else if(validEmployee.getRole().equalsIgnoreCase("seller")) {
                     //login seller screen
                 }

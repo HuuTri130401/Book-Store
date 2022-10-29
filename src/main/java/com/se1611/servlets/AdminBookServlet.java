@@ -27,9 +27,9 @@ import javax.servlet.http.HttpSession;
 public class AdminBookServlet extends HttpServlet {
 
     private final String INVALID_PAGE = "invalidPage";
-    private final String BOOK_PAGE = "adminBookPage";
-    private final String BOOK_DETAIL_PAGE = "adminBookDetailPage";
-    private final String BOOK_CATEGOTY_PAGE = "adminBookCategoryPage";
+    private final String ADMIN_BOOK_PAGE = "adminBookPage";
+    private final String ADMIN_BOOK_DETAIL_PAGE = "adminBookDetailPage";
+    private final String ADMIN_BOOK_CATEGOTY_PAGE = "adminBookCategoryPage";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException {
@@ -54,28 +54,28 @@ public class AdminBookServlet extends HttpServlet {
                     last = 4;
                     list = dao.getInformationBook(first, last);
                     session.setAttribute("listBook", list);
-                    url = BOOK_PAGE;
+                    url = ADMIN_BOOK_PAGE;
                     break;
                 case "bookPage2":
                     first = 5;
                     last = 8;
                     list = dao.getInformationBook(first, last);
                     session.setAttribute("listBook", list);
-                    url = BOOK_PAGE;
+                    url = ADMIN_BOOK_PAGE;
                     break;
                 case "bookPage3":
                     first = 9;
                     last = 12;
                     list = dao.getInformationBook(first, last);
                     session.setAttribute("listBook", list);
-                    url = BOOK_PAGE;
+                    url = ADMIN_BOOK_PAGE;
                     break;
                 case "bookPage4":
                     first = 13;
                     last = 16;
                     list = dao.getInformationBook(first, last);
                     session.setAttribute("listBook", list);
-                    url = BOOK_PAGE;
+                    url = ADMIN_BOOK_PAGE;
                     break;
                 // Page Category Book
                 case "Romance":
@@ -83,28 +83,28 @@ public class AdminBookServlet extends HttpServlet {
                     list = dao.getCategoryBook(first);
                     session.setAttribute("listCategoryBook", list);
                     request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = BOOK_CATEGOTY_PAGE;
+                    url = ADMIN_BOOK_CATEGOTY_PAGE;
                     break;
                 case "Self-help":
                     first = 2;
                     list = dao.getCategoryBook(first);
                     session.setAttribute("listCategoryBook", list);
                     request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = BOOK_CATEGOTY_PAGE;
+                    url = ADMIN_BOOK_CATEGOTY_PAGE;
                     break;
                 case "Novel":
                     first = 3;
                     list = dao.getCategoryBook(first);
                     session.setAttribute("listCategoryBook", list);
                     request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = BOOK_CATEGOTY_PAGE;
+                    url = ADMIN_BOOK_CATEGOTY_PAGE;
                     break;
                 case "Fantasy":
                     first = 4;
                     list = dao.getCategoryBook(first);
                     session.setAttribute("listCategoryBook", list);
                     request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = BOOK_CATEGOTY_PAGE;
+                    url = ADMIN_BOOK_CATEGOTY_PAGE;
                     break;
                 // Page Detail Book khi click vào từng book
                 case "bookDetail":
@@ -117,7 +117,7 @@ public class AdminBookServlet extends HttpServlet {
                     list = dao.getCategoryBook(categoryId);
                     request.setAttribute("bookIdServlet", bookId);
                     request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = BOOK_DETAIL_PAGE;
+                    url = ADMIN_BOOK_DETAIL_PAGE;
                     break;
             }
         } catch (SQLException e) {

@@ -125,7 +125,7 @@
                         <div class="profile_details">
                             <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
-                                <span class="name">${role}</span>
+                                <span class="name">${sessionScope.USER["fullName"]}</span>
                                 <i class='bx bxs-chevron-down'></i>
                             </div>
                         </div>
@@ -140,76 +140,35 @@
             <!-- link in sidebar -->
             <ul class="nav-links">
                 <li>
-                    <c:choose>
-                        <c:when test="${role=='ADMIN'}">
                             <a href="./adminDashBoard.jsp">
                                 <i class='bx bx-grid-alt'></i>
                                 <span class="links_name">Dashboard</span>
                             </a>
-                        </c:when>
-                        <c:when test="${role=='STAFF'}">
-                            <a href="staffNodifyPage">
-                                <i class='bx bxs-bell'></i>
-                                <span class="links_name">Nodify</span>
-                            </a>
-                        </c:when>
-                    </c:choose>
                 </li>
                 <li>
-                    <c:choose>
-                        <c:when test="${role=='ADMIN'}">
                             <a href="./adminManageEmployees.jsp">
                                 <i class='bx bx-user'></i>
                                 <span class="links_name">Employees</span>
                             </a>
-                        </c:when>
-                        <c:when test="${role=='STAFF'}">
-                            <a href="./adminManageEmployees.jsp">
-                                <i class='bx bx-notification'></i>
-                                <span class="links_name">Request</span>
-                            </a>
-                        </c:when>
-                    </c:choose>
                 </li>
                 <li>
-                    <c:choose>
-                        <c:when test="${role=='ADMIN'}">
                             <a href="#">
                                 <i class='bx bx-home'></i>
                                 <span class="links_name">Overview</span>
                             </a>
-                        </c:when>
-                        <c:when test="${role=='STAFF'}">
-                            <a href="#">
-                                <i class='bx bx-add-to-queue'></i>
-                                <span class="links_name">Importation</span>
-                            </a>
-                        </c:when>
-                    </c:choose>
-
                 </li>
                 <li>
 
-                    <a type="submit" href="bookAction?action=bookPage1">
+                    <a type="submit" href="adminBookAction?action=bookPage1">
                         <i class='bx bx-book'></i>
                         <span class="links_name">Books</span>
                     </a>
                 </li>
                 <li>
-                    <c:choose>
-                        <c:when test="${role=='ADMIN'}">
                             <a href="#">
                                 <i class='bx bx-trending-up'></i>
                                 <span class="links_name">Statistic</span>
                             </a>
-                        </c:when>
-                        <c:when test="${role=='STAFF'}">
-                            <a href="inventoryAction">
-                                <i class='bx bx-carousel' ></i>
-                                <span class="links_name">Inventory</span>
-                            </a>
-                        </c:when>
-                    </c:choose>
                 </li>
                 <li>
                     <a href="login.jsp">
@@ -228,7 +187,7 @@
                 <div class="overview-boxes">
                     <div class="box">
                         <div class="left-side">
-                            <form class="formCategory" action="bookAction" method="POST">
+                            <form class="formCategory" action="adminBookAction" method="POST">
                                 <spam class="categoryText">Category</spam>
                                 <select class="comboxCategory" name="action">
                                     <option value="Romance">Romance</option>
@@ -241,7 +200,7 @@
                             <div class="itemList row">
                                 <c:forEach items="${listBook}" var="b">
                                     <div class="item col-lg-6">
-                                        <form action="bookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}"
+                                        <form action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}"
                                               method="POST">
                                             <div class="border">
                                             <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
@@ -258,10 +217,10 @@
                             <div class="page row">
                                 <div class="col-lg-4"></div>
                                 <div class="col-lg-4 d-flex justify-content-center" >
-                            <a type="submit" href="bookAction?action=bookPage1">1</a>
-                            <a type="submit" href="bookAction?action=bookPage2">2</a>
-                            <a type="submit" href="bookAction?action=bookPage3">3</a>
-                            <a type="submit" href="bookAction?action=bookPage4">4</a>
+                            <a type="submit" href="adminBookAction?action=bookPage1">1</a>
+                            <a type="submit" href="adminBookAction?action=bookPage2">2</a>
+                            <a type="submit" href="adminBookAction?action=bookPage3">3</a>
+                            <a type="submit" href="adminBookAction?action=bookPage4">4</a>
                                 </div>
                                 <div class="col-lg-4"></div>
                             </div>
