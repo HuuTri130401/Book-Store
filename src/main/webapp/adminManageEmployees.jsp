@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 
     <head>
@@ -35,7 +38,7 @@
                         <div class="profile_details">
                             <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
-                                <span class="name">${role}</span>
+                                <span class="name">${sessionScope.USER["fullName"]}</span>
                                 <i class='bx bxs-chevron-down'></i>
                             </div>
                         </div>
@@ -67,8 +70,10 @@
                         </a>
                     </li>
                     <li>
-                        <i class='bx bx-book'></i>
-                        <span class="links_name">Books</span>
+                        <a href="./adminManageBooks.jsp">
+                            <i class='bx bx-book'></i>
+                            <span class="links_name">Books</span>
+                        </a>
                     </li>
                     <li>
                         <a href="#">

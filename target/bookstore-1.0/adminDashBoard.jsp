@@ -38,7 +38,7 @@
                         <div class="profile_details">
                             <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
-                                <span class="name">${role}</span>
+                                <span class="name">${sessionScope.USER["fullName"]}</span>
                                 <i class='bx bxs-chevron-down'></i>
                             </div>
                         </div>
