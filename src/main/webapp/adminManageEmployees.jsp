@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Manage Employees</title>
         <!-- link file CSS -->
-        <link rel="stylesheet" href="./css/adminHomeStyle.css">
+        <link rel="stylesheet" href="./css/adminManageEmployeesStyle.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
@@ -86,20 +86,45 @@
                     </li>
                 </ul>
             </div>
-
             <!-- home content -->
             <div class="home-section">
                 <!-- home-content -->
                 <div class="home-content">
-
-                    <div class="overview-boxes">
-
-                        
+                    <div class="overview-tableEmployee">
+                        <div class="tableEmployee">
+                            <h2 id="nameTable">LIST OF EMPLOYEES</h2>
+                            <table id="employees">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Password</th>
+                                    <th>Account</th>
+                                    <th>Role</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Gender</th>
+                                    <th>Status</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <script src="./js/script.js"></script>
 
     </body>
