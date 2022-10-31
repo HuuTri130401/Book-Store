@@ -16,6 +16,13 @@
         <servlet-name>StaffBookServlet</servlet-name>
         <servlet-class>com.se1611.servlets.StaffBookServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaffImportationServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.StaffImportationServlet</servlet-class>
+    </servlet>
+
+                        <!--MAPPING-->
+
     <servlet-mapping>
         <servlet-name>EmployeeLoginServlet</servlet-name>
         <url-pattern>/EmployeeLoginServlet</url-pattern>
@@ -32,6 +39,11 @@
         <servlet-name>StaffBookServlet</servlet-name>
         <url-pattern>/StaffBookServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffImportationServlet</servlet-name>
+        <url-pattern>/StaffImportationServlet</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

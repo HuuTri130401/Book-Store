@@ -6,6 +6,8 @@ package com.se1611.servlets;
 
 import com.se1611.book.BookDAO;
 import com.se1611.book.BookDTO;
+import com.se1611.request.RequestDAO;
+import com.se1611.request.RequestDTO;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -40,9 +42,11 @@ public class StaffBookServlet extends HttpServlet {
         // Session
         HttpSession session = request.getSession();
         // Create list save book
-
         List<BookDTO> list = new ArrayList<>();
         BookDAO dao = new BookDAO();
+        //GEt List Request
+        List<RequestDTO> listRequest = new ArrayList<>();
+        RequestDAO daoRequest = new RequestDAO();
         // số book cần lấy, 1 page gồm 4 book
         int first = 0;
         int last = 0;
@@ -108,11 +112,13 @@ public class StaffBookServlet extends HttpServlet {
                     break;
                 // Page Detail Book khi click vào từng book
                 case "bookDetail":
+                    listRequest = daoRequest.getRequest();
+                    int bookId = Integer.parseInt(request.getParameter("bookId"));
+                    request.setAttribute("request_Book_Id",checkBook(bookId,listRequest,request));
                     first = 1;
                     last = 16;
                     list = dao.getInformationBook(first, last);
                     session.setAttribute("listBook", list);
-                    String bookId = request.getParameter("bookId");
                     int categoryId = Integer.parseInt(request.getParameter("categoryId"));
                     list = dao.getCategoryBook(categoryId);
                     request.setAttribute("bookIdServlet", bookId);
@@ -128,14 +134,27 @@ public class StaffBookServlet extends HttpServlet {
         }
     }
 
+    //Check lấy bookid trong list Request
+    private int checkBook(int bookId, List<RequestDTO> listRequest,HttpServletRequest request) {
+        int request_Book_Id = 0;
+        for (int i = 0; i < listRequest.size(); i++) {
+            if (bookId == listRequest.get(i).getRequest_Book_Id()) {
+                request_Book_Id = bookId;
+                //Get Request Id
+                request.setAttribute("request_Id",listRequest.get(i).getRequest_Id());
+            }
+        }
+        return request_Book_Id;
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

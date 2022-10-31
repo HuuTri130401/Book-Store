@@ -52,6 +52,7 @@ public class InventoryServlet extends HttpServlet {
                     Date date_Inventory = new Date(millis);
                     //Insert Inventory
                     if (dao.InsertInventory(employee_Inventory, date_Inventory)) {
+                        //Insert Inventory Detail
                         if (dao.InsertInventoryDetail(id_Inventory, book_id_Inventory, quantity_Inventory, note)) {
                             listInventory = dao.GetInventory();
                             session.setAttribute("listInventory", listInventory);

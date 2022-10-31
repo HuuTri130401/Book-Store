@@ -146,13 +146,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./adminManageEmployees.jsp">
+                    <a href="staffImportationAction?action=getRequest">
                         <i class='bx bx-notification'></i>
                         <span class="links_name">Request</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="staffImportationAction?action=getImportation">
                         <i class='bx bx-add-to-queue'></i>
                         <span class="links_name">Importation</span>
                     </a>

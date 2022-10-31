@@ -85,6 +85,10 @@
             margin-right: 50px;
         }
 
+        .button {
+            display: flex;
+        }
+
         /*End Item List*/
 
         /*Start Description*/
@@ -188,13 +192,13 @@
             </a>
         </li>
         <li>
-            <a href="./adminManageEmployees.jsp">
+            <a href="staffImportationAction?action=getRequest">
                 <i class='bx bx-notification'></i>
                 <span class="links_name">Request</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="staffImportationAction?action=getImportation">
                 <i class='bx bx-add-to-queue'></i>
                 <span class="links_name">Importation</span>
             </a>
@@ -249,12 +253,38 @@
                                     <p class="quantity">Quantity: ${b.quantity_Book}</p>
                                     <p class="author">Author: <u>${b.author}</u></p>
                                     <p class="yearPublic">Year Of Public: ${b.year_Of_Public}</p>
-                                    <button class="inventory btn btn-danger" data-toggle="modal"
-                                            data-target="#myModal">Inventory
-                                    </button>
-                                    <button class="btn btn-info" style="font-size: 30px;">Importation</button>
+
+                                        <%--                                    Button add Inventory and Importation--%>
+                                    <div class="button">
+                                        <button class="inventory btn btn-danger" data-toggle="modal"
+                                                data-target="#myModal">Inventory
+                                        </button>
+
+                                            <%-- START Check Book In List Request to Display buton Importation--%>
+                                        <c:choose>
+                                            <c:when test="${request_Book_Id > 0}">
+                                                <button class="btn btn-info" style="font-size: 30px;"
+                                                        data-toggle="modal"
+                                                        data-target="#myModalImportation">Importation
+                                                </button>
+                                            </c:when>
+                                            <%-- Chuyển sang button view Request nếu k có id book in List Request--%>
+                                            <c:otherwise>
+                                                <form action="staffImportationAction?action=getRequest" method="POST">
+                                                    <button type="submit" class="btn btn-info" style="font-size: 30px;">
+                                                        View
+                                                        Request
+                                                    </button>
+                                                </form>
+                                            </c:otherwise>
+                                        </c:choose>
+                                            <%-- END  Check Book In List Request to Display buton Importation --%>
+
+                                    </div>
+                                        <%-- End Button add Inventory and Importation --%>
                                 </div>
                             </div>
+                            <%--                            Show Description Book   --%>
                             <div class="boxDescription">
                                 <div class="description">
                                     <strong>Information Detail</strong><br>
@@ -272,13 +302,76 @@
 
 <script src="./js/script.js"></script>
 
+<%--Form Add to Importation--%>
+<div class="modal fade" id="myModalImportation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <header class="head-form mb-0">
+                <h2>Importation Book</h2>
+            </header>
+
+            <div class="modal-body">
+                <%--Form --%>
+                <form action="staffImportationAction?action=insertImportation" method="POST">
+                    <%--  ID BOOK Insert To Inventory SQL--%>
+                    <input type="hidden" name="book_Id_Importation" value="${bookIdServlet}"/>
+                    <input type="hidden" name="request_Id" value="${request_Id}"/>
+                    <%--  DO Note And Quantity Inventory --%>
+                    <%--Enter Note--%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                            </div>
+                            <input type="text" name="quantityImportation" class="form-control input-sm"
+                                   style="font-size: 15px" placeholder="Quantity">
+                        </div>
+                    </div>
+                    <%-- Enter Price--%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                            </div>
+                            <input type="text" name="priceImportation" class="form-control input-sm"
+                                   style="font-size: 15px" placeholder="Price">
+                        </div>
+                    </div>
+                    <%--   Enter note--%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-briefcase"></i></span>
+                            </div>
+                            <select style="font-size: 15px" class="form-control" name="note">
+                                <option>Note</option>
+                                <option value="Importation Enough Books">Importation Enough Books</option>
+                                <option value="Importation Missing Books">Importation Missing Books</option>
+                            </select>
+                            <input type="text" name="noteOther" class="form-control input-sm" style="font-size: 15px"
+                                   placeholder="Other Note"/>
+                        </div>
+                    </div>
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-info add">Add Book</button>
+                </form>
+                <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--Form Add to Inventory--%>
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <header class="head-form mb-0">
-                <h2 id="header-title">Add Book To Inventory</h2>
+                <h2>Add Book To Inventory</h2>
             </header>
 
             <div class="modal-body">
@@ -286,6 +379,7 @@
                 <form action="staffInventoryAction?action=insertInventory" method="POST">
                     <%--  ID BOOK Insert To Inventory SQL--%>
                     <input type="hidden" name="book_Id_Inventory" value="${bookIdServlet}"/>
+
                     <%--  DO Note And Quantity Inventory --%>
                     <div class="form-group">
                         <div class="input-group">
@@ -295,7 +389,7 @@
                             <select style="font-size: 15px" class="form-control" name="note">
                                 <option >Reason</option>
                                 <option value="Moldy Book">Moldy Book</option>
-                                <option value="Book Lost Team">Book Lost Team</option>
+                                <option value="Book Lose Team">Book Lose Team</option>
                                 <option value="Book Is Bent">Book Is Bent</option>
                             </select>
                         </div>
@@ -320,6 +414,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

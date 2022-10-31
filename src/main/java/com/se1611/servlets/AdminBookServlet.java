@@ -77,6 +77,13 @@ public class AdminBookServlet extends HttpServlet {
                     session.setAttribute("listBook", list);
                     url = ADMIN_BOOK_PAGE;
                     break;
+                case "bookPage5":
+                    first = 17;
+                    last = 21;
+                    list = dao.getInformationBook(first, last);
+                    session.setAttribute("listBook", list);
+                    url = ADMIN_BOOK_PAGE;
+                    break;
                 // Page Category Book
                 case "Romance":
                     first = 1;

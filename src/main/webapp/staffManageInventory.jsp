@@ -18,6 +18,9 @@
     <%--    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>--%>
     <%--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--%>
     <%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /*Start Form Add To Inventory*/
         .modal-dialog {
@@ -92,13 +95,13 @@
                 </a>
             </li>
             <li>
-                <a href="./adminManageEmployees.jsp">
+                <a href="staffImportationAction?action=getRequest">
                     <i class='bx bx-notification'></i>
                     <span class="links_name">Request</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="staffImportationAction?action=getImportation">
                     <i class='bx bx-add-to-queue'></i>
                     <span class="links_name">Importation</span>
                 </a>
@@ -135,7 +138,7 @@
                     <div class="left-side">
                         <%--                             Write   Body Code--%>
                         <table class="table">
-                            <thead class="thead-dark">
+                            <thead class="thead-dark" style="font-size: 15px">
                             <tr>
                                 <th>Image</th>
                                 <th>Name Book</th>
@@ -143,10 +146,10 @@
                                 <th>Reason</th>
                                 <th>Date To Inventory</th>
                                 <th>Employee Implement</th>
-                                <th>Status</th>
+                                <th></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="font-size: 15px">
 
                             <c:forEach var="i" items="${listInventory}">
                                 <c:if test="${i.inventory_Status==true}">
@@ -162,10 +165,10 @@
                                         <td>${i.date_Inventory}</td>
                                         <td>${i.employee_Inventory}</td>
                                         <td>
-                                            <button name="action" value="updateInventory" class="btn btn-info">Update
-                                            </button>
-                                            <button class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#myModal">Delete
+<%--                                            <button style="font-size: 15px" class="btn btn-info">Update--%>
+<%--                                            </button>--%>
+                                            <button style="font-size: 30px;border: none" data-toggle="modal"
+                                                    data-target="#myModal"><i class="fa-solid fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>
