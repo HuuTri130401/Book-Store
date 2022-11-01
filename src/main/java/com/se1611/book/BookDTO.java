@@ -39,7 +39,7 @@ public class BookDTO {
         this.descriptionBook = descriptionBook;
     }
 
-    public BookDTO(int book_Id, String name, String author, int year_Of_Public, int category, float price_Book, int quantity_Book, String image_Book, boolean status, String categoryName) {
+    public BookDTO(int book_Id, String name, String author, int year_Of_Public, int category, float price_Book, int quantity_Book, String image_Book, boolean status, String descriptionBook) {
         this.book_Id = book_Id;
         this.name = name;
         this.author = author;
@@ -49,7 +49,7 @@ public class BookDTO {
         this.quantity_Book = quantity_Book;
         this.image_Book = image_Book;
         this.status = status;
-        this.categoryName = categoryName;
+        this.descriptionBook = descriptionBook;
     }
 
     public BookDTO(int book_Id, String name, String author, int year_Of_Public, int category, float price_Book, int quantity_Book, String image_Book, boolean status) {

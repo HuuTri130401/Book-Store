@@ -5,7 +5,10 @@
 package com.se1611.book;
 
 import com.se1611.utils.DBHelper;
+import java.io.Serializable;
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,8 +20,60 @@ import javax.naming.NamingException;
  *
  * @author tuan vu
  */
-public class BookDAO {
+public class BookDAO implements Serializable {
 
+    private List<BookDTO> bookList;
+
+    public List<BookDTO> getBookList() {
+        return bookList;
+    }
+    
+    public void getAllBook() throws SQLException, NamingException{
+        Connection con = null;
+        CallableStatement stm = null;
+        ResultSet rs = null;
+        try{
+            con = DBHelper.getConnection();
+            if(con != null){
+                String sql = "SELECT book_Id, name_Book, author_Book, year_Of_Public, category, price_Book, quantity_Book, image, status_Book, description_Book "
+                        + "FROM Book "
+                        + "WHERE status_Book = 1";
+                stm = con.prepareCall(sql);
+                rs = stm.executeQuery();
+                
+                while(rs.next()){
+                    int bookID = rs.getInt("book_Id");
+                    String name = rs.getString("name_Book");
+                    String author = rs.getString("author_Book");
+                    int year = rs.getInt("year_Of_Public");
+                    int categoryId = rs.getInt("category");
+                    float price = rs.getFloat("price_Book");
+                    int quantity = rs.getInt("quantity_Book");
+                    String img = rs.getString("image");
+                    boolean status = rs.getBoolean("status_Book");
+                    String des = rs.getString("description_Book");
+                        
+                    BookDTO dto = new BookDTO(bookID, name, author, year, categoryId, price, quantity, img, status, des);
+                    
+                    if(this.bookList == null){
+                        this.bookList = new ArrayList<>();
+                    }
+                    this.bookList.add(dto);
+                }
+            }
+        }finally{
+            if(rs != null){
+                rs.close();
+            }
+            if(stm != null){
+                stm.close();
+            }
+            if(con != null){
+                con.close();
+            }
+        }
+    }
+    
     public List<BookDTO> getInformationBook(int first, int last) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -116,4 +171,49 @@ public class BookDAO {
         return listCategoryBook;
     }
 
+    public BookDTO GetBookbyID(int bookId)
+            throws SQLException, NamingException{
+            Connection con = null;
+            PreparedStatement stm = null;
+            ResultSet rs = null;
+            try{
+                con = DBHelper.getConnection();
+                if(con != null){
+                    String sql = "Select book_Id, name_Book, author_Book, year_Of_Public, category, price_Book, quantity_Book, image, status_Book, description_Book "
+                            + "From Book "
+                            + "Where book_Id = ?";
+                    
+                    stm = con.prepareStatement(sql);
+                    stm.setInt(1, bookId);
+                    rs = stm.executeQuery();
+                    
+                    if(rs.next()){
+                        int bookID = rs.getInt("book_Id");
+                        String name = rs.getString("name_Book");
+                        String author = rs.getString("author_Book");
+                        int year = rs.getInt("year_Of_Public");
+                        int categoryId = rs.getInt("category");
+                        float price = rs.getFloat("price_Book");
+                        int quantity = rs.getInt("quantity_Book");
+                        String img = rs.getString("image");
+                        boolean status = rs.getBoolean("status_Book");
+                        String des = rs.getString("description_Book");
+                        
+                        BookDTO dto = new BookDTO(bookID, name, author, year, categoryId, price, quantity, img, status, des);
+                        return dto;
+                    }
+                }
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                if(stm != null){
+                    stm.close();
+                }
+                if(con != null){
+                    con.close();
+                }
+            }
+        return null;
+    }
 }
