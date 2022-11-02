@@ -41,6 +41,7 @@ public class StaffImportationServlet extends HttpServlet {
         RequestDAO daoRequest = new RequestDAO();
         try {
             switch (action) {
+
                 case "getRequest":
                     listRequest = daoRequest.getRequest();
                     session.setAttribute("listRequest", listRequest);

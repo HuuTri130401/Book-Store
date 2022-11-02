@@ -60,6 +60,15 @@
         <param-name>AUTHENTICATION_PROPERTIES_FILE_LOCATION</param-name>
         <param-value>/WEB-INF/authentication.properties</param-value>
     </context-param>
+<!--    Start Location save Image when add New Book-->
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload</param-name>
+        <param-value>
+            C:\Users\Nguye\Documents\GitHub\BookStore_SWP\src\main\webapp\images
+        </param-value>
+    </context-param>
+    <!--   End Location save Image when add New Book-->
     <filter>
         <filter-name>AuthenticationFilters</filter-name>
         <filter-class>com.se1611.filters.AuthenticationFilters</filter-class>

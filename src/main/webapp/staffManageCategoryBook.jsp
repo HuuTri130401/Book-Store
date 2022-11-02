@@ -69,6 +69,16 @@
                 width: 100px;
             }
             /*End Item List*/
+
+            /*Page Start*/
+            .page{
+                font-size: 30px;
+            }
+            .page a{
+                margin-left: 10px;
+                color: #000000 ;
+            }
+            /*Page End*/
         </style>
     </head>
 
@@ -158,7 +168,7 @@
                     <div class="box">
                         <div class="left-side">
                             <div class="categoryText">
-                                <a style="color: black" type="submit" href="staffBookAction?action=bookPage1">Category  </a> >
+                                    <a style="color: black" type="submit" href="staffBookAction?action=bookPage1">Category  </a> >
                                 ${nameCategory}
                             </div>
                             <div class="itemList row">
@@ -176,6 +186,23 @@
                                 </div>
                             </c:forEach>
                             </div>
+
+                            <%--Start Page--%>
+                            <div class="page row">
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4 d-flex justify-content-center">
+                                    <a type="submit" href="staffBookAction?action=${nameCategory}">1</a>
+                                    <c:if test="${numLastCategory>4}">
+                                        <a type="submit" href="staffBookAction?action=${nameCategory}2">2</a>
+                                    </c:if>
+                                    <c:if test="${numLastCategory>8}">
+                                        <a type="submit" href="staffBookAction?action=${nameCategory}3">3</a>
+                                    </c:if>
+                                </div>
+                                <div class="col-lg-4"></div>
+                            </div>
+                            <%-- End Page--%>
+
                         </div>
                     </div>
                 </div>

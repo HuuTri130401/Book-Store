@@ -205,24 +205,36 @@
                                             <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
                                            <p class="name">${b.name}</p> <br/>
                                             <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
-                                                <small style="text-decoration:underline">đ</small><p><br/>
-                                            <button class="viewDetail btn btn-info" type="submit">View Detail</button>
+                                                <small style="text-decoration:underline">đ</small>
+                                                <p><br/>
+                                                    <button class="viewDetail btn btn-info" type="submit">View Detail
+                                                    </button>
                                             </div>
                                         </form>
 
                                     </div>
                                 </c:forEach>
                             </div>
+
+                            <%--Start Page--%>
                             <div class="page row">
                                 <div class="col-lg-4"></div>
-                                <div class="col-lg-4 d-flex justify-content-center" >
-                            <a type="submit" href="staffBookAction?action=bookPage1">1</a>
-                            <a type="submit" href="staffBookAction?action=bookPage2">2</a>
-                            <a type="submit" href="staffBookAction?action=bookPage3">3</a>
-                            <a type="submit" href="staffBookAction?action=bookPage4">4</a>
+                                <div class="col-lg-4 d-flex justify-content-center">
+                                    <a type="submit" href="staffBookAction?action=bookPage1">1</a>
+                                    <a type="submit" href="staffBookAction?action=bookPage2">2</a>
+                                    <a type="submit" href="staffBookAction?action=bookPage3">3</a>
+                                    <a type="submit" href="staffBookAction?action=bookPage4">4</a>
+                                    <c:if test="${numLastBook>16}">
+                                        <a type="submit" href="staffBookAction?action=bookPage5">5</a>
+                                    </c:if>
+                                    <c:if test="${numLastBook>20}">
+                                        <a type="submit" href="staffBookAction?action=bookPage6">6</a>
+                                    </c:if>
                                 </div>
                                 <div class="col-lg-4"></div>
                             </div>
+                            <%-- End Page--%>
+
                         </div>
                     </div>
                 </div>

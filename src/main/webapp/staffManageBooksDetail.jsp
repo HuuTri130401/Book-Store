@@ -254,7 +254,7 @@
                                     <p class="author">Author: <u>${b.author}</u></p>
                                     <p class="yearPublic">Year Of Public: ${b.year_Of_Public}</p>
 
-                                        <%--                                    Button add Inventory and Importation--%>
+                                        <%--   Button add Inventory and Importation--%>
                                     <div class="button">
                                         <button class="inventory btn btn-danger" data-toggle="modal"
                                                 data-target="#myModal">Inventory
@@ -262,7 +262,7 @@
 
                                             <%-- START Check Book In List Request to Display buton Importation--%>
                                         <c:choose>
-                                            <c:when test="${request_Book_Id > 0}">
+                                            <c:when test="${request_Book_Id >0 && request_status==1}">
                                                 <button class="btn btn-info" style="font-size: 30px;"
                                                         data-toggle="modal"
                                                         data-target="#myModalImportation">Importation
@@ -317,8 +317,8 @@
                     <%--  ID BOOK Insert To Inventory SQL--%>
                     <input type="hidden" name="book_Id_Importation" value="${bookIdServlet}"/>
                     <input type="hidden" name="request_Id" value="${request_Id}"/>
-                    <%--  DO Note And Quantity Inventory --%>
-                    <%--Enter Note--%>
+
+                    <%--Enter Quantity--%>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -328,6 +328,7 @@
                                    style="font-size: 15px" placeholder="Quantity">
                         </div>
                     </div>
+
                     <%-- Enter Price--%>
                     <div class="form-group">
                         <div class="input-group">
@@ -338,6 +339,7 @@
                                    style="font-size: 15px" placeholder="Price">
                         </div>
                     </div>
+
                     <%--   Enter note--%>
                     <div class="form-group">
                         <div class="input-group">
@@ -357,13 +359,14 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="submit" class="btn btn-info add">Add Book</button>
+                <button type="submit" class="btn btn-info add">Add</button>
                 </form>
                 <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+<%--End Form Add to Importation--%>
 
 <%--Form Add to Inventory--%>
 <div class="modal fade" id="myModal">
@@ -407,13 +410,14 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer" id="modal-footer">
-                <button type="submit" class="btn btn-info add">Add Book</button>
+                <button type="submit" class="btn btn-info add">Add</button>
                 </form>
                 <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+<%--End Form Add to Inventory--%>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
