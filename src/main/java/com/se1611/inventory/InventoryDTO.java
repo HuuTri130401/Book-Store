@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class InventoryDTO {
         public int inventory_Id;
+        public int inventory_Detail_Id;
         public String inventory_Img;
         public String inventory_Name_Book;
         public int quantity_Inventory;
@@ -12,9 +13,27 @@ public class InventoryDTO {
         public String note_Inventory;
         public int inventory_Book_Id;
         public int inventory_Category_Id;
+        public boolean inventory_Status;
+
+        public InventoryDTO(int inventory_Id, int inventory_Detail_Id, String inventory_Img, String inventory_Name_Book,
+                            int quantity_Inventory, Date date_Inventory, String employee_Inventory, String note_Inventory,
+                            int inventory_Book_Id, int inventory_Category_Id, boolean inventory_Status) {
+                this.inventory_Id = inventory_Id;
+                this.inventory_Detail_Id = inventory_Detail_Id;
+                this.inventory_Img = inventory_Img;
+                this.inventory_Name_Book = inventory_Name_Book;
+                this.quantity_Inventory = quantity_Inventory;
+                this.date_Inventory = date_Inventory;
+                this.employee_Inventory = employee_Inventory;
+                this.note_Inventory = note_Inventory;
+                this.inventory_Book_Id = inventory_Book_Id;
+                this.inventory_Category_Id = inventory_Category_Id;
+                this.inventory_Status = inventory_Status;
+        }
 
         public InventoryDTO(int inventory_Id, String inventory_Img, String inventory_Name_Book, int quantity_Inventory,
-                            Date date_Inventory, String employee_Inventory, String note_Inventory, int inventory_Book_Id, int inventory_Category_Id) {
+                            Date date_Inventory, String employee_Inventory, String note_Inventory, int inventory_Book_Id,
+                            int inventory_Category_Id, boolean inventory_Status) {
                 this.inventory_Id = inventory_Id;
                 this.inventory_Img = inventory_Img;
                 this.inventory_Name_Book = inventory_Name_Book;
@@ -24,21 +43,13 @@ public class InventoryDTO {
                 this.note_Inventory = note_Inventory;
                 this.inventory_Book_Id = inventory_Book_Id;
                 this.inventory_Category_Id = inventory_Category_Id;
+                this.inventory_Status = inventory_Status;
         }
+
 
         public InventoryDTO() {
         }
 
-        public InventoryDTO(int inventory_Id, String inventory_Img, String inventory_Name_Book, int quantity_Inventory,
-                            Date date_Inventory, String employee_Inventory, String note_Inventory) {
-                this.inventory_Id = inventory_Id;
-                this.inventory_Img = inventory_Img;
-                this.inventory_Name_Book = inventory_Name_Book;
-                this.quantity_Inventory = quantity_Inventory;
-                this.date_Inventory = date_Inventory;
-                this.employee_Inventory = employee_Inventory;
-                this.note_Inventory = note_Inventory;
-        }
         public int getInventory_Id() {
                 return inventory_Id;
         }
@@ -109,5 +120,21 @@ public class InventoryDTO {
 
         public void setInventory_Category_Id(int inventory_Category_Id) {
                 this.inventory_Category_Id = inventory_Category_Id;
+        }
+
+        public boolean isInventory_Status() {
+                return inventory_Status;
+        }
+
+        public void setInventory_Status(boolean inventory_Status) {
+                this.inventory_Status = inventory_Status;
+        }
+
+        public int getInventory_Detail_Id() {
+                return inventory_Detail_Id;
+        }
+
+        public void setInventory_Detail_Id(int inventory_Detail_Id) {
+                this.inventory_Detail_Id = inventory_Detail_Id;
         }
 }

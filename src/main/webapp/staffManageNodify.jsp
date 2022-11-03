@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +38,7 @@
                         <div class="profile_details">
                             <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
-                                <span class="name">${role}</span>
+                                <span class="name">${sessionScope.USER["fullName"]}</span>
                                 <i class='bx bxs-chevron-down'></i>
                             </div>
                         </div>
@@ -51,75 +52,34 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
-                        <c:choose>
-                            <c:when test="${role=='ADMIN'}">
-                                <a href="./adminDashBoard.jsp">
-                                    <i class='bx bx-grid-alt'></i>
-                                    <span class="links_name">Dashboard</span>
-                                </a>
-                            </c:when>
-                            <c:when test="${role=='STAFF'}">
                                 <a href="staffNodifyPage">
                                     <i class='bx bxs-bell'></i>
                                     <span class="links_name">Nodify</span>
                                 </a>
-                            </c:when>
-                        </c:choose>
                     </li>
                     <li>
-                        <c:choose>
-                            <c:when test="${role=='ADMIN'}">
-                        <a href="./adminManageEmployees.jsp">
-                            <i class='bx bx-user'></i>
-                            <span class="links_name">Employees</span>
-                        </a>
-                            </c:when>
-                            <c:when test="${role=='STAFF'}">
-                                <a href="./adminManageEmployees.jsp">
+                                <a href="staffImportationAction?action=getRequest">
                                     <i class='bx bx-notification'></i>
                                     <span class="links_name">Request</span>
                                 </a>
-                            </c:when>
-                        </c:choose>
                     </li>
                     <li>
-                        <c:choose>
-                            <c:when test="${role=='ADMIN'}">
-                                <a href="#">
-                                    <i class='bx bx-home'></i>
-                                    <span class="links_name">Overview</span>
-                                </a>
-                            </c:when>
-                            <c:when test="${role=='STAFF'}">
-                                <a href="#">
+                                <a href="staffImportationAction?action=getImportation">
                                     <i class='bx bx-add-to-queue'></i>
                                     <span class="links_name">Importation</span>
                                 </a>
-                            </c:when>
-                        </c:choose>
-
                     </li>
                     <li>
-                        <a type="submit" href="bookAction?action=bookPage1">
+                        <a type="submit" href="staffBookAction?action=bookPage1">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
                     </li>
                     <li>
-                        <c:choose>
-                            <c:when test="${role=='ADMIN'}">
-                                <a href="#">
-                                    <i class='bx bx-trending-up'></i>
-                                    <span class="links_name">Statistic</span>
-                                </a>
-                            </c:when>
-                            <c:when test="${role=='STAFF'}">
-                                <a href="inventoryAction">
+                                <a href="staffInventoryAction?action=getInventory">
                                     <i class='bx bx-carousel' ></i>
                                     <span class="links_name">Inventory</span>
                                 </a>
-                            </c:when>
-                        </c:choose>
                     </li>
                     <li>
                         <a href="login.jsp">

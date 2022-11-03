@@ -55,6 +55,7 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
+<<<<<<< HEAD
                         <a href="./adminManageInforDashboard">
                             <i class='bx bx-grid-alt'></i>
                             <span class="links_name">Dashboard</span>
@@ -74,15 +75,44 @@
                     </li>
                     <li>
                         <a href="./adminManageBooks.jsp">
+=======
+                                <a href="./adminDashBoard.jsp">
+                                    <i class='bx bx-grid-alt'></i>
+                                    <span class="links_name">Dashboard</span>
+                                </a>
+                    </li>
+                    <li>
+                                <a href="./adminManageEmployees.jsp">
+                                    <i class='bx bx-user'></i>
+                                    <span class="links_name">Employees</span>
+                                </a>
+                    </li>
+                    <li>
+                                <a href="#">
+                                    <i class='bx bx-home'></i>
+                                    <span class="links_name">Overview</span>
+                                </a>
+                    </li>
+                    <li>
+
+                        <a type="submit" href="adminBookAction?action=bookPage1">
+>>>>>>> origin/vu
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< HEAD
                         <a href="#">
                             <i class='bx bx-trending-up'></i>
                             <span class="links_name">Statistic</span>
                         </a>
+=======
+                                <a href="#">
+                                    <i class='bx bx-trending-up'></i>
+                                    <span class="links_name">Statistic</span>
+                                </a>
+>>>>>>> origin/vu
                     </li>
                     <li>
                         <a href="login.jsp">
