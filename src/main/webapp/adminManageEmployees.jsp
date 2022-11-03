@@ -100,8 +100,6 @@
                     <div class="overview-tableEmployee">
                         <h2 id="nameTable">LIST OF EMPLOYEES</h2>
 
-                        <%--<c:set var="searchValue" value="${param.txtSearch}"/>--%>
-                        <%--<c:if test="${not empty searchValue}">--%>
                         <c:set var="listEmployees" value="${requestScope.LIST_EMPLOYEES}"/>
 
                         <c:if test="${not empty listEmployees}">

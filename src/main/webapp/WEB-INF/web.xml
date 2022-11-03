@@ -36,7 +36,6 @@
         <servlet-name>StaffImportationServlet</servlet-name>
         <servlet-class>com.se1611.servlets.StaffImportationServlet</servlet-class>
     </servlet>
-
     <!--MAPPING-->
     <servlet-mapping>
         <servlet-name>AuthLoginServlet</servlet-name>
@@ -75,7 +74,6 @@
         <servlet-name>StaffImportationServlet</servlet-name>
         <url-pattern>/StaffImportationServlet</url-pattern>
     </servlet-mapping>
-
     <session-config>
         <session-timeout>
             300

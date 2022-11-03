@@ -188,7 +188,7 @@ public class BookDAO {
                     int year_Of_Public = rs.getInt("year_Of_Public");
                     listMostInventoryBook.add(new BookDTO(name_Book, year_Of_Public, quantity_Book));
                 }
-            }
+}
         } finally {
             if (rs != null) {
                 rs.close();
