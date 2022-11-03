@@ -85,7 +85,7 @@ public class BookDAO {
                 rs = stm.executeQuery();
                 listCategoryBook = new ArrayList<>();
                 while (rs.next()) {
-                   BookDTO list=new BookDTO();
+                    BookDTO list = new BookDTO();
                     list.setBook_Id(rs.getInt("book_Id"));
                     list.setName(rs.getString("name_Book"));
                     list.setAuthor(rs.getString("author_Book"));
@@ -114,6 +114,45 @@ public class BookDAO {
             }
         }
         return listCategoryBook;
+    }
+
+    public List<BookDTO> getListMostInventoryBook()
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<BookDTO> listMostInventoryBook = null;
+
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "Select Top 1  WITH TIES name_Book, quantity_Book, year_Of_Public\n"
+                        + "From Book \n"
+                        + "Order By quantity_Book DESC";
+
+                stm = con.prepareStatement(sql);
+                listMostInventoryBook = new ArrayList<>();
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+                    String name_Book = rs.getString("name_Book");
+                    int quantity_Book = rs.getInt("quantity_Book");
+                    int year_Of_Public = rs.getInt("year_Of_Public");
+                    listMostInventoryBook.add(new BookDTO(name_Book, year_Of_Public, quantity_Book));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return listMostInventoryBook;
     }
 
 }

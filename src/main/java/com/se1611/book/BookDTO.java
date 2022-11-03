@@ -25,6 +25,12 @@ public class BookDTO {
     public BookDTO() {
     }
 
+    public BookDTO(String name, int year_Of_Public, int quantity_Book) {
+        this.name = name;
+        this.year_Of_Public = year_Of_Public;
+        this.quantity_Book = quantity_Book;
+    }
+    
     public BookDTO(int book_Id, String name, String author, int year_Of_Public, int category, float price_Book, int quantity_Book, String image_Book, boolean status, String categoryName, String descriptionBook) {
         this.book_Id = book_Id;
         this.name = name;

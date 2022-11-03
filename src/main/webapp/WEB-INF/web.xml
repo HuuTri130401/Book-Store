@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>EmployeeLoginServlet</servlet-name>
-        <servlet-class>com.se1611.servlets.EmployeeLoginServlet</servlet-class>
+        <servlet-name>AuthLoginServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AuthLoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminBookServlet</servlet-name>
@@ -12,9 +12,25 @@
         <servlet-name>InventoryServlet</servlet-name>
         <servlet-class>com.se1611.servlets.InventoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminManageListEmployeesServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminManageListEmployeesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateEmployeeServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminUpdateEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteEmployeeServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminDeleteEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminManageDashboardServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminManageDashboardServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>EmployeeLoginServlet</servlet-name>
-        <url-pattern>/EmployeeLoginServlet</url-pattern>
+        <servlet-name>AuthLoginServlet</servlet-name>
+        <url-pattern>/AuthLoginServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminBookServlet</servlet-name>
@@ -24,9 +40,25 @@
         <servlet-name>InventoryServlet</servlet-name>
         <url-pattern>/InventoryServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminManageListEmployeesServlet</servlet-name>
+        <url-pattern>/AdminManageListEmployeesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateEmployeeServlet</servlet-name>
+        <url-pattern>/AdminUpdateEmployeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteEmployeeServlet</servlet-name>
+        <url-pattern>/AdminDeleteEmployeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminManageDashboardServlet</servlet-name>
+        <url-pattern>/AdminManageDashboardServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            300
         </session-timeout>
     </session-config>
     <welcome-file-list>

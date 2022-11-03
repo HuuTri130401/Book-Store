@@ -36,7 +36,7 @@
                             <button type='submit'><i class='bx bx-search-alt-2'></i></button>
                         </div>
                         <div class="profile_details">
-                            <img src="images/admin1.png" alt="image admin">
+                            <img src="./images/admin1.png" alt="image admin">
                             <div class="name_role">
                                 <span class="name">${sessionScope.USER["fullName"]}</span>
                                 <i class='bx bxs-chevron-down'></i>
@@ -52,13 +52,13 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
-                        <a href="./adminDashBoard.jsp">
+                        <a href="./adminManageInforDashboard">
                             <i class='bx bx-grid-alt'></i>
                             <span class="links_name">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="./adminManageEmployees.jsp">
+                        <a href="./adminShowListEmployees">
                             <i class='bx bx-user'></i>
                             <span class="links_name">Employees</span>
                         </a>
@@ -127,15 +127,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        <c:set var="listMostInventoryBook" value="${requestScope.MOST_INVENTORY_BOOK}"/>
                         <div class="box">
                             <div class="left-side">
-                                <div class="boxtopic">Best - Selling Product</div>
-                                <div class="number">123.333</div>
-                                <div class="name-product">NameBook</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box4'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
+                                <div class="boxtopic">Most Inventory Book</div>
+                                <c:forEach var="bookDTO" items="${listMostInventoryBook}">
+                                    <div class="number" style="color: red">Quantity: ${bookDTO.quantity_Book}</div>
+                                    <div class="name-product">Name: ${bookDTO.name}</div>
+                                    <div class="indicator">
+                                        <i class='bx bx-up-arrow-alt box4'></i>
+                                        <span class="text">Year Of Public: ${bookDTO.year_Of_Public}</span>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
