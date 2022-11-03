@@ -158,7 +158,7 @@
 
                             <c:forEach var="i" items="${listRequest}">
                                 <c:if test="${i.request_Status != 0}">
-                                    <%--                                Start Show Item Request--%>
+                                    <%-- Start Show Item Request--%>
                                     <tr>
                                         <td><img style="height: 100px;width: 100px"
                                                  src="<c:url value="/images/${i.request_Image}"/>"/></td>
@@ -198,6 +198,7 @@
                                                           method="POST">
                                                         <input type="hidden" name="request_Id"
                                                                value="${i.request_Id}"/>
+                                                            <%--Form --%>
                                                 </div>
                                                 <!-- Modal footer -->
                                                 <div class="modal-footer">
@@ -242,7 +243,7 @@
 <%--                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>--%>
 <%--                                </div>--%>
                                 <input type="file" name="imageUpload" class="form-control input-sm"
-                                       style="font-size: 15px" placeholder="Upload Image Book" >
+                                       style="font-size: 15px" placeholder="Upload Image Book" value="Upload">
 <%--                            </div>--%>
                         </div>
                         <%--  End Image Book --%>
@@ -348,7 +349,6 @@
 </div>
 <%--End Form Create Book--%>
 
-<%--Update Book Inventory--%>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
