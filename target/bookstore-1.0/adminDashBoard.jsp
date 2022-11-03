@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./adminManageBooks.jsp">
+                        <a type="submit" href="adminBookAction?action=bookPage1">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>

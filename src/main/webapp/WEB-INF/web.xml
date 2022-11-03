@@ -13,7 +13,6 @@
         <servlet-class>com.se1611.servlets.InventoryServlet</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>AdminManageListEmployeesServlet</servlet-name>
         <servlet-class>com.se1611.servlets.AdminManageListEmployeesServlet</servlet-class>
     </servlet>
@@ -29,6 +28,7 @@
         <servlet-name>AdminManageDashboardServlet</servlet-name>
         <servlet-class>com.se1611.servlets.AdminManageDashboardServlet</servlet-class>
     </servlet>
+    <servlet>
         <servlet-name>StaffBookServlet</servlet-name>
         <servlet-class>com.se1611.servlets.StaffBookServlet</servlet-class>
     </servlet>
@@ -36,10 +36,7 @@
         <servlet-name>StaffImportationServlet</servlet-name>
         <servlet-class>com.se1611.servlets.StaffImportationServlet</servlet-class>
     </servlet>
-
-                        <!--MAPPING-->
-
-
+    <!--MAPPING-->
     <servlet-mapping>
         <servlet-name>AuthLoginServlet</servlet-name>
         <url-pattern>/AuthLoginServlet</url-pattern>
@@ -69,7 +66,7 @@
         <servlet-name>AdminManageDashboardServlet</servlet-name>
         <url-pattern>/AdminManageDashboardServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
         <servlet-name>StaffBookServlet</servlet-name>
         <url-pattern>/StaffBookServlet</url-pattern>
     </servlet-mapping>
@@ -77,8 +74,6 @@
         <servlet-name>StaffImportationServlet</servlet-name>
         <url-pattern>/StaffImportationServlet</url-pattern>
     </servlet-mapping>
-
-
     <session-config>
         <session-timeout>
             300
@@ -95,12 +90,13 @@
         <param-name>AUTHENTICATION_PROPERTIES_FILE_LOCATION</param-name>
         <param-value>/WEB-INF/authentication.properties</param-value>
     </context-param>
-<!--    Start Location save Image when add New Book-->
+    <!--    Start Location save Image when add New Book-->
     <context-param>
         <description>Location to store uploaded file</description>
         <param-name>file-upload</param-name>
         <param-value>
-            C:\Users\Nguye\Documents\GitHub\BookStore_SWP\src\main\webapp\images
+            <!--C:\Users\Nguye\Documents\GitHub\BookStore_SWP\src\main\webapp\images-->
+            src\main\webapp\images
         </param-value>
     </context-param>
     <!--   End Location save Image when add New Book-->
