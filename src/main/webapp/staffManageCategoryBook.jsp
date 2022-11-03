@@ -1,17 +1,15 @@
-<%@ page import="java.text.DecimalFormat" %>
-<!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Manage Books</title>
+        <title>Admin Dashboard</title>
         <!-- link file CSS -->
-        <link rel="stylesheet" href="./css/adminManageBooksStyle.css">
+        <link rel="stylesheet" href="./css/adminHomeStyle.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <!-- Latest compiled and minified CSS -->
@@ -21,32 +19,17 @@
                 box-sizing: border-box;
                 padding: 0;
                 margin: 0;
+
             }
 
-            /*Start CategoryBox*/
-            .left-side .choice{
-                font-size: 15px;
-                margin-left: 10px;
-                height:25px;
-                width: 40px;
-            }
+            /*Start Category*/
             .left-side .categoryText{
                 margin-left: 10px;
                 font-size: 20px;
                 height: 40px;
-            }
-            .left-side .comboxCategory{
                 color: #17A2B8;
-                margin-top: 5px;
-                margin-left: 10px;
-                width: 115px;
-                height: 100%;
-                font-size: 18px;
             }
-            .left-side .formCategory{
-                height: 32px;
-            }
-            /*End CategoryBox*/
+            /*End Category*/
 
             /*Start Border : Khung border bao quanh book*/
             .border{
@@ -100,14 +83,13 @@
     </head>
 
     <body>
-
+        <!--header-->
         <header>
             <div class="header-menu">
                 <!-- even menu sidebar -->
                 <div class="sidebar-button__logo">
                     <div class="sidebar-button">
                         <i class='bx bx-menu sidebarBtn'></i>
-                        <!-- <span class="dashboard">Dashboard</span> -->
                     </div>
 
                     <!-- div of logo -->
@@ -126,49 +108,48 @@
                             <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
                                 <span class="name">${sessionScope.USER["fullName"]}</span>
+
                                 <i class='bx bxs-chevron-down'></i>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </header>
 
+        <!-- sidebar -->
         <nav class="sidebar">
-
             <!-- link in sidebar -->
             <ul class="nav-links">
                 <li>
-                            <a href="./adminDashBoard.jsp">
-                                <i class='bx bx-grid-alt'></i>
-                                <span class="links_name">Dashboard</span>
-                            </a>
+                    <a href="staffNodifyPage">
+                        <i class='bx bxs-bell'></i>
+                        <span class="links_name">Nodify</span>
+                    </a>
                 </li>
                 <li>
-                            <a href="./adminManageEmployees.jsp">
-                                <i class='bx bx-user'></i>
-                                <span class="links_name">Employees</span>
-                            </a>
+                    <a href="staffImportationAction?action=getRequest">
+                        <i class='bx bx-notification'></i>
+                        <span class="links_name">Request</span>
+                    </a>
                 </li>
                 <li>
-                            <a href="#">
-                                <i class='bx bx-home'></i>
-                                <span class="links_name">Overview</span>
-                            </a>
+                    <a href="staffImportationAction?action=getImportation">
+                        <i class='bx bx-add-to-queue'></i>
+                        <span class="links_name">Importation</span>
+                    </a>
                 </li>
                 <li>
-
-                    <a type="submit" href="adminBookAction?action=bookPage1">
+                    <a type="submit" href="staffBookAction?action=bookPage1">
                         <i class='bx bx-book'></i>
                         <span class="links_name">Books</span>
                     </a>
                 </li>
                 <li>
-                            <a href="#">
-                                <i class='bx bx-trending-up'></i>
-                                <span class="links_name">Statistic</span>
-                            </a>
+                    <a href="staffInventoryAction?action=getInventory">
+                        <i class='bx bx-carousel' ></i>
+                        <span class="links_name">Inventory</span>
+                    </a>
                 </li>
                 <li>
                     <a href="login.jsp">
@@ -181,64 +162,54 @@
 
         <!-- home content -->
         <section class="home-section">
-
             <!-- home-content -->
             <div class="home-content">
                 <div class="overview-boxes">
                     <div class="box">
                         <div class="left-side">
-                            <form class="formCategory" action="adminBookAction" method="POST">
-                                <spam class="categoryText">Category</spam>
-                                <select class="comboxCategory" name="action">
-                                    <option value="Romance">Romance</option>
-                                    <option value="Self-help">Self-help</option>
-                                    <option value="Novel">Novel</option>
-                                    <option value="Fantasy">Fantasy</option>
-                                </select>
-                                <button class="choice btn btn-secondary" type="submit">Go</button>
-                            </form><br/>
-                            <div class="itemList row">
-                                <c:forEach items="${listBook}" var="b">
-                                    <div class="item col-lg-6">
-                                        <form action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}"
-                                              method="POST">
-                                            <div class="border">
-                                            <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
-                                           <p class="name">${b.name}</p> <br/>
-                                            <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
-                                                <small style="text-decoration:underline">đ</small><p><br/>
-                                            <button class="viewDetail btn btn-info" type="submit">View Detail</button>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </c:forEach>
+                            <div class="categoryText">
+                                    <a style="color: black" type="submit" href="staffBookAction?action=bookPage1">Category  </a> >
+                                ${nameCategory}
                             </div>
+                            <div class="itemList row">
+                            <c:forEach items="${listCategoryBook}" var="b">
+                                <div class="item col-lg-6">
+                                <form action="staffBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" method="POST">
+                                    <div class="border">
+                                    <img src="<c:url value="/images/${b.image_Book}"/>"/>
+                                        <p class="name">${b.name}</p> <br/>
+                                        <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
+                                            <small style="text-decoration:underline">đ</small><p><br/>
+                                        <button class="viewDetail btn btn-info" type="submit">View Detail</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </c:forEach>
+                            </div>
+
+                            <%--Start Page--%>
                             <div class="page row">
                                 <div class="col-lg-4"></div>
-                                <div class="col-lg-4 d-flex justify-content-center" >
-                            <a type="submit" href="adminBookAction?action=bookPage1">1</a>
-                            <a type="submit" href="adminBookAction?action=bookPage2">2</a>
-                            <a type="submit" href="adminBookAction?action=bookPage3">3</a>
-                            <a type="submit" href="adminBookAction?action=bookPage4">4</a>
-                                    <c:if test="${numLastBook>16}">
-                                        <a type="submit" href="staffBookAction?action=bookPage5">5</a>
+                                <div class="col-lg-4 d-flex justify-content-center">
+                                    <a type="submit" href="staffBookAction?action=${nameCategory}">1</a>
+                                    <c:if test="${numLastCategory>4}">
+                                        <a type="submit" href="staffBookAction?action=${nameCategory}2">2</a>
                                     </c:if>
-                                    <c:if test="${numLastBook>20}">
-                                        <a type="submit" href="staffBookAction?action=bookPage6">6</a>
+                                    <c:if test="${numLastCategory>8}">
+                                        <a type="submit" href="staffBookAction?action=${nameCategory}3">3</a>
                                     </c:if>
                                 </div>
                                 <div class="col-lg-4"></div>
                             </div>
+                            <%-- End Page--%>
+
                         </div>
                     </div>
                 </div>
             </div>
-
         </section>
 
         <script src="./js/script.js"></script>
 
     </body>
-
 </html>

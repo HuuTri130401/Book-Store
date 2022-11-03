@@ -28,6 +28,7 @@ public class AuthLoginServlet extends HttpServlet {
     private final String INVALID_PAGE = "invalidPage";
     private final String ADMIN_MANAGE_BOOKS_PAGE = "adminManageInforDashboard";
     private final String STAFF_NODIFY_PAGE = "staffNodifyPage";
+    private final String SELLER_NODIFY_PAGE = "sellerNodifyPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,8 +62,14 @@ public class AuthLoginServlet extends HttpServlet {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", validEmployee);
                     session.setAttribute("role",validEmployee.getRole().toUpperCase(Locale.ROOT));
+                    session.setAttribute("employee_Id",validEmployee.getEmployee_Id());
                 } else if(validEmployee.getRole().equalsIgnoreCase("seller")) {
                     //login seller screen
+                    url = SELLER_NODIFY_PAGE;
+                    //create new session
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("USER", validEmployee);
+                    session.setAttribute("employee_Id",validEmployee.getEmployee_Id());
                 }
             }//end if validAccount is not null
         } catch (SQLException e) {

@@ -140,35 +140,34 @@
             <!-- link in sidebar -->
             <ul class="nav-links">
                 <li>
-                            <a href="./adminDashBoard.jsp">
-                                <i class='bx bx-grid-alt'></i>
-                                <span class="links_name">Dashboard</span>
-                            </a>
+                    <a href="staffNodifyPage">
+                        <i class='bx bxs-bell'></i>
+                        <span class="links_name">Nodify</span>
+                    </a>
                 </li>
                 <li>
-                            <a href="./adminManageEmployees.jsp">
-                                <i class='bx bx-user'></i>
-                                <span class="links_name">Employees</span>
-                            </a>
+                    <a href="staffImportationAction?action=getRequest">
+                        <i class='bx bx-notification'></i>
+                        <span class="links_name">Request</span>
+                    </a>
                 </li>
                 <li>
-                            <a href="#">
-                                <i class='bx bx-home'></i>
-                                <span class="links_name">Overview</span>
-                            </a>
+                    <a href="staffImportationAction?action=getImportation">
+                        <i class='bx bx-add-to-queue'></i>
+                        <span class="links_name">Importation</span>
+                    </a>
                 </li>
                 <li>
-
-                    <a type="submit" href="adminBookAction?action=bookPage1">
+                    <a type="submit" href="staffBookAction?action=bookPage1">
                         <i class='bx bx-book'></i>
                         <span class="links_name">Books</span>
                     </a>
                 </li>
                 <li>
-                            <a href="#">
-                                <i class='bx bx-trending-up'></i>
-                                <span class="links_name">Statistic</span>
-                            </a>
+                    <a href="staffInventoryAction?action=getInventory">
+                        <i class='bx bx-carousel' ></i>
+                        <span class="links_name">Inventory</span>
+                    </a>
                 </li>
                 <li>
                     <a href="login.jsp">
@@ -187,7 +186,7 @@
                 <div class="overview-boxes">
                     <div class="box">
                         <div class="left-side">
-                            <form class="formCategory" action="adminBookAction" method="POST">
+                            <form class="formCategory" action="staffBookAction" method="POST">
                                 <spam class="categoryText">Category</spam>
                                 <select class="comboxCategory" name="action">
                                     <option value="Romance">Romance</option>
@@ -200,27 +199,31 @@
                             <div class="itemList row">
                                 <c:forEach items="${listBook}" var="b">
                                     <div class="item col-lg-6">
-                                        <form action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}"
+                                        <form action="staffBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}"
                                               method="POST">
                                             <div class="border">
                                             <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
                                            <p class="name">${b.name}</p> <br/>
                                             <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
-                                                <small style="text-decoration:underline">đ</small><p><br/>
-                                            <button class="viewDetail btn btn-info" type="submit">View Detail</button>
+                                                <small style="text-decoration:underline">đ</small>
+                                                <p><br/>
+                                                    <button class="viewDetail btn btn-info" type="submit">View Detail
+                                                    </button>
                                             </div>
                                         </form>
 
                                     </div>
                                 </c:forEach>
                             </div>
+
+                            <%--Start Page--%>
                             <div class="page row">
                                 <div class="col-lg-4"></div>
-                                <div class="col-lg-4 d-flex justify-content-center" >
-                            <a type="submit" href="adminBookAction?action=bookPage1">1</a>
-                            <a type="submit" href="adminBookAction?action=bookPage2">2</a>
-                            <a type="submit" href="adminBookAction?action=bookPage3">3</a>
-                            <a type="submit" href="adminBookAction?action=bookPage4">4</a>
+                                <div class="col-lg-4 d-flex justify-content-center">
+                                    <a type="submit" href="staffBookAction?action=bookPage1">1</a>
+                                    <a type="submit" href="staffBookAction?action=bookPage2">2</a>
+                                    <a type="submit" href="staffBookAction?action=bookPage3">3</a>
+                                    <a type="submit" href="staffBookAction?action=bookPage4">4</a>
                                     <c:if test="${numLastBook>16}">
                                         <a type="submit" href="staffBookAction?action=bookPage5">5</a>
                                     </c:if>
@@ -230,6 +233,8 @@
                                 </div>
                                 <div class="col-lg-4"></div>
                             </div>
+                            <%-- End Page--%>
+
                         </div>
                     </div>
                 </div>

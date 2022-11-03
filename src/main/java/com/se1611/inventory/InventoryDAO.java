@@ -1,13 +1,9 @@
 package com.se1611.inventory;
 
-import com.se1611.book.BookDTO;
 import com.se1611.utils.DBHelper;
 
 import javax.naming.NamingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +18,8 @@ public class InventoryDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "select i.inventory_Id as inventory_Id, image,name_Book, \n" +
-                        "quantity_Inventory,note,date_Into_Inventory,fullName,b.book_Id as book_Id,category\n" +
+                String sql = "select i.inventory_Id as inventory_Id,inventory_Detail_Id, image,name_Book, \n" +
+                        "quantity_Inventory,note,date_Into_Inventory,fullName,b.book_Id as book_Id,category,status\n" +
                         "from Inventory i inner join InventoryDetail d on \n" +
                         "i.inventory_Id=d.inventory_Id inner join \n" +
                         "Book b on d.book_Id=b.book_Id inner join Employee e on i.employee_Id=e.employee_Id";
@@ -41,6 +37,8 @@ public class InventoryDAO {
                     list.setEmployee_Inventory(rs.getString("fullName"));
                     list.setInventory_Book_Id(rs.getInt("book_Id"));
                     list.setInventory_Category_Id(rs.getInt("category"));
+                    list.setInventory_Status(rs.getBoolean("status"));
+                    list.setInventory_Detail_Id(rs.getInt("inventory_Detail_Id"));
                     listInventory.add(list);
                 }
             }
@@ -58,4 +56,99 @@ public class InventoryDAO {
         return listInventory;
     }
 
+    //Insert Inventory
+    public boolean InsertInventory(int employee_Id, Date date_Into_Inventory) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = true;
+        int count = 0;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "insert into Inventory (employee_Id,date_Into_Inventory)\n" + "values (?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, employee_Id);
+                stm.setDate(2, date_Into_Inventory);
+                count = stm.executeUpdate();
+                if (count == 0) {
+                    result = false;
+
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    //Insert Inventory Detail
+    public boolean InsertInventoryDetail(int inventory_Id, int book_Id, int quantity_Inventory, String note) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = true;
+        int count = 0;
+        boolean status=true;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "insert into InventoryDetail(inventory_Id,book_Id,quantity_Inventory,note,status)\n" + "values (?,?,?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, inventory_Id);
+                stm.setInt(2, book_Id);
+                stm.setInt(3, quantity_Inventory);
+                stm.setString(4, note);
+                stm.setBoolean(5, status);
+                count = stm.executeUpdate();
+                if (count == 0) {
+                    result = false;
+                } else {
+                    result = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            stm.close();
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    //Delete Inventory
+    public boolean DeleteInventory(int inventory_Id) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = true;
+        int count = 0;
+        boolean status=false;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "update [dbo].[InventoryDetail] set status=? where [inventory_Detail_Id]=?";
+                stm = con.prepareStatement(sql);
+                stm.setBoolean(1, status);
+                stm.setInt(2, inventory_Id);
+                count = stm.executeUpdate();
+                if (count == 0) {
+                    result = false;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }
