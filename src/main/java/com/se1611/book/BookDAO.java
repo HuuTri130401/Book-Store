@@ -174,7 +174,7 @@ public class BookDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "Select Top 1  WITH TIES name_Book, quantity_Book, year_Of_Public\n"
+                String sql = "Select Top 1 WITH TIES name_Book, quantity_Book, year_Of_Public\n"
                         + "From Book \n"
                         + "Order By quantity_Book DESC";
 
@@ -182,13 +182,13 @@ public class BookDAO {
                 listMostInventoryBook = new ArrayList<>();
                 rs = stm.executeQuery();
 
-                if (rs.next()) {
+                while (rs.next()) {
                     String name_Book = rs.getString("name_Book");
                     int quantity_Book = rs.getInt("quantity_Book");
                     int year_Of_Public = rs.getInt("year_Of_Public");
                     listMostInventoryBook.add(new BookDTO(name_Book, year_Of_Public, quantity_Book));
                 }
-}
+            }
         } finally {
             if (rs != null) {
                 rs.close();

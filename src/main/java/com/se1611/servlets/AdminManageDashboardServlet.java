@@ -6,6 +6,7 @@ package com.se1611.servlets;
 
 import com.se1611.book.BookDAO;
 import com.se1611.book.BookDTO;
+import com.se1611.orders.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -44,11 +45,19 @@ public class AdminManageDashboardServlet extends HttpServlet {
         Properties siteMap = (Properties) context.getAttribute("SITE_MAP");
         String url = (String) siteMap.get(RESULT);
         try {
+            
+            //MOST_INVENTORY_BOOK 
             BookDAO bookDAO = new BookDAO();
             List<BookDTO> inventoryBook = bookDAO.getListMostInventoryBook();
             if (!inventoryBook.isEmpty()) {
                 request.setAttribute("MOST_INVENTORY_BOOK", inventoryBook);
             }
+
+            //TOTAL_ORDER
+            OrderDAO orderDAO = new OrderDAO();
+            float sumInOrder = orderDAO.getTotalOrderOfBook();
+            request.setAttribute("TOTAL_OF_ORDER", sumInOrder);
+            
         } catch (SQLException e) {
             log("AdminManageListEmployeesServlet_SQL_ " + e.getMessage());
         } catch (NamingException e) {
@@ -67,7 +76,6 @@ public class AdminManageDashboardServlet extends HttpServlet {
 //            System.out.println(list);
 //        }
 //    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

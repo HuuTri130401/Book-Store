@@ -97,13 +97,14 @@
 
                     <div class="overview-boxes">
 
+                        <c:set var="sumOfTotalOrder" value="${requestScope.TOTAL_OF_ORDER}"/>
                         <div class="box">
                             <div class="left-side">
                                 <div class="boxtopic">Total Order</div>
-                                <div class="number">123,456</div>
+                                <div class="number">${sumOfTotalOrder}</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box1'></i>
-                                    <span class="text">Up from yesterday</span>
+                                    <span class="text">During The Current Year</span>
                                 </div>
                             </div>
                         </div>
