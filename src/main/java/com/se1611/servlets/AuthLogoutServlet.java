@@ -5,8 +5,6 @@
 package com.se1611.servlets;
 
 import java.io.IOException;
-import java.util.Properties;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +18,7 @@ import javax.servlet.http.HttpSession;
 public class AuthLogoutServlet extends HttpServlet {
 
     private final String LOGIN_PAGE = "loginPage";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,12 +30,15 @@ public class AuthLogoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-                ServletContext context = request.getServletContext();
-        String url = LOGIN_PAGE;
+//        ServletContext context = request.getServletContext();
+//        Properties siteMap = (Properties) context.getAttribute("SITE_MAP");
+//        String url = (String) siteMap.get(LOGIN_PAGE); //get login.jsp
+
+        //dispath to loginPage in search bar google
+        String url = LOGIN_PAGE; 
         try {
             HttpSession session = request.getSession(false);
-            if(session != null){
+            if (session != null) {
                 session.invalidate();
             }//end if session IS NOT NULL
         } finally {

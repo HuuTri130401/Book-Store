@@ -37,6 +37,10 @@
         <servlet-class>com.se1611.servlets.StaffImportationServlet</servlet-class>
     </servlet>
     <!--MAPPING-->
+    <servlet>
+        <servlet-name>AuthLogoutServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AuthLogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthLoginServlet</servlet-name>
         <url-pattern>/AuthLoginServlet</url-pattern>
@@ -50,7 +54,6 @@
         <url-pattern>/InventoryServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>AdminManageListEmployeesServlet</servlet-name>
         <url-pattern>/AdminManageListEmployeesServlet</url-pattern>
     </servlet-mapping>
@@ -73,6 +76,10 @@
     <servlet-mapping>
         <servlet-name>StaffImportationServlet</servlet-name>
         <url-pattern>/StaffImportationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthLogoutServlet</servlet-name>
+        <url-pattern>/AuthLogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

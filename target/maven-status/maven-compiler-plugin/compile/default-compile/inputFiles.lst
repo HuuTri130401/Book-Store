@@ -2,6 +2,7 @@ D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\inventory\In
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\AdminBookServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\listeners\ContextListener.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\inventory\InventoryDTO.java
+D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\orders\OrderDAO.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\StaffImportationServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\request\RequestDAO.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\StaffBookServlet.java

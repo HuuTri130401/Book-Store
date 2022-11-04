@@ -11,6 +11,7 @@ com\se1611\servlets\StaffBookServlet.class
 com\se1611\listeners\ContextListener.class
 com\se1611\servlets\AdminManageDashboardServlet.class
 com\se1611\servlets\AuthLoginServlet.class
+com\se1611\orders\OrderDAO.class
 com\se1611\servlets\InventoryServlet.class
 com\se1611\book\BookDAO.class
 com\se1611\request\RequestDAO.class
