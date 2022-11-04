@@ -152,7 +152,7 @@
 
                             <c:forEach var="i" items="${listRequest}">
                                 <c:if test="${i.request_Status != 0}">
-                                    <%--                                Start Show Item Request--%>
+                                    <%-- Start Show Item Request--%>
                                     <tr>
                                         <td><img style="height: 100px;width: 100px"
                                                  src="<c:url value="/images/${i.request_Image}"/>"/></td>
@@ -195,6 +195,7 @@
                                                         <input type="hidden" name="request_Id"
                                                                value="${i.request_Id}"/>
                                                             <%-- Are You Sure --%>
+                                                            <%--Form --%>
                                                 </div>
                                                 <!-- Modal footer -->
                                                 <div class="modal-footer">
@@ -219,8 +220,132 @@
 </div>
 <script src="./js/script.js"></script>
 
+<%--Start Form Create Book--%>
+<div class="modal fade" id="myModalBook">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-<%--Update Book Inventory--%>
+            <header class="head-form mb-0">
+                <h2>Create Book</h2>
+            </header>
+
+            <div class="modal-body">
+                <%--Form --%>
+                <form action="staffBookAction?action=createBook" method="POST" enctype="multipart/form-data" boundary>
+
+                        <%--  Start Image Book --%>
+                        <div class="form-group">
+<%--                            <div class="input-group">--%>
+<%--                                <div class="input-group-prepend">--%>
+<%--                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>--%>
+<%--                                </div>--%>
+                                <input type="file" name="imageUpload" class="form-control input-sm"
+                                       style="font-size: 15px" placeholder="Upload Image Book" value="Upload">
+<%--                            </div>--%>
+                        </div>
+                        <%--  End Image Book --%>
+
+                        <%--  Start Name Book --%>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                </div>
+                                <input type="text" name="nameBook" class="form-control input-sm"
+                                       style="font-size: 15px" placeholder="Name Book">
+                            </div>
+                        </div>
+                        <%--  End Name Book --%>
+
+                        <%--  Start Author --%>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                </div>
+                                <input type="text" name="author" class="form-control input-sm"
+                                       style="font-size: 15px" placeholder="Author">
+                            </div>
+                        </div>
+                        <%--  End Author --%>
+
+                        <%--  Start Quantity Book --%>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                </div>
+                                <input type="number" name="quantity" class="form-control input-sm"
+                                       style="font-size: 15px" placeholder="Quantity">
+                            </div>
+                        </div>
+                        <%--  End Quantity Book --%>
+
+                        <%--  Start Price Book --%>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                </div>
+                                <input type="number" name="price" class="form-control input-sm"
+                                       style="font-size: 15px" placeholder="Price">
+                            </div>
+                        </div>
+                        <%--  End Price Book --%>
+
+                    <%--  Start Category Book --%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-briefcase"></i></span>
+                            </div>
+                            <select style="font-size: 15px" class="form-control" name="category">
+                                <option >Category</option>
+                                <option value="1">Romance</option>
+                                <option value="2">Self-help</option>
+                                <option value="3">Novel</option>
+                                <option value="4">Fantasy</option>
+                            </select>
+                        </div>
+                    </div>
+                        <%--  End Category Book --%>
+
+                        <%--  Start Public Book --%>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                </div>
+                                <input type="number" name="publicOfYear" class="form-control input-sm"
+                                       style="font-size: 15px" placeholder="Public Of Year">
+                            </div>
+                        </div>
+                        <%--  End Public Book --%>
+
+                        <%--  Start Description Book --%>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                </div>
+                                <input type="text" name="description" class="form-control input-sm"
+                                       style="font-size: 15px" placeholder="Description">
+                            </div>
+                        </div>
+                        <%--  End Description Book --%>
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer" id="modal-footer">
+                <button type="submit" class="btn btn-info add">Add</button>
+                </form>
+                <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--End Form Create Book--%>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
