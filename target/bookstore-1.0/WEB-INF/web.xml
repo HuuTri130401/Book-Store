@@ -38,6 +38,14 @@
     </servlet>
     <!--MAPPING-->
     <servlet>
+        <servlet-name>SellerBookServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.SellerBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AddToCartServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AuthLogoutServlet</servlet-name>
         <servlet-class>com.se1611.servlets.AuthLogoutServlet</servlet-class>
     </servlet>
@@ -80,6 +88,14 @@
     <servlet-mapping>
         <servlet-name>AuthLogoutServlet</servlet-name>
         <url-pattern>/AuthLogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerBookServlet</servlet-name>
+        <url-pattern>/SellerBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <url-pattern>/AddToCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

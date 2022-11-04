@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import com.se1611.orderDetail.OrderDetailDAO;
+import com.se1611.orderDetail.OrderDetailDTO;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,7 +30,7 @@ public class AuthLoginServlet extends HttpServlet {
     private final String INVALID_PAGE = "invalidPage";
     private final String ADMIN_MANAGE_BOOKS_PAGE = "adminManageInforDashboard";
     private final String STAFF_NODIFY_PAGE = "staffNodifyPage";
-    private final String SELLER_NODIFY_PAGE = "sellerNodifyPage";
+    private final String SELLER_NOTIFY_PAGE = "sellerNotifyPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,13 +65,17 @@ public class AuthLoginServlet extends HttpServlet {
                     session.setAttribute("USER", validEmployee);
                     session.setAttribute("role",validEmployee.getRole().toUpperCase(Locale.ROOT));
                     session.setAttribute("employee_Id",validEmployee.getEmployee_Id());
-                } else if(validEmployee.getRole().equalsIgnoreCase("seller")) {
+                } else if (validEmployee.getRole().equalsIgnoreCase("seller")) {
                     //login seller screen
-                    url = SELLER_NODIFY_PAGE;
+                    url = SELLER_NOTIFY_PAGE;
                     //create new session
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", validEmployee);
-                    session.setAttribute("employee_Id",validEmployee.getEmployee_Id());
+                    session.setAttribute("role", validEmployee.getRole().toUpperCase(Locale.ROOT));
+                    session.setAttribute("employee_Id", validEmployee.getEmployee_Id());
+                    OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+                    ArrayList<OrderDetailDTO> listOrderDetail = orderDetailDAO.getListOrderDetail();
+                    session.setAttribute("LIST_ORDER_DETAIL", listOrderDetail);
                 }
             }//end if validAccount is not null
         } catch (SQLException e) {

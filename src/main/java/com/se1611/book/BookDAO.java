@@ -202,5 +202,45 @@ public class BookDAO {
         }
         return listMostInventoryBook;
     }
+    public BookDTO getBookById(int bookId) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        BookDTO book = new BookDTO();
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String query = "SELECT * FROM Book WHERE book_Id =?";
+                stm = con.prepareStatement(query);
+                stm.setInt(1, bookId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    book.setBook_Id(rs.getInt("book_Id"));
+                    book.setName(rs.getString("name_Book"));
+                    book.setAuthor(rs.getString("author_Book"));
+                    book.setYear_Of_Public(rs.getInt("year_Of_Public"));
+                    book.setCategory(rs.getInt("category"));
+                    book.setPrice_Book(rs.getFloat("price_Book"));
+                    book.setQuantity_Book(rs.getInt("quantity_Book"));
+                    book.setImage_Book(rs.getString("image"));
+                    book.setStatus(rs.getBoolean("status_Book"));
+                    book.setCategoryName(rs.getString("nameCate"));
+                    book.setDescriptionBook(rs.getString("description_Book"));
+                }
+            }
+        } catch (SQLException e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return book;
+    }
 
 }

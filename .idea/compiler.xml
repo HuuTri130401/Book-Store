@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="bookstore" options="-endorseddirs C:\Users\Nguye\Documents\GitHub\BookStore_SWP\target/endorsed" />
+      <module name="bookstore" options="-endorseddirs &quot;C:\Users\Admin\OneDrive - Unicorn\Documents\GitHub\bookstore4\target/endorsed&quot;" />
     </option>
   </component>
 </project>
