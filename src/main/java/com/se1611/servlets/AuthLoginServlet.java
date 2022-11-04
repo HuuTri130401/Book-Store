@@ -7,7 +7,6 @@ package com.se1611.servlets;
 import com.se1611.employees.EmployeeDAO;
 import com.se1611.employees.EmployeeDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.logging.Level;

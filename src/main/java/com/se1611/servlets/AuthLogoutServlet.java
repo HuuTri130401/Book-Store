@@ -5,7 +5,8 @@
 package com.se1611.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Properties;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,13 +32,14 @@ public class AuthLogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+                ServletContext context = request.getServletContext();
         String url = LOGIN_PAGE;
         try {
             HttpSession session = request.getSession(false);
             if(session != null){
                 session.invalidate();
-            }//end if session is not null
-        }finally {
+            }//end if session IS NOT NULL
+        } finally {
             response.sendRedirect(url);
         }
     }

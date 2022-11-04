@@ -81,12 +81,14 @@
                             <span class="links_name">Statistic</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="login.jsp">
-                            <i class='bx bx-log-out'></i>
-                            <span class="links_name">Log out</span>
-                        </a>
-                    </li>
+                    <form action="logoutAction">
+                        <li>
+                            <a type="submit" href="./loginPage">
+                                <i class='bx bx-log-out'></i>
+                                <span class="links_name">Log out</span>
+                            </a>
+                        </li>
+                    </form>
                 </ul>
             </div>
 
