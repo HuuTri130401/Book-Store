@@ -36,7 +36,7 @@
                             <button type='submit'><i class='bx bx-search-alt-2'></i></button>
                         </div>
                         <div class="profile_details">
-                            <img src="./images/admin1.png" alt="image admin">
+                            <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
                                 <span class="name">${sessionScope.USER["fullName"]}</span>
                                 <i class='bx bxs-chevron-down'></i>
@@ -52,37 +52,38 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
-                        <a href="./adminManageInforDashboard">
-                            <i class='bx bx-grid-alt'></i>
-                            <span class="links_name">Dashboard</span>
-                        </a>
+                                <a href="./adminDashBoard.jsp">
+                                    <i class='bx bx-grid-alt'></i>
+                                    <span class="links_name">Dashboard</span>
+                                </a>
                     </li>
                     <li>
-                        <a href="./adminShowListEmployees">
-                            <i class='bx bx-user'></i>
-                            <span class="links_name">Employees</span>
-                        </a>
+                                <a href="./adminManageEmployees.jsp">
+                                    <i class='bx bx-user'></i>
+                                    <span class="links_name">Employees</span>
+                                </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-home'></i>
-                            <span class="links_name">Overview</span>
-                        </a>
+                                <a href="#">
+                                    <i class='bx bx-home'></i>
+                                    <span class="links_name">Overview</span>
+                                </a>
                     </li>
                     <li>
+
                         <a type="submit" href="adminBookAction?action=bookPage1">
                             <i class='bx bx-book'></i>
                             <span class="links_name">Books</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-trending-up'></i>
-                            <span class="links_name">Statistic</span>
-                        </a>
+                                <a href="#">
+                                    <i class='bx bx-trending-up'></i>
+                                    <span class="links_name">Statistic</span>
+                                </a>
                     </li>
                     <li>
-                        <a href="./logoutAction">
+                        <a href="login.jsp">
                             <i class='bx bx-log-out'></i>
                             <span class="links_name">Log out</span>
                         </a>
@@ -97,14 +98,13 @@
 
                     <div class="overview-boxes">
 
-                        <c:set var="sumOfTotalOrder" value="${requestScope.TOTAL_OF_ORDER}"/>
                         <div class="box">
                             <div class="left-side">
                                 <div class="boxtopic">Total Order</div>
-                                <div class="number">${sumOfTotalOrder}</div>
+                                <div class="number">123,456</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box1'></i>
-                                    <span class="text">During The Current Year</span>
+                                    <span class="text">Up from yesterday</span>
                                 </div>
                             </div>
                         </div>
@@ -128,19 +128,15 @@
                                 </div>
                             </div>
                         </div>
-
-                        <c:set var="listMostInventoryBook" value="${requestScope.MOST_INVENTORY_BOOK}"/>
                         <div class="box">
                             <div class="left-side">
-                                <div class="boxtopic">Most Inventory Book</div>
-                                <c:forEach var="bookDTO" items="${listMostInventoryBook}">
-                                    <div class="number" style="color: red">Quantity: ${bookDTO.quantity_Book}</div>
-                                    <div class="name-product">Name: ${bookDTO.name}</div>
-                                    <div class="indicator">
-                                        <i class='bx bx-up-arrow-alt box4'></i>
-                                        <span class="text">Year Of Public: ${bookDTO.year_Of_Public}</span>
-                                    </div>
-                                </c:forEach>
+                                <div class="boxtopic">Best - Selling Product</div>
+                                <div class="number">123.333</div>
+                                <div class="name-product">NameBook</div>
+                                <div class="indicator">
+                                    <i class='bx bx-up-arrow-alt box4'></i>
+                                    <span class="text">Up from yesterday</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -148,6 +144,7 @@
             </div>
         </div>
         <script src="./js/script.js"></script>
+
     </body>
 
 </html>

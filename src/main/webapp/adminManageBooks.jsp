@@ -221,12 +221,6 @@
                             <a type="submit" href="adminBookAction?action=bookPage2">2</a>
                             <a type="submit" href="adminBookAction?action=bookPage3">3</a>
                             <a type="submit" href="adminBookAction?action=bookPage4">4</a>
-                                    <c:if test="${numLastBook>16}">
-                                        <a type="submit" href="staffBookAction?action=bookPage5">5</a>
-                                    </c:if>
-                                    <c:if test="${numLastBook>20}">
-                                        <a type="submit" href="staffBookAction?action=bookPage6">6</a>
-                                    </c:if>
                                 </div>
                                 <div class="col-lg-4"></div>
                             </div>
