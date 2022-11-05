@@ -9,47 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- link file CSS -->
-    <link rel="stylesheet" href="./css/adminHomeStyle.css">
+
     <!-- BoxIcon CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <%--    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>--%>
-    <%--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--%>
-    <%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>--%>
+<%--    Link Button CSS--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
           integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /*Start Form Add To Inventory*/
-        .modal-dialog {
-            margin-top: 200px;
-
-        }
-
-        .add {
-            width: 70px;
-            height: 28px;
-            margin-right: 10px;
-            font-size: 15px;
-        }
-
-        .xclose {
-            width: 70px;
-            height: 28px;
-            margin-right: 10px;
-            font-size: 15px;
-        }
-
-        .head-form {
-            color: #ffae00;
-            font-weight: bold;
-            margin: 20px 0px 0px 70px;
-        }
-
-        /*End Form Add To Inventory*/
-    </style>
+    <!-- link file CSS -->
+    <link rel="stylesheet" href="./css/staffManageInventory.css">
 </head>
 
 <body>
@@ -130,12 +100,7 @@
     <!-- home content -->
     <div class="home-section">
         <!-- home-content -->
-        <div class="home-content">
 
-            <div class="overview-boxes">
-
-                <div class="box">
-                    <div class="left-side">
                         <%--                             Write   Body Code--%>
                         <table class="table">
                             <thead class="thead-dark" style="font-size: 15px">
@@ -158,7 +123,7 @@
                                         <td><img style="height: 100px;width: 100px"
                                                  src="<c:url value="/images/${i.inventory_Img}"/>"/></td>
                                         <td>
-                                            <a href="staffBookAction?action=bookDetail&bookId=${i.inventory_Book_Id}&categoryId=${i.inventory_Category_Id}">
+                                            <a href="staffBookAction?action=bookDetail&bookId=${i.inventory_Book_Id}&categoryId=${i.inventory_Category_Id}&bookName=${i.inventory_Name_Book}">
                                                     ${i.inventory_Name_Book}</a></td>
                                         <td>${i.quantity_Inventory}</td>
                                         <td>${i.note_Inventory}</td>
@@ -180,7 +145,7 @@
                                         <div class="modal-content">
 
                                             <header class="head-form mb-0">
-                                                <h2>Are You Sure Delete Book Inventory ?</h2>
+                                                <h2>Are You Sure Delete Inventory Book ?</h2>
                                             </header>
 
                                             <div class="modal-body">
@@ -205,10 +170,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 <script src="./js/script.js"></script>
 

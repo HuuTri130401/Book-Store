@@ -168,7 +168,7 @@ body {
     position: absolute;
     height: 100%;
     width: 27rem;
-    background: 
+    background:
       linear-gradient(to right, #267871, #136a8a);
     transition: all 0.5s ease;
 }

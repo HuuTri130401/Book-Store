@@ -9,46 +9,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- link file CSS -->
-    <link rel="stylesheet" href="./css/adminHomeStyle.css">
+
     <!-- BoxIcon CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <%--    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>--%>
-    <%--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--%>
-    <%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>--%>
+    <%-- Link Button CSS--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
           integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /*Start Form*/
-        .modal-dialog {
-            margin-top: 200px;
-        }
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-        .add {
-            width: 70px;
-            height: 28px;
-            margin-right: 10px;
-            font-size: 15px;
-        }
+    <!-- link file CSS -->
+    <link rel="stylesheet" href="./css/staffManageRequest.css">
 
-        .xclose {
-            width: 70px;
-            height: 28px;
-            margin-right: 10px;
-            font-size: 15px;
-        }
-
-        .head-form {
-            color: #ffae00;
-            font-weight: bold;
-            margin: 20px 0px 0px 70px;
-        }
-
-        /*End Form*/
-    </style>
 </head>
 
 <body>
@@ -129,180 +102,200 @@
     <!-- home content -->
     <div class="home-section">
         <!-- home-content -->
-        <div class="home-content">
+        <%--       Write   Body Code--%>
+        <table class="table">
+            <thead class="thead-dark" style="font-size: 15px">
+            <tr>
+                <th>Image</th>
+                <th>Name Book</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Note</th>
+                <th>Date Request</th>
+                <th>Status</th>
+                <th>Status Book</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody style="font-size: 15px">
 
-            <div class="overview-boxes">
 
-                <div class="box">
-                    <div class="left-side">
-                        <%--                             Write   Body Code--%>
-                        <table class="table">
-                            <thead class="thead-dark" style="font-size: 15px">
-                            <tr>
-                                <th>Image</th>
-                                <th>Name Book</th>
-                                <th>Quantity</th>
-                                <th>Note</th>
-                                <th>Date Request</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody style="font-size: 15px">
+            <c:forEach var="i" items="${listRequest}">
+                <c:if test="${i.request_Status != 0}">
+                    <%-- Start Show Item Request--%>
 
-                            <%--Create Book --%>
-                            <button style="font-size: 30px;border: none" data-toggle="modal" class="btn btn-primary"
-                                    data-target="#myModalBook">Create Book</i>
+                    <tr>
+                        <td><img style="height: 100px;width: 100px"
+                                 src="<c:url value="/images/${i.request_Image}"/>"/></td>
+                        <td>
+                            <c:if test="${i.status_Book_Request==false}">
+                                <a href="staffBookAction?action=bookDetailRequest&bookNameRequest=${i.request_Name_Book}">
+                                        ${i.request_Name_Book}</a>
+                            </c:if>
+
+                            <c:if test="${i.status_Book_Request==true}">
+
+                                ${i.request_Name_Book}</a>
+                            </c:if>
+                        </td>
+                        <td>${i.request_Quantity}</td>
+                        <td>${i.request_Price}</td>
+                        <td>${i.request_Note}</td>
+                        <td>${i.request_Date}</td>
+                        <td>
+                            <c:if test="${i.request_Status==1}">
+                                <p style="color: #ffa400">Proceeding</p>
+                            </c:if>
+                            <c:if test="${i.request_Status==2}">
+                                <p style="color: #1ace1a">Done</p>
+                            </c:if>
+                            <c:if test="${i.request_Status==3}">
+                                <p style="color: red">Un Done</p>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${i.status_Book_Request==true}">
+                                <%--Create Book --%>
+                                <button style="font-size: 30px;border: none" data-toggle="modal"
+                                        data-target="#myModalBook"><i class="fa-solid fa-plus"></i>
+                                </button>
+                                <%--End Create Book--%>
+                            </c:if>
+                        </td>
+                        <td>
+                            <button style="font-size: 30px;border: none" data-toggle="modal"data-target="#myModal">
+                                <c:set var="id" value="${i.request_Id}"></c:set>
+                                <i class="fa-solid fa-trash"></i>
                             </button>
-                            <%--End Create Book--%>
+                        </td>
+                    </tr>
+                    <%-- End Show Item Request--%>
 
-                            <c:forEach var="i" items="${listRequest}">
-                                <c:if test="${i.request_Status != 0}">
-                                    <%--                                Start Show Item Request--%>
-                                    <tr>
-                                        <td><img style="height: 100px;width: 100px"
-                                                 src="<c:url value="/images/${i.request_Image}"/>"/></td>
-                                        <td>
-                                            <a href="staffBookAction?action=bookDetail&bookId=${i.request_Book_Id}&categoryId=${i.request_Category}">
-                                                    ${i.request_Name_Book}</a></td>
-                                        <td>${i.request_Quantity}</td>
-                                        <td>${i.request_Note}</td>
-                                        <td>${i.request_Date}</td>
-                                        <td>
-                                            <c:if test="${i.request_Status==1}">
-                                                <p style="color: red">Proceeding</p>
-                                            </c:if>
-                                            <c:if test="${i.request_Status==2}">
-                                                <p style="color: #1ace1a">Done</p>
-                                            </c:if></td>
-                                        <td>
-                                            <button style="font-size: 30px;border: none"  data-toggle="modal"
-                                                    data-target="#myModal"><i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <%-- End Show Item Request--%>
+                    <%--Delete Request--%>
+                    <div class="modal fade" id="myModal">
+                        <div style="height: 100%" class="modal-dialog">
+                            <div class="modal-content">
 
-                                    <%--Delete Request--%>
-                                    <div class="modal fade" id="myModal">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
+                                <header class="head-form mb-0">
+                                    <h2>Are You Sure Delete Request Book ?</h2>
+                                </header>
 
-                                                <header class="head-form mb-0">
-                                                    <h2>Are You Sure Delete Request Book ?</h2>
-                                                </header>
-
-                                                <div class="modal-body">
-                                                        <%--Form --%>
-                                                    <form action="staffImportationAction?action=deleteRequest"
-                                                          method="POST">
-                                                        <input type="hidden" name="request_Id"
-                                                               value="${i.request_Id}"/>
-                                                </div>
-                                                <!-- Modal footer -->
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-danger add">Delete</button>
-                                                    </form>
-                                                    <button class="btn btn-warning xclose" data-dismiss="modal">Close
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%--End Delete Request--%>
-                                </c:if>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                                <div class="modal-body">
+                                        <%--Form --%>
+                                    <form action="staffImportationAction?action=deleteRequest"
+                                          method="POST">
+                                        <input type="hidden" name="request_Id"
+                                               value="${i.request_Id}"/>
+                                            <%--Form --%>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger add">Delete</button>
+                                    </form>
+                                    <button class="btn btn-warning xclose" data-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <%--End Delete Request--%>
+
+
+
+                </c:if>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
+
 </div>
 <script src="./js/script.js"></script>
 
 <%--Start Form Create Book--%>
+<c:forEach var="i" items="${listRequest}">
+    <c:set var="idR" value="${id}"></c:set>
+<c:if test="${i.request_Id==idR}">
 <div class="modal fade" id="myModalBook">
-    <div class="modal-dialog">
+    <div style=" margin-top: 70px;" class="modal-dialog">
         <div class="modal-content">
 
             <header class="head-form mb-0">
-                <h2>Create Book</h2>
+                <h2 style="padding-left: 75px;font-size: 30px">Create Book</h2>
             </header>
 
             <div class="modal-body">
                 <%--Form --%>
-                <form action="staffBookAction?action=createBook" method="POST" enctype="multipart/form-data" boundary>
+                <form action="staffBookAction?action=createBook" method="POST">
 
-                        <%--  Start Image Book --%>
-                        <div class="form-group">
-<%--                            <div class="input-group">--%>
-<%--                                <div class="input-group-prepend">--%>
-<%--                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>--%>
-<%--                                </div>--%>
-                                <input type="file" name="imageUpload" class="form-control input-sm"
-                                       style="font-size: 15px" placeholder="Upload Image Book" >
-<%--                            </div>--%>
-                        </div>
-                        <%--  End Image Book --%>
+                    <%--  Start Image Book --%>
+                    <div class="form-group">
+                        <input type="hidden" name="imageUpload" value="${i.request_Image}">
+                    </div>
+                    <%--  End Image Book --%>
 
-                        <%--  Start Name Book --%>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
-                                </div>
-                                <input type="text" name="nameBook" class="form-control input-sm"
-                                       style="font-size: 15px" placeholder="Name Book">
+                    <%--  Start Name Book --%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-book"></i></span>
                             </div>
+                            <input type="text" name="nameBook" class="form-control input-sm"
+                                   style="font-size: 20px" value="${i.request_Name_Book}">
                         </div>
-                        <%--  End Name Book --%>
+                    </div>
+                    <%--  End Name Book --%>
 
-                        <%--  Start Author --%>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
-                                </div>
-                                <input type="text" name="author" class="form-control input-sm"
-                                       style="font-size: 15px" placeholder="Author">
+                    <%--  Start Author --%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-person"></i></span>
                             </div>
+                            <input type="text" name="author" class="form-control input-sm"
+                                   style="font-size: 20px" placeholder="Author">
                         </div>
-                        <%--  End Author --%>
+                    </div>
+                    <%--  End Author --%>
 
-                        <%--  Start Quantity Book --%>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
-                                </div>
-                                <input type="number" name="quantity" class="form-control input-sm"
-                                       style="font-size: 15px" placeholder="Quantity">
+                    <%--  Start Quantity Book --%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-arrow-up-9-1"></i></span>
                             </div>
+                            <input type="number" name="quantity"
+                                   class="form-control input-sm"
+                                   style="font-size: 20px" value="${i.request_Quantity}">
                         </div>
-                        <%--  End Quantity Book --%>
+                    </div>
+                    <%--  End Quantity Book --%>
 
-                        <%--  Start Price Book --%>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
-                                </div>
-                                <input type="number" name="price" class="form-control input-sm"
-                                       style="font-size: 15px" placeholder="Price">
+                    <%--  Start Price Book --%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-money-bill-wave"></i></span>
                             </div>
+                            <input type="number" name="price" class="form-control input-sm"
+                                   style="font-size: 20px" value="${i.request_Price}">
                         </div>
-                        <%--  End Price Book --%>
+                    </div>
+                    <%--  End Price Book --%>
 
                     <%--  Start Category Book --%>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-briefcase"></i></span>
+                                                            <span class="input-group-text"><i
+                                                                    class="fa fa-briefcase"></i></span>
                             </div>
-                            <select style="font-size: 15px" class="form-control" name="category">
-                                <option >Category</option>
+                            <select style="font-size: 20px" class="form-control"
+                                    name="category">
+                                <option>Category</option>
                                 <option value="1">Romance</option>
                                 <option value="2">Self-help</option>
                                 <option value="3">Novel</option>
@@ -310,31 +303,35 @@
                             </select>
                         </div>
                     </div>
-                        <%--  End Category Book --%>
+                    <%--  End Category Book --%>
 
-                        <%--  Start Public Book --%>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
-                                </div>
-                                <input type="number" name="publicOfYear" class="form-control input-sm"
-                                       style="font-size: 15px" placeholder="Public Of Year">
+                    <%--  Start Public Book --%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-calendar-days"></i></span>
                             </div>
+                            <input type="number" name="publicOfYear"
+                                   class="form-control input-sm"
+                                   style="font-size: 20px" placeholder="Public Of Year">
                         </div>
-                        <%--  End Public Book --%>
+                    </div>
+                    <%--  End Public Book --%>
 
-                        <%--  Start Description Book --%>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-address-book"></i></span>
-                                </div>
-                                <input type="text" name="description" class="form-control input-sm"
-                                       style="font-size: 15px" placeholder="Description">
+                    <%--  Start Description Book --%>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-regular fa-file"></i></span>
                             </div>
+                            <input type="text" name="description"
+                                   class="form-control input-sm"
+                                   style="font-size: 20px" placeholder="Description">
                         </div>
-                        <%--  End Description Book --%>
+                    </div>
+                    <%--  End Description Book --%>
 
             </div>
             <!-- Modal footer -->
@@ -346,9 +343,10 @@
         </div>
     </div>
 </div>
+</c:if>
+</c:forEach>
 <%--End Form Create Book--%>
 
-<%--Update Book Inventory--%>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

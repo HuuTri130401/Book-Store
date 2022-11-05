@@ -11,92 +11,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Manage Books</title>
         <!-- link file CSS -->
-        <link rel="stylesheet" href="./css/adminManageBooksStyle.css">
+        <link rel="stylesheet" href="./css/staffManageBook.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-        <style>
-            body{
-                box-sizing: border-box;
-                padding: 0;
-                margin: 0;
-            }
 
-            /*Start CategoryBox*/
-            .left-side .choice{
-                font-size: 15px;
-                margin-left: 10px;
-                height:25px;
-                width: 40px;
-            }
-            .left-side .categoryText{
-                margin-left: 10px;
-                font-size: 20px;
-                height: 40px;
-            }
-            .left-side .comboxCategory{
-                color: #17A2B8;
-                margin-top: 5px;
-                margin-left: 10px;
-                width: 115px;
-                height: 100%;
-                font-size: 18px;
-            }
-            .left-side .formCategory{
-                height: 32px;
-            }
-            /*End CategoryBox*/
-
-            /*Start Border : Khung border bao quanh book*/
-            .border{
-                margin-left: 10px;
-                margin-bottom: 10px;
-                padding: 10px 10px 10px 10px;
-                width: 423px;
-            }
-            /*End Border*/
-
-            /*Start Item List: Weight height font book name, price*/
-            .item{
-                width: 50%;
-
-            }
-            .item img{
-                width: 50%;
-            }
-
-            .item{
-                padding-left: 100px;
-            }
-            .item img{
-                height: 350px;
-                width: 400px;
-            }
-            .item .name{
-                font-size: 30px;
-                margin-bottom: 0px;
-            }
-            .item .price{
-                font-size:25px;
-            }
-            .item .viewDetail{
-                font-size: 15px;
-                height:30px;
-                width: 100px;
-            }
-            /*End Item List*/
-
-            /*Page Start*/
-            .page{
-                font-size: 30px;
-            }
-            .page a{
-                margin-left: 10px;
-                color: #000000 ;
-            }
-            /*Page End*/
-        </style>
     </head>
 
     <body>
@@ -140,22 +60,22 @@
             <!-- link in sidebar -->
             <ul class="nav-links">
                 <li>
-                            <a href="./adminDashBoard.jsp">
-                                <i class='bx bx-grid-alt'></i>
-                                <span class="links_name">Dashboard</span>
-                            </a>
+                    <a href="./adminDashBoard.jsp">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
                 </li>
                 <li>
-                            <a href="./adminManageEmployees.jsp">
-                                <i class='bx bx-user'></i>
-                                <span class="links_name">Employees</span>
-                            </a>
+                    <a href="./adminManageEmployees.jsp">
+                        <i class='bx bx-user'></i>
+                        <span class="links_name">Employees</span>
+                    </a>
                 </li>
                 <li>
-                            <a href="#">
-                                <i class='bx bx-home'></i>
-                                <span class="links_name">Overview</span>
-                            </a>
+                    <a href="#">
+                        <i class='bx bx-home'></i>
+                        <span class="links_name">Overview</span>
+                    </a>
                 </li>
                 <li>
 
@@ -165,10 +85,10 @@
                     </a>
                 </li>
                 <li>
-                            <a href="#">
-                                <i class='bx bx-trending-up'></i>
-                                <span class="links_name">Statistic</span>
-                            </a>
+                    <a href="#">
+                        <i class='bx bx-trending-up'></i>
+                        <span class="links_name">Statistic</span>
+                    </a>
                 </li>
                 <li>
                     <a href="login.jsp">
@@ -182,61 +102,53 @@
         <!-- home content -->
         <section class="home-section">
 
-            <!-- home-content -->
-            <div class="home-content">
-                <div class="overview-boxes">
-                    <div class="box">
-                        <div class="left-side">
-                            <form class="formCategory" action="adminBookAction" method="POST">
-                                <spam class="categoryText">Category</spam>
-                                <select class="comboxCategory" name="action">
-                                    <option value="Romance">Romance</option>
-                                    <option value="Self-help">Self-help</option>
-                                    <option value="Novel">Novel</option>
-                                    <option value="Fantasy">Fantasy</option>
-                                </select>
-                                <button class="choice btn btn-secondary" type="submit">Go</button>
-                            </form><br/>
-                            <div class="itemList row">
-                                <c:forEach items="${listBook}" var="b">
-                                    <div class="item col-lg-6">
-                                        <form action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}"
-                                              method="POST">
-                                            <div class="border">
-                                            <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
-                                           <p class="name">${b.name}</p> <br/>
-                                            <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
-                                                <small style="text-decoration:underline">đ</small><p><br/>
-                                            <button class="viewDetail btn btn-info" type="submit">View Detail</button>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </c:forEach>
+            <form class="formCategory" action="adminBookAction" method="POST">
+                <spam class="categoryText">Category</spam>
+                <select class="comboxCategory" name="action">
+                    <option value="Romance">Romance</option>
+                    <option value="Self-help">Self-help</option>
+                    <option value="Novel">Novel</option>
+                    <option value="Fantasy">Fantasy</option>
+                </select>
+                <button class="choice btn btn-secondary" type="submit">Go</button>
+            </form><br/>
+            <div class="itemList row">
+                <c:forEach items="${listBook}" var="b">
+                    <div class="item col-lg-6">
+                        <form style="height: 325px;width: 450px"
+                              action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}"
+                              method="POST">
+                            <div class="border">
+                                <img src="<c:url value="/images/${b.image_Book}"/>"/>
+                                <p class="name">${b.name}</p>
+                                <p class="price">
+                                    <fmt:formatNumber value="${b.price_Book}" type="number"/>
+                                    <small style="text-decoration:underline">đ</small>
+                                    <button class="viewDetail btn btn-info" type="submit">View Detail
+                                    </button>
+                                <p>
                             </div>
-                            <div class="page row">
-                                <div class="col-lg-4"></div>
-                                <div class="col-lg-4 d-flex justify-content-center" >
-                            <a type="submit" href="adminBookAction?action=bookPage1">1</a>
-                            <a type="submit" href="adminBookAction?action=bookPage2">2</a>
-                            <a type="submit" href="adminBookAction?action=bookPage3">3</a>
-                            <a type="submit" href="adminBookAction?action=bookPage4">4</a>
-                                    <c:if test="${numLastBook>16}">
-                                        <a type="submit" href="staffBookAction?action=bookPage5">5</a>
-                                    </c:if>
-                                    <c:if test="${numLastBook>20}">
-                                        <a type="submit" href="staffBookAction?action=bookPage6">6</a>
-                                    </c:if>
-                                </div>
-                                <div class="col-lg-4"></div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                </div>
+                </c:forEach>
             </div>
-
+            <div class="page row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4 d-flex justify-content-center" >
+                    <a type="submit" href="adminBookAction?action=bookPage1">1</a>
+                    <a type="submit" href="adminBookAction?action=bookPage2">2</a>
+                    <a type="submit" href="adminBookAction?action=bookPage3">3</a>
+                    <a type="submit" href="adminBookAction?action=bookPage4">4</a>
+                    <c:if test="${numLastBook>16}">
+                        <a type="submit" href="staffBookAction?action=bookPage5">5</a>
+                    </c:if>
+                    <c:if test="${numLastBook>20}">
+                        <a type="submit" href="staffBookAction?action=bookPage6">6</a>
+                    </c:if>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
         </section>
-
         <script src="./js/script.js"></script>
 
     </body>

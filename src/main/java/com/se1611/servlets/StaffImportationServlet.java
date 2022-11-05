@@ -53,6 +53,15 @@ public class StaffImportationServlet extends HttpServlet {
                     session.setAttribute("listImportation", listImportation);
                     url = IMPORTATION_PAGE;
                     break;
+                case"updateStatusRequestUnDone":
+                    int request_Ids = Integer.parseInt(request.getParameter("request_Id"));
+                    //Update Status Request
+                    if (daoRequest.UpdateStatusRequest(request_Ids,false)) {
+                        listRequest = daoRequest.getRequest();
+                        session.setAttribute("listRequestz", listRequest);
+                        url = REQUEST_PAGE;
+                    }
+                    break;
                 case "insertImportation":
                     //get List Importation
                     listImportation = daoImportation.getImportation();
@@ -77,7 +86,7 @@ public class StaffImportationServlet extends HttpServlet {
                         if (daoImportation.InsertImportationDetail(id_Importation, quantity_Importation, price_Importation,
                                 total_Importation, noteImportation,book_id_Importation)) {
                             //Update Status Request
-                            if (daoRequest.UpdateStatusRequest(request_Id)) {
+                            if (daoRequest.UpdateStatusRequest(request_Id,true)) {
                                 listImportation = daoImportation.getImportation();
                                 session.setAttribute("listImportation", listImportation);
                                 url = IMPORTATION_PAGE;

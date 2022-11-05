@@ -19,12 +19,12 @@ public class ImportationDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "select i.import_Id as importId, import_Detail_Id,r.request_Id as requestId, image, name_Book, date_Import, \n" +
-                        "price_Import_Detail,quantity_Import_Detail,total_Import_Detail,d.note as note,d.status as status_Import," +
-                        "r.book_Id as bookId,category,fullName\n" +
-                        "from Importation i inner join ImportationDetail d on i.import_Id=d.import_Id inner join\n" +
-                        "BookingRequest r on r.request_Id=i.request_id inner join Book b on b.book_Id=r.book_Id " +
-                        "inner join Employee e on i.employee_Id=e.employee_Id";
+                String sql = "select i.import_Id as importId, import_Detail_Id,r.request_Id as requestId, b.image as image, b.name_Book as name_Book, date_Import,\n" +
+                        "                        price_Import_Detail,quantity_Import_Detail,total_Import_Detail,d.note as note,d.status as status_Import,\n" +
+                        "                        b.book_Id as bookId,category,fullName\n" +
+                        "                        from Importation i inner join ImportationDetail d on i.import_Id=d.import_Id inner join\n" +
+                        "                        BookingRequest r on r.request_Id=i.request_id inner join Book b on d.book_Id=b.book_Id\n" +
+                        "                        inner join Employee e on i.employee_Id=e.employee_Id";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 listImportation = new ArrayList<>();

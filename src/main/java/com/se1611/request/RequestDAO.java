@@ -20,22 +20,23 @@ public class RequestDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "select request_Id, b.book_Id as bookId,image, name_Book,quantity_Request,date_Request,note,status,category\n" +
-                        "from BookingRequest r inner join Book b on r.book_Id=b.book_Id";
+                String sql = "select request_Id,image, name_Book,quantity_Request,price_Request,date_Request,note,status," +
+                        "status_Book_Request\n" +
+                        "                        from BookingRequest";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 listRequest = new ArrayList<>();
                 while (rs.next()) {
                     RequestDTO list = new RequestDTO();
                     list.setRequest_Id(rs.getInt("request_Id"));
-                    list.setRequest_Book_Id(rs.getInt("bookId"));
                     list.setRequest_Image(rs.getString("image"));
                     list.setRequest_Name_Book(rs.getString("name_Book"));
                     list.setRequest_Quantity(rs.getInt("quantity_Request"));
                     list.setRequest_Date(rs.getDate("date_Request"));
                     list.setRequest_Note(rs.getString("note"));
                     list.setRequest_Status(rs.getInt("status"));
-                    list.setRequest_Category(rs.getInt("category"));
+                    list.setStatus_Book_Request(rs.getBoolean("status_Book_Request"));
+                    list.setRequest_Price(rs.getFloat("price_Request"));
                     listRequest.add(list);
                 }
             }
@@ -54,7 +55,7 @@ public class RequestDAO {
     }
 
     //update Status Request
-    public boolean UpdateStatusRequest(int request_Id) throws SQLException, NamingException {
+    public boolean UpdateStatusRequest(int request_Id,boolean check) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = true;
@@ -64,7 +65,12 @@ public class RequestDAO {
             if (con != null) {
                 String sql = "update [dbo].[BookingRequest] set status=? where [request_Id]=?";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, 2);
+                //Check status, if true to update Done, false update Un Done
+                if(check) {
+                    stm.setInt(1, 2);
+                }else{
+                    stm.setInt(1, 3);
+                }
                 stm.setInt(2, request_Id);
                 count = stm.executeUpdate();
                 if (count == 0) {

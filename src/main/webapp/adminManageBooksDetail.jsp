@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <!-- link file CSS -->
-    <link rel="stylesheet" href="./css/adminHomeStyle.css">
+    <link rel="stylesheet" href="./css/staffManageBookDetail.css">
     <!-- BoxIcon CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- Latest compiled and minified CSS -->
@@ -17,94 +17,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        body {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-        }
 
-        /*Start Border : Khung border bao quanh book*/
-        .border {
-            border-radius: 20px;
-            margin-left: 140px;
-            margin-bottom: 10px;
-            padding: 10px 10px 10px 10px;
-            width: 800px;
-        }
-
-        /*Start Category*/
-        .left-side .categoryText {
-            margin-left: 10px;
-            font-size: 20px;
-            height: 40px;
-            color: black;
-        }
-
-        /*End Category*/
-
-        /*Start Item List: Weight height font book name, price*/
-        .itemList img {
-            width: 50%;
-            height: 350px;
-            width: 400px;
-        }
-
-        .item {
-            margin-left: 40px;
-        }
-
-        .item .name {
-            font-size: 35px;
-            padding-bottom: 20px;
-        }
-
-        .item .price {
-            margin-top: 20px;
-            font-size: 30px;
-            color: #C92127;
-        }
-
-        .item .quantity {
-            font-size: 25px;
-            padding-bottom: 5px;
-        }
-
-        .item .author {
-            font-size: 25px;
-            padding-bottom: 5px;
-        }
-
-        .item .yearPublic {
-            font-size: 25px;
-            padding-bottom: 5px;
-        }
-
-        .item .inventory {
-            font-size: 30px;
-            margin-right: 50px;
-        }
-        /*End Item List*/
-
-        /*Start Description*/
-        .boxDescription{
-            border-radius: 15px;
-            background-color: rgba(224, 219, 219, 0.68);
-            margin-left: 10px;
-            margin-top: 30px;
-        }
-        .description{
-            margin-top: 20px;
-            font-size: 22px;
-            margin-left: 10px;
-        }
-        .description .text{
-            padding-top: 10px;
-            font-size: 15px;
-        }
-        /*End Description*/
-
-    </style>
 </head>
 
 <body>
@@ -186,11 +99,7 @@
 
 <!-- home content -->
 <section class="home-section">
-    <!-- home-content -->
-    <div class="home-content">
-        <div class="overview-boxes">
-            <div class="box">
-                <div class="left-side">
+
                     <div class="categoryText">
                         <a style="color: black" href="adminBookAction?action=bookPage1">Category </a> >
                         <a style="color: #17A2B8" href="adminBookAction?action=${nameCategory}"> ${nameCategory}</a>
@@ -205,7 +114,7 @@
                                     <img src="<c:url value="/images/${b.image_Book}"/>" class="rounded"/><br/>
                                 </div>
                                 <div class="item col-lg-5">
-                                    <strong class="name">${b.name}</strong><br/>
+                                    <strong class="name">${b.name}</strong>
                                     <p class="price">
                                             <fmt:formatNumber value="${b.price_Book}" type="number"/>
                                         <small style="text-decoration:underline">đ</small>
@@ -217,17 +126,14 @@
                             </div>
                             <div class="boxDescription">
                                 <div class="description">
-                                    <strong>Information Detail</strong><br>
+                                    <strong>Information Detail</strong>
                                     <p class="text">${b.descriptionBook}</p>
                                 </div>
                             </div>
                             <%--                            End Show Item Book--%>
                         </c:if>
                     </c:forEach>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </section>
 
 <script src="./js/script.js"></script>

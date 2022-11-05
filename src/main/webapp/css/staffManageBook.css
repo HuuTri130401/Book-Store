@@ -13,10 +13,11 @@
 
 html {
     font-size: 62.5%;
+    height: 100%;
 }
 
 body {
-    min-height: 100vh;
+    height: 100%;
     width: 100%;
     font-size: 1.6rem;
 }
@@ -30,14 +31,14 @@ body {
 
 .header .header-menu {
     display: flex;
-    align-items: center; 
+    align-items: center;
 }
 
 .header .sidebar-button__logo {
     display: flex;
     max-width: 27rem;
-    background: 
-    linear-gradient(to right, #267871, #136a8a);
+    background:
+            linear-gradient(to right, #267871, #136a8a);
 }
 
 .header .sidebar-button__logo .sidebar-button {
@@ -47,8 +48,8 @@ body {
     color: #fff;
     font-size: 2rem;
     align-items: center;
-    background: 
-    linear-gradient(to right, #267871, #136a8a);
+    background:
+            linear-gradient(to right, #267871, #136a8a);
     padding: 0 20px;
 }
 
@@ -169,7 +170,7 @@ body {
     height: 100%;
     width: 27rem;
     background:
-      linear-gradient(to right, #267871, #136a8a);
+            linear-gradient(to right, #267871, #136a8a);
     transition: all 0.5s ease;
 }
 
@@ -219,7 +220,7 @@ body {
 .home-section {
     background-color: #f5f5f5;;
     position: relative;
-    min-height: 100vh;
+    height: 100%;
     width: calc(100% - 27rem);
     left: 27rem;
     transition: all 0.5s ease;
@@ -230,71 +231,8 @@ body {
     left: 6rem;
 }
 
-.home-section .home-content {
-    position: relative;
-    padding-top: 2rem;
-}
 
-.home-content .overview-boxes {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding: 0 2rem;
-    flex-wrap: wrap;
-}
 
-.home-content .overview-boxes .box {
-    width: calc(100% / 4 - 1.5rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem 1.4rem;
-    background: #fff;
-    border-radius: 1.2rem;
-}
-
-.home-content .overview-boxes .boxtopic {
-    font-size: 2rem;
-    font-weight: 500;
-}
-
-.home-content .overview-boxes .number {
-    font-size: 3.5rem;
-    font-weight: 500;
-    margin-top: -0.5rem;
-    display: inline-block;
-}
-
-.overview-boxes .indicator {
-    display: flex;
-    align-items: center;
-}
-
-.overview-boxes .indicator i {
-    height: 2rem;
-    width: 2rem;
-    background: #267871;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 2rem;
-    margin-right: 0.5rem;
-}
-
-.overview-boxes .indicator .box2{
-    background-color: #0d8cba;
-}
-
-.overview-boxes .indicator .box3{
-    background-color: #bcd214;
-}
-
-.overview-boxes .indicator .box4{
-    background-color: #ed6b15;
-}
-
-.overview-boxes .indicator .text {
-    font-size: 1.2rem;
-}
 
 @media (max-width: 1216px) {
     .sidebar {
@@ -318,10 +256,7 @@ body {
 }
 
 @media (max-width: 836px) {
-    .home-content .overview-boxes .box {
-        width: calc(100% / 2 - 1.5rem);
-        margin-bottom: 15px;
-    }
+
 
     .header .sidebar-button__logo .logo-details {
         /* display: none; */
@@ -333,21 +268,80 @@ body {
         display: none;
     }
 }
-
-/*table th , table td{
-    text-align: center;
+body{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-table tr:nth-child(even) {
-    background-color: #BEF2F5
+/*Start CategoryBox*/
+.home-section .choice{
+    font-size: 15px;
+    margin-left: 10px;
+    height:30px;
+    width: 50px;
+    padding: 0px 0px 0px 0px;
+}
+.home-section .categoryText{
+    margin-left: 10px;
+    font-size: 20px;
+    height: 40px;
+}
+.home-section .comboxCategory{
+    color: #17A2B8;
+    margin-left: 10px;
+    width: 115px;
+    height: 100%;
+    font-size: 18px;
+}
+.home-section .formCategory{
+    height: 30px;
+}
+/*End CategoryBox*/
+
+/*Start Border : Khung border bao quanh book*/
+.border{
+    margin-left: 118px;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+    height: 317px;
+    width: 355px;
+}
+/*End Border*/
+
+/*Start Item List: Weight height font book name, price*/
+.item{
+    width: 50%;
 }
 
-.pagination li:hover {
-    cursor: pointer;
-}*/
+.item{
+    padding-left: 100px;
+}
+.item img{
+    height: 230px;
+    width: 330px;
+}
+.item .name{
+    font-size: 23px;
+    margin-bottom: 0px;
+}
+.item .price{
+    font-size:20px;
+}
+.item .viewDetail{
+    font-size: 15px;
+    height:30px;
+    width: 100px;
+    margin-left: 115px;
+}
+/*End Item List*/
 
-/* ========================================================== */
-/* footer {
-    height: 12%;
-    background-color: #0f2c4f;
-} */
+/*Page Start*/
+.page{
+    font-size: 25px;
+}
+.page a{
+    margin-left: 10px;
+    color: #000000 ;
+}
+/*Page End*/

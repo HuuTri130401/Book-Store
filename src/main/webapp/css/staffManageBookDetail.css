@@ -13,6 +13,7 @@
 
 html {
     font-size: 62.5%;
+    height: 100%;
 }
 
 body {
@@ -30,14 +31,14 @@ body {
 
 .header .header-menu {
     display: flex;
-    align-items: center; 
+    align-items: center;
 }
 
 .header .sidebar-button__logo {
     display: flex;
     max-width: 27rem;
-    background: 
-    linear-gradient(to right, #267871, #136a8a);
+    background:
+            linear-gradient(to right, #267871, #136a8a);
 }
 
 .header .sidebar-button__logo .sidebar-button {
@@ -47,8 +48,8 @@ body {
     color: #fff;
     font-size: 2rem;
     align-items: center;
-    background: 
-    linear-gradient(to right, #267871, #136a8a);
+    background:
+            linear-gradient(to right, #267871, #136a8a);
     padding: 0 20px;
 }
 
@@ -169,7 +170,7 @@ body {
     height: 100%;
     width: 27rem;
     background:
-      linear-gradient(to right, #267871, #136a8a);
+            linear-gradient(to right, #267871, #136a8a);
     transition: all 0.5s ease;
 }
 
@@ -219,135 +220,140 @@ body {
 .home-section {
     background-color: #f5f5f5;;
     position: relative;
-    min-height: 100vh;
+    height: 100%;
     width: calc(100% - 27rem);
     left: 27rem;
     transition: all 0.5s ease;
 }
 
-.sidebar.active ~ .home-section{
-    width: calc(100% - 6rem);
-    left: 6rem;
+body {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-.home-section .home-content {
-    position: relative;
-    padding-top: 2rem;
+/*Start Border : Khung border bao quanh book*/
+.border {
+    border-radius: 20px;
+    margin-left: 140px;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+    width: 800px;
 }
 
-.home-content .overview-boxes {
+/*Start Category*/
+.home-section .categoryText {
+    margin-left: 10px;
+    font-size: 20px;
+    height: 40px;
+    color: black;
+}
+
+/*End Category*/
+
+/*Start Item List: Weight height font book name, price*/
+.itemList img {
+    width: 50%;
+    height: 350px;
+    width: 400px;
+}
+
+.item {
+    margin-left: 40px;
+}
+
+.item .name {
+    font-size: 35px;
+    padding-bottom: 20px;
+}
+
+.item .price {
+    margin-top: 20px;
+    font-size: 30px;
+    color: #C92127;
+}
+
+.item .quantity {
+    font-size: 25px;
+    padding-bottom: 5px;
+}
+
+.item .author {
+    font-size: 25px;
+    padding-bottom: 5px;
+}
+
+.item .yearPublic {
+    font-size: 25px;
+    padding-bottom: 5px;
+}
+
+.item .inventory {
+    font-size: 30px;
+    margin-right: 50px;
+}
+
+.button {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding: 0 2rem;
-    flex-wrap: wrap;
 }
 
-.home-content .overview-boxes .box {
-    width: calc(100% / 4 - 1.5rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem 1.4rem;
-    background: #fff;
-    border-radius: 1.2rem;
+/*End Item List*/
+
+/*Start Description*/
+.boxDescription {
+    border-radius: 15px;
+    background-color: rgba(224, 219, 219, 0.68);
+    margin-left: 10px;
+    margin-top: 30px;
 }
 
-.home-content .overview-boxes .boxtopic {
-    font-size: 2rem;
-    font-weight: 500;
+.description {
+    margin-top: 20px;
+    font-size: 22px;
+    margin-left: 10px;
 }
 
-.home-content .overview-boxes .number {
-    font-size: 3.5rem;
-    font-weight: 500;
-    margin-top: -0.5rem;
-    display: inline-block;
+.description .text {
+    padding-top: 10px;
+    font-size: 15px;
 }
 
-.overview-boxes .indicator {
-    display: flex;
-    align-items: center;
+/*End Description*/
+
+/*Start Form Add To Inventory*/
+.modal-dialog{
+    height: 100%;
+}
+.modal-content{
+    margin-top: 200px;
+
+}
+.input-group{
+    height: 40px;
+}
+.form-control{
+    height: 40px;
+}
+.add{
+    width: 70px;
+    height: 28px;
+    margin-right: 10px;
+    font-size: 15px;
 }
 
-.overview-boxes .indicator i {
-    height: 2rem;
-    width: 2rem;
-    background: #267871;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 2rem;
-    margin-right: 0.5rem;
+.xclose{
+    width: 70px;
+    height: 28px;
+    margin-right: 10px;
+    font-size: 15px;
 }
-
-.overview-boxes .indicator .box2{
-    background-color: #0d8cba;
+.noImportation{
+    width: 140px;
+    height: 28px;
+    margin-right: 178px;
+    font-size: 15px;
 }
+/*End Form Add To Inventory*/
 
-.overview-boxes .indicator .box3{
-    background-color: #bcd214;
-}
 
-.overview-boxes .indicator .box4{
-    background-color: #ed6b15;
-}
 
-.overview-boxes .indicator .text {
-    font-size: 1.2rem;
-}
-
-@media (max-width: 1216px) {
-    .sidebar {
-        width: 6rem;
-    }
-
-    .sidebar.active {
-        width: 27rem;
-    }
-
-    .home-section {
-        width: calc(100% - 6rem);
-        left: 6rem;
-        transition: all 0.5s ease;
-    }
-
-    .sidebar.active ~ .home-section {
-        width: calc(100% - 27rem);
-        left: 27rem;
-    }
-}
-
-@media (max-width: 836px) {
-    .home-content .overview-boxes .box {
-        width: calc(100% / 2 - 1.5rem);
-        margin-bottom: 15px;
-    }
-
-    .header .sidebar-button__logo .logo-details {
-        /* display: none; */
-        width: 52px;
-    }
-
-    .header .sidebar-button__logo .logo-details .logo_name{
-        /* color: #ffffff; */
-        display: none;
-    }
-}
-
-/*table th , table td{
-    text-align: center;
-}
-
-table tr:nth-child(even) {
-    background-color: #BEF2F5
-}
-
-.pagination li:hover {
-    cursor: pointer;
-}*/
-
-/* ========================================================== */
-/* footer {
-    height: 12%;
-    background-color: #0f2c4f;
-} */
