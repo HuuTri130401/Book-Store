@@ -99,12 +99,11 @@
                 <div class="home-content">
                     <div class="overview-tableEmployee">
                         <h2 id="nameTable">LIST OF EMPLOYEES</h2>
+                        <div class="tableEmployee">
 
-                        <c:set var="listEmployees" value="${requestScope.LIST_EMPLOYEES}"/>
-
-                        <c:if test="${not empty listEmployees}">
-                            <div class="tableEmployee">
-                                <table id="employees">
+                            <table id="employees">
+                                <c:set var="listEmployees" value="${requestScope.LIST_EMPLOYEES}"/>
+                                <c:if test="${not empty listEmployees}">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
@@ -170,16 +169,14 @@
                                     </c:forEach>
                                     </tbody>
                                 </table>
-                            </div>
 
-                            <%--</c:if>--%>
-                        </c:if>
-                        <c:if test="${empty listEmployees}">
-                            <h2 style="margin-top: 10rem ">
-                                CAN NOT FIND THIS RECORD !       
-                            </h2>
-                        </c:if>
-
+                            </c:if>
+                            <c:if test="${empty listEmployees}">
+                                <h2 style="margin-top: 10rem ">
+                                    CAN NOT FIND THIS RECORD !       
+                                </h2>
+                            </c:if>
+                        </div>
                     </div>
                 </div>
             </div>

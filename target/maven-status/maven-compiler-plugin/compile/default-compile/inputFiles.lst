@@ -7,6 +7,7 @@ D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\Sta
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\request\RequestDAO.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\StaffBookServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\book\BookDAO.java
+D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\bookingRequest\BookingRequestDTO.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\filters\DispatcherFilter.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\InventoryServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\AuthLogoutServlet.java
@@ -17,7 +18,9 @@ D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\Adm
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\utils\PropertiesFileHelper.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\Importation\ImportationDAO.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\employees\EmployeeDTO.java
+D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\AdminManageListBookingRequestServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\AuthLoginServlet.java
+D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\bookingRequest\BookingRequestDAO.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\filters\AuthenticationFilters.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\AdminDeleteEmployeeServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\request\RequestDTO.java

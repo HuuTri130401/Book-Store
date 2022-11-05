@@ -41,6 +41,10 @@
         <servlet-name>AuthLogoutServlet</servlet-name>
         <servlet-class>com.se1611.servlets.AuthLogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminManageListBookingRequestServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminManageListBookingRequestServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthLoginServlet</servlet-name>
         <url-pattern>/AuthLoginServlet</url-pattern>
@@ -80,6 +84,10 @@
     <servlet-mapping>
         <servlet-name>AuthLogoutServlet</servlet-name>
         <url-pattern>/AuthLogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminManageListBookingRequestServlet</servlet-name>
+        <url-pattern>/AdminManageListBookingRequestServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

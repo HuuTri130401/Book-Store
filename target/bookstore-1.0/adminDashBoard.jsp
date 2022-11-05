@@ -82,6 +82,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="./adminShowListBookingRequest">
+                            <i class='bx bx-import'></i>
+                            <span class="links_name">Booking Request</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="./logoutAction">
                             <i class='bx bx-log-out'></i>
                             <span class="links_name">Log out</span>
@@ -110,8 +116,8 @@
                         </div>
                         <div class="box">
                             <div class="left-side">
-                                <div class="boxtopic">Total Sales</div>
-                                <div class="number">1.123.000</div>
+                                <div class="boxtopic">Not Yet</div>
+                                <div class="number">1.111.000</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box2'></i>
                                     <span class="text">Up from yesterday</span>

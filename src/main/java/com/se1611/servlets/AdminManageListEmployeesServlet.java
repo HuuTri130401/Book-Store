@@ -8,7 +8,6 @@ import com.se1611.employees.EmployeeDAO;
 import com.se1611.employees.EmployeeDTO;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -48,7 +47,7 @@ public class AdminManageListEmployeesServlet extends HttpServlet {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             List<EmployeeDTO> listEmployees = employeeDAO.getListEmployee();
             if (!listEmployees.isEmpty()) {
-                listEmployees = employeeDAO.getListEmployee();
+                //listEmployees = employeeDAO.getListEmployee();
                 request.setAttribute("LIST_EMPLOYEES", listEmployees);
             } 
             if (searchValue != null && searchValue.trim().length() > 0) {

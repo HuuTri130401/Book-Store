@@ -4,14 +4,17 @@ com\se1611\inventory\InventoryDAO.class
 com\se1611\servlets\AdminUpdateEmployeeServlet.class
 com\se1611\book\BookDTO.class
 com\se1611\employees\EmployeeDTO.class
+com\se1611\servlets\AdminManageListBookingRequestServlet.class
 com\se1611\filters\AuthenticationFilters.class
 com\se1611\employees\EmployeeDAO.class
 com\se1611\servlets\StaffImportationServlet.class
 com\se1611\servlets\StaffBookServlet.class
 com\se1611\listeners\ContextListener.class
 com\se1611\servlets\AdminManageDashboardServlet.class
+com\se1611\bookingRequest\BookingRequestDTO.class
 com\se1611\servlets\AuthLoginServlet.class
 com\se1611\orders\OrderDAO.class
+com\se1611\bookingRequest\BookingRequestDAO.class
 com\se1611\servlets\InventoryServlet.class
 com\se1611\book\BookDAO.class
 com\se1611\request\RequestDAO.class
