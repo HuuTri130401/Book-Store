@@ -14,7 +14,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.naming.NamingException;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -67,6 +66,9 @@ public class StaffBookServlet extends HttpServlet {
         int last = 100;
         int categoryId=1;
 
+        //Get List Request
+        listRequest = daoRequest.getRequest();
+
         //Lấy all Book in List
         listBook=daoBook.getInformationBook(first,last);
         request.setAttribute("numLastBook",listBook.size());
@@ -77,16 +79,16 @@ public class StaffBookServlet extends HttpServlet {
                     //Create Book
                     case "createBook":
                         // Upload Book
-                        String image = uploadFile(request, response);
+                        String image =request.getParameter("imageUpload");
 
                         //Get Parameter Book
-                        String nameBook =fieldUpload.get("nameBook");
-                        String author = fieldUpload.get("author");
-                        int quantity = Integer.parseInt(fieldUpload.get("quantity"));
-                        Float price = Float.parseFloat(fieldUpload.get("price"));
-                        int category = Integer.parseInt(fieldUpload.get("category"));
-                        int publicOfYear = Integer.parseInt(fieldUpload.get("publicOfYear"));
-                        String description = fieldUpload.get("description");
+                        String nameBook =request.getParameter("nameBook");
+                        String author = request.getParameter("author");
+                        int quantity = Integer.parseInt(request.getParameter("quantity"));
+                        Float price = Float.parseFloat(request.getParameter("price"));
+                        int category = Integer.parseInt(request.getParameter("category"));
+                        int publicOfYear = Integer.parseInt(request.getParameter("publicOfYear"));
+                        String description = request.getParameter("description");
 
                         //Create Book
                         if (daoBook.createBook(nameBook, author, publicOfYear, category, price, quantity, image, description)) {
@@ -259,25 +261,41 @@ public class StaffBookServlet extends HttpServlet {
                         categoryId=4;
                         first = 9;
                         last=12;
-                        listBook = daoBook.getCategoryBook(categoryId,first,last);
+                        listBook = daoBook.getCategoryBook(categoryId, first, last);
                         session.setAttribute("listCategoryBook", listBook);
                         request.setAttribute("nameCategory", listBook.get(0).getCategoryName());
                         url = STAFF_BOOK_CATEGOTY_PAGE;
                         break;
                     // Page Detail Book khi click vào từng book
                     case "bookDetail":
-                        //Get List Request
-                        listRequest = daoRequest.getRequest();
+                        //Check Status Book to display button
+                        String nameBookDetail = request.getParameter("bookName");
+                        checkStatusBook(nameBookDetail, listRequest, request);
                         int bookId = Integer.parseInt(request.getParameter("bookId"));
-                        request.setAttribute("request_Book_Id", checkBook(bookId, listRequest, request));
                         //set Attribute List Book
                         session.setAttribute("listBook", listBook);
                         categoryId = Integer.parseInt(request.getParameter("categoryId"));
-                        listBook = daoBook.getCategoryBook(categoryId,first,last);
+                        listBook = daoBook.getCategoryBook(categoryId, first, last);
                         request.setAttribute("bookIdServlet", bookId);
                         request.setAttribute("nameCategory", listBook.get(0).getCategoryName());
                         url = STAFF_BOOK_DETAIL_PAGE;
                         break;
+                    case "bookDetailRequest":
+                        //Get Name Book
+                        String nameBookRequest = request.getParameter("bookNameRequest");
+                        checkStatusBook(nameBookRequest, listRequest, request);
+                        //Get IdBook In List Book
+                        int bookIdRequest = GetBookId(nameBookRequest,listBook);
+                        //Get Category
+                        int categoryIdRequest=GetCatrgoryId(nameBookRequest,listBook);
+                        //set Attribute List Book
+                        session.setAttribute("listBook", listBook);
+                        listBook = daoBook.getCategoryBook(categoryIdRequest, first, last);
+                        request.setAttribute("bookIdServlet", bookIdRequest);
+                        request.setAttribute("nameCategory", listBook.get(0).getCategoryName());
+                        url = STAFF_BOOK_DETAIL_PAGE;
+                        break;
+
                 }
                 break callCaseBookPage1;
             }
@@ -287,6 +305,27 @@ public class StaffBookServlet extends HttpServlet {
             request.getRequestDispatcher(url).forward(request, response);
             // response.sendRedirect(url);
         }
+    }
+    //Get CategoryID
+    private int GetCatrgoryId(String nameBookRequest, List<BookDTO> listBook) {
+        int categoryId = 0;
+        for (int i = 0; i < listBook.size(); i++) {
+            if (nameBookRequest.trim().compareTo(listBook.get(i).getName().trim()) == 0) {
+                categoryId = listBook.get(i).getCategory();
+            }
+        }
+        return categoryId;
+    }
+
+    //Get BookID
+    private int GetBookId(String nameBookRequest, List<BookDTO> listBook) {
+        int bookId = 0;
+        for (int i = 0; i < listBook.size(); i++) {
+            if (nameBookRequest.trim().compareTo(listBook.get(i).getName().trim()) == 0) {
+                bookId = listBook.get(i).getBook_Id();
+            }
+        }
+        return bookId;
     }
 
     //Upload Image Book
@@ -334,18 +373,15 @@ public class StaffBookServlet extends HttpServlet {
     }
 
     //Check lấy bookid trong list Request
-    private int checkBook(int bookId, List<RequestDTO> listRequest, HttpServletRequest request) {
-        int request_Book_Id = 0;
+    private void checkStatusBook(String bookName, List<RequestDTO> listRequest, HttpServletRequest request) {
         for (int i = 0; i < listRequest.size(); i++) {
-            if (bookId == listRequest.get(i).getRequest_Book_Id()) {
-                request_Book_Id = bookId;
+            if (bookName.trim().compareTo(listRequest.get(i).getRequest_Name_Book().trim()) == 0) {
                 //Get Request Id
-                request.setAttribute("request_Id", listRequest.get(i).getRequest_Id());
+                request.setAttribute("request_Id",listRequest.get(i).getRequest_Id());
                 //Get Requet Status
-                request.setAttribute("request_status",listRequest.get(i).getRequest_Status());
+                request.setAttribute("request_status", listRequest.get(i).getRequest_Status());
             }
         }
-        return request_Book_Id;
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 

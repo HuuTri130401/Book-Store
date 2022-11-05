@@ -11,91 +11,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Manage Books</title>
         <!-- link file CSS -->
-        <link rel="stylesheet" href="./css/adminManageBooksStyle.css">
+        <link rel="stylesheet" href="./css/staffManageBook.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
         <style>
-            body{
-                box-sizing: border-box;
-                padding: 0;
-                margin: 0;
-            }
 
-            /*Start CategoryBox*/
-            .left-side .choice{
-                font-size: 15px;
-                margin-left: 10px;
-                height:25px;
-                width: 40px;
-            }
-            .left-side .categoryText{
-                margin-left: 10px;
-                font-size: 20px;
-                height: 40px;
-            }
-            .left-side .comboxCategory{
-                color: #17A2B8;
-                margin-top: 5px;
-                margin-left: 10px;
-                width: 115px;
-                height: 100%;
-                font-size: 18px;
-            }
-            .left-side .formCategory{
-                height: 32px;
-            }
-            /*End CategoryBox*/
-
-            /*Start Border : Khung border bao quanh book*/
-            .border{
-                margin-left: 10px;
-                margin-bottom: 10px;
-                padding: 10px 10px 10px 10px;
-                width: 423px;
-            }
-            /*End Border*/
-
-            /*Start Item List: Weight height font book name, price*/
-            .item{
-                width: 50%;
-
-            }
-            .item img{
-                width: 50%;
-            }
-
-            .item{
-                padding-left: 100px;
-            }
-            .item img{
-                height: 350px;
-                width: 400px;
-            }
-            .item .name{
-                font-size: 30px;
-                margin-bottom: 0px;
-            }
-            .item .price{
-                font-size:25px;
-            }
-            .item .viewDetail{
-                font-size: 15px;
-                height:30px;
-                width: 100px;
-            }
-            /*End Item List*/
-
-            /*Page Start*/
-            .page{
-                font-size: 30px;
-            }
-            .page a{
-                margin-left: 10px;
-                color: #000000 ;
-            }
-            /*Page End*/
         </style>
     </head>
 
@@ -112,7 +34,7 @@
 
                     <!-- div of logo -->
                     <div class="logo-details">
-                        <img src="./images/logo.jpg" alt="Logo Phuong Nam Bookstore">
+                        <img  src="./images/logo.jpg" alt="Logo Phuong Nam Bookstore">
                         <span class="logo_name">Book Store</span>
                     </div>
                 </div>
@@ -182,10 +104,6 @@
         <section class="home-section">
 
             <!-- home-content -->
-            <div class="home-content">
-                <div class="overview-boxes">
-                    <div class="box">
-                        <div class="left-side">
                             <form class="formCategory" action="staffBookAction" method="POST">
                                 <spam class="categoryText">Category</spam>
                                 <select class="comboxCategory" name="action">
@@ -199,16 +117,16 @@
                             <div class="itemList row">
                                 <c:forEach items="${listBook}" var="b">
                                     <div class="item col-lg-6">
-                                        <form action="staffBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}"
+                                        <form style="height: 325px;width: 450px" action="staffBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}&bookName=${b.name}"
                                               method="POST">
                                             <div class="border">
                                             <img src="<c:url value="/images/${b.image_Book}"/>"/><br/>
-                                           <p class="name">${b.name}</p> <br/>
+                                           <p  class="name">${b.name}</p>
                                             <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
-                                                <small style="text-decoration:underline">đ</small>
-                                                <p><br/>
-                                                    <button class="viewDetail btn btn-info" type="submit">View Detail
-                                                    </button>
+                                                <small style="text-decoration:underline">đ</small> <button class="viewDetail btn btn-info" type="submit">View Detail
+                                                </button>
+                                                <p>
+
                                             </div>
                                         </form>
 
@@ -234,11 +152,6 @@
                                 <div class="col-lg-4"></div>
                             </div>
                             <%-- End Page--%>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </section>
 

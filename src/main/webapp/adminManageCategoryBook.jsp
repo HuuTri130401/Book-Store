@@ -9,67 +9,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Dashboard</title>
         <!-- link file CSS -->
-        <link rel="stylesheet" href="./css/adminHomeStyle.css">
+        <link rel="stylesheet" href="./css/staffManageBook.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-        <style>
-            body{
-                box-sizing: border-box;
-                padding: 0;
-                margin: 0;
 
-            }
-
-            /*Start Category*/
-            .left-side .categoryText{
-                margin-left: 10px;
-                font-size: 20px;
-                height: 40px;
-                color: #17A2B8;
-            }
-            /*End Category*/
-
-            /*Start Border : Khung border bao quanh book*/
-            .border{
-                margin-left: 10px;
-                margin-bottom: 10px;
-                padding: 10px 10px 10px 10px;
-                width: 423px;
-            }
-            /*End Border*/
-
-            /*Start Item List: Weight height font book name, price*/
-            .item{
-                width: 50%;
-
-            }
-            .item img{
-                width: 50%;
-            }
-
-            .item{
-                padding-left: 100px;
-            }
-            .item img{
-                height: 350px;
-                width: 400px;
-            }
-            .item .name{
-                font-size: 30px;
-                margin-bottom: 0px;
-            }
-            .item .price{
-                font-size:25px;
-            }
-            .item .viewDetail{
-                font-size: 15px;
-                height:30px;
-                width: 100px;
-            }
-            /*End Item List*/
-        </style>
     </head>
 
     <body>
@@ -153,10 +98,6 @@
         <!-- home content -->
         <section class="home-section">
             <!-- home-content -->
-            <div class="home-content">
-                <div class="overview-boxes">
-                    <div class="box">
-                        <div class="left-side">
                             <div class="categoryText">
                                 <a style="color: black" type="submit" href="adminBookAction?action=bookPage1">Category  </a> >
                                 ${nameCategory}
@@ -164,22 +105,33 @@
                             <div class="itemList row">
                             <c:forEach items="${listCategoryBook}" var="b">
                                 <div class="item col-lg-6">
-                                <form action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" method="POST">
+                                <form style="height: 325px;width: 450px"action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" method="POST">
                                     <div class="border">
                                     <img src="<c:url value="/images/${b.image_Book}"/>"/>
-                                        <p class="name">${b.name}</p> <br/>
+                                        <p class="name">${b.name}</p>
                                         <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
-                                            <small style="text-decoration:underline">đ</small><p><br/>
-                                        <button class="viewDetail btn btn-info" type="submit">View Detail</button>
+                                            <small style="text-decoration:underline">đ</small> <button class="viewDetail btn btn-info" type="submit">View Detail</button><p>
+
                                     </div>
                                 </form>
                                 </div>
                             </c:forEach>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <%--Start Page--%>
+                                <div class="page row">
+                                    <div class="col-lg-4"></div>
+                                    <div class="col-lg-4 d-flex justify-content-center">
+                                        <a type="submit" href="adminBookAction?action=${nameCategory}">1</a>
+                                        <c:if test="${numLastCategory>4}">
+                                            <a type="submit" href="adminBookAction?action=${nameCategory}2">2</a>
+                                        </c:if>
+                                        <c:if test="${numLastCategory>8}">
+                                            <a type="submit" href="adminBookAction?action=${nameCategory}3">3</a>
+                                        </c:if>
+                                    </div>
+                                    <div class="col-lg-4"></div>
+                                </div>
+                                <%-- End Page--%>
         </section>
 
         <script src="./js/script.js"></script>
