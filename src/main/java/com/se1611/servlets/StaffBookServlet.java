@@ -45,7 +45,7 @@ public class StaffBookServlet extends HttpServlet {
     private final String STAFF_BOOK_DETAIL_PAGE = "staffBookDetailPage";
     private final String STAFF_BOOK_CATEGOTY_PAGE = "staffBookCategoryPage";
     //Declare Hashmap save information When create Book
-    HashMap<String,String> fieldUpload=new HashMap<>();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -361,6 +361,7 @@ public class StaffBookServlet extends HttpServlet {
                         }
                     }
                 }else{
+                    HashMap<String,String> fieldUpload=new HashMap<>();
                     //Save cac filed name book, quantity, author.....
                     fieldUpload.put(fileItem.getFieldName(),fileItem.getString());
                 } //end If

@@ -23,6 +23,8 @@ public class StaffImportationServlet extends HttpServlet {
     private final String INVALID_PAGE = "invalidPage";
     private final String IMPORTATION_PAGE = "staffImportationPage";
     private final String REQUEST_PAGE = "staffRequestPage";
+    private final String REQUEST_HISTORY_PAGE = "staffRequestHistoryPage";
+    private final String IMPORTATION_HISTORY_PAGE = "staffImportationHistoryPage";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws NamingException,
             ServletException, IOException, SQLException {
@@ -39,6 +41,10 @@ public class StaffImportationServlet extends HttpServlet {
         //DAO
         ImportationDAO daoImportation = new ImportationDAO();
         RequestDAO daoRequest = new RequestDAO();
+        //Declace request ID
+        int request_Id;
+        //Declace import ID
+        int importation_detail_id;
         try {
             switch (action) {
 
@@ -54,11 +60,11 @@ public class StaffImportationServlet extends HttpServlet {
                     url = IMPORTATION_PAGE;
                     break;
                 case"updateStatusRequestUnDone":
-                    int request_Ids = Integer.parseInt(request.getParameter("request_Id"));
+                    request_Id = Integer.parseInt(request.getParameter("request_Id"));
                     //Update Status Request
-                    if (daoRequest.UpdateStatusRequest(request_Ids,false)) {
+                    if (daoRequest.UpdateStatusRequest(request_Id, false)) {
                         listRequest = daoRequest.getRequest();
-                        session.setAttribute("listRequestz", listRequest);
+                        session.setAttribute("listRequest", listRequest);
                         url = REQUEST_PAGE;
                     }
                     break;
@@ -67,7 +73,7 @@ public class StaffImportationServlet extends HttpServlet {
                     listImportation = daoImportation.getImportation();
                     //Get Data Prepare insert Inventory SQL
                     int book_id_Importation = Integer.parseInt(request.getParameter("book_Id_Importation"));
-                    int request_Id = Integer.parseInt(request.getParameter("request_Id"));
+                    request_Id = Integer.parseInt(request.getParameter("request_Id"));
                     int quantity_Importation = Integer.parseInt(request.getParameter("quantityImportation"));
                     float price_Importation = Float.parseFloat(request.getParameter("priceImportation"));
                     float total_Importation = quantity_Importation * price_Importation;
@@ -86,7 +92,7 @@ public class StaffImportationServlet extends HttpServlet {
                         if (daoImportation.InsertImportationDetail(id_Importation, quantity_Importation, price_Importation,
                                 total_Importation, noteImportation,book_id_Importation)) {
                             //Update Status Request
-                            if (daoRequest.UpdateStatusRequest(request_Id,true)) {
+                            if (daoRequest.UpdateStatusRequest(request_Id, true)) {
                                 listImportation = daoImportation.getImportation();
                                 session.setAttribute("listImportation", listImportation);
                                 url = IMPORTATION_PAGE;
@@ -95,8 +101,8 @@ public class StaffImportationServlet extends HttpServlet {
                     }
                     break;
                 case "deleteImportation":
-                    int importation_detail_id = Integer.parseInt(request.getParameter("import_Detail_Id"));
-                    if(daoImportation.DeleteImportation(importation_detail_id)){
+                    importation_detail_id = Integer.parseInt(request.getParameter("import_Detail_Id"));
+                    if (daoImportation.DeleteImportation(importation_detail_id, false)) {
                         listImportation = daoImportation.getImportation();
                         session.setAttribute("listImportation", listImportation);
                         url = IMPORTATION_PAGE;
@@ -104,10 +110,38 @@ public class StaffImportationServlet extends HttpServlet {
                     break;
                 case "deleteRequest":
                     int request_Idx = Integer.parseInt(request.getParameter("request_Id"));
-                    if(daoRequest.DeleteRequest(request_Idx)){
+                    if (daoRequest.DeleteRequest(request_Idx)) {
                         listRequest = daoRequest.getRequest();
                         session.setAttribute("listRequest", listRequest);
                         url = REQUEST_PAGE;
+                    }
+                    break;
+                case "historyRequest":
+                    listRequest = daoRequest.getRequest();
+                    session.setAttribute("listRequest", listRequest);
+                    url = REQUEST_HISTORY_PAGE;
+                    break;
+                case "historyImportation":
+                    //Get List Inventory
+                    listImportation = daoImportation.getImportation();
+                    session.setAttribute("listImportation", listImportation);
+                    url = IMPORTATION_HISTORY_PAGE;
+                    break;
+                case "returnRequestDelete":
+                    request_Id = Integer.parseInt(request.getParameter("request_Id"));
+                    //Update Status Request
+                    if (daoRequest.UpdateStatusRequest(request_Id, true)) {
+                        listRequest = daoRequest.getRequest();
+                        session.setAttribute("listRequest", listRequest);
+                        url = REQUEST_PAGE;
+                    }
+                    break;
+                case "returnImportationDelete":
+                    importation_detail_id = Integer.parseInt(request.getParameter("import_Detail_Id"));
+                    if (daoImportation.DeleteImportation(importation_detail_id, true)) {
+                        listImportation = daoImportation.getImportation();
+                        session.setAttribute("listImportation", listImportation);
+                        url = IMPORTATION_PAGE;
                     }
                     break;
             }

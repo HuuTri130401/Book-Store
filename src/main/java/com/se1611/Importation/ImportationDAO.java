@@ -135,18 +135,22 @@ public class ImportationDAO {
     }
 
     //Delete Inventory
-    public boolean DeleteImportation(int importation_Id) throws SQLException, NamingException {
+    public boolean DeleteImportation(int importation_Id, boolean check) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = true;
         int count = 0;
-        boolean status=false;
+
         try {
             con = DBHelper.getConnection();
             if (con != null) {
                 String sql = "update [dbo].[ImportationDetail] set [status]=? where [import_Detail_Id]=?";
                 stm = con.prepareStatement(sql);
-                stm.setBoolean(1, status);
+                if(check) {
+                    stm.setBoolean(1, true);
+                }else{
+                    stm.setBoolean(1, false);
+                }
                 stm.setInt(2, importation_Id);
                 count = stm.executeUpdate();
                 if (count == 0) {

@@ -113,7 +113,6 @@
                     <hr style="width: 25.7rem;"/>
                     <h2 id="nameTable">LIST OF BOOK REQUEST</h2>
                     <div class="tableBookRequest">
-
                         <c:set var="listBookingRequest" value="${requestScope.LIST_BOOKING_REQUESTS}"/>
                         <c:if test="${not empty listBookingRequest}">
                             <table id="bookRequest">
