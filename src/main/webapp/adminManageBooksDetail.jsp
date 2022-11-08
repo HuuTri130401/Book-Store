@@ -116,7 +116,7 @@
                                 <div class="item col-lg-5">
                                     <strong class="name">${b.name}</strong>
                                     <p class="price">
-                                            <fmt:formatNumber value="${b.price_Book}" type="number"/>
+                                            <fmt:formatNumber type="number" value="${b.price_Book}" />
                                         <small style="text-decoration:underline">đ</small>
                                     <p><br/>
                                     <p class="quantity">Quantity: ${b.quantity_Book}</p>

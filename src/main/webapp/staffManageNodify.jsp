@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Dashboard</title>
         <!-- link file CSS -->
-        <link rel="stylesheet" href="./css/adminHomeStyle.css">
+        <link rel="stylesheet" href="./css/Notify.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -52,22 +52,22 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
-                                <a href="staffNodifyPage">
-                                    <i class='bx bxs-bell'></i>
-                                    <span class="links_name">Nodify</span>
-                                </a>
+                        <a href="staffNodifyPage">
+                            <i class='bx bxs-bell'></i>
+                            <span class="links_name">Notify</span>
+                        </a>
                     </li>
                     <li>
-                                <a href="staffImportationAction?action=getRequest">
-                                    <i class='bx bx-notification'></i>
-                                    <span class="links_name">Request</span>
-                                </a>
+                        <a href="staffImportationAction?action=getRequest">
+                            <i class='bx bx-notification'></i>
+                            <span class="links_name">Request</span>
+                        </a>
                     </li>
                     <li>
-                                <a href="staffImportationAction?action=getImportation">
-                                    <i class='bx bx-add-to-queue'></i>
-                                    <span class="links_name">Importation</span>
-                                </a>
+                        <a href="staffImportationAction?action=getImportation">
+                            <i class='bx bx-add-to-queue'></i>
+                            <span class="links_name">Importation</span>
+                        </a>
                     </li>
                     <li>
                         <a type="submit" href="staffBookAction?action=bookPage1">
@@ -94,55 +94,23 @@
             <div class="home-section">
                 <!-- home-content -->
                 <div class="home-content">
-
-                    <div class="overview-boxes">
-
-                        <div class="box">
-                            <div class="left-side">
-                                <div class="boxtopic">Total Order</div>
-                                <div class="number">123,456</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box1'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="left-side">
-                                <div class="boxtopic">Total Sales</div>
-                                <div class="number">1.123.000</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box2'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="left-side">
-                                <div class="boxtopic">Total Profit</div>
-                                <div class="number">400.000</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box3'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="left-side">
-                                <div class="boxtopic">Best - Selling Product</div>
-                                <div class="number">123.333</div>
-                                <div class="name-product">NameBook</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt box4'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="home-notify">
+                    <p class="notify">NOTIFY</p>
+                    <div>
+                        <p class="text">
+                           <strong> 20/11/2022:</strong> Sale 10% các đơn hàng tri ân ngày Nhà Giáo Việt Nam <br/>
+                            <strong> 23/11/2022 - 30/11/2022: </strong>Sale Black Friday giảm giá 30% các đơn hàng có giá trị từ 200.000vnd trở lên<br/>
+                            <strong>  12/12/2022: </strong>Sale 10% các đơn hàng từ 150.000vnd<br/>
+                            <strong>24/12/2022 - 25/12/2022:</strong> Nghĩ Lễ Noel<br/>
+                            <strong>  1/1/2022:</strong> Nghĩ tết dương lịch<br/>
+                            <strong>18/1/2022: </strong>Lễ tất niên cuối năm<br/>
+                            <strong> 21/1/2022 - 25/1/2022:</strong> Nghĩ tết âm lịch</p>
+                    </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <script src="./js/script.js"></script>
+
+            <script src="./js/script.js"></script>
 
     </body>
 

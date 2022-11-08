@@ -36,6 +36,18 @@
         <servlet-name>StaffImportationServlet</servlet-name>
         <servlet-class>com.se1611.servlets.StaffImportationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerBookServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.SellerBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerCartServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.SellerCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerOrderServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.SellerOrderServlet</servlet-class>
+    </servlet>
     <!--MAPPING-->
     <servlet>
         <servlet-name>AuthLogoutServlet</servlet-name>
@@ -88,6 +100,18 @@
     <servlet-mapping>
         <servlet-name>AdminManageListBookingRequestServlet</servlet-name>
         <url-pattern>/AdminManageListBookingRequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerBookServlet</servlet-name>
+        <url-pattern>/SellerBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderServlet</servlet-name>
+        <url-pattern>/SellerOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerCartServlet</servlet-name>
+        <url-pattern>/SellerCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

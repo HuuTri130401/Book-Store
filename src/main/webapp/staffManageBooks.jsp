@@ -64,7 +64,7 @@
                 <li>
                     <a href="staffNodifyPage">
                         <i class='bx bxs-bell'></i>
-                        <span class="links_name">Nodify</span>
+                        <span class="links_name">Notify</span>
                     </a>
                 </li>
                 <li>

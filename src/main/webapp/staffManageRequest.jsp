@@ -63,7 +63,7 @@
             <li>
                 <a href="staffNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Nodify</span>
+                    <span class="links_name">Notify</span>
                 </a>
             </li>
             <li>
@@ -236,7 +236,8 @@
                                 <div class="modal-body">
                                         <%--Form --%>
                                     <form action="staffBookAction?action=createBook" method="POST">
-
+                                        <input type="hidden" name="request_Id"
+                                               value="${i.request_Id}"/>
                                             <%--  Start Image Book --%>
                                         <div class="form-group">
                                             <input type="hidden" name="imageUpload" value="${i.request_Image}">
