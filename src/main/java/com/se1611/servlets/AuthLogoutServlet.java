@@ -5,6 +5,7 @@
 package com.se1611.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,14 +36,13 @@ public class AuthLogoutServlet extends HttpServlet {
 //        String url = (String) siteMap.get(LOGIN_PAGE); //get login.jsp
 
         //dispath to loginPage in search bar google
-        String url = LOGIN_PAGE; 
-        try {
-            HttpSession session = request.getSession(false);
-            if (session != null) {
-                session.invalidate();
-            }//end if session IS NOT NULL
-        } finally {
-            response.sendRedirect(url);
+        try (PrintWriter out = response.getWriter()) {
+            try {
+             request.getSession().invalidate();
+         } finally {
+             response.sendRedirect(LOGIN_PAGE);
+             out.close();
+         }
         }
     }
 

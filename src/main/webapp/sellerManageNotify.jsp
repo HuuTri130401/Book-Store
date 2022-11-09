@@ -59,18 +59,18 @@
                     </li>
                      <li>
                                 <a href="sellerBookAction?action=bookPage1">
-                                    <i class='bx bxs-bell'></i>
+                                    <i class='bx bxs-cart-alt'></i>
                                     <span class="links_name">Order</span>
                                 </a>
                     </li>
                     <li>
-                                <a href="sellerListOrderPage">
-                                    <i class='bx bxs-bell'></i>
+                                <a href="sellerOrderListAction">
+                                    <i class='bx bxs-spreadsheet'></i>
                                     <span class="links_name">List Order</span>
                                 </a>
                     </li>
                     <li>
-                        <a href="login.jsp">
+                        <a href="logoutAction">
                             <i class='bx bx-log-out'></i>
                             <span class="links_name">Log out</span>
                         </a>

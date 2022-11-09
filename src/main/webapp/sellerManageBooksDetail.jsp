@@ -147,7 +147,7 @@
         </style>
     </head>
 
-     <body>
+    <body>
         <div class="header">
             <div class="header-menu">
                 <!-- even menu sidebar -->
@@ -163,10 +163,12 @@
                 </div>
                 <div class="seachbox-profile">
                     <div class="wraper_searchbox_profile">
-                        <div class="search-box">
-                            <input type="text" placeholder="Search...">
-                            <button type='submit'><i class='bx bx-search-alt-2'></i></button>
-                        </div>
+                        <form action="searchBookAction">
+                            <div class="search-box">
+                                <input type="text" placeholder="Search..." name="txtSearchBookName" value="${param.txtSearchBookName}">
+                                <button type="submit"><i class='bx bx-search-alt-2'></i></button>
+                            </div>
+                        </form>
                         <div class="profile_details">
                             <img src="images/admin1.png" alt="image admin">
                             <div class="name_role">
@@ -210,102 +212,103 @@
                 </ul>
             </div>
 
-        <!-- home content -->
-        <section class="home-section">
-            <!-- home-content -->
-            <div class="home-content">
-                <div class="overview-boxes">
-                    <div class="box">
-                        <div class="left-side">
-                            <c:forEach items="${listBook}" var="b">
-                                <c:set var="bookId" value="${bookIdServlet}"></c:set>
-                                <c:if test="${b.book_Id==bookId}">
+            <!-- home content -->
+            <section class="home-section">
+                <!-- home-content -->
+                <div class="home-content">
+                    <div class="overview-boxes">
+                        <div class="box">
+                            <div class="left-side">
+                                    <c:forEach items="${listBook}" var="b">
+                                        <c:set var="bookId" value="${bookIdServlet}"></c:set>
+                                        <c:if test="${b.book_Id==bookId}">
 
-                                    <%--         Item Book Need Show--%>
-                                    <div class="itemList row">
-                                        <div class="border col-lg-4">
-                                            <img src="<c:url value="/images/${b.image_Book}"/>" class="rounded"/><br/>
-                                        </div>
-                                        <div class="item col-lg-5">
-                                            <strong class="name">${b.name}</strong><br/>
-                                            <p class="price">
-                                                <fmt:formatNumber value="${b.price_Book}" type="number"/>
-                                                <small style="text-decoration:underline">đ</small>
-                                            <p><br/>
-                                            <p class="quantity">Quantity: ${b.quantity_Book}</p>
-                                            <p class="author">Author: <u>${b.author}</u></p>
-                                            <p class="yearPublic">Year Of Public: ${b.year_Of_Public}</p>
+                                            <%--         Item Book Need Show--%>
+                                            <div class="itemList row">
+                                                <div class="border col-lg-4">
+                                                    <img src="<c:url value="/images/${b.image_Book}"/>" class="rounded"/><br/>
+                                                </div>
+                                                <div class="item col-lg-5">
+                                                    <strong class="name">${b.name}</strong><br/>
+                                                    <p class="price">
+                                                        <fmt:formatNumber value="${b.price_Book}" type="number"/>
+                                                        <small style="text-decoration:underline">đ</small>
+                                                    <p><br/>
+                                                    <p class="quantity">Quantity: ${b.quantity_Book}</p>
+                                                    <p class="author">Author: <u>${b.author}</u></p>
+                                                    <p class="yearPublic">Year Of Public: ${b.year_Of_Public}</p>
 
-                                            <%--                                    Button add Inventory and Importation--%>
-                                            <div class="button">
-                                                <button class="inventory btn btn-danger" data-toggle="modal"
-                                                        data-target="#myModal">Add to cart
-                                                </button>                                 
+                                                    <%--                                    Button add Inventory and Importation--%>
+                                                    <div class="button">
+                                                        <button class="inventory btn btn-danger" data-toggle="modal"
+                                                                data-target="#myModal">Add to cart
+                                                        </button>                                 
+                                                    </div>
+                                                    <%-- End Button add to cart--%>
+                                                </div>
                                             </div>
-                                            <%-- End Button add to cart--%>
-                                        </div>
-                                    </div>
-                                    <%--                            Show Description Book   --%>
-                                    <div class="boxDescription">
-                                        <div class="description">
-                                            <strong>Information Detail</strong><br>
-                                            <p class="text">${b.descriptionBook}</p>
-                                        </div>
-                                    </div>
-                                    <%--                            End Show Item Book--%>
-                                </c:if>
-                            </c:forEach>
+                                            <%--                            Show Description Book   --%>
+                                            <div class="boxDescription">
+                                                <div class="description">
+                                                    <strong>Information Detail</strong><br>
+                                                    <p class="text">${b.descriptionBook}</p>
+                                                </div>
+                                            </div>
+                                            <%--                            End Show Item Book--%>
+                                        </c:if>
+                                    </c:forEach>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <script src="./js/script.js"></script>
+            </section>
+            <script src="./js/script.js"></script>
 
 
 
-        <%--Form Add to Cart--%>
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <header class="head-form mb-0">
-                        <h2>Add Book To Cart</h2>
-                    </header>
-                    <div class="modal-body">
-                        <%--Form --%>
-                        <form action="addToCartAction?action=addToCart" method="POST">
-                            <%--  ID BOOK Insert To Inventory SQL--%>
-                            <input type="hidden" name="book_Id_Cart" value="${bookIdServlet}"/>
+            <%--Form Add to Cart--%>
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <header class="head-form mb-0">
+                            <h2>Add Book To Cart</h2>
+                        </header>
+                        <div class="modal-body">
+                            <%--Form --%>
+                            <form action="addToCartAction?action=addToCart" method="POST">
+                                <%--  ID BOOK Insert To Inventory SQL--%>
+                                <input type="hidden" name="book_Id_Cart" value="${bookIdServlet}"/>
 
-                            <%--  Add Quantity To Cart --%>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                <%--  Add Quantity To Cart --%>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                        </div>
+                                        <input type="number" min="1" required="" name="quantity" class="form-control input-sm"
+                                               style="font-size: 15px" placeholder="Quantity">
                                     </div>
-                                    <input type="number" min="1" required="" name="quantity" class="form-control input-sm"
-                                           style="font-size: 15px" placeholder="Quantity">
                                 </div>
-                            </div>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer" id="modal-footer">
-                        <button type="submit" class="btn btn-info add">Add</button>
-                        </form>
-                        <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer" id="modal-footer">
+                            <button type="submit" class="btn btn-info add">Add</button>
+                            </form>
+                            <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+                    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+                    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     </body>
 </html>
