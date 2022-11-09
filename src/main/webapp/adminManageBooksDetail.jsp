@@ -89,7 +89,7 @@
             </a>
         </li>
         <li>
-            <a href="login.jsp">
+            <a href="./logoutAction">
                 <i class='bx bx-log-out'></i>
                 <span class="links_name">Log out</span>
             </a>

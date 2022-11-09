@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Manage Books</title>
+        <title>Seller Books</title>
         <!-- link file CSS -->
         <link rel="stylesheet" href="./css/sellerManageBook.css">
         <!-- BoxIcon CDN Link -->
@@ -27,7 +27,7 @@
 
     <body>
 
-        <header>
+        <div class="header">
             <div class="header-menu">
                 <!-- even menu sidebar -->
                 <div class="sidebar-button__logo">
@@ -59,7 +59,7 @@
                 </div>
 
             </div>
-        </header>
+        </div>
 
         <nav class="sidebar">
 
@@ -91,7 +91,7 @@
                 </li>
 
                 <li>
-                    <a href="login.jsp">
+                    <a href="./logoutAction">
                         <i class='bx bx-log-out'></i>
                         <span class="links_name">Log out</span>
                     </a>
