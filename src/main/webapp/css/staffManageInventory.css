@@ -225,11 +225,12 @@ body {
     left: 27rem;
     transition: all 0.5s ease;
 }
-
-/*Start Form Add To Inventory*/
-.modal-dialog {
+.home-content{
+    display: flex;
+}
+/*Start Form*/
+.modal-dialog{
     margin-top: 200px;
-
 }
 
 .add {
@@ -249,8 +250,25 @@ body {
 .head-form {
     color: #ffae00;
     font-weight: bold;
-    margin: 20px 0px 0px 70px;
+    font-size: 20px;
+    margin: 25px 0px 0px 75px;
+}
+#nameTable {
+    margin-left: 490px;
+    color: #fab804ea;
+    padding: 1rem;
+    text-align: center;
+}
+.history{
+    margin-left: 452px;
+    text-align: right;
+    font-size: 30px;
+
+}
+#btnHistory{
+    border: none;
+    color: #ce4426;
 }
 
-/*End Form Add To Inventory*/
+/*End Form*/
 

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Staff Inventory</title>
 
     <!-- BoxIcon CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -61,7 +61,7 @@
             <li>
                 <a href="staffNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Nodify</span>
+                    <span class="links_name">Notify</span>
                 </a>
             </li>
             <li>
@@ -89,7 +89,7 @@
                 </a>
             </li>
             <li>
-                <a href="login.jsp">
+                <a href="./logoutAction">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -100,67 +100,85 @@
     <!-- home content -->
     <div class="home-section">
         <!-- home-content -->
+        <div class="home-content">
+            <div>
+                <h2 id="nameTable">LIST OF BOOK REQUEST</h2>
+            </div>
+            <%-- Button History--%>
+            <div class="history">
+                <form action="staffInventoryAction?action=historyInventory" method="POST">
+                    <button id="btnHistory">
+                        <i class="fa-solid fa-recycle"></i>
+                    </button>
+                </form>
+            </div>
+            <%-- End Button History--%>
+        </div>
+        <%--End Home Content--%>
 
-                        <%--                             Write   Body Code--%>
-                        <table class="table">
-                            <thead class="thead-dark" style="font-size: 15px">
-                            <tr>
-                                <th>Image</th>
-                                <th>Name Book</th>
-                                <th>Quantity</th>
-                                <th>Reason</th>
-                                <th>Date To Inventory</th>
-                                <th>Employee Implement</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody style="font-size: 15px">
+        <%--  Write   Body Code--%>
+        <table class="table">
+            <thead class="thead-dark" style="font-size: 15px">
+            <tr>
+                <th>.No</th>
+                <th>Image</th>
+                <th>Name Book</th>
+                <th>Quantity</th>
+                <th>Reason</th>
+                <th>Inventory Date</th>
+                <th>Employee Implement</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody style="font-size: 15px">
 
-                            <c:forEach var="i" items="${listInventory}">
-                                <c:if test="${i.inventory_Status==true}">
-                                    <%--                                Start Show Item Inventory--%>
-                                    <tr>
-                                        <td><img style="height: 100px;width: 100px"
-                                                 src="<c:url value="/images/${i.inventory_Img}"/>"/></td>
-                                        <td>
-                                            <a href="staffBookAction?action=bookDetail&bookId=${i.inventory_Book_Id}&categoryId=${i.inventory_Category_Id}&bookName=${i.inventory_Name_Book}">
-                                                    ${i.inventory_Name_Book}</a></td>
-                                        <td>${i.quantity_Inventory}</td>
-                                        <td>${i.note_Inventory}</td>
-                                        <td>${i.date_Inventory}</td>
-                                        <td>${i.employee_Inventory}</td>
-                                        <td>
-<%--                                            <button style="font-size: 15px" class="btn btn-info">Update--%>
-<%--                                            </button>--%>
-                                            <button style="font-size: 30px;border: none" data-toggle="modal"
-                                                    data-target="#myModal"><i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <%-- End Show Item Inventory--%>
+            <c:forEach var="i" items="${listInventory}" varStatus="loop">
+                <c:if test="${i.inventory_Status==true}">
+                    <%--                                Start Show Item Inventory--%>
+                    <tr>
+                        <td>${loop.count}</td>
+                        <td><img style="height: 100px;width: 100px"
+                                 src="<c:url value="/images/${i.inventory_Img}"/>"/></td>
+                        <td>
+                            <a href="staffBookAction?action=bookDetail&bookId=${i.inventory_Book_Id}&categoryId=${i.inventory_Category_Id}&bookName=${i.inventory_Name_Book}">
+                                    ${i.inventory_Name_Book}</a></td>
+                        <td>${i.quantity_Inventory}</td>
+                        <td>${i.note_Inventory}</td>
+                        <td>${i.date_Inventory}</td>
+                        <td>${i.employee_Inventory}</td>
+                        <td>
+                                <%--                                            <button style="font-size: 15px" class="btn btn-info">Update--%>
+                                <%--                                            </button>--%>
+                            <button style="font-size: 30px;border: none" data-toggle="modal"
+                                    data-target="#myModal${loop.index}"><i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <%-- End Show Item Inventory--%>
 
-                                <%--Delete Book Inventory--%>
-                                <div class="modal fade" id="myModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
+                    <%--Delete Book Inventory--%>
+                    <div class="modal fade" id="myModal${loop.index}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
 
-                                            <header class="head-form mb-0">
-                                                <h2>Are You Sure Delete Inventory Book ?</h2>
-                                            </header>
+                                <header class="head-form mb-0">
+                                    <h2>Are You Sure To Delete The Book ?</h2>
+                                </header>
 
-                                            <div class="modal-body">
-                                                    <%--Form --%>
-                                                <form action="staffInventoryAction?action=deleteInventory" method="POST">
-                                                    <input type="hidden" name="inventory_Detail_Id" value="${i.inventory_Detail_Id}"/>
-                                                        <%-- Are You Sure --%>
-                                            </div>
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger add">Delete</button>
-                                                </form>
-                                                <button class="btn btn-warning xclose" data-dismiss="modal">Close
-                                                </button>
-                                            </div>
+                                <div class="modal-body">
+                                        <%--Form --%>
+                                    <form action="staffInventoryAction?action=deleteInventory" method="POST">
+                                        <input type="hidden" name="inventory_Detail_Id"
+                                               value="${i.inventory_Detail_Id}"/>
+                                            <%-- Are You Sure --%>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger add">Delete</button>
+                                    </form>
+                                    <button class="btn btn-warning xclose" data-dismiss="modal">Close
+                                    </button>
+                                </div>
                                         </div>
                                     </div>
                                 </div>

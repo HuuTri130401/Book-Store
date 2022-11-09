@@ -80,6 +80,7 @@ public class StaffBookServlet extends HttpServlet {
                     case "createBook":
                         // Upload Book
                         String image =request.getParameter("imageUpload");
+                        int requestId=Integer.parseInt(request.getParameter("request_Id"));
 
                         //Get Parameter Book
                         String nameBook =request.getParameter("nameBook");
@@ -92,8 +93,10 @@ public class StaffBookServlet extends HttpServlet {
 
                         //Create Book
                         if (daoBook.createBook(nameBook, author, publicOfYear, category, price, quantity, image, description)) {
-                            action = "bookPage1";
-                            continue callCaseBookPage1;
+                            if(daoRequest.UpdateStatusNewOld(requestId)) {
+                                action = "bookPage1";
+                                continue callCaseBookPage1;
+                            }
                         }
                         break;
                     //Page Book
@@ -361,6 +364,7 @@ public class StaffBookServlet extends HttpServlet {
                         }
                     }
                 }else{
+
                     //Save cac filed name book, quantity, author.....
                     fieldUpload.put(fileItem.getFieldName(),fileItem.getString());
                 } //end If

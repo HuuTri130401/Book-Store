@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Staff Request</title>
 
     <!-- BoxIcon CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -63,7 +63,7 @@
             <li>
                 <a href="staffNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Nodify</span>
+                    <span class="links_name">Notify</span>
                 </a>
             </li>
             <li>
@@ -91,7 +91,7 @@
                 </a>
             </li>
             <li>
-                <a href="login.jsp">
+                <a href="./logoutAction">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -102,10 +102,27 @@
     <!-- home content -->
     <div class="home-section">
         <!-- home-content -->
+        <div class="home-content">
+            <div>
+                <h2 id="nameTable">LIST OF BOOK REQUEST</h2>
+            </div>
+            <%-- Button History--%>
+            <div class="history">
+                <form action="staffImportationAction?action=historyRequest" method="POST">
+                    <button id="btnHistory">
+                        <i class="fa-solid fa-recycle"></i>
+                    </button>
+                </form>
+            </div>
+            <%-- End Button History--%>
+        </div>
+        <%--End Home Content--%>
+
         <%--       Write   Body Code--%>
         <table class="table">
             <thead class="thead-dark" style="font-size: 15px">
             <tr>
+                <th>.No</th>
                 <th>Image</th>
                 <th>Name Book</th>
                 <th>Quantity</th>
@@ -113,18 +130,17 @@
                 <th>Note</th>
                 <th>Date Request</th>
                 <th>Status</th>
-                <th>Status Book</th>
+                <th>New Book</th>
                 <th></th>
             </tr>
             </thead>
             <tbody style="font-size: 15px">
-
-
-            <c:forEach var="i" items="${listRequest}">
+            <c:forEach var="i" items="${listRequest}" varStatus="loop">
                 <c:if test="${i.request_Status != 0}">
                     <%-- Start Show Item Request--%>
 
                     <tr>
+                        <td>${loop.count}</td>
                         <td><img style="height: 100px;width: 100px"
                                  src="<c:url value="/images/${i.request_Image}"/>"/></td>
                         <td>
@@ -142,9 +158,10 @@
                         <td>${i.request_Price}</td>
                         <td>${i.request_Note}</td>
                         <td>${i.request_Date}</td>
+                            <%--Set Status Book --%>
                         <td>
                             <c:if test="${i.request_Status==1}">
-                                <p style="color: #ffa400">Proceeding</p>
+                                <p style="color: #fab804ea">Proceeding</p>
                             </c:if>
                             <c:if test="${i.request_Status==2}">
                                 <p style="color: #1ace1a">Done</p>
@@ -153,31 +170,38 @@
                                 <p style="color: red">Un Done</p>
                             </c:if>
                         </td>
+                            <%--End Set Status Book --%>
+
+                            <%--Create Book --%>
                         <td>
                             <c:if test="${i.status_Book_Request==true}">
-                                <%--Create Book --%>
                                 <button style="font-size: 30px;border: none" data-toggle="modal"
-                                        data-target="#myModalBook"><i class="fa-solid fa-plus"></i>
+                                        data-target="#myModalBook${loop.index}"><i class="fa-solid fa-plus"></i>
                                 </button>
-                                <%--End Create Book--%>
                             </c:if>
                         </td>
+                            <%--End Create Book--%>
+
+                            <%--Start Delete Book--%>
                         <td>
-                            <button style="font-size: 30px;border: none" data-toggle="modal"data-target="#myModal">
-                                <c:set var="id" value="${i.request_Id}"></c:set>
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                            <c:if test="${i.request_Status ==2}">
+                                <button style="font-size: 30px;border: none" data-toggle="modal"
+                                        data-target="#myModal${loop.index}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </c:if>
                         </td>
+                            <%--End Delete Book--%>
                     </tr>
                     <%-- End Show Item Request--%>
 
                     <%--Delete Request--%>
-                    <div class="modal fade" id="myModal">
+                    <div class="modal fade" id="myModal${loop.index}">
                         <div style="height: 100%" class="modal-dialog">
                             <div class="modal-content">
 
                                 <header class="head-form mb-0">
-                                    <h2>Are You Sure Delete Request Book ?</h2>
+                                    <h2>Are You Sure To Delete The Book ?</h2>
                                 </header>
 
                                 <div class="modal-body">
@@ -200,152 +224,145 @@
                     </div>
                     <%--End Delete Request--%>
 
+                    <%--Start Form Create Book--%>
+                    <div class="modal fade" id="myModalBook${loop.index}">
+                        <div style=" margin-top: 70px;" class="modal-dialog">
+                            <div class="modal-content">
 
+                                <header class="head-form mb-0">
+                                    <h2 style="padding-left: 75px;font-size: 30px">Create Book</h2>
+                                </header>
+
+                                <div class="modal-body">
+                                        <%--Form --%>
+                                    <form action="staffBookAction?action=createBook" method="POST">
+                                        <input type="hidden" name="request_Id"
+                                               value="${i.request_Id}"/>
+                                            <%--  Start Image Book --%>
+                                        <div class="form-group">
+                                            <input type="hidden" name="imageUpload" value="${i.request_Image}">
+                                        </div>
+                                            <%--  End Image Book --%>
+
+                                            <%--  Start Name Book --%>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-book"></i></span>
+                                                </div>
+                                                <input type="text" name="nameBook" class="form-control input-sm"
+                                                       style="font-size: 20px" value="${i.request_Name_Book}">
+                                            </div>
+                                        </div>
+                                            <%--  End Name Book --%>
+
+                                            <%--  Start Author --%>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-person"></i></span>
+                                                </div>
+                                                <input type="text" name="author" class="form-control input-sm"
+                                                       style="font-size: 20px" placeholder="Author">
+                                            </div>
+                                        </div>
+                                            <%--  End Author --%>
+
+                                            <%--  Start Quantity Book --%>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-arrow-up-9-1"></i></span>
+                                                </div>
+                                                <input type="number" name="quantity"
+                                                       class="form-control input-sm"
+                                                       style="font-size: 20px" value="${i.request_Quantity}">
+                                            </div>
+                                        </div>
+                                            <%--  End Quantity Book --%>
+
+                                            <%--  Start Price Book --%>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-money-bill-wave"></i></span>
+                                                </div>
+                                                <input type="number" name="price" class="form-control input-sm"
+                                                       style="font-size: 20px" value="${i.request_Price}">
+                                            </div>
+                                        </div>
+                                            <%--  End Price Book --%>
+
+                                            <%--  Start Category Book --%>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa fa-briefcase"></i></span>
+                                                </div>
+                                                <select style="font-size: 20px" class="form-control"
+                                                        name="category">
+                                                    <option>Category</option>
+                                                    <option value="1">Romance</option>
+                                                    <option value="2">Self-help</option>
+                                                    <option value="3">Novel</option>
+                                                    <option value="4">Fantasy</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <%--  End Category Book --%>
+
+                                            <%--  Start Public Book --%>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-calendar-days"></i></span>
+                                                </div>
+                                                <input type="number" name="publicOfYear"
+                                                       class="form-control input-sm"
+                                                       style="font-size: 20px" placeholder="Public Of Year">
+                                            </div>
+                                        </div>
+                                            <%--  End Public Book --%>
+
+                                            <%--  Start Description Book --%>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-regular fa-file"></i></span>
+                                                </div>
+                                                <input type="text" name="description"
+                                                       class="form-control input-sm"
+                                                       style="font-size: 20px" placeholder="Description">
+                                            </div>
+                                        </div>
+                                            <%--  End Description Book --%>
+
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer" id="modal-footer">
+                                    <button type="submit" class="btn btn-info add">Add</button>
+                                    </form>
+                                    <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--End Form Create Book--%>
 
                 </c:if>
             </c:forEach>
             </tbody>
         </table>
     </div>
-
 </div>
 <script src="./js/script.js"></script>
-
-<%--Start Form Create Book--%>
-<c:forEach var="i" items="${listRequest}">
-    <c:set var="idR" value="${id}"></c:set>
-<c:if test="${i.request_Id==idR}">
-<div class="modal fade" id="myModalBook">
-    <div style=" margin-top: 70px;" class="modal-dialog">
-        <div class="modal-content">
-
-            <header class="head-form mb-0">
-                <h2 style="padding-left: 75px;font-size: 30px">Create Book</h2>
-            </header>
-
-            <div class="modal-body">
-                <%--Form --%>
-                <form action="staffBookAction?action=createBook" method="POST">
-
-                    <%--  Start Image Book --%>
-                    <div class="form-group">
-                        <input type="hidden" name="imageUpload" value="${i.request_Image}">
-                    </div>
-                    <%--  End Image Book --%>
-
-                    <%--  Start Name Book --%>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa-solid fa-book"></i></span>
-                            </div>
-                            <input type="text" name="nameBook" class="form-control input-sm"
-                                   style="font-size: 20px" value="${i.request_Name_Book}">
-                        </div>
-                    </div>
-                    <%--  End Name Book --%>
-
-                    <%--  Start Author --%>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa-solid fa-person"></i></span>
-                            </div>
-                            <input type="text" name="author" class="form-control input-sm"
-                                   style="font-size: 20px" placeholder="Author">
-                        </div>
-                    </div>
-                    <%--  End Author --%>
-
-                    <%--  Start Quantity Book --%>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa-solid fa-arrow-up-9-1"></i></span>
-                            </div>
-                            <input type="number" name="quantity"
-                                   class="form-control input-sm"
-                                   style="font-size: 20px" value="${i.request_Quantity}">
-                        </div>
-                    </div>
-                    <%--  End Quantity Book --%>
-
-                    <%--  Start Price Book --%>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa-solid fa-money-bill-wave"></i></span>
-                            </div>
-                            <input type="number" name="price" class="form-control input-sm"
-                                   style="font-size: 20px" value="${i.request_Price}">
-                        </div>
-                    </div>
-                    <%--  End Price Book --%>
-
-                    <%--  Start Category Book --%>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa fa-briefcase"></i></span>
-                            </div>
-                            <select style="font-size: 20px" class="form-control"
-                                    name="category">
-                                <option>Category</option>
-                                <option value="1">Romance</option>
-                                <option value="2">Self-help</option>
-                                <option value="3">Novel</option>
-                                <option value="4">Fantasy</option>
-                            </select>
-                        </div>
-                    </div>
-                    <%--  End Category Book --%>
-
-                    <%--  Start Public Book --%>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa-solid fa-calendar-days"></i></span>
-                            </div>
-                            <input type="number" name="publicOfYear"
-                                   class="form-control input-sm"
-                                   style="font-size: 20px" placeholder="Public Of Year">
-                        </div>
-                    </div>
-                    <%--  End Public Book --%>
-
-                    <%--  Start Description Book --%>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa-regular fa-file"></i></span>
-                            </div>
-                            <input type="text" name="description"
-                                   class="form-control input-sm"
-                                   style="font-size: 20px" placeholder="Description">
-                        </div>
-                    </div>
-                    <%--  End Description Book --%>
-
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer" id="modal-footer">
-                <button type="submit" class="btn btn-info add">Add</button>
-                </form>
-                <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-</c:if>
-</c:forEach>
-<%--End Form Create Book--%>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

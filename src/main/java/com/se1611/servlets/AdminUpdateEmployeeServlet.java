@@ -53,7 +53,7 @@ public class AdminUpdateEmployeeServlet extends HttpServlet {
         try {
             EmployeeDAO dao = new EmployeeDAO();
             dao.updateEmployeeAccount(employee_Id, account_Id, password, fullName, phone, address, gender, role, status_Employee);
-            request.setAttribute("UPDATE_EMPLOYEE_MSG", "Update Employee "  + account_Id + " Success");  
+            request.setAttribute("UPDATE_EMPLOYEE_MSG", "Update Employee "  + fullName + " Success");  
         } catch (SQLException e) {
             log("Account Update Servlet _ SQLException_ " + e.getMessage());
         } catch (NamingException e) {

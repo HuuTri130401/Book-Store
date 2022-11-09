@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 public class InventoryServlet extends HttpServlet {
     private final String INVALID_PAGE = "invalidPage";
     private final String INVENTORY_PAGE="staffInventoryPage";
+    private final String INVENTORY_HISTORY_PAGE="staffInventoryHistoryPage";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws NamingException,
             ServletException, IOException, SQLException {
@@ -32,6 +33,8 @@ public class InventoryServlet extends HttpServlet {
         //
         List<InventoryDTO> listInventory = new ArrayList<>();
         InventoryDAO dao = new InventoryDAO();
+        //Declace inventory Id
+        int inventory_detail_id;
         try {
             switch (action) {
                 case "getInventory":
@@ -61,12 +64,26 @@ public class InventoryServlet extends HttpServlet {
                     }
                     break;
                 case "deleteInventory":
-                    int inventory_detail_id = Integer.parseInt(request.getParameter("inventory_Detail_Id"));
-                    if(dao.DeleteInventory(inventory_detail_id)){
+                    inventory_detail_id = Integer.parseInt(request.getParameter("inventory_Detail_Id"));
+                    if(dao.DeleteInventory(inventory_detail_id,false)){
                         listInventory = dao.GetInventory();
                         session.setAttribute("listInventory", listInventory);
                         url = INVENTORY_PAGE;
                     }
+                    break;
+                case "returnInventoryDelete":
+                    inventory_detail_id = Integer.parseInt(request.getParameter("inventory_Detail_Id"));
+                    if(dao.DeleteInventory(inventory_detail_id,true)){
+                        listInventory = dao.GetInventory();
+                        session.setAttribute("listInventory", listInventory);
+                        url = INVENTORY_PAGE;
+                    }
+                    break;
+
+                case "historyInventory":
+                    listInventory = dao.GetInventory();
+                    session.setAttribute("listInventory", listInventory);
+                    url = INVENTORY_HISTORY_PAGE;
                     break;
             }
         } catch (SQLException e) {

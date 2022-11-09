@@ -54,59 +54,59 @@
             </div>
         </div>
 
-            <div class="sidebar">
-                <!-- link in sidebar -->
-                <ul class="nav-links">
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-home'></i>
-                            <span class="links_name">Overview</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./adminManageInforDashboard">
-                            <i class='bx bx-grid-alt'></i>
-                            <span class="links_name">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./adminShowListEmployees">
-                            <i class='bx bx-user'></i>
-                            <span class="links_name">Employees</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./adminShowListBookingRequest">
-                            <i class='bx bx-import'></i>
-                            <span class="links_name">Booking Request</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a type="submit" href="adminBookAction?action=bookPage1">
-                            <i class='bx bx-book'></i>
-                            <span class="links_name">Books</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./adminShowListImportations">
-                            <i class='bx bxs-report'></i>
-                            <span class="links_name">Importation</span>
-                        </a>
-                    </li>
-<!--                    <li>
-                        <a href="./adminShowListOrders">
-                            <i class='bx bx-list-ol'></i>
-                            <span class="links_name">Order</span>
-                        </a>
-                    </li>-->
-                    <li>
-                        <a href="./logoutAction">
-                            <i class='bx bx-log-out'></i>
-                            <span class="links_name">Log out</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div class="sidebar">
+            <!-- link in sidebar -->
+            <ul class="nav-links">
+                <li>
+                    <a href="#">
+                        <i class='bx bx-home'></i>
+                        <span class="links_name">Overview</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adminManageInforDashboard">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adminShowListEmployees">
+                        <i class='bx bx-user'></i>
+                        <span class="links_name">Employees</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adminShowListBookingRequest">
+                        <i class='bx bx-import'></i>
+                        <span class="links_name">Booking Request</span>
+                    </a>
+                </li>
+                <li>
+                    <a type="submit" href="adminBookAction?action=bookPage1">
+                        <i class='bx bx-book'></i>
+                        <span class="links_name">Books</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adminShowListImportations">
+                        <i class='bx bxs-report'></i>
+                        <span class="links_name">Importation</span>
+                    </a>
+                </li>
+                <!--                    <li>
+                                        <a href="./adminShowListOrders">
+                                            <i class='bx bx-list-ol'></i>
+                                            <span class="links_name">Order</span>
+                                        </a>
+                                    </li>-->
+                <li>
+                    <a href="./logoutAction">
+                        <i class='bx bx-log-out'></i>
+                        <span class="links_name">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
         <!-- home content -->
         <section class="home-section">

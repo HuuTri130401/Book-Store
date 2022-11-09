@@ -87,6 +87,35 @@ public class RequestDAO {
         }
         return result;
     }
+    //update Status Book New/Old Request
+    public boolean UpdateStatusNewOld(int request_Id) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = true;
+        int count = 0;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "update [dbo].[BookingRequest] set [status_Book_Request]=? where [request_Id]=?";
+                stm = con.prepareStatement(sql);
+                //Check status, if true to update Done, false update Un Done
+                    stm.setBoolean(1, false);
+                stm.setInt(2, request_Id);
+                count = stm.executeUpdate();
+                if (count == 0) {
+                    result = false;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 
     //Delete Request
     public boolean DeleteRequest(int request_Id) throws SQLException, NamingException {

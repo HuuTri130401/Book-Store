@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Staff Book Detail</title>
 
     <!-- BoxIcon CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -23,7 +23,7 @@
 
 <body>
 <!--header-->
-<header>
+<div class="header">
     <div class="header-menu">
         <!-- even menu sidebar -->
         <div class="sidebar-button__logo">
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-</header>
+</div>
 
 <!-- sidebar -->
 <nav class="sidebar">
@@ -62,7 +62,7 @@
         <li>
             <a href="staffNodifyPage">
                 <i class='bx bxs-bell'></i>
-                <span class="links_name">Nodify</span>
+                <span class="links_name">Notify</span>
             </a>
         </li>
         <li>
@@ -90,7 +90,7 @@
             </a>
         </li>
         <li>
-            <a href="login.jsp">
+            <a href="./logoutAction">
                 <i class='bx bx-log-out'></i>
                 <span class="links_name">Log out</span>
             </a>
