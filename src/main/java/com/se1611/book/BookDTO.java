@@ -4,11 +4,13 @@
  */
 package com.se1611.book;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tuan vu
  */
-public class BookDTO {
+public class BookDTO implements Serializable{
 
     private int book_Id;
     private String name;

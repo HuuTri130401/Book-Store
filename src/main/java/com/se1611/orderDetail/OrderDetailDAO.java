@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 
 /**
@@ -98,5 +99,44 @@ public class OrderDetailDAO {
             closeConnection();
         }
         return false;
+    }
+    
+    public List<CustomizedOrderDetailDTO> getOrderDetailsByOrderID(int orderId) throws SQLException, NamingException{
+        List<CustomizedOrderDetailDTO> details = null;
+        
+        try{
+            con = DBHelper.getConnection();
+            if(con != null){
+                String sql = "SELECT od.order_Detail_Id, od.book_Id, od.quantity_Order_Detail, od.total_Order_Detail, b.name_Book, b.category, b.price_Book, b.image "
+                        + "FROM OrderDetail od join Book b on od.book_Id = b.book_Id "
+                        + "WHERE od.order_Id = ?";
+                
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, orderId);
+                rs = stm.executeQuery();
+                
+                while(rs.next()){
+                    int odID = rs.getInt("order_Detail_Id");
+                    int bookID = rs.getInt("book_Id");
+                    int quantity = rs.getInt("quantity_Order_Detail");
+                    String name = rs.getString("name_Book");
+                    String cover = rs.getString("image");
+                    float price = rs.getFloat("price_Book");
+                    float total = rs.getFloat("total_Order_Detail");
+                    int categoryID = rs.getInt("category");
+                    
+                    CustomizedOrderDetailDTO dto = new CustomizedOrderDetailDTO(odID, bookID, quantity, categoryID, name, price, total, cover);
+                    if(details == null){
+                        details = new ArrayList<>();
+                    }
+                    details.add(dto);
+                }
+            }
+        }
+        finally{
+            closeConnection();
+            return details;
+        }
+        
     }
 }

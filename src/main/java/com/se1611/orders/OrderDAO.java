@@ -10,6 +10,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 
 /**
@@ -117,4 +119,66 @@ public class OrderDAO {
         }
     }
 
+    public List<OrderDTO> getOrderListByEmpID(int empID) throws SQLException, NamingException {
+        List<OrderDTO> orders = null;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "SELECT order_Id, date_To_Oder, quantity_Order, total_Order "
+                        + "FROM [Order] "
+                        + "WHERE employee_Id = ? "
+                        + "ORDER BY date_To_Oder DESC";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, empID);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int orderId = rs.getInt("order_Id");
+                    Date orderedDate = rs.getDate("date_To_Oder");
+                    int quantity = rs.getInt("quantity_Order");
+                    float total = rs.getFloat("total_Order");
+
+                    OrderDTO dto = new OrderDTO(orderId, empID, orderedDate, quantity, total);
+                    if (orders == null) {
+                        orders = new ArrayList<>();
+                    }
+                    orders.add(dto);
+                }
+            }
+        } finally {
+            closeConnection();
+            return orders;
+        }
+        
+    }
+    
+    public OrderDTO getOrderByOrderId(int id) throws SQLException, NamingException {
+        OrderDTO order = null;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "SELECT employee_Id, date_To_Oder, quantity_Order, total_Order "
+                        + "FROM [Order] "
+                        + "WHERE order_Id = ? "
+                        + "ORDER BY date_To_Oder DESC";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+                    int empID = rs.getInt("employee_Id");
+                    Date orderedDate = rs.getDate("date_To_Oder");
+                    int quantity = rs.getInt("quantity_Order");
+                    float total = rs.getFloat("total_Order");
+
+                    order = new OrderDTO(id, empID, orderedDate, quantity, total);
+                }
+            }
+        } finally {
+            closeConnection();
+            return order;
+        }
+    }
 }

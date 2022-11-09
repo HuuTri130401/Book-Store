@@ -243,4 +243,52 @@ public class BookDAO {
         return book;
     }
 
+    public ArrayList<BookDTO> SearchBook(String search) throws SQLException, ClassNotFoundException, NamingException {
+        Connection connection = null;
+        PreparedStatement prestm = null;
+        ResultSet rs = null;
+        ArrayList<BookDTO> result = new ArrayList<>();
+        
+        try {
+            connection = DBHelper.getConnection();
+            if (connection != null) {
+                String orderSQLString = "SELECT b.book_Id, b.name_Book, b.author_Book, b.year_Of_Public, b.category, b.price_Book,"
+                        +                       " b.quantity_Book, b.image, b.status_Book, c.category_Name "
+                        + "FROM Book b inner join Category c on b.category = c.category_Id "
+                        + "WHERE b.name_Book LIKE ?";
+
+                prestm = connection.prepareStatement(orderSQLString);
+                prestm.setString(1, "%" + search + "%");
+                rs = prestm.executeQuery();
+                while (rs.next()) {
+
+                    int bookId = rs.getInt("book_Id");
+                    String nameBook = rs.getString("name_Book");
+                    String author = rs.getString("author_Book");
+                    int year = rs.getInt("year_Of_Public");
+                    int category = rs.getInt("category");
+                    float price = rs.getFloat("price_Book");
+                    int quantity = rs.getInt("quantity_Book");
+                    String cover = rs.getString("image");
+                    boolean status = rs.getBoolean("status_Book");
+                    String nameCate = rs.getString("category_Name");
+                    BookDTO dto = new BookDTO(bookId, nameBook, author, year, 
+                            category, price, quantity, cover, status, nameCate);
+                    
+                    result.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (prestm != null) {
+                prestm.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return result;
+    }
 }

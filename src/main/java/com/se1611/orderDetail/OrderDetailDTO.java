@@ -5,11 +5,13 @@
  */
 package com.se1611.orderDetail;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Admin
  */
-public class OrderDetailDTO {
+public class OrderDetailDTO implements Serializable {
     private int order_Detail_Id;
     private int order_Id;
     private int book_Id;
