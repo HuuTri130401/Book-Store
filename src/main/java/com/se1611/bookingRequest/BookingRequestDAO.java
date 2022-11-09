@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -39,7 +40,8 @@ public class BookingRequestDAO {
                     String name_Book = rs.getString("name_Book");
                     int quantity_Request = rs.getInt("quantity_Request");
                     float price_Request = rs.getFloat("price_Request");
-                    Date date_Request = rs.getDate("date_Request");
+//                    Date date_Request = rs.getDate("date_Request");
+                    LocalDate date_Request = rs.getDate("date_Request").toLocalDate();
                     String note = rs.getString("note");
                     int status = rs.getInt("status");
                     boolean status_Book_Request = rs.getBoolean("status_Book_Request");
@@ -63,7 +65,7 @@ public class BookingRequestDAO {
         return listBookingRequest;
     }//end getListBooking request function
 
-    public boolean addNewBookingRequest(String image, String name_Book, int quantity_Request, float price_Request, Date date_Request, String note, int status, boolean status_Book_Request)
+    public boolean addNewBookingRequest(String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, String note, int status, boolean status_Book_Request)
             throws SQLException, ClassNotFoundException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -78,7 +80,8 @@ public class BookingRequestDAO {
                 stm.setString(2, name_Book);
                 stm.setInt(3, quantity_Request);
                 stm.setFloat(4, price_Request);
-                stm.setDate(5, date_Request);
+//                stm.setDate(5, date_Request);
+                stm.setDate(5, Date.valueOf(date_Request));
                 stm.setString(6, note);
                 stm.setInt(7, status);
                 stm.setBoolean(8, status_Book_Request);
@@ -99,4 +102,37 @@ public class BookingRequestDAO {
         return false;
     }//end addNewBookingRequest
 
+    public float getTotalMoneyLastMonthBookRequest()
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        float totalMoneyLastMonthBookRequest = 0;
+
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "Select SUM(quantity_Request * price_Request)\n"
+                        + "From [BookingRequest]\n"
+                        + "Where Month(date_Request) = Month(GETDATE() - 1) ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String sumValue = rs.getString(1);
+                    totalMoneyLastMonthBookRequest = Float.parseFloat(sumValue);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return totalMoneyLastMonthBookRequest;
+    }
 }//end class

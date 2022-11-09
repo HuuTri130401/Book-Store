@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Admin
  */
 public class AdminDeleteEmployeeServlet extends HttpServlet {
-
+    private final String ADMIN_SHOW_LIST_EMPLOYEES = "adminShowListEmployees";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,10 +34,11 @@ public class AdminDeleteEmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String employee_Id = request.getParameter("employee_Id");
-        String url = "adminShowListEmployees";
+        String url = ADMIN_SHOW_LIST_EMPLOYEES;
         try {
             EmployeeDAO dao = new EmployeeDAO();
             dao.deleteEmployeeAccount(employee_Id);
+            request.setAttribute("DELETE_EMPLOYEE_MSG", "InActive Employee Success!");
         } catch (ClassNotFoundException e) {
             log("Account Update Servlet _ ClassNotFoundException_ " + e.getMessage());
         } catch (SQLException e) {

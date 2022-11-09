@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Dashboard</title>
         <!-- link file CSS -->
-        <link rel="stylesheet" href="./css/staffManageBook.css">
+        <link rel="stylesheet" href="./css/adminManageCategoryBookStyle.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <!-- Latest compiled and minified CSS -->
@@ -20,30 +20,32 @@
     <body>
         <!--header-->
         <header>
-            <div class="header-menu">
-                <!-- even menu sidebar -->
-                <div class="sidebar-button__logo">
-                    <div class="sidebar-button">
-                        <i class='bx bx-menu sidebarBtn'></i>
-                    </div>
-
-                    <!-- div of logo -->
-                    <div class="logo-details">
-                        <img src="./images/logo.jpg" alt="Logo Phuong Nam Bookstore">
-                        <span class="logo_name">Book Store</span>
-                    </div>
-                </div>
-                <div class="seachbox-profile">
-                    <div class="wraper_searchbox_profile">
-                        <div class="search-box">
-                            <input type="text" placeholder="Search...">
-                            <button type="submit"><i class='bx bx-search-alt-2'></i></button>
+            <div class="header">
+                <div class="header-menu">
+                    <!-- even menu sidebar -->
+                    <div class="sidebar-button__logo">
+                        <div class="sidebar-button">
+                            <i class='bx bx-menu sidebarBtn'></i>
                         </div>
-                        <div class="profile_details">
-                            <img src="images/admin1.png" alt="image admin">
-                            <div class="name_role">
-                                <span class="name">${sessionScope.USER["fullName"]}</span>
-                                <i class='bx bxs-chevron-down'></i>
+
+                        <!-- div of logo -->
+                        <div class="logo-details">
+                            <img src="./images/logo.jpg" alt="Logo Phuong Nam Bookstore">
+                            <span class="logo_name">Book Store</span>
+                        </div>
+                    </div>
+                    <div class="seachbox-profile">
+                        <div class="wraper_searchbox_profile">
+                            <div class="search-box">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><i class='bx bx-search-alt-2'></i></button>
+                            </div>
+                            <div class="profile_details">
+                                <img src="images/admin1.png" alt="image admin">
+                                <div class="name_role">
+                                    <span class="name">${sessionScope.USER["fullName"]}</span>
+                                    <i class='bx bxs-chevron-down'></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,87 +53,96 @@
             </div>
         </header>
 
-        <!-- sidebar -->
-        <nav class="sidebar">
+        <div class="sidebar">
             <!-- link in sidebar -->
             <ul class="nav-links">
                 <li>
-                            <a href="./adminDashBoard.jsp">
-                                <i class='bx bx-grid-alt'></i>
-                                <span class="links_name">Dashboard</span>
-                            </a>
+                    <a href="#">
+                        <i class='bx bx-home'></i>
+                        <span class="links_name">Overview</span>
+                    </a>
                 </li>
                 <li>
-                            <a href="./adminManageEmployees.jsp">
-                                <i class='bx bx-user'></i>
-                                <span class="links_name">Employees</span>
-                            </a>
+                    <a href="./adminManageInforDashboard">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
                 </li>
                 <li>
-                            <a href="#">
-                                <i class='bx bx-home'></i>
-                                <span class="links_name">Overview</span>
-                            </a>
+                    <a href="./adminShowListEmployees">
+                        <i class='bx bx-user'></i>
+                        <span class="links_name">Employees</span>
+                    </a>
                 </li>
                 <li>
-
+                    <a href="./adminShowListBookingRequest">
+                        <i class='bx bx-import'></i>
+                        <span class="links_name">Booking Request</span>
+                    </a>
+                </li>
+                <li>
                     <a type="submit" href="adminBookAction?action=bookPage1">
                         <i class='bx bx-book'></i>
                         <span class="links_name">Books</span>
                     </a>
                 </li>
                 <li>
-                            <a href="#">
-                                <i class='bx bx-trending-up'></i>
-                                <span class="links_name">Statistic</span>
-                            </a>
+                    <a href="./adminShowListImportations">
+                        <i class='bx bxs-report'></i>
+                        <span class="links_name">Importation</span>
+                    </a>
                 </li>
+                <!--                <li>
+                                    <a href="./adminShowListOrders">
+                                        <i class='bx bx-list-ol'></i>
+                                        <span class="links_name">Order</span>
+                                    </a>
+                                </li>-->
                 <li>
-                    <a href="login.jsp">
+                    <a href="./logoutAction">
                         <i class='bx bx-log-out'></i>
                         <span class="links_name">Log out</span>
                     </a>
                 </li>
             </ul>
-        </nav>
-
+        </div>
         <!-- home content -->
         <section class="home-section">
             <!-- home-content -->
-                            <div class="categoryText">
-                                <a style="color: black" type="submit" href="adminBookAction?action=bookPage1">Category  </a> >
-                                ${nameCategory}
-                            </div>
-                            <div class="itemList row">
-                            <c:forEach items="${listCategoryBook}" var="b">
-                                <div class="item col-lg-6">
-                                <form style="height: 325px;width: 450px"action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" method="POST">
-                                    <div class="border">
-                                    <img src="<c:url value="/images/${b.image_Book}"/>"/>
-                                        <p class="name">${b.name}</p>
-                                        <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
-                                            <small style="text-decoration:underline">đ</small> <button class="viewDetail btn btn-info" type="submit">View Detail</button><p>
+            <div class="categoryText">
+                <a style="color: black" type="submit" href="adminBookAction?action=bookPage1">Category  </a> >
+                ${nameCategory}
+            </div>
+            <div class="itemList row">
+                <c:forEach items="${listCategoryBook}" var="b">
+                    <div class="item col-lg-6">
+                        <form style="height: 325px;width: 450px"action="adminBookAction?action=bookDetail&bookId=${b.book_Id}&categoryId=${b.category}" method="POST">
+                            <div class="border">
+                                <img src="<c:url value="/images/${b.image_Book}"/>"/>
+                                <p class="name">${b.name}</p>
+                                <p class="price"><fmt:formatNumber value="${b.price_Book}" type="number"/>
+                                    <small style="text-decoration:underline">đ</small> <button class="viewDetail btn btn-info" type="submit">View Detail</button><p>
 
-                                    </div>
-                                </form>
-                                </div>
-                            </c:forEach>
                             </div>
-                                <%--Start Page--%>
-                                <div class="page row">
-                                    <div class="col-lg-4"></div>
-                                    <div class="col-lg-4 d-flex justify-content-center">
-                                        <a type="submit" href="adminBookAction?action=${nameCategory}">1</a>
-                                        <c:if test="${numLastCategory>4}">
-                                            <a type="submit" href="adminBookAction?action=${nameCategory}2">2</a>
-                                        </c:if>
-                                        <c:if test="${numLastCategory>8}">
-                                            <a type="submit" href="adminBookAction?action=${nameCategory}3">3</a>
-                                        </c:if>
-                                    </div>
-                                    <div class="col-lg-4"></div>
-                                </div>
-                                <%-- End Page--%>
+                        </form>
+                    </div>
+                </c:forEach>
+            </div>
+            <%--Start Page--%>
+            <div class="page row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4 d-flex justify-content-center">
+                    <a type="submit" href="adminBookAction?action=${nameCategory}">1</a>
+                    <c:if test="${numLastCategory>4}">
+                        <a type="submit" href="adminBookAction?action=${nameCategory}2">2</a>
+                    </c:if>
+                    <c:if test="${numLastCategory>8}">
+                        <a type="submit" href="adminBookAction?action=${nameCategory}3">3</a>
+                    </c:if>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+            <%-- End Page--%>
         </section>
 
         <script src="./js/script.js"></script>

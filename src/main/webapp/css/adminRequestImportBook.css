@@ -1,14 +1,5 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Nov 4, 2022, 3:45:18 PM
-    Author     : Admin
-*/
 /* Google font CDN link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +9,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 :root {
     --primary-color: -webkit-linear-gradient(to right, #267871, #136a8a);
-    ;
 }
 
 html {
@@ -33,24 +23,24 @@ body {
 
 /* ========================================================== */
 /* HEADER--LOGO */
-header {
+.header{
     height: 10%;
     width: 100%;
 }
 
-header .header-menu {
+.header .header-menu {
     display: flex;
     align-items: center;
 }
 
-header .sidebar-button__logo {
+.header .sidebar-button__logo {
     display: flex;
     max-width: 27rem;
     background:
         linear-gradient(to right, #267871, #136a8a);
 }
 
-header .sidebar-button__logo .sidebar-button {
+.header .sidebar-button__logo .sidebar-button {
     max-width: 6rem;
     height: 8rem;
     display: flex;
@@ -62,26 +52,26 @@ header .sidebar-button__logo .sidebar-button {
     padding: 0 20px;
 }
 
-header .sidebar-button__logo .sidebar-button:hover {
+.header .sidebar-button__logo .sidebar-button:hover {
     background-color: #136a8a;
 }
 
-header .sidebar-button__logo .logo-details img {
+.header .sidebar-button__logo .logo-details img {
     max-width: 5rem;
     max-height: 5rem;
 }
 
-header .sidebar-button__logo .logo-details {
+.header .sidebar-button__logo .logo-details {
     height: 8rem;
     width: 21rem;
     display: flex;
     align-items: center;
-    background-color: var(--primary-color);
+    background-color: -webkit-linear-gradient(to right, #267871, #136a8a);
 }
 
-header .sidebar-button__logo .logo-details .logo_name {
+.header .sidebar-button__logo .logo-details .logo_name{
     font-size: 2.4rem;
-    font-weight: 600;
+    font-weight:600;
     color: #fab804ea;
     margin-left: 0.8rem;
 }
@@ -132,36 +122,34 @@ header .sidebar-button__logo .logo-details .logo_name {
     right: 0.4rem;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--primary-color);
+    background: #267871;
     border-radius: 0.7rem;
-    color: #333;
+    color:#fff;
     font-size: 2.2rem;
     line-height: 4rem;
     text-align: center;
 }
-
-.seachbox-profile .profile_details {
+.seachbox-profile .profile_details{
     position: relative;
     display: flex;
     align-items: center;
     height: 5rem;
     min-width: 19rem;
-    max-width: 30rem;
     background: #f5f6fa;
     border: 2px solid #efeef1;
     border-radius: 0.6rem;
-    padding: 0 1.5rem 0 0.5rem;
+    padding: 0 1.5rem 0 0.2rem;
 }
 
-.seachbox-profile .profile_details img {
+.seachbox-profile .profile_details img{
     height: 4rem;
     width: 4rem;
     object-fit: cover;
     border-radius: 0.6rem;
 }
 
-.seachbox-profile .profile_details .name_role {
-    font-size: 1.5rem;
+.seachbox-profile .profile_details .name_role .name{
+    font-size: 1.8rem;
     font-weight: 500;
     color: #333;
     margin: 0 1rem;
@@ -170,7 +158,7 @@ header .sidebar-button__logo .logo-details .logo_name {
 
 .seachbox-profile .profile_details i {
     color: #333;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
 }
 
 /* ========================================================== */
@@ -178,7 +166,7 @@ header .sidebar-button__logo .logo-details .logo_name {
 
 .sidebar {
     position: absolute;
-    height: 100%;
+    height: 110%; 
     width: 27rem;
     background:
         linear-gradient(to right, #267871, #136a8a);
@@ -190,10 +178,10 @@ header .sidebar-button__logo .logo-details .logo_name {
 }
 
 .sidebar .nav-links {
-    margin-bottom: 1.6rem;
+    margin-bottom : 1.6rem;
 }
 
-.sidebar .nav-links li {
+.sidebar .nav-links li{
     height: 5rem;
     width: 100%;
     list-style: none;
@@ -208,18 +196,18 @@ header .sidebar-button__logo .logo-details .logo_name {
     transition: all 0.4s ease;
 }
 
-.sidebar .nav-links li a:hover {
+.sidebar .nav-links li a:hover{
     background-color: #0d465b;
 }
 
-.sidebar .nav-links li a i {
+.sidebar .nav-links li a i{
     min-width: 6rem;
     text-align: center;
     color: #fff;
     font-size: 1.8rem;
 }
 
-.sidebar .nav-links li a .links_name {
+.sidebar .nav-links li a .links_name{
     color: #fff;
     font-size: 1.5rem;
     font-weight: 400;
@@ -228,7 +216,6 @@ header .sidebar-button__logo .logo-details .logo_name {
 /* Home secsion CSS */
 .home-section {
     background-color: #f5f5f5;
-    ;
     position: relative;
     min-height: 100vh;
     width: calc(100% - 27rem);
@@ -326,41 +313,43 @@ header .sidebar-button__logo .logo-details .logo_name {
     color: rgb(215, 21, 21);
 }
 
+.overview-tableBookRequest .tableBookRequest #bookRequest tr .buttonActionUpdate {
+    color: white;
+    background-color: green;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.4rem;
+    border: none;
+}
+
 .select_StatusBook{
-    padding: 0.5rem 1.8rem;
+    padding: 0.5rem 0.8rem;
     border-radius: 0.4em;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     background-color: green;
     color: #fff;
-    font-weight: 500;
+    font-weight: 300;
 }
 .select_StatusBook .newBook{
-    padding: 0.5rem 1.8rem;
+    padding: 0.5rem 0.8rem;
     border-radius: 0.4em;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     background-color: green;
     color: #fff;
-    font-weight: 500;
+    font-weight: 300;
 }
 
 .select_StatusBook .updateBook{
-    padding: 0.5rem 1.8rem;
+    padding: 0.5rem 0.8rem;
     border-radius: 0.4em;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     background-color: blue;
     color: #fff;
-    font-weight: 500;
+    font-weight: 300;
 }
 .select_StatusBook {
-
+    
 }
 
-/* ========================================================== */
-
 
 /* ========================================================== */
-/* footer {
-    height: 12%;
-    background-color: #0f2c4f;
-} */
 

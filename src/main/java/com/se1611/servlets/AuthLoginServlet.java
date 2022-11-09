@@ -28,6 +28,7 @@ public class AuthLoginServlet extends HttpServlet {
     private final String ADMIN_MANAGE_BOOKS_PAGE = "adminManageInforDashboard";
     private final String STAFF_NODIFY_PAGE = "staffNodifyPage";
     private final String SELLER_NODIFY_PAGE = "sellerNodifyPage";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,7 +55,7 @@ public class AuthLoginServlet extends HttpServlet {
                     //create new session
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", validEmployee);
-                } else if(validEmployee.getRole().equalsIgnoreCase("staff")) {
+                } else if(validEmployee.getRole().equalsIgnoreCase("staff") && validEmployee.isStatus_Employee() == true) {
                     //login staff screen
                     url = STAFF_NODIFY_PAGE;
                     //create new session
@@ -62,13 +63,16 @@ public class AuthLoginServlet extends HttpServlet {
                     session.setAttribute("USER", validEmployee);
                     session.setAttribute("role",validEmployee.getRole().toUpperCase(Locale.ROOT));
                     session.setAttribute("employee_Id",validEmployee.getEmployee_Id());
-                } else if(validEmployee.getRole().equalsIgnoreCase("seller")) {
+                } else if(validEmployee.getRole().equalsIgnoreCase("seller") && validEmployee.isStatus_Employee() == true) {
                     //login seller screen
                     url = SELLER_NODIFY_PAGE;
                     //create new session
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", validEmployee);
                     session.setAttribute("employee_Id",validEmployee.getEmployee_Id());
+                } else if(validEmployee.isStatus_Employee() == false){
+                    url = INVALID_PAGE;
+                    response.sendRedirect(url);
                 }
             }//end if validAccount is not null
         } catch (SQLException e) {

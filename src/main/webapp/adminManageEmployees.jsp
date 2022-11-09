@@ -55,6 +55,12 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
+                        <a href="#">
+                            <i class='bx bx-home'></i>
+                            <span class="links_name">Overview</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="./adminManageInforDashboard">
                             <i class='bx bx-grid-alt'></i>
                             <span class="links_name">Dashboard</span>
@@ -67,9 +73,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-home'></i>
-                            <span class="links_name">Overview</span>
+                        <a href="./adminShowListBookingRequest">
+                            <i class='bx bx-import'></i>
+                            <span class="links_name">Booking Request</span>
                         </a>
                     </li>
                     <li>
@@ -79,13 +85,19 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-trending-up'></i>
-                            <span class="links_name">Statistic</span>
+                        <a href="./adminShowListImportations">
+                            <i class='bx bxs-report'></i>
+                            <span class="links_name">Importation</span>
                         </a>
                     </li>
+<!--                    <li>
+                        <a href="./adminShowListOrders">
+                            <i class='bx bx-list-ol'></i>
+                            <span class="links_name">Order</span>
+                        </a>
+                    </li>-->
                     <li>
-                        <a href="login.jsp">
+                        <a href="./logoutAction">
                             <i class='bx bx-log-out'></i>
                             <span class="links_name">Log out</span>
                         </a>
@@ -98,16 +110,41 @@
                 <!-- home-content -->
                 <div class="home-content">
                     <div class="overview-tableEmployee">
+                        <div class="wraper_addNewEmployee_nameTable">
+                            <a href="adminCreateEmployeePage" class="addNewEmployee">
+                                <i class='bx bx-add-to-queue'></i>
+                                <span class="links_name">Add New Employee</span>
+                            </a>
+                        </div>
+                        <hr style="width: 25.7rem;"/>
+
+                        <!--Show msg after Insert-->
+                        <c:set var="insertEmpMsg" value="${requestScope.INSERT_EMPLOYEE_MSG}"/>
+                        <c:if test="${not empty insertEmpMsg}">
+                            <h3 class='text' style="color: green" >${insertEmpMsg}</h3>
+                        </c:if>
+
+                        <!--Show msg after Delete-->
+                        <c:set var="inActiveEmpMsg" value="${requestScope.DELETE_EMPLOYEE_MSG}"/>
+                        <c:if test="${not empty inActiveEmpMsg}">
+                            <h3 class='text' style="color: red" >${inActiveEmpMsg}</h3>
+                        </c:if>   
+
+                        <!--Show msg after Update-->
+                        <c:set var="updateEmpMsg" value="${requestScope.UPDATE_EMPLOYEE_MSG}"/>
+                        <c:if test="${not empty updateEmpMsg}">
+                            <h3 class='text' style="color: green" >${updateEmpMsg}</h3>
+                        </c:if>   
+
                         <h2 id="nameTable">LIST OF EMPLOYEES</h2>
                         <div class="tableEmployee">
-
                             <table id="employees">
                                 <c:set var="listEmployees" value="${requestScope.LIST_EMPLOYEES}"/>
                                 <c:if test="${not empty listEmployees}">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>EmployeeID</th>
+                                            <th>ID</th>
                                             <th>AccountID</th>
                                             <th>Password</th>
                                             <th>Name</th>
@@ -124,45 +161,56 @@
                                         <c:forEach var="employeeDTO" items="${listEmployees}" varStatus="counter">
                                         <form action="adminUpdateEmployeeAction">
                                             <tr>
-                                                <td>
-                                                    ${counter.count}
-                                                </td>
+                                                <td>${counter.count}</td>
                                                 <td>
                                                     ${employeeDTO.employee_Id}
-                                                    <input type="hidden" name="txtHiddenEmployee_Id" value="${employeeDTO.employee_Id}"/>
+                                                    <input class="textInforEmployee" type="hidden" name="txtHiddenEmployee_Id" value="${employeeDTO.employee_Id}"/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="txtAccount_Id" value="${employeeDTO.account_Id}" />
+                                                    <input class="textInforEmployee" type="text" name="txtAccount_Id" value="${employeeDTO.account_Id}" minlength="4"  maxlength="25"/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="txtPassword" value="${employeeDTO.password}" />
+                                                    <input class="textInforEmployee" type="text" name="txtPassword" value="${employeeDTO.password}" minlength="5"  maxlength="20"/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="txtFullName" value="${employeeDTO.fullName}" />
+                                                    <input class="textInforEmployee" type="text" name="txtFullName" value="${employeeDTO.fullName}" minlength="3"  maxlength="30"/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="txtPhone" value="${employeeDTO.phone}" />
+                                                    <input class="textInforEmployee" type="number" name="txtPhone" value="${employeeDTO.phone}" style="width: 8em"/> <%-- minlength="10"  maxlength="11" size="12" --%>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="txtAddress" value="${employeeDTO.address}" />
+                                                    <input class="textInforEmployee" type="text" name="txtAddress" value="${employeeDTO.address}" minlength="4" maxlength="30"/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="txtGender" value="${employeeDTO.gender}" />
+                                                    <input class="textInforEmployee" type="text" name="txtGender" value="${employeeDTO.gender}" minlength="4" maxlength="6" size="7"/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="txtRole" value="${employeeDTO.role}" />
+                                                    <input class="textInforEmployee" type="text" name="txtRole" value="${employeeDTO.role}" minlength="4" maxlength="6" size="7" />
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="txtStatus_Employee" value="${employeeDTO.status_Employee}" />
+                                                    <c:if test="${employeeDTO.status_Employee eq true}">
+                                                        <input class="textInforEmployee" type="text" name="txtStatus_Employee" 
+                                                               style="color: green" value="${employeeDTO.status_Employee}" minlength="4" maxlength="5" size="6"/>
+                                                    </c:if>
+                                                    <c:if test="${employeeDTO.status_Employee eq false}">
+                                                        <input class="textInforEmployee" type="text" name="txtStatus_Employee" 
+                                                               style="color: red" value="${employeeDTO.status_Employee}" minlength="4" maxlength="5" size="6"/>
+                                                    </c:if>
                                                 </td>
                                                 <td>
-                                                    <input type="submit" value="Update"/>
-                                                </td>
-                                                <td>
+                                                    <input 
+                                                        <c:if test="${employeeDTO.role eq 'admin'}">disabled style="color: red; font-weight:600;"</c:if>
+                                                            class="buttonActionUpdate" type="submit" value="Update"
+                                                            />
+                                                    </td>
+                                                    <td>
                                                     <c:url var="urlRewriting" value="adminDeleteEmployeeAction">
                                                         <c:param name="employee_Id" value="${employeeDTO.employee_Id}"/>
                                                     </c:url>
-                                                    <a href=${urlRewriting}>Delete</a>
+                                                    <a  
+                                                        <c:if test="${employeeDTO.role eq 'admin'}"> style="color: green; pointer-events:none; font-weight:600;"</c:if>
+                                                        class="buttonActionDelete" href=${urlRewriting}>Delete
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </form>
@@ -172,7 +220,9 @@
 
                             </c:if>
                             <c:if test="${empty listEmployees}">
-                                <h2 style="margin-top: 10rem ">
+                                <h2 style="text-align: center;
+                                           align-items: center;
+                                           color: red">
                                     CAN NOT FIND THIS RECORD !       
                                 </h2>
                             </c:if>

@@ -166,7 +166,7 @@ body {
 
 .sidebar {
     position: absolute;
-    height: 100%;
+    height: 110%; 
     width: 27rem;
     background:
         linear-gradient(to right, #267871, #136a8a);
@@ -233,6 +233,7 @@ body {
 .home-section .home-content {
     position: relative;
     padding-top: 2rem;
+    height: 100vh
 }
 
 @media (max-width: 1216px) {
@@ -286,10 +287,36 @@ body {
     padding: 8px;
 }
 
+
 .home-section .home-content  .overview-tableEmployee .tableEmployee #employees tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #fff;
 }
 
+.home-section .home-content .overview-tableEmployee .tableEmployee #employees tr .textInforEmployee {
+    width: 100%;
+    border: 1px solid white;
+    cursor: pointer;
+    background: #f2f2f2;
+    border-radius: 0.2rem;
+    font-size: 1.5rem;
+}
+
+.home-section .home-content .overview-tableEmployee .tableEmployee #employees tr .buttonActionUpdate {
+    color: white;
+    background-color: green;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.4rem;
+    border: none;
+}
+
+.home-section .home-content .overview-tableEmployee .tableEmployee #employees tr .buttonActionDelete {
+    color: white;
+    background-color: #cc1515;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.4rem;
+    border: none;
+    text-decoration: none;
+}
 .home-section .home-content  .overview-tableEmployee .tableEmployee #employees tr:hover {
     background-color: #ddd;
 }
@@ -305,6 +332,22 @@ body {
 
 .home-section .home-content  .overview-tableEmployee .tableEmployee #employees tr td {
     text-align: center;
+}
+
+.overview-tableEmployee .wraper_addNewEmployee_nameTable {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 2rem;
+    padding: 0rem 2rem 2rem 2rem;
+}
+
+.wraper_addNewEmployee_nameTable .addNewEmployee {
+    text-decoration: none;
+    color: #fff;
+    background-color: green;
+    padding: 0.5rem;
+    border-radius: 6px;
 }
 
 .home-content   .overview-tableEmployee #nameTable {

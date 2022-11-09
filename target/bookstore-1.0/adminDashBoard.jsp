@@ -52,6 +52,12 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
+                        <a href="#">
+                            <i class='bx bx-home'></i>
+                            <span class="links_name">Overview</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="./adminManageInforDashboard">
                             <i class='bx bx-grid-alt'></i>
                             <span class="links_name">Dashboard</span>
@@ -64,9 +70,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-home'></i>
-                            <span class="links_name">Overview</span>
+                        <a href="./adminShowListBookingRequest">
+                            <i class='bx bx-import'></i>
+                            <span class="links_name">Booking Request</span>
                         </a>
                     </li>
                     <li>
@@ -76,17 +82,17 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-trending-up'></i>
-                            <span class="links_name">Statistic</span>
+                        <a href="./adminShowListImportations">
+                            <i class='bx bxs-report'></i>
+                            <span class="links_name">Importation</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="./adminShowListBookingRequest">
-                            <i class='bx bx-import'></i>
-                            <span class="links_name">Booking Request</span>
+<!--                    <li>
+                        <a href="./adminShowListOrders">
+                            <i class='bx bx-list-ol'></i>
+                            <span class="links_name">Order</span>
                         </a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="./logoutAction">
                             <i class='bx bx-log-out'></i>
@@ -107,30 +113,34 @@
                         <div class="box">
                             <div class="left-side">
                                 <div class="boxtopic">Total Order</div>
-                                <div class="number">${sumOfTotalOrder}</div>
+                                <div class="number" style="color: #267871;">${sumOfTotalOrder} VNĐ</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box1'></i>
                                     <span class="text">During The Current Year</span>
                                 </div>
                             </div>
                         </div>
+
+                        <c:set var="sumTotalMoneyLastMonthBookRequest" value="${requestScope.TOTAL_MONEY_OF_LAST_MONTH}"/>        
                         <div class="box">
                             <div class="left-side">
-                                <div class="boxtopic">Not Yet</div>
-                                <div class="number">1.111.000</div>
+                                <div class="boxtopic">Total Money Of Request</div>
+                                <div class="number" style="color: #0d8cba;">${sumTotalMoneyLastMonthBookRequest} VNĐ</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box2'></i>
-                                    <span class="text">Up from yesterday</span>
+                                    <span class="text">Money Book Request Last Month</span>
                                 </div>
                             </div>
                         </div>
+
+                        <c:set var="totalOfQuantityInventoryCurrentYear" value="${requestScope.TOTAL_QUANTITY_INVENTORY_CURRENT_YEAR}"/>        
                         <div class="box">
                             <div class="left-side">
-                                <div class="boxtopic">Total Profit</div>
-                                <div class="number">400.000</div>
+                                <div class="boxtopic">Total Inventory</div>
+                                <div class="number"  style="color: #bcd214;">${totalOfQuantityInventoryCurrentYear}</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box3'></i>
-                                    <span class="text">Up from yesterday</span>
+                                    <span class="text">Inventory Current Year</span>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +150,7 @@
                             <div class="left-side">
                                 <div class="boxtopic">Most Inventory Book</div>
                                 <c:forEach var="bookDTO" items="${listMostInventoryBook}">
-                                    <div class="number" style="color: red">Quantity: ${bookDTO.quantity_Book}</div>
+                                    <div class="number" style="color: #ed6b15;">${bookDTO.quantity_Book} Book(s)</div>
                                     <div class="name-product">Name: ${bookDTO.name}</div>
                                     <div class="indicator">
                                         <i class='bx bx-up-arrow-alt box4'></i>

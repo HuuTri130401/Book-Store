@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AdminUpdateEmployeeServlet extends HttpServlet {
 
+    private final String ADMIN_SHOW_LIST_EMPLOYEES = "adminShowListEmployees";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,17 +42,18 @@ public class AdminUpdateEmployeeServlet extends HttpServlet {
         String account_Id = request.getParameter("txtAccount_Id");
         String password = request.getParameter("txtPassword");
         String fullName = request.getParameter("txtFullName");
-        int phone = Integer.parseInt(request.getParameter("txtPhone"));
+        String phone = request.getParameter("txtPhone");
         String address = request.getParameter("txtAddress");
         String gender = request.getParameter("txtGender");
         String role = request.getParameter("txtRole");
         boolean status_Employee = Boolean.parseBoolean(request.getParameter("txtStatus_Employee"));
 
-        String url = siteMap.getProperty("adminShowListEmployees");
+        String url = siteMap.getProperty(ADMIN_SHOW_LIST_EMPLOYEES);
 
         try {
             EmployeeDAO dao = new EmployeeDAO();
             dao.updateEmployeeAccount(employee_Id, account_Id, password, fullName, phone, address, gender, role, status_Employee);
+            request.setAttribute("UPDATE_EMPLOYEE_MSG", "Update Employee "  + account_Id + " Success");  
         } catch (SQLException e) {
             log("Account Update Servlet _ SQLException_ " + e.getMessage());
         } catch (NamingException e) {

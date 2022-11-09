@@ -14,7 +14,8 @@ public class EmployeeDTO {
     private String account_Id;
     private String password;
     private String fullName;
-    private int phone;
+//    private int phone;
+    private String phone;
     private String address;
     private String gender;
     private String role;
@@ -23,8 +24,19 @@ public class EmployeeDTO {
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(int employee_Id, String account_Id, String password, String fullName, int phone, String address, String gender, String role, boolean status_Employee) {
+    public EmployeeDTO(int employee_Id, String account_Id, String password, String fullName, String phone, String address, String gender, String role, boolean status_Employee) {
         this.employee_Id = employee_Id;
+        this.account_Id = account_Id;
+        this.password = password;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.role = role;
+        this.status_Employee = status_Employee;
+    }
+
+    public EmployeeDTO(String account_Id, String password, String fullName, String phone, String address, String gender, String role, boolean status_Employee) {
         this.account_Id = account_Id;
         this.password = password;
         this.fullName = fullName;
@@ -67,11 +79,11 @@ public class EmployeeDTO {
         this.fullName = fullName;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -106,5 +118,5 @@ public class EmployeeDTO {
     public void setStatus_Employee(boolean status_Employee) {
         this.status_Employee = status_Employee;
     }
-    
+
 }

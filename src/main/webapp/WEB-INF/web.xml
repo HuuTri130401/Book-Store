@@ -45,6 +45,18 @@
         <servlet-name>AdminManageListBookingRequestServlet</servlet-name>
         <servlet-class>com.se1611.servlets.AdminManageListBookingRequestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminCreateNewEmployeeServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminCreateNewEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCreateBookingRequestServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminCreateBookingRequestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminManageListImportationsServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminManageListImportationsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthLoginServlet</servlet-name>
         <url-pattern>/AuthLoginServlet</url-pattern>
@@ -89,6 +101,18 @@
         <servlet-name>AdminManageListBookingRequestServlet</servlet-name>
         <url-pattern>/AdminManageListBookingRequestServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCreateNewEmployeeServlet</servlet-name>
+        <url-pattern>/AdminCreateNewEmployeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCreateBookingRequestServlet</servlet-name>
+        <url-pattern>/AdminCreateBookingRequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminManageListImportationsServlet</servlet-name>
+        <url-pattern>/AdminManageListImportationsServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -111,7 +135,7 @@
         <param-name>file-upload</param-name>
         <param-value>
             <!--C:\Users\Nguye\Documents\GitHub\BookStore_SWP\src\main\webapp\images-->
-            src\main\webapp\images
+            \src\main\webapp\images
         </param-value>
     </context-param>
     <!--   End Location save Image when add New Book-->

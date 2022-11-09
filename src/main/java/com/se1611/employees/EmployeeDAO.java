@@ -41,7 +41,7 @@ public class EmployeeDAO {
                 if (rs.next()) {
                     int employee_Id = rs.getInt("employee_Id");
                     String fullName = rs.getString("fullName");
-                    int phone = rs.getInt("phone");
+                    String phone = rs.getString("phone");
                     String address = rs.getString("address");
                     String gender = rs.getString("gender");
                     String role = rs.getString("role");
@@ -73,7 +73,8 @@ public class EmployeeDAO {
             con = DBHelper.getConnection();
             if (con != null) {
                 String sql = "Select employee_Id, account_Id, password, fullName, phone, address, gender, role, status_Employee \n"
-                        + "From Employee";
+                        + "From Employee \n"
+                        + "Order by status_Employee";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -81,7 +82,7 @@ public class EmployeeDAO {
                     String account_Id = rs.getString("account_Id");
                     String password = rs.getString("password");
                     String fullName = rs.getString("fullName");
-                    int phone = rs.getInt("phone");
+                    String phone = rs.getString("phone");
                     String address = rs.getString("address");
                     String gender = rs.getString("gender");
                     String role = rs.getString("role");
@@ -127,7 +128,7 @@ public class EmployeeDAO {
                     String account_Id = rs.getString("account_Id");
                     String password = rs.getString("password");
                     String fullName = rs.getString("fullName");
-                    int phone = rs.getInt("phone");
+                    String phone = rs.getString("phone");
                     String address = rs.getString("address");
                     String gender = rs.getString("gender");
                     String role = rs.getString("role");
@@ -179,7 +180,7 @@ public class EmployeeDAO {
         return false;
     }
 
-    public boolean updateEmployeeAccount(int employee_Id,String account_Id, String password, String fullName, int phone, String address, String gender, String role, boolean status_Employee)
+    public boolean updateEmployeeAccount(int employee_Id, String account_Id, String password, String fullName, String phone, String address, String gender, String role, boolean status_Employee)
             throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -193,15 +194,15 @@ public class EmployeeDAO {
                 stm.setString(1, account_Id);
                 stm.setString(2, password);
                 stm.setString(3, fullName);
-                stm.setInt(4, phone);
+                stm.setString(4, phone);
                 stm.setString(5, address);
                 stm.setString(6, gender);
                 stm.setString(7, role);
                 stm.setBoolean(8, status_Employee);
                 stm.setInt(9, employee_Id);
-                
+
                 int rowEffect = stm.executeUpdate();
-                if(rowEffect > 0){
+                if (rowEffect > 0) {
                     return true;
                 } //end if result > 0
             } //end if con is not null
@@ -217,25 +218,25 @@ public class EmployeeDAO {
         return false;
     }
 
-    public boolean addEmployeeAccount(String account_Id, String password, String fullName, int phone, String address, String gender, String role, boolean status_Employee)
-            throws SQLException, ClassNotFoundException, NamingException {
+    public boolean addEmployeeAccount(EmployeeDTO employee)
+            throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "Insert Into Employee(account_Id, password, fullName, phone, address, gender, role, status_Employee)\n"
+                String sql = "Insert Employee(account_Id, password, fullName, phone, address, gender, role, status_Employee)\n"
                         + "Values (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 stm = con.prepareStatement(sql);
-                stm.setString(1, account_Id);
-                stm.setString(2, password);
-                stm.setString(3, fullName);
-                stm.setInt(4, phone);
-                stm.setString(5, address);
-                stm.setString(6, gender);
-                stm.setString(7, role);
-                stm.setBoolean(8, status_Employee);
+                stm.setString(1, employee.getAccount_Id());
+                stm.setString(2, employee.getPassword());
+                stm.setString(3, employee.getFullName());
+                stm.setString(4, employee.getPhone());
+                stm.setString(5, employee.getAddress());
+                stm.setString(6, employee.getGender());
+                stm.setString(7, employee.getRole());
+                stm.setBoolean(8, employee.isStatus_Employee());
 
                 int rowEffect = stm.executeUpdate();
                 if (rowEffect > 0) {
@@ -251,6 +252,35 @@ public class EmployeeDAO {
             }
         }
         return false;
+    }
+
+    public boolean checkAcoountDuplicate(String account_Id) throws SQLException, NamingException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelper.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement("SELECT account_Id FROM Employee WHERE account_Id = ?");
+                stm.setString(1, account_Id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return check;
     }
 
 }

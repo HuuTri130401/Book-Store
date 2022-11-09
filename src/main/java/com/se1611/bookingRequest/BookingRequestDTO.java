@@ -5,6 +5,7 @@
 package com.se1611.bookingRequest;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,7 +17,7 @@ public class BookingRequestDTO {
     private String name_Book;
     private int quantity_Request;
     private float price_Request;
-    private Date date_Request;
+    private LocalDate date_Request;
     private String note;
     private int status;
     private boolean status_Book_Request;
@@ -24,7 +25,7 @@ public class BookingRequestDTO {
     public BookingRequestDTO() {
     }
 
-    public BookingRequestDTO(int request_Id, String image, String name_Book, int quantity_Request, float price_Request, Date date_Request, String note, int status, boolean status_Book_Request) {
+    public BookingRequestDTO(int request_Id, String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, String note, int status, boolean status_Book_Request) {
         this.request_Id = request_Id;
         this.image = image;
         this.name_Book = name_Book;
@@ -36,6 +37,17 @@ public class BookingRequestDTO {
         this.status_Book_Request = status_Book_Request;
     }
 
+    public BookingRequestDTO(String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, String note, int status, boolean status_Book_Request) {
+        this.image = image;
+        this.name_Book = name_Book;
+        this.quantity_Request = quantity_Request;
+        this.price_Request = price_Request;
+        this.date_Request = date_Request;
+        this.note = note;
+        this.status = status;
+        this.status_Book_Request = status_Book_Request;
+    }
+    
     public int getRequest_Id() {
         return request_Id;
     }
@@ -76,11 +88,11 @@ public class BookingRequestDTO {
         this.price_Request = price_Request;
     }
 
-    public Date getDate_Request() {
+    public LocalDate getDate_Request() {
         return date_Request;
     }
 
-    public void setDate_Request(Date date_Request) {
+    public void setDate_Request(LocalDate date_Request) {
         this.date_Request = date_Request;
     }
 

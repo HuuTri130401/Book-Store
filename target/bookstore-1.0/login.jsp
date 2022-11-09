@@ -18,7 +18,7 @@
             <div class='form'>
                 <form action="loginAction" method="POST">
                     <input type="text" placeholder='Username' class='text' id='username' required name="txtAccountId"><br>
-                    <input type="password" placeholder='Password' class='password' name="txtPassword"><br>
+                    <input type="password" placeholder='Password' class='password' required name="txtPassword"><br>
                     <input type="submit" class='btn-login' value="Login" />
                     <input type="reset" class="btn-cancel" value="Cancel" />    
                 </form>

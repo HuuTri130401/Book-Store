@@ -1,4 +1,5 @@
 com\se1611\utils\DBHelper.class
+com\se1611\employees\CreateEmployeeError.class
 com\se1611\utils\PropertiesFileHelper.class
 com\se1611\inventory\InventoryDAO.class
 com\se1611\servlets\AdminUpdateEmployeeServlet.class
@@ -15,8 +16,12 @@ com\se1611\bookingRequest\BookingRequestDTO.class
 com\se1611\servlets\AuthLoginServlet.class
 com\se1611\orders\OrderDAO.class
 com\se1611\bookingRequest\BookingRequestDAO.class
+com\se1611\bookingRequest\BookingRequestError.class
 com\se1611\servlets\InventoryServlet.class
+com\se1611\servlets\AdminCreateBookingRequestServlet.class
 com\se1611\book\BookDAO.class
+com\se1611\servlets\AdminCreateNewEmployeeServlet.class
+com\se1611\servlets\AdminManageListImportationsServlet.class
 com\se1611\request\RequestDAO.class
 com\se1611\inventory\InventoryDTO.class
 com\se1611\request\RequestDTO.class

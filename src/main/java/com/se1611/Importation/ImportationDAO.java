@@ -79,7 +79,6 @@ public class ImportationDAO {
                 count = stm.executeUpdate();
                 if (count == 0) {
                     result = false;
-
                 }
             }
         } finally {
