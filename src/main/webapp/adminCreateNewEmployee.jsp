@@ -3,7 +3,7 @@
 <html lang="en" >
     <head>
         <meta charset="UTF-8">
-        <title>Sign Up Page</title>
+        <title>Create New Employee</title>
         <link href="https://fonts.googleapis.com/css?family=Assistant:400,700" rel="stylesheet">
         <link rel="stylesheet" href="./css/signUpForm.css">
     </head>
