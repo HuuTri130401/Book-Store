@@ -41,8 +41,10 @@
         <div class="seachbox-profile">
             <div class="wraper_searchbox_profile">
                 <div class="search-box">
-                    <input type="text" placeholder="Search...">
-                    <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                    <form action="staffImportationAction?action=searchRequestHistory" method="POST">
+                        <input type="text" placeholder="Search..." name="search" value="${search}">
+                        <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                    </form>
                 </div>
                 <div class="profile_details">
                     <img src="images/admin1.png" alt="image admin">
@@ -53,6 +55,20 @@
                 </div>
             </div>
         </div>
+        <%-- Form Return--%>
+        <c:set var="toast" value="${count}"></c:set>
+        <c:if test="${toast==1}">
+            <div  class="toastx">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-body">
+                    <h3 class="toast-title">Return Success</h3>
+                    <p class="toast-msg"> Book ${nameBook} Has Been Successfully Returned</p>
+                </div>
+            </div>
+        </c:if>
+        <%-- End Form Return--%>
     </div>
 </div>
 
@@ -63,7 +79,7 @@
             <li>
                 <a href="staffNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Notify</span>
+                    <span class="links_name">Notification</span>
                 </a>
             </li>
             <li>
@@ -116,6 +132,7 @@
                     <th>Price</th>
                     <th>Note</th>
                     <th>Date Request</th>
+                    <th>Date Complete</th>
                     <th>Status</th>
                     <th></th>
                 </tr>
@@ -146,6 +163,7 @@
                             <td>${i.request_Price}</td>
                             <td>${i.request_Note}</td>
                             <td>${i.request_Date}</td>
+                            <td>${i.request_Date_Done}</td>
                                 <%-- Set Status Deleted Request--%>
                             <td>
                                 <c:if test="${i.request_Status==0}">
@@ -178,6 +196,10 @@
                                             <%--Form --%>
                                         <form action="staffImportationAction?action=returnRequestDelete"
                                               method="POST">
+                                            <input type="hidden" name="count"
+                                                   value="1"/>
+                                            <input type="hidden" name="nameBook"
+                                                   value="${i.request_Name_Book}"/>
                                             <input type="hidden" name="request_Id"
                                                    value="${i.request_Id}"/>
                                                 <%--Form --%>

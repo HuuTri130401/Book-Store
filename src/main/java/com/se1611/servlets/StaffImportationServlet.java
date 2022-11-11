@@ -2,8 +2,8 @@ package com.se1611.servlets;
 
 import com.se1611.Importation.ImportationDAO;
 import com.se1611.Importation.ImportationDTO;
-import com.se1611.request.RequestDAO;
-import com.se1611.request.RequestDTO;
+import com.se1611.bookingRequest.RequestDAO;
+import com.se1611.bookingRequest.RequestDTO;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -29,6 +29,7 @@ public class StaffImportationServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws NamingException,
             ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String url = INVALID_PAGE;
         //Declace Session
         HttpSession session = request.getSession();
@@ -86,13 +87,16 @@ public class StaffImportationServlet extends HttpServlet {
                     int id_Importation = (listImportation.get(listImportation.size() - 1).getImport_Id()) + 1;
                     long millis = System.currentTimeMillis();
                     Date date_Importation = new Date(millis);
+                    //Get Date Request
+                    Date date_Request = new Date(millis);
                     //Insert Importation
                     if (daoImportation.InsertImportation(employee_Importation, date_Importation, request_Id)) {
                         //Insert Importation Detail
                         if (daoImportation.InsertImportationDetail(id_Importation, quantity_Importation, price_Importation,
-                                total_Importation, noteImportation,book_id_Importation)) {
+                                total_Importation, noteImportation, book_id_Importation)) {
                             //Update Status Request
                             if (daoRequest.UpdateStatusRequest(request_Id, true)) {
+                                daoRequest.UpdateDateRequestDone(request_Id, date_Request);
                                 listImportation = daoImportation.getImportation();
                                 session.setAttribute("listImportation", listImportation);
                                 url = IMPORTATION_PAGE;
@@ -102,17 +106,26 @@ public class StaffImportationServlet extends HttpServlet {
                     break;
                 case "deleteImportation":
                     importation_detail_id = Integer.parseInt(request.getParameter("import_Detail_Id"));
+                    int count = Integer.parseInt(request.getParameter("count"));
+                    String nameBook = request.getParameter("nameBook");
                     if (daoImportation.DeleteImportation(importation_detail_id, false)) {
                         listImportation = daoImportation.getImportation();
                         session.setAttribute("listImportation", listImportation);
+                        request.setAttribute("nameBook", nameBook);
+                        request.setAttribute("count", count);
                         url = IMPORTATION_PAGE;
                     }
                     break;
                 case "deleteRequest":
                     int request_Idx = Integer.parseInt(request.getParameter("request_Id"));
+                    count = Integer.parseInt(request.getParameter("count"));
+                    nameBook = request.getParameter("nameBook");
+                    System.out.println(nameBook.trim());
                     if (daoRequest.DeleteRequest(request_Idx)) {
                         listRequest = daoRequest.getRequest();
                         session.setAttribute("listRequest", listRequest);
+                        request.setAttribute("nameBook", nameBook);
+                        request.setAttribute("count", count);
                         url = REQUEST_PAGE;
                     }
                     break;
@@ -129,20 +142,60 @@ public class StaffImportationServlet extends HttpServlet {
                     break;
                 case "returnRequestDelete":
                     request_Id = Integer.parseInt(request.getParameter("request_Id"));
+                    count = Integer.parseInt(request.getParameter("count"));
+                    nameBook = request.getParameter("nameBook");
                     //Update Status Request
                     if (daoRequest.UpdateStatusRequest(request_Id, true)) {
                         listRequest = daoRequest.getRequest();
                         session.setAttribute("listRequest", listRequest);
-                        url = REQUEST_PAGE;
+                        request.setAttribute("nameBook", nameBook);
+                        request.setAttribute("count", count);
+                        url = REQUEST_HISTORY_PAGE;
                     }
                     break;
                 case "returnImportationDelete":
                     importation_detail_id = Integer.parseInt(request.getParameter("import_Detail_Id"));
+                    count = Integer.parseInt(request.getParameter("count"));
+                    nameBook = request.getParameter("nameBook");
                     if (daoImportation.DeleteImportation(importation_detail_id, true)) {
                         listImportation = daoImportation.getImportation();
                         session.setAttribute("listImportation", listImportation);
-                        url = IMPORTATION_PAGE;
+                        request.setAttribute("nameBook", nameBook);
+                        request.setAttribute("count", count);
+                        url = IMPORTATION_HISTORY_PAGE;
                     }
+                    break;
+                case "searchRequest":
+                    String search = request.getParameter("search");
+                    //Search
+                    listRequest = daoRequest.SearchRequest(search);
+                    session.setAttribute("listRequest", listRequest);
+                    request.setAttribute("search", search);
+                    url = REQUEST_PAGE;
+                    break;
+                case "searchRequestHistory":
+                    search = request.getParameter("search");
+                    //Search
+                    listRequest = daoRequest.SearchRequest(search);
+                    session.setAttribute("listRequest", listRequest);
+                    request.setAttribute("search", search);
+                    url = REQUEST_HISTORY_PAGE;
+                    break;
+                case "searchImportation":
+                    search = request.getParameter("search");
+                    //Search
+                    listImportation = daoImportation.SearchImportation(search);
+                    session.setAttribute("listImportation", listImportation);
+                    request.setAttribute("search", search);
+                    url = IMPORTATION_PAGE;
+                    break;
+                case "searchImportationHistory":
+                    search = request.getParameter("search");
+                    //Search
+                    listImportation = daoImportation.SearchImportation(search);
+                    session.setAttribute("listImportation", listImportation);
+                    request.setAttribute("search", search);
+                    url = IMPORTATION_HISTORY_PAGE;
                     break;
             }
         } catch (SQLException e) {

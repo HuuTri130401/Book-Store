@@ -18,6 +18,7 @@ public class BookingRequestDTO {
     private int quantity_Request;
     private float price_Request;
     private LocalDate date_Request;
+
     private String note;
     private int status;
     private boolean status_Book_Request;
@@ -119,5 +120,5 @@ public class BookingRequestDTO {
     public void setStatus_Book_Request(boolean status_Book_Request) {
         this.status_Book_Request = status_Book_Request;
     }
-    
+
 }

@@ -45,8 +45,10 @@
                 <div class="seachbox-profile">
                     <div class="wraper_searchbox_profile">
                         <div class="search-box">
-                            <input type="text" placeholder="Search...">
-                            <button type="submit"><i class='bx bx-search-alt-2'></i></button>
+                            <form action="sellerBookAction?action=searchBook" method="POST">
+                                <input type="text" placeholder="Search..." name="search" value="${search}">
+                                <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                            </form>
                         </div>
                         <div class="profile_details">
                             <img src="images/admin1.png" alt="image admin">
@@ -68,7 +70,7 @@
                 <li>
                     <a href="sellerNodifyPage">
                         <i class='bx bxs-bell'></i>
-                        <span class="links_name">Notify</span>
+                        <span class="links_name">Notification</span>
                     </a>
                 </li>
                 <li>
@@ -137,16 +139,18 @@
                             <div class="page row">
                                 <div class="col-lg-4"></div>
                                 <div class="col-lg-4 d-flex justify-content-center">
-                                    <a type="submit" href="sellerBookAction?action=bookPage1">1</a>
-                                    <a type="submit" href="sellerBookAction?action=bookPage2">2</a>
-                                    <a type="submit" href="sellerBookAction?action=bookPage3">3</a>
-                                    <a type="submit" href="sellerBookAction?action=bookPage4">4</a>
-                                    <c:if test="${numLastBook>16}">
-                                        <a type="submit" href="sellerBookAction?action=bookPage5">5</a>
-                                    </c:if>
-                                    <c:if test="${numLastBook>20}">
-                                        <a type="submit" href="sellerBookAction?action=bookPage6">6</a>
-                                    </c:if>
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="sellerBookAction?action=bookPage1">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="sellerBookAction?action=bookPage2">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="sellerBookAction?action=bookPage3">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="sellerBookAction?action=bookPage4">4</a></li>
+                                        <c:if test="${numLastBook>16}">
+                                        <li class="page-item"><a class="page-link" href="sellerBookAction?action=bookPage5">5</a></li>
+                                        </c:if>
+                                        <c:if test="${numLastBook>20}">
+                                        <li class="page-item"><a class="page-link" href="sellerBookAction?action=bookPage6">6</a></li>
+                                        </c:if>
+                                    </ul>
                                 </div>
                                 <div class="col-lg-4"></div>
                             </div>

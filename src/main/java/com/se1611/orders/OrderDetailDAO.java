@@ -45,7 +45,7 @@ public class OrderDetailDAO {
         return false;
     }
 
-    public List<OrderDetailDTO> GetInforOrderDetail() throws SQLException, NamingException {
+    public List<OrderDetailDTO> GetInforOrderDetail(int first, int last) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -54,10 +54,14 @@ public class OrderDetailDAO {
             con = DBHelper.getConnection();
             if (con != null) {
                 String sql = "select image, name_Book, quantity_Order_Detail,price_Book,\n" +
-                        "total_Order_Detail,category,b.book_Id as bookId,order_Detail_Id,order_Id\n" +
-                        "from [dbo].[OrderDetail] d  inner join Book b \n" +
-                        "on d.book_Id=b.book_Id";
+                        "                        total_Order_Detail,category,bookId,order_Detail_Id,order_Id\n" +
+                        "                        from (select image, name_Book, quantity_Order_Detail,price_Book,\n" +
+                        "                        total_Order_Detail,category,b.book_Id as bookId,order_Detail_Id,order_Id, ROW_NUMBER()over(Order by [order_Detail_Id]) as Rownum\n" +
+                        "                    from  [dbo].[OrderDetail] d  inner join Book b on d.book_Id=b.book_Id ) as BookData\n" +
+                        "\t\t\t\t\twhere BookData.Rownum between ? and ? ";
                 stm = con.prepareStatement(sql);
+                stm.setInt(1, first);
+                stm.setInt(2, last);
                 rs = stm.executeQuery();
                 listOrder = new ArrayList<>();
                 while (rs.next()) {
@@ -86,7 +90,49 @@ public class OrderDetailDAO {
         }
         return listOrder;
     }
-
+//Search
+public List<OrderDetailDTO> SearchInforOrderDetail(String search) throws SQLException, NamingException {
+    Connection con = null;
+    PreparedStatement stm = null;
+    ResultSet rs = null;
+    List<OrderDetailDTO> listOrder = null;
+    try {
+        con = DBHelper.getConnection();
+        if (con != null) {
+            String sql = "select image, name_Book, quantity_Order_Detail,price_Book,\n" +
+                    "total_Order_Detail,category,b.book_Id as bookId,order_Detail_Id,order_Id\n" +
+                    "from [dbo].[OrderDetail] d  inner join Book b \n" +
+                    "on d.book_Id=b.book_Id where name_Book like ? ";
+            stm = con.prepareStatement(sql);
+            stm.setString(1,"%"+search+"%");
+            rs = stm.executeQuery();
+            listOrder = new ArrayList<>();
+            while (rs.next()) {
+                OrderDetailDTO list=new OrderDetailDTO();
+                list.setOrder_Detail_Id(rs.getInt("order_Detail_Id"));
+                list.setQuantity_Order_Detail(rs.getInt("quantity_Order_Detail"));
+                list.setTotal_Order_Detail(rs.getFloat("total_Order_Detail"));
+                list.setImage_Order(rs.getString("image"));
+                list.setName_Book_Order(rs.getString("name_Book"));
+                list.setCategory_Id(rs.getInt("category"));
+                list.setBook_Id(rs.getInt("bookId"));
+                list.setOrder_Id(rs.getInt("order_Id"));
+                listOrder.add(list);
+            }
+        }
+    } finally {
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+    }
+    return listOrder;
+}
     public boolean updateStatus(int orderId, boolean check) throws SQLException, NamingException {
         String query = "UPDATE [dbo].[Order] SET status=? WHERE order_Id=?";
         try {

@@ -66,7 +66,7 @@
         <li>
             <a href="sellerNodifyPage">
                 <i class='bx bxs-bell'></i>
-                <span class="links_name">Notify</span>
+                <span class="links_name">Notification</span>
             </a>
         </li>
         <li>
