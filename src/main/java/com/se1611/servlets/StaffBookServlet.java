@@ -6,8 +6,8 @@ package com.se1611.servlets;
 
 import com.se1611.book.BookDAO;
 import com.se1611.book.BookDTO;
-import com.se1611.request.RequestDAO;
-import com.se1611.request.RequestDTO;
+import com.se1611.bookingRequest.RequestDAO;
+import com.se1611.bookingRequest.RequestDTO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -49,6 +49,7 @@ public class StaffBookServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String url = INVALID_PAGE;
         // /lấy Acction Để đưa vào switch vô case chuyển page
         String action = request.getParameter("action");
@@ -76,6 +77,15 @@ public class StaffBookServlet extends HttpServlet {
             callCaseBookPage1:
             while (true) {
                 switch (action) {
+                    //Search Book
+                    case "searchBook":
+                        String search=request.getParameter("search");
+                        //Search
+                        listBook=daoBook.SearchBook(1,4,search);
+                        session.setAttribute("listBook", listBook);
+                        request.setAttribute("search",search);
+                        url = STAFF_BOOK_PAGE;
+                        break;
                     //Create Book
                     case "createBook":
                         // Upload Book

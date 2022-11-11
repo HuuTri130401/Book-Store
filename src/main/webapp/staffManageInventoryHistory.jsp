@@ -39,8 +39,10 @@
         <div class="seachbox-profile">
             <div class="wraper_searchbox_profile">
                 <div class="search-box">
-                    <input type="text" placeholder="Search...">
-                    <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                    <form action="staffInventoryAction?action=searchInventoryHistory" method="POST">
+                        <input type="text" placeholder="Search..." name="search" value="${search}">
+                        <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                    </form>
                 </div>
                 <div class="profile_details">
                     <img src="images/admin1.png" alt="image admin">
@@ -51,6 +53,20 @@
                 </div>
             </div>
         </div>
+        <%-- Form Return--%>
+        <c:set var="toast" value="${count}"></c:set>
+        <c:if test="${toast==1}">
+            <div  class="toastx">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-body">
+                    <h3 class="toast-title">Return Success</h3>
+                    <p class="toast-msg"> Book ${nameBook} Has Been Successfully Returned</p>
+                </div>
+            </div>
+        </c:if>
+        <%-- End Form Return--%>
     </div>
 </div>
 
@@ -61,7 +77,7 @@
             <li>
                 <a href="staffNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Notify</span>
+                    <span class="links_name">Notification</span>
                 </a>
             </li>
             <li>
@@ -165,11 +181,15 @@
                                                     <%--Form --%>
                                                 <form action="staffInventoryAction?action=returnInventoryDelete" method="POST">
                                                     <input type="hidden" name="inventory_Detail_Id" value="${i.inventory_Detail_Id}"/>
+                                                    <input type="hidden" name="count"
+                                                           value="1"/>
+                                                    <input type="hidden" name="nameBook"
+                                                           value="${i.inventory_Name_Book}"/>
                                                         <%-- Are You Sure --%>
                                             </div>
                                             <!-- Modal footer -->
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger add">Delete</button>
+                                                <button type="submit" class="btn btn-danger add">Return</button>
                                                 </form>
                                                 <button class="btn btn-warning xclose" data-dismiss="modal">Close
                                                 </button>

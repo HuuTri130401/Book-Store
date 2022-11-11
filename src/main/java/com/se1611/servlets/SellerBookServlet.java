@@ -34,6 +34,7 @@ public class SellerBookServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String url = INVALID_PAGE;
         // /lấy Acction Để đưa vào switch vô case chuyển page
         String action = request.getParameter("action");
@@ -56,6 +57,15 @@ public class SellerBookServlet extends HttpServlet {
         //Switch Case
         try {
             switch (action) {
+                //Search Book
+                case "searchBook":
+                    String search=request.getParameter("search");
+                    //Search
+                    list=dao.SearchBook(1,4,search);
+                    session.setAttribute("listBook", list);
+                    request.setAttribute("search",search);
+                    url = SELLER_BOOK_PAGE;
+                    break;
                 //Page Book
                 case "bookPage1":
                     first = 1;

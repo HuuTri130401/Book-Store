@@ -57,7 +57,7 @@
             <li>
                 <a href="sellerNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Notify</span>
+                    <span class="links_name">Notification</span>
                 </a>
             </li>
             <li>
@@ -93,7 +93,7 @@
         <!-- home-content -->
         <div class="home-content">
             <div class="home-notify">
-                <p class="notify">NOTIFY</p>
+                <p class="notify">NOTIFICATION</p>
                 <div>
                     <p class="text">
                         <strong> 20/11/2022:</strong> Sale 10% các đơn hàng tri ân ngày Nhà Giáo Việt Nam <br/>

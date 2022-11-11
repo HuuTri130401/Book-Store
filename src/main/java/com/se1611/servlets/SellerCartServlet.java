@@ -30,6 +30,7 @@ public class SellerCartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws NamingException,
             ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String url = INVALID_PAGE;
         //Declace Session
         HttpSession session = request.getSession();
@@ -128,10 +129,14 @@ public class SellerCartServlet extends HttpServlet {
                 case "deleteCart":
                     bookId = Integer.parseInt(request.getParameter("bookId"));
                     cartList = (ArrayList<CartDTO>) session.getAttribute("listCart");
+                    int counts =Integer.parseInt(request.getParameter("count"));
+                    String nameBook= request.getParameter("nameBook");
                     for (CartDTO cartDTO1 : cartList) {
                         if (cartDTO1.getBookId() == bookId) {
                             cartList.remove(cartDTO1);
                             session.setAttribute("listCart", cartList);
+                            request.setAttribute("nameBook",nameBook);
+                            request.setAttribute("count",counts);
                             break;
                         }
                     }

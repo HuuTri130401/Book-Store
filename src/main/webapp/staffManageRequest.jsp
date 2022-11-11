@@ -25,7 +25,9 @@
 </head>
 
 <body>
+
 <div class="header">
+
     <div class="header-menu">
         <!-- even menu sidebar -->
         <div class="sidebar-button__logo">
@@ -41,8 +43,10 @@
         <div class="seachbox-profile">
             <div class="wraper_searchbox_profile">
                 <div class="search-box">
-                    <input type="text" placeholder="Search...">
+                    <form action="staffImportationAction?action=searchRequest" method="POST">
+                    <input type="text" placeholder="Search..." name="search" value="${search}">
                     <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                    </form>
                 </div>
                 <div class="profile_details">
                     <img src="images/admin1.png" alt="image admin">
@@ -53,17 +57,33 @@
                 </div>
             </div>
         </div>
+        <%-- Form Delete Request--%>
+        <c:set var="toast" value="${count}"></c:set>
+        <c:if test="${toast==1}">
+        <div  class="toastx">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-body">
+                <h3 class="toast-title">Delete Success</h3>
+                <p class="toast-msg"> Book ${nameBook} Has Been Successfully Deleted</p>
+            </div>
+        </div>
+        </c:if>
+        <%-- End Form Delete Request--%>
     </div>
+
 </div>
 
 <div class="wrapper-body">
+
     <div class="sidebar">
         <!-- link in sidebar -->
         <ul class="nav-links">
             <li>
                 <a href="staffNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Notify</span>
+                    <span class="links_name">Notification</span>
                 </a>
             </li>
             <li>
@@ -129,6 +149,7 @@
                 <th>Price</th>
                 <th>Note</th>
                 <th>Date Request</th>
+                <th>Date Complete</th>
                 <th>Status</th>
                 <th>New Book</th>
                 <th></th>
@@ -158,6 +179,7 @@
                         <td>${i.request_Price}</td>
                         <td>${i.request_Note}</td>
                         <td>${i.request_Date}</td>
+                        <td>${i.request_Date_Done}</td>
                             <%--Set Status Book --%>
                         <td>
                             <c:if test="${i.request_Status==1}">
@@ -207,7 +229,12 @@
                                 <div class="modal-body">
                                         <%--Form --%>
                                     <form action="staffImportationAction?action=deleteRequest"
+
                                           method="POST">
+                                        <input type="hidden" name="count"
+                                               value="1"/>
+                                        <input type="hidden" name="nameBook"
+                                               value="${i.request_Name_Book}"/>
                                         <input type="hidden" name="request_Id"
                                                value="${i.request_Id}"/>
                                             <%--Form --%>
@@ -358,10 +385,13 @@
 
                 </c:if>
             </c:forEach>
+
             </tbody>
         </table>
+
     </div>
 </div>
+
 <script src="./js/script.js"></script>
 
 
@@ -374,7 +404,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
+<%--<script>--%>
+<%--    $(document).ready(function(){--%>
+<%--        $('.toast').toast('show');--%>
+<%--    });--%>
+<%--</script>--%>
 </body>
 
 </html>

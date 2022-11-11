@@ -42,8 +42,10 @@
         <div class="seachbox-profile">
             <div class="wraper_searchbox_profile">
                 <div class="search-box">
-                    <input type="text" placeholder="Search...">
-                    <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                    <form action="sellerOrderAction?action=SearchOrder" method="POST">
+                        <input type="text" placeholder="Search..." name="search" value="${search}">
+                        <button type='submit'><i class='bx bx-search-alt-2'></i></button>
+                    </form>
                 </div>
                 <div class="profile_details">
                     <img src="images/admin1.png" alt="image admin">
@@ -54,7 +56,22 @@
                 </div>
             </div>
         </div>
+        <%-- Form Delete Request--%>
+        <c:set var="toast" value="${count}"></c:set>
+        <c:if test="${toast==1}">
+            <div  class="toastx">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-body">
+                    <h3 class="toast-title">Delete Success</h3>
+                    <p class="toast-msg"> Order ${orderId} Has Been Successfully Deleted</p>
+                </div>
+            </div>
+        </c:if>
+        <%-- End Form Delete Request--%>
     </div>
+
 </div>
 
 <div class="wrapper-body">
@@ -64,7 +81,7 @@
             <li>
                 <a href="sellerNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Notify</span>
+                    <span class="links_name">Notification</span>
                 </a>
             </li>
             <li>
@@ -180,6 +197,10 @@
                                         <%--Form --%>
                                     <form action="sellerOrderAction?action=deleteOrder" method="POST">
                                         <input type="hidden" name="orderId" value="${i.order_Id}"/>
+                                        <input type="hidden" name="count"
+                                               value="1"/>
+                                        <input type="hidden" name="orderId"
+                                               value="${i.order_Id}"/>
                                             <%-- Are You Sure --%>
                                 </div>
                                 <!-- Modal footer -->
@@ -207,6 +228,10 @@
                                         <%--Form --%>
                                     <form action="sellerCartAction?action=addToCart" method="POST">
                                         <input type="hidden" name="orderId" value="${i.order_Id}"/>
+                                        <input type="hidden" name="count"
+                                               value="1"/>
+                                        <input type="hidden" name="orderId"
+                                               value="${i.order_Id}"/>
                                             <%-- Are You Sure --%>
                                 </div>
                                 <!-- Modal footer -->
@@ -224,7 +249,23 @@
                 </div>
             </c:if>
         </c:forEach>
-
+        <%--Start Page--%>
+        <div class="page row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4 d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="sellerOrderAction?action=getOrder">1</a></li>
+                    <c:if test="${numLastOrder>4}">
+                        <li class="page-item"><a class="page-link" href="sellerOrderAction?action=getOrder2">2</a></li>
+                    </c:if>
+                    <c:if test="${numLastOrder>8}">
+                        <li class="page-item"><a class="page-link" href="sellerOrderAction?action=getOrder3">3</a></li>
+                    </c:if>
+                </ul>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+        <%-- End Page--%>
     </div>
 
 </div>

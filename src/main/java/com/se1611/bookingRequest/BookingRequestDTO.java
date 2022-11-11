@@ -19,7 +19,11 @@ public class BookingRequestDTO {
     private int quantity_Request;
     private float price_Request;
     private LocalDate date_Request;
+<<<<<<< HEAD
     private LocalDate date_Request_Done;
+=======
+
+>>>>>>> origin/vu
     private String note;
     private int status;
     private boolean status_Book_Request;

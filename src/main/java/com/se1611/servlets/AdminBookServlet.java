@@ -56,6 +56,15 @@ public class AdminBookServlet extends HttpServlet {
         //Switch Case
         try {
             switch (action) {
+                //Search Book
+                case "searchBook":
+                    String search=request.getParameter("search");
+                    //Search
+                    list=dao.SearchBook(1,4,search);
+                    session.setAttribute("listBook", list);
+                    request.setAttribute("search",search);
+                    url = ADMIN_BOOK_PAGE;
+                    break;
                 //Page Book
                 case "bookPage1":
                     first = 1;

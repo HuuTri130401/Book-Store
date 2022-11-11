@@ -25,6 +25,7 @@ public class InventoryServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws NamingException,
             ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String url = INVALID_PAGE;
         //Declace Session
         HttpSession session = request.getSession();
@@ -65,18 +66,26 @@ public class InventoryServlet extends HttpServlet {
                     break;
                 case "deleteInventory":
                     inventory_detail_id = Integer.parseInt(request.getParameter("inventory_Detail_Id"));
+                    int count =Integer.parseInt(request.getParameter("count"));
+                    String nameBook= request.getParameter("nameBook");
                     if(dao.DeleteInventory(inventory_detail_id,false)){
                         listInventory = dao.GetInventory();
                         session.setAttribute("listInventory", listInventory);
+                        request.setAttribute("nameBook",nameBook);
+                        request.setAttribute("count",count);
                         url = INVENTORY_PAGE;
                     }
                     break;
                 case "returnInventoryDelete":
                     inventory_detail_id = Integer.parseInt(request.getParameter("inventory_Detail_Id"));
+                    count =Integer.parseInt(request.getParameter("count"));
+                    nameBook= request.getParameter("nameBook");
                     if(dao.DeleteInventory(inventory_detail_id,true)){
                         listInventory = dao.GetInventory();
                         session.setAttribute("listInventory", listInventory);
-                        url = INVENTORY_PAGE;
+                        request.setAttribute("nameBook",nameBook);
+                        request.setAttribute("count",count);
+                        url = INVENTORY_HISTORY_PAGE;
                     }
                     break;
 
@@ -84,6 +93,22 @@ public class InventoryServlet extends HttpServlet {
                     listInventory = dao.GetInventory();
                     session.setAttribute("listInventory", listInventory);
                     url = INVENTORY_HISTORY_PAGE;
+                    break;
+                case"searchInventory":
+                    String search=request.getParameter("search");
+                    //Search
+                    listInventory=dao.SearchInventory(search);
+                    session.setAttribute("listInventory", listInventory);
+                    request.setAttribute("search",search);
+                    url = INVENTORY_PAGE;
+                    break;
+                case"searchInventoryHistory":
+                   search=request.getParameter("search");
+                    //Search
+                    listInventory=dao.SearchInventory(search);
+                    session.setAttribute("listInventory", listInventory);
+                    request.setAttribute("search",search);
+                    url = INVENTORY_PAGE;
                     break;
             }
         } catch (SQLException e) {

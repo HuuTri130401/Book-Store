@@ -51,7 +51,22 @@
                 </div>
             </div>
         </div>
+        <%-- Form Delete Request--%>
+        <c:set var="toast" value="${count}"></c:set>
+        <c:if test="${toast==1}">
+            <div  class="toastx">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-body">
+                    <h3 class="toast-title">Delete Success</h3>
+                    <p class="toast-msg"> Book ${nameBook} Has Been Successfully Deleted</p>
+                </div>
+            </div>
+        </c:if>
+        <%-- End Form Delete Request--%>
     </div>
+
 </div>
 
 <div class="wrapper-body">
@@ -61,7 +76,7 @@
             <li>
                 <a href="sellerNodifyPage">
                     <i class='bx bxs-bell'></i>
-                    <span class="links_name">Notify</span>
+                    <span class="links_name">Notification</span>
                 </a>
             </li>
             <li>
@@ -147,6 +162,10 @@
                             <div class="modal-body">
                                     <%--Form --%>
                                 <form action="sellerCartAction?action=deleteCart" method="POST">
+                                    <input type="hidden" name="count"
+                                           value="1"/>
+                                    <input type="hidden" name="nameBook"
+                                           value="${x.bookName}"/>
                                     <input type="hidden" name="bookId" value="${x.bookId}"/>
                                         <%-- Are You Sure --%>
                             </div>
