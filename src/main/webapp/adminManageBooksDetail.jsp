@@ -118,50 +118,35 @@
                 <c:forEach items="${listBook}" var="b">
                     <c:set var="bookId" value="${bookIdServlet}"></c:set>
                     <c:if test="${b.book_Id==bookId}">
-
-                        <<<<<<< HEAD
-                        <%--                            Item Book Need Show--%>
+                         <%--  Item Book Need Show--%>
                         <div class="itemList row">
-                            <img src="<c:url value="/images/${b.image_Book}"/>" class="rounded"/><br/>
+                            <div class="border col-lg-4">
+                                <img src="<c:url value="/images/${b.image_Book}"/>" class="rounded"/><br/>
+                            </div>
                             <div class="item col-lg-5">
                                 <strong class="name">${b.name}</strong>
                                 <p class="price">
-                                    <fmt:formatNumber value="${b.price_Book}" type="number"/>
+                                    <fmt:formatNumber type="number" value="${b.price_Book}" />
                                     <small style="text-decoration:underline">đ</small>
                                 <p><br/>
                                 <p class="quantity">Quantity: ${b.quantity_Book}</p>
                                 <p class="author">Author: <u>${b.author}</u></p>
                                 <p class="yearPublic">Year Of Public: ${b.year_Of_Public}</p>
-                                =======
-                                <%--                            Item Book Need Show--%>
-                                <div class="itemList row">
-                                    <div class="border col-lg-4">
-                                        <img src="<c:url value="/images/${b.image_Book}"/>" class="rounded"/><br/>
-                                    </div>
-                                    <div class="item col-lg-5">
-                                        <strong class="name">${b.name}</strong>
-                                        <p class="price">
-                                            <fmt:formatNumber type="number" value="${b.price_Book}" />
-                                            <small style="text-decoration:underline">đ</small>
-                                        <p><br/>
-                                        <p class="quantity">Quantity: ${b.quantity_Book}</p>
-                                        <p class="author">Author: <u>${b.author}</u></p>
-                                        <p class="yearPublic">Year Of Public: ${b.year_Of_Public}</p>
-                                    </div>
-                                    >>>>>>> origin/vu
-                                </div>
                             </div>
-                            <div class="boxDescription">
-                                <div class="description">
-                                    <strong>Information Detail</strong>
-                                    <p class="text">${b.descriptionBook}</p>
-                                </div>
-                            </div>
-                            <%--                            End Show Item Book--%>
-                        </c:if>
-                    </c:forEach>
-                </div>
-            </div>
-            <script src="./js/script.js"></script>
-    </body>
+                            >>>>>>> origin/vu
+                        </div>
+                    </div>
+                    <div class="boxDescription">
+                        <div class="description">
+                            <strong>Information Detail</strong>
+                            <p class="text">${b.descriptionBook}</p>
+                        </div>
+                    </div>
+                    <%--                            End Show Item Book--%>
+                </c:if>
+            </c:forEach>
+        </div>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
 </html>

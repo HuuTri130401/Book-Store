@@ -34,8 +34,11 @@
                 <div class="seachbox-profile">
                     <div class="wraper_searchbox_profile">
                         <div class="search-box">
-                            <input type="text" placeholder="Search...">
-                            <button type="submit"><i class='bx bx-search-alt-2'></i></button>
+                            <!--SEARCH-BOOK-REQUEST-->
+                            <form action="adminShowListBookingRequest">
+                                <input type="text" placeholder="Search..." name="txtSearch" value="${param.txtSearch}">
+                                <button type="submit"><i class='bx bx-search-alt-2'></i></button>
+                            </form>
                         </div>
                         <div class="profile_details">
                             <img src="./images/admin1.png" alt="image admin">
@@ -49,59 +52,59 @@
             </div>
         </div>
 
-            <div class="sidebar">
-                <!-- link in sidebar -->
-                <ul class="nav-links">
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-home'></i>
-                            <span class="links_name">Overview</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./adminManageInforDashboard">
-                            <i class='bx bx-grid-alt'></i>
-                            <span class="links_name">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./adminShowListEmployees">
-                            <i class='bx bx-user'></i>
-                            <span class="links_name">Employees</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./adminShowListBookingRequest">
-                            <i class='bx bx-import'></i>
-                            <span class="links_name">Booking Request</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a type="submit" href="adminBookAction?action=bookPage1">
-                            <i class='bx bx-book'></i>
-                            <span class="links_name">Books</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./adminShowListImportations">
-                            <i class='bx bxs-report'></i>
-                            <span class="links_name">Importation</span>
-                        </a>
-                    </li>
-<!--                    <li>
-                        <a href="./adminShowListOrders">
-                            <i class='bx bx-list-ol'></i>
-                            <span class="links_name">Order</span>
-                        </a>
-                    </li>-->
-                    <li>
-                        <a href="./logoutAction">
-                            <i class='bx bx-log-out'></i>
-                            <span class="links_name">Log out</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div class="sidebar">
+            <!-- link in sidebar -->
+            <ul class="nav-links">
+                <li>
+                    <a href="#">
+                        <i class='bx bx-home'></i>
+                        <span class="links_name">Overview</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adminManageInforDashboard">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adminShowListEmployees">
+                        <i class='bx bx-user'></i>
+                        <span class="links_name">Employees</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adminShowListBookingRequest">
+                        <i class='bx bx-import'></i>
+                        <span class="links_name">Booking Request</span>
+                    </a>
+                </li>
+                <li>
+                    <a type="submit" href="adminBookAction?action=bookPage1">
+                        <i class='bx bx-book'></i>
+                        <span class="links_name">Books</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adminShowListImportations">
+                        <i class='bx bxs-report'></i>
+                        <span class="links_name">Importation</span>
+                    </a>
+                </li>
+                <!--                    <li>
+                                        <a href="./adminShowListOrders">
+                                            <i class='bx bx-list-ol'></i>
+                                            <span class="links_name">Order</span>
+                                        </a>
+                                    </li>-->
+                <li>
+                    <a href="./logoutAction">
+                        <i class='bx bx-log-out'></i>
+                        <span class="links_name">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
         <!-- home content -->
         <div class="home-section">
@@ -129,6 +132,7 @@
                                         <th>Quantity</th>
                                         <th>Price</th>
                                         <th>Date</th>
+                                        <th>Date Complete</th>
                                         <th>Note</th>
                                         <th>Status</th>
                                         <th>Status_Book</th>
@@ -158,6 +162,9 @@
                                             </td>
                                             <td>
                                                 ${bookRequestDTO.date_Request}
+                                            </td>
+                                            <td>
+                                                ${bookRequestDTO.date_Request_Done}
                                             </td>
                                             <td>
                                                 ${bookRequestDTO.note}
@@ -207,6 +214,13 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                        </c:if>
+                        <c:if test="${empty listBookingRequest}">
+                            <h2 style="text-align: center;
+                                align-items: center;
+                                color: red">
+                                CAN NOT FIND THIS RECORD !       
+                            </h2>
                         </c:if>
                     </div>
                 </div>

@@ -14,6 +14,11 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
+    public OrderDTO(Date date_To_Order, Float total_Order) {
+        this.date_To_Order = date_To_Order;
+        this.total_Order = total_Order;
+    }
+
     public OrderDTO(int order_Id, int employee_Id, Date date_To_Order, int quantity_Order, Float total_Order) {
         this.order_Id = order_Id;
         this.employee_Id = employee_Id;

@@ -38,7 +38,6 @@ public class AdminManageListEmployeesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //HttpSession session = request.getSession(false);
         ServletContext context = request.getServletContext();
         Properties siteMap = (Properties) context.getAttribute("SITE_MAP");
         String url = (String) siteMap.get(RESULT);
@@ -47,7 +46,6 @@ public class AdminManageListEmployeesServlet extends HttpServlet {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             List<EmployeeDTO> listEmployees = employeeDAO.getListEmployee();
             if (!listEmployees.isEmpty()) {
-                //listEmployees = employeeDAO.getListEmployee();
                 request.setAttribute("LIST_EMPLOYEES", listEmployees);
             } 
             if (searchValue != null && searchValue.trim().length() > 0) {

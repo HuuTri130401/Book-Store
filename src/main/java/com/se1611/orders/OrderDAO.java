@@ -8,6 +8,7 @@ import com.se1611.inventory.InventoryDTO;
 import com.se1611.utils.DBHelper;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -17,6 +18,49 @@ import javax.naming.NamingException;
  * @author Admin
  */
 public class OrderDAO {
+
+    public List<OrderDTO> getTotalOrderIn12Months()
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<OrderDTO> listTotalOrder = new ArrayList<>();
+
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "SELECT MONTH(date_To_Oder), total_Order\n"
+                        + "FROM [Order]\n"
+                        + "Where Year(GETDATE()) = Year(date_To_Oder)\n"
+                        + "GROUP BY MONTH(date_To_Oder), total_Order";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    Date month = rs.getDate("date_To_Oder");
+                    float totalOrder = rs.getFloat("total_Order");
+                    OrderDTO orderDTO = new OrderDTO(month, totalOrder);
+                    listTotalOrder.add(orderDTO);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return listTotalOrder;
+    }
+    
+    public static void main(String[] args) 
+            throws SQLException, NamingException {
+        OrderDAO dao = new OrderDAO();
+        System.out.println(dao.getTotalOrderIn12Months());
+    }
 
     public float getTotalOrderOfBook()
             throws SQLException, NamingException {
@@ -51,6 +95,7 @@ public class OrderDAO {
         }
         return totalOrderOfBook;
     }
+
     private Connection con = null;
     private PreparedStatement stm = null;
     private ResultSet rs = null;
@@ -66,6 +111,7 @@ public class OrderDAO {
             con.close();
         }
     }
+
     public List<OrderDTO> GetInforOrder() throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -74,13 +120,13 @@ public class OrderDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status\n" +
-                        "from [dbo].[Order] o inner join Employee e on e.employee_Id=o.employee_Id";
+                String sql = "select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status\n"
+                        + "from [dbo].[Order] o inner join Employee e on e.employee_Id=o.employee_Id";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 listOrder = new ArrayList<>();
                 while (rs.next()) {
-                    OrderDTO list=new OrderDTO();
+                    OrderDTO list = new OrderDTO();
                     list.setOrder_Id(rs.getInt("order_Id"));
                     list.setQuantity_Order(rs.getInt("quantity_Order"));
                     list.setTotal_Order(rs.getFloat("total_Order"));
@@ -103,6 +149,7 @@ public class OrderDAO {
         }
         return listOrder;
     }
+
     public boolean createOrder(OrderDTO orderDTO) throws SQLException, ClassNotFoundException, NamingException {
         try {
             con = DBHelper.getConnection();

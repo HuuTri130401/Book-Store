@@ -87,12 +87,12 @@
                             <span class="links_name">Importation</span>
                         </a>
                     </li>
-<!--                    <li>
-                        <a href="./adminShowListOrders">
-                            <i class='bx bx-list-ol'></i>
-                            <span class="links_name">Order</span>
-                        </a>
-                    </li>-->
+                    <!--                    <li>
+                                            <a href="./adminShowListOrders">
+                                                <i class='bx bx-list-ol'></i>
+                                                <span class="links_name">Order</span>
+                                            </a>
+                                        </li>-->
                     <li>
                         <a href="./logoutAction">
                             <i class='bx bx-log-out'></i>
@@ -137,7 +137,7 @@
                         <div class="box">
                             <div class="left-side">
                                 <div class="boxtopic">Total Inventory</div>
-                                <div class="number"  style="color: #bcd214;">${totalOfQuantityInventoryCurrentYear}</div>
+                                <div class="number"  style="color: #bcd214;">${totalOfQuantityInventoryCurrentYear} Book(s)</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box3'></i>
                                     <span class="text">Inventory Current Year</span>
@@ -148,7 +148,7 @@
                         <c:set var="listMostInventoryBook" value="${requestScope.MOST_INVENTORY_BOOK}"/>
                         <div class="box">
                             <div class="left-side">
-                                <div class="boxtopic">Most Inventory Book</div>
+                                <div class="boxtopic">Most Remaining Books</div>
                                 <c:forEach var="bookDTO" items="${listMostInventoryBook}">
                                     <div class="number" style="color: #ed6b15;">${bookDTO.quantity_Book} Book(s)</div>
                                     <div class="name-product">Name: ${bookDTO.name}</div>
@@ -160,10 +160,59 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- add chart -->
+                    <div class="graphBox">
+                        <div class="boxShow">
+                            <canvas id="myChart" style="max-height: 440px; width:100%"></canvas>
+<!--                            <script>
+                                //var xValues = [${requestScope.LIST_SEMESTER_STRING}];
+                                //const ctx = document.getElementById('myChart').getContext('2d');
+                                //const myChart = new Chart(ctx, {
+                                
+                                //var xValues = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                                var xValues = [120, 109, 30, 50, 200, -200, 120, 190, 300, 300, 200, 300];
+                                var yValues = [120, 109, 30, 50, 200, -200, 120, 190, 300, 300, 200, 300];
+                                
+                                new Chart("myChart", {
+                                    type: "bar",
+                                    data: {
+                                        labels: xValues,
+                                        datasets: [{
+                                                label: '# Statistics For 12 Months',
+                                                data: yValues,
+                                                backgroundColor: [
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                    '#267871',
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                    },
+                                    options: {
+                                        legend: {display: true},
+                                        responsive: true,
+                                    }
+                                });
+                            </script>-->
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
         <script src="./js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+        <script src="./js/my_chart.js"></script>
     </body>
 
 </html>

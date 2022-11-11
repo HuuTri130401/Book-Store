@@ -24,8 +24,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Admin
  */
 public class AdminManageListBookingRequestServlet extends HttpServlet {
-    
+
     private final String RESULT_BOOKING_REQUEST = "adminManageListBookingRequestPage";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,12 +42,18 @@ public class AdminManageListBookingRequestServlet extends HttpServlet {
         ServletContext context = request.getServletContext();
         Properties siteMap = (Properties) context.getAttribute("SITE_MAP");
         String url = (String) siteMap.get((RESULT_BOOKING_REQUEST));
-        
+
         try {
+            String searchValue = request.getParameter("txtSearch");
             BookingRequestDAO bookingRequestDAO = new BookingRequestDAO();
-            List<BookingRequestDTO> listBookingRequestDTO = bookingRequestDAO.getListBookingRequest();
-            if(!listBookingRequestDTO.isEmpty()){
-                request.setAttribute("LIST_BOOKING_REQUESTS", listBookingRequestDTO);
+
+            List<BookingRequestDTO> listBookingRequest = bookingRequestDAO.getListBookingRequest();
+            if (!listBookingRequest.isEmpty()) {
+                request.setAttribute("LIST_BOOKING_REQUESTS", listBookingRequest);
+            }
+            if (searchValue != null && searchValue.trim().length() > 0) {
+                listBookingRequest = bookingRequestDAO.searchBookRequest(searchValue);
+                request.setAttribute("LIST_BOOKING_REQUESTS", listBookingRequest);
             }
         } catch (SQLException e) {
             log("AdminManageListBookingRequestServlet_SQL_ " + e.getMessage());
@@ -56,7 +63,16 @@ public class AdminManageListBookingRequestServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
-        
+
+    }
+    
+    public static void main(String[] args)
+            throws NamingException, SQLException {
+        BookingRequestDAO bookingRequestDAO = new BookingRequestDAO();
+        List<BookingRequestDTO> listBookingRequest = bookingRequestDAO.getListBookingRequest();
+        if (!listBookingRequest.isEmpty()) {
+            System.out.println(listBookingRequest);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

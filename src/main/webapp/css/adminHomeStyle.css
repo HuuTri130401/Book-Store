@@ -296,6 +296,26 @@ body {
     font-size: 1.2rem;
 }
 
+/* CSS charts */
+.home-section .home-content .graphBox {
+    position: relative;
+    width: 100%;
+    padding: 20px 20px 0 20px;
+    align-items: center;
+}
+
+.home-section .home-content .graphBox .boxShow {
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.home-section .home-content .graphBox .boxShow #myChart {
+    height: 90%;
+}
+
 @media (max-width: 1216px) {
     .sidebar {
         width: 6rem;

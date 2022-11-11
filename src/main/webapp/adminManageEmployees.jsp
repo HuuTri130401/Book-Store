@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="./css/adminManageEmployeesStyle.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
     <body>
@@ -47,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -90,12 +92,12 @@
                             <span class="links_name">Importation</span>
                         </a>
                     </li>
-<!--                    <li>
-                        <a href="./adminShowListOrders">
-                            <i class='bx bx-list-ol'></i>
-                            <span class="links_name">Order</span>
-                        </a>
-                    </li>-->
+                    <!--                    <li>
+                                            <a href="./adminShowListOrders">
+                                                <i class='bx bx-list-ol'></i>
+                                                <span class="links_name">Order</span>
+                                            </a>
+                                        </li>-->
                     <li>
                         <a href="./logoutAction">
                             <i class='bx bx-log-out'></i>
@@ -117,7 +119,32 @@
                             </a>
                         </div>
                         <hr style="width: 25.7rem;"/>
-
+                        <%-- Show message after update--%>
+                        <c:set var="updateEmpMsg" value="${requestScope.UPDATE_EMPLOYEE_MSG}"/>
+                        <c:if test="${not empty updateEmpMsg}">
+                            <div  class="toastx">
+                                <div class="toast-icon">
+                                    <i class="fa-sharp fa-solid fa-circle-check"></i>
+                                </div>
+                                <div class="toast-body">
+                                    <h3 class="toast-title">Successfully</h3>
+                                    <p class="toast-msg">${updateEmpMsg}</p>
+                                </div>
+                            </div>
+                        </c:if>
+                        <%-- Show message after inactive--%>
+                        <c:set var="inActiveEmpMsg" value="${requestScope.DELETE_EMPLOYEE_MSG}"/>
+                        <c:if test="${not empty inActiveEmpMsg}">
+                            <div  class="toastx-inactive">
+                                <div class="toast-icon-inactive">
+                                    <i class="fa-sharp fa-solid fa-exclamation"></i> 
+                                </div>
+                                <div class="toast-body-inactive">
+                                    <h3 class="toast-title-inactive">Successfully</h3>
+                                    <p class="toast-msg-inactive">${inActiveEmpMsg}</p>
+                                </div>
+                            </div>
+                        </c:if>
                         <!--Show msg after Insert-->
                         <c:set var="insertEmpMsg" value="${requestScope.INSERT_EMPLOYEE_MSG}"/>
                         <c:if test="${not empty insertEmpMsg}">
@@ -125,16 +152,15 @@
                         </c:if>
 
                         <!--Show msg after Delete-->
-                        <c:set var="inActiveEmpMsg" value="${requestScope.DELETE_EMPLOYEE_MSG}"/>
+                        <%-- <c:set var="inActiveEmpMsg" value="${requestScope.DELETE_EMPLOYEE_MSG}"/>
                         <c:if test="${not empty inActiveEmpMsg}">
                             <h3 class='text' style="color: red" >${inActiveEmpMsg}</h3>
                         </c:if>   
-
-                        <!--Show msg after Update-->
+                        Show msg after Update
                         <c:set var="updateEmpMsg" value="${requestScope.UPDATE_EMPLOYEE_MSG}"/>
                         <c:if test="${not empty updateEmpMsg}">
                             <h3 class='text' style="color: green" >${updateEmpMsg}</h3>
-                        </c:if>   
+                        </c:if>   --%>
 
                         <h2 id="nameTable">LIST OF EMPLOYEES</h2>
                         <div class="tableEmployee">
@@ -199,7 +225,7 @@
                                                 </td>
                                                 <td>
                                                     <input 
-                                                        <c:if test="${employeeDTO.role eq 'admin'}">disabled style="color: red; font-weight:600;"</c:if>
+                                                        <c:if test="${employeeDTO.role eq 'admin'}">disabled style="background: #4a9a4a; color: #333; font-weight:600;"</c:if>
                                                             class="buttonActionUpdate" type="submit" value="Update"
                                                             />
                                                     </td>
@@ -208,7 +234,7 @@
                                                         <c:param name="employee_Id" value="${employeeDTO.employee_Id}"/>
                                                     </c:url>
                                                     <a  
-                                                        <c:if test="${employeeDTO.role eq 'admin'}"> style="color: green; pointer-events:none; font-weight:600;"</c:if>
+                                                        <c:if test="${employeeDTO.role eq 'admin'}"> style="background: #d04141; color: #333; pointer-events:none; font-weight:600;"</c:if>
                                                         class="buttonActionDelete" href=${urlRewriting}>Delete
                                                     </a>
                                                 </td>
@@ -217,12 +243,11 @@
                                     </c:forEach>
                                     </tbody>
                                 </table>
-
                             </c:if>
                             <c:if test="${empty listEmployees}">
                                 <h2 style="text-align: center;
-                                           align-items: center;
-                                           color: red">
+                                    align-items: center;
+                                    color: red">
                                     CAN NOT FIND THIS RECORD !       
                                 </h2>
                             </c:if>
