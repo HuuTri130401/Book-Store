@@ -31,7 +31,6 @@
                                 <td>Status Of Book</td>
                                 <td><input type="radio" name="radioStatusBook" class="radio" value="New" checked="checked">New<br/></td>
                                 <td><input type="radio" name="radioStatusBook" class="radio" value="Old">Old<br/></td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>

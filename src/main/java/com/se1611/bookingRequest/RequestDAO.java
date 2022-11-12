@@ -18,13 +18,8 @@ public class RequestDAO {
             con = DBHelper.getConnection();
             if (con != null) {
                 String sql = "select request_Id,image, name_Book,quantity_Request,price_Request,date_Request,note,status," +
-<<<<<<< HEAD:src/main/java/com/se1611/request/RequestDAO.java
-                        " status_Book_Request\n" +
+                        " status_Book_Request, date_Request_Done\n" +
                         " from BookingRequest";
-=======
-                        "status_Book_Request,date_Request_Done\n" +
-                        "                        from BookingRequest";
->>>>>>> origin/vu:src/main/java/com/se1611/bookingRequest/RequestDAO.java
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 listRequest = new ArrayList<>();

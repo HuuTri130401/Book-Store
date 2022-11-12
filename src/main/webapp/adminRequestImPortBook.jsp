@@ -136,7 +136,7 @@
                                         <th>Note</th>
                                         <th>Status</th>
                                         <th>Status_Book</th>
-                                        <th>Update</th>
+                                        <!--<th>Update</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -207,9 +207,9 @@
                                                     </option>
                                                 </select>
                                             </td>
-                                            <td>
+<!--                                            <td>
                                                 <input class="buttonActionUpdate" type="submit" value="Update"/>
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </c:forEach>
                                 </tbody>
