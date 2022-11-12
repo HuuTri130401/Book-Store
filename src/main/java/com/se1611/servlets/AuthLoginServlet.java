@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 public class AuthLoginServlet extends HttpServlet {
 
     private final String INVALID_PAGE = "invalidPage";
+    private final String LOGIN_PAGE = "loginPage";
     private final String ADMIN_MANAGE_BOOKS_PAGE = "adminManageInforDashboard";
     private final String STAFF_NODIFY_PAGE = "staffNodifyPage";
     private final String SELLER_NODIFY_PAGE = "sellerNodifyPage";
@@ -41,11 +42,13 @@ public class AuthLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = INVALID_PAGE;
+        String url = LOGIN_PAGE;
         //get request parameters
+        HttpSession sessionLoginFailed=request.getSession();
         String userId = request.getParameter("txtAccountId");
         String password = request.getParameter("txtPassword");
-
+        int count = Integer.parseInt(request.getParameter("countLogin"));
+        sessionLoginFailed.setAttribute("countLogin",count);
         try {
             EmployeeDAO dao = new EmployeeDAO();
             EmployeeDTO validEmployee = dao.getAccountByAccoutIdAndPassword(userId, password);

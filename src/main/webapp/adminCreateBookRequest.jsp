@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en" >
     <head>
@@ -29,8 +30,8 @@
                             </tr>
                             <tr>
                                 <td>Status Of Book</td>
-                                <td><input type="radio" name="radioStatusBook" class="radio" value="New" checked="checked">New<br/></td>
-                                <td><input type="radio" name="radioStatusBook" class="radio" value="Old">Old<br/></td>
+                                <td><input type="radio" name="radioStatusBook" class="radio" value="true" checked="checked">New<br/></td>
+                                <td><input type="radio" name="radioStatusBook" class="radio" value="false">Old<br/></td>
                                 <td></td>
                             </tr>
                         </tbody>

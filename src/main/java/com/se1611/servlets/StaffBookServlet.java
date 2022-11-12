@@ -94,6 +94,7 @@ public class StaffBookServlet extends HttpServlet {
 
                         //Get Parameter Book
                         String nameBook =request.getParameter("nameBook");
+                        System.out.println(nameBook);
                         String author = request.getParameter("author");
                         int quantity = Integer.parseInt(request.getParameter("quantity"));
                         Float price = Float.parseFloat(request.getParameter("price"));
@@ -281,6 +282,7 @@ public class StaffBookServlet extends HttpServlet {
                         break;
                     // Page Detail Book khi click vào từng book
                     case "bookDetail":
+
                         //Check Status Book to display button
                         String nameBookDetail = request.getParameter("bookName");
                         checkStatusBook(nameBookDetail, listRequest, request);
@@ -294,6 +296,7 @@ public class StaffBookServlet extends HttpServlet {
                         url = STAFF_BOOK_DETAIL_PAGE;
                         break;
                     case "bookDetailRequest":
+
                         //Get Name Book
                         String nameBookRequest = request.getParameter("bookNameRequest");
                         checkStatusBook(nameBookRequest, listRequest, request);

@@ -3,6 +3,7 @@ body {
   font-family: Assistant, sans-serif;
   display: flex;
   min-height: 90vh;
+  position: relative;
 }
 
 .login {
@@ -100,4 +101,28 @@ body {
   background: white;
   color: dimgray;
   transition: 0.5s;
+}
+.toast{
+  margin-top: 18%;
+  margin-left: 41%;
+  align-items: center;
+  border-radius: 15px;
+  background: #ffff;
+  width: 280px;
+  height: 140px;
+  position: absolute;
+}
+.title{
+  margin-top: 5px;
+font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+}
+.content{
+font-size: 15px;
+  text-align: center;
+}
+.close{
+margin-right: 48%;
+  margin-bottom: 20px;
 }

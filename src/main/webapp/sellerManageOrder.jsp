@@ -140,7 +140,7 @@
                     <div class="itemOrder">
                         <p id="id"> Order: ${i.order_Id}</p>
                         <div><p id="date">Date: ${i.date_To_Order}</p></div>
-                        <div><p id="fullname">Implementer: ${i.fullname}</p></div>
+                        <div><p id="fullname">Creator: ${i.fullname}</p></div>
                             <%-- Start button Delete Cart--%>
                         <button id="btnDelete" data-toggle="modal"
                                 data-target="#myModal${loop.index}"><i class="fa-solid fa-trash"></i>
@@ -221,7 +221,7 @@
                             <div class="modal-content">
 
                                 <header class="head-form mb-0">
-                                    <h2>Are You Sure Add Book To Cart?</h2>
+                                    <h2>Are You Sure Buy Again Book?</h2>
                                 </header>
 
                                 <div class="modal-body">
@@ -236,7 +236,7 @@
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-info add">Add</button>
+                                    <button type="submit" class="btn btn-info add">Buy</button>
                                     </form>
                                     <button class="btn btn-warning xclose" data-dismiss="modal">Close
                                     </button>

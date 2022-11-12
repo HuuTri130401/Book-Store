@@ -111,11 +111,8 @@ public class OrderDAO {
         }
     }
 
-<<<<<<< HEAD
-    public List<OrderDTO> GetInforOrder() throws SQLException, NamingException {
-=======
+
     public List<OrderDTO> GetInforOrder(int first, int last) throws SQLException, NamingException {
->>>>>>> origin/vu
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -123,15 +120,11 @@ public class OrderDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-<<<<<<< HEAD
-                String sql = "select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status\n"
-                        + "from [dbo].[Order] o inner join Employee e on e.employee_Id=o.employee_Id";
-=======
+
                 String sql = "select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status\n" +
                         "                        from (select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status, ROW_NUMBER()over(Order by [order_Id]) as Rownum\n" +
                         "                    from  [dbo].[Order] o inner join Employee e on e.employee_Id=o.employee_Id )as BookData\n" +
                         "\t\t\t\t\t\twhere BookData.Rownum between ? and ?";
->>>>>>> origin/vu
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, first);
                 stm.setInt(2, last);
@@ -162,8 +155,7 @@ public class OrderDAO {
         return listOrder;
     }
 
-<<<<<<< HEAD
-=======
+
     //Search
     public List<OrderDTO> SeachInforOrder(List<Integer> orderIdList) throws SQLException, NamingException {
         Connection con = null;
@@ -207,7 +199,6 @@ public class OrderDAO {
         return listOrder;
     }
 
->>>>>>> origin/vu
     public boolean createOrder(OrderDTO orderDTO) throws SQLException, ClassNotFoundException, NamingException {
         try {
             con = DBHelper.getConnection();

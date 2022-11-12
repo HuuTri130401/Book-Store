@@ -38,11 +38,13 @@ public class AdminCreateBookingRequestServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         //GET SITEMAP
         Properties siteMap = (Properties) request.getServletContext().getAttribute("SITE_MAP");
         //getRequest Parameter
         String image = request.getParameter("imgImage");
         String name_Book = request.getParameter("txtBookName");
+        System.out.println(name_Book);
         int quantity_Request = Integer.parseInt(request.getParameter("txtQuantityBook"));
         float price_Request = Float.parseFloat(request.getParameter("txtPrice"));
 //        Date date_Request = Date.valueOf(request.getParameter("txtDate"));

@@ -34,6 +34,7 @@ public class AdminBookServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String url = INVALID_PAGE;
         // /lấy Acction Để đưa vào switch vô case chuyển page
         String action = request.getParameter("action");

@@ -128,13 +128,12 @@
                                         <button class="inventory btn btn-danger" data-toggle="modal"
                                                 data-target="#myModal">Inventory
                                         </button>
-
                                             <%-- START Check Book In List Request to Display buton Importation--%>
                                         <c:choose>
-                                            <c:when test="${request_status==1}">
+                                            <c:when test="${request_status == 1}">
                                                 <button class="btn btn-info" style="font-size: 30px;"
                                                         data-toggle="modal"
-                                                        data-target="#myModalImportation">Importation
+                                                        data-target="#myModalImportation">Import Book
                                                 </button>
                                             </c:when>
                                             <%-- Chuyển sang button view Request nếu k có id book in List Request--%>

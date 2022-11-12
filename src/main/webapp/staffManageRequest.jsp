@@ -279,7 +279,7 @@
                                                                     class="fa-solid fa-book"></i></span>
                                                 </div>
                                                 <input type="text" name="nameBook" class="form-control input-sm"
-                                                       style="font-size: 20px" value="${i.request_Name_Book}">
+                                                       style="font-size: 20px" value="${i.request_Name_Book}" readonly="readonly">
                                             </div>
                                         </div>
                                             <%--  End Name Book --%>
@@ -292,7 +292,7 @@
                                                                     class="fa-solid fa-person"></i></span>
                                                 </div>
                                                 <input type="text" name="author" class="form-control input-sm"
-                                                       style="font-size: 20px" placeholder="Author">
+                                                       style="font-size: 20px" placeholder="Author" >
                                             </div>
                                         </div>
                                             <%--  End Author --%>
@@ -306,7 +306,7 @@
                                                 </div>
                                                 <input type="number" name="quantity"
                                                        class="form-control input-sm"
-                                                       style="font-size: 20px" value="${i.request_Quantity}">
+                                                       style="font-size: 20px" value="${i.request_Quantity}" readonly="readonly">
                                             </div>
                                         </div>
                                             <%--  End Quantity Book --%>
@@ -319,7 +319,7 @@
                                                                     class="fa-solid fa-money-bill-wave"></i></span>
                                                 </div>
                                                 <input type="number" name="price" class="form-control input-sm"
-                                                       style="font-size: 20px" value="${i.request_Price}">
+                                                       style="font-size: 20px" value="${i.request_Price}" readonly="readonly">
                                             </div>
                                         </div>
                                             <%--  End Price Book --%>
@@ -352,7 +352,7 @@
                                                 </div>
                                                 <input type="number" name="publicOfYear"
                                                        class="form-control input-sm"
-                                                       style="font-size: 20px" placeholder="Public Of Year">
+                                                       style="font-size: 20px" placeholder="Public Of Year" value="2022" readonly="readonly">
                                             </div>
                                         </div>
                                             <%--  End Public Book --%>
