@@ -324,7 +324,15 @@ public class StaffBookServlet extends HttpServlet {
                         //Check Status Book to display button
                         String nameBookDetail = request.getParameter("bookName");
                         checkStatusBook(nameBookDetail, listRequest, request);
-                        bookId = Integer.parseInt(request.getParameter("bookId"));
+                        bookId = GetBookId(nameBookDetail,listBook);
+                        //If book Deleted
+                        if(bookId==0){
+                            listBook=daoBook.getInformationBookDeleted(first,last);
+                            bookId= GetBookId(nameBookDetail,listBook);
+                            url=STAFF_BOOK_DETAIL_DELETED_PAGE;
+                        }else {
+                            url = STAFF_BOOK_DETAIL_PAGE;
+                        }
                         //set Attribute List Book
                         session.setAttribute("listBook", listBook);
                         categoryId = Integer.parseInt(request.getParameter("categoryId"));
@@ -332,7 +340,6 @@ public class StaffBookServlet extends HttpServlet {
                         request.setAttribute("categoryId", categoryId);
                         request.setAttribute("bookIdServlet", bookId);
                         request.setAttribute("nameCategory", listBook.get(0).getCategoryName());
-                        url = STAFF_BOOK_DETAIL_PAGE;
                         break;
                     case "bookDetailRequest":
                         //Get Name Book
