@@ -117,7 +117,7 @@
     <div class="home-section">
         <!-- home-content -->
 
-        <h2 id="nameTable">LIST HISTORY OF BOOK INVENTORY</h2>
+        <h2 id="nameTable">LIST BOOK INVENTORY DELETED</h2>
                         <%--                             Write   Body Code--%>
                         <table class="table">
                             <thead class="thead-dark" style="font-size: 15px">

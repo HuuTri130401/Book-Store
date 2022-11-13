@@ -56,196 +56,223 @@ public class AdminBookServlet extends HttpServlet {
 
         //Switch Case
         try {
-            switch (action) {
-                //Search Book
-                case "searchBook":
-                    String search=request.getParameter("search");
-                    //Search
-                    list=dao.SearchBook(1,4,search);
-                    session.setAttribute("listBook", list);
-                    request.setAttribute("search",search);
-                    url = ADMIN_BOOK_PAGE;
-                    break;
-                //Page Book
-                case "bookPage1":
-                    first = 1;
-                    last = 4;
-                    list = dao.getInformationBook(first, last);
-                    session.setAttribute("listBook", list);
-                    url = ADMIN_BOOK_PAGE;
-                    break;
-                case "bookPage2":
-                    first = 5;
-                    last = 8;
-                    list = dao.getInformationBook(first, last);
-                    session.setAttribute("listBook", list);
-                    url = ADMIN_BOOK_PAGE;
-                    break;
-                case "bookPage3":
-                    first = 9;
-                    last = 12;
-                    list = dao.getInformationBook(first, last);
-                    session.setAttribute("listBook", list);
-                    url = ADMIN_BOOK_PAGE;
-                    break;
-                case "bookPage4":
-                    first = 13;
-                    last = 16;
-                    list = dao.getInformationBook(first, last);
-                    session.setAttribute("listBook", list);
-                    url = ADMIN_BOOK_PAGE;
-                    break;
-                case "bookPage5":
-                    first = 17;
-                    last = 20;
-                    list = dao.getInformationBook(first, last);
-                    session.setAttribute("listBook", list);
-                    url = ADMIN_BOOK_PAGE;
-                    break;
-                case "bookPage6":
-                    first = 21;
-                    last = 24;
-                    list = dao.getInformationBook(first, last);
-                    session.setAttribute("listBook", list);
-                    url = ADMIN_BOOK_PAGE;
-                    break;
+            callCaseBookPage1:
+            while (true) {
+                switch (action) {
+                    //Update Book
+                    case "updateBook":
+                        // Upload Book
+                        int bookId = Integer.parseInt(request.getParameter("bookId"));
+                        int update = Integer.parseInt(request.getParameter("update"));
 
-                // Page Category Book
-                case "Romance":
-                    //Get all list category book, get quantity category
-                    categoryId=1;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("numLastCategory",list.size());
-                    //get 1-4 list book category
-                    first = 1;
-                    last=4;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Romance2":
-                    categoryId=1;
-                    first = 5;
-                    last=8;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Romance3":
-                    categoryId=1;
-                    first = 9;
-                    last=12;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Self-help":
-                    //Get all list category book, get quantity category
-                    categoryId=2;
-                    list= dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("numLastCategory",list.size());
-                    //get 1-4 list book category
-                    first = 1;
-                    last=4;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Self-help2":
-                    categoryId=2;
-                    first = 5;
-                    last=8;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Self-help3":
-                    categoryId=2;
-                    first = 9;
-                    last=12;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Novel":
-                    //Get all list category book, get quantity category
-                    categoryId=3;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("numLastCategory",list.size());
-                    //get 1-4 list book category
-                    first = 1;
-                    last=4;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Novel2":
-                    categoryId=3;
-                    first = 5;
-                    last=8;
-                    list= dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Novel3":
-                    categoryId=3;
-                    first = 9;
-                    last=12;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Fantasy":
-                    //Get all list category book, get quantity category
-                    categoryId=4;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("numLastCategory",list.size());
-                    //get 1-4 list book category
-                    first = 1;
-                    last=4;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Fantasy2":
-                    categoryId=4;
-                    first = 5;
-                    last=8;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                case "Fantasy3":
-                    categoryId=4;
-                    first = 9;
-                    last=12;
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    session.setAttribute("listCategoryBook", list);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_CATEGOTY_PAGE;
-                    break;
-                // Page Detail Book khi click vào từng book
-                case "bookDetail":
+                        //Get Parameter Book
+                        String nameBook = request.getParameter("bookName");
+                        String author = request.getParameter("author");
+                        int quantity = Integer.parseInt(request.getParameter("quantity"));
+                        float price = Float.parseFloat(request.getParameter("price"));
+                        int category = Integer.parseInt(request.getParameter("categoryId"));
+                        int publicOfYear = Integer.parseInt(request.getParameter("publicOfYear"));
 
-                    session.setAttribute("listBook", list);
-                    String bookId = request.getParameter("bookId");
-                    categoryId = Integer.parseInt(request.getParameter("categoryId"));
-                    list = dao.getCategoryBook(categoryId,first,last);
-                    request.setAttribute("bookIdServlet", bookId);
-                    request.setAttribute("nameCategory", list.get(0).getCategoryName());
-                    url = ADMIN_BOOK_DETAIL_PAGE;
-                    break;
+                        //Update Book
+                        if (dao.UpdateBook(nameBook, author, publicOfYear, category, price, quantity, bookId)) {
+                            action = "bookDetail";
+                            request.setAttribute("nameBook", nameBook);
+                            request.setAttribute("update", update);
+                            list = dao.getInformationBook(first, last);
+                            continue callCaseBookPage1;
+                        }
+                        //Search Book
+                    case "searchBook":
+                        String search = request.getParameter("search");
+                        //Search
+                        list = dao.SearchBook(1, 4, search);
+                        session.setAttribute("listBook", list);
+                        request.setAttribute("search", search);
+                        url = ADMIN_BOOK_PAGE;
+                        break;
+                    //Page Book
+                    case "bookPage1":
+                        first = 1;
+                        last = 4;
+                        list = dao.getInformationBook(first, last);
+                        session.setAttribute("listBook", list);
+                        url = ADMIN_BOOK_PAGE;
+                        break;
+                    case "bookPage2":
+                        first = 5;
+                        last = 8;
+                        list = dao.getInformationBook(first, last);
+                        session.setAttribute("listBook", list);
+                        url = ADMIN_BOOK_PAGE;
+                        break;
+                    case "bookPage3":
+                        first = 9;
+                        last = 12;
+                        list = dao.getInformationBook(first, last);
+                        session.setAttribute("listBook", list);
+                        url = ADMIN_BOOK_PAGE;
+                        break;
+                    case "bookPage4":
+                        first = 13;
+                        last = 16;
+                        list = dao.getInformationBook(first, last);
+                        session.setAttribute("listBook", list);
+                        url = ADMIN_BOOK_PAGE;
+                        break;
+                    case "bookPage5":
+                        first = 17;
+                        last = 20;
+                        list = dao.getInformationBook(first, last);
+                        session.setAttribute("listBook", list);
+                        url = ADMIN_BOOK_PAGE;
+                        break;
+                    case "bookPage6":
+                        first = 21;
+                        last = 24;
+                        list = dao.getInformationBook(first, last);
+                        session.setAttribute("listBook", list);
+                        url = ADMIN_BOOK_PAGE;
+                        break;
+
+                    // Page Category Book
+                    case "Romance":
+                        //Get all list category book, get quantity category
+                        categoryId = 1;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("numLastCategory", list.size());
+                        //get 1-4 list book category
+                        first = 1;
+                        last = 4;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Romance2":
+                        categoryId = 1;
+                        first = 5;
+                        last = 8;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Romance3":
+                        categoryId = 1;
+                        first = 9;
+                        last = 12;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Self-help":
+                        //Get all list category book, get quantity category
+                        categoryId = 2;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("numLastCategory", list.size());
+                        //get 1-4 list book category
+                        first = 1;
+                        last = 4;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Self-help2":
+                        categoryId = 2;
+                        first = 5;
+                        last = 8;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Self-help3":
+                        categoryId = 2;
+                        first = 9;
+                        last = 12;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Novel":
+                        //Get all list category book, get quantity category
+                        categoryId = 3;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("numLastCategory", list.size());
+                        //get 1-4 list book category
+                        first = 1;
+                        last = 4;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Novel2":
+                        categoryId = 3;
+                        first = 5;
+                        last = 8;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Novel3":
+                        categoryId = 3;
+                        first = 9;
+                        last = 12;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Fantasy":
+                        //Get all list category book, get quantity category
+                        categoryId = 4;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("numLastCategory", list.size());
+                        //get 1-4 list book category
+                        first = 1;
+                        last = 4;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Fantasy2":
+                        categoryId = 4;
+                        first = 5;
+                        last = 8;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    case "Fantasy3":
+                        categoryId = 4;
+                        first = 9;
+                        last = 12;
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        session.setAttribute("listCategoryBook", list);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_CATEGOTY_PAGE;
+                        break;
+                    // Page Detail Book khi click vào từng book
+                    case "bookDetail":
+
+                        session.setAttribute("listBook", list);
+                       bookId =Integer.parseInt(request.getParameter("bookId"));
+                        categoryId = Integer.parseInt(request.getParameter("categoryId"));
+                        list = dao.getCategoryBook(categoryId, first, last);
+                        request.setAttribute("categoryId", categoryId);
+                        request.setAttribute("bookIdServlet", bookId);
+                        request.setAttribute("nameCategory", list.get(0).getCategoryName());
+                        url = ADMIN_BOOK_DETAIL_PAGE;
+                        break;
+                }
+                break callCaseBookPage1;
             }
         } catch (SQLException e) {
             log("BookServlet_SQL_" + e.getMessage());

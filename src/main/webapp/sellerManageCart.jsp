@@ -64,7 +64,7 @@
                 </div>
             </div>
         </c:if>
-        <%-- End Form Delete --%>
+        <%-- End Form Update --%>
         <%-- Form Delete --%>
         <c:set var="toast" value="${count}"></c:set>
         <c:if test="${toast==1}">

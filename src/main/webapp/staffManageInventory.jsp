@@ -202,6 +202,7 @@
                     </div>
                 </div>
             </div>
+                <%--Delete Book Inventory--%>
             </c:if>
             </c:forEach>
             </tbody>

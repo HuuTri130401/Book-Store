@@ -120,7 +120,7 @@
     <div class="home-section">
         <!-- home-content -->
         <div class="home-content" >
-        <h2 id="nameTable">LIST HISTORY OF BOOK REQUEST</h2>
+        <h2 id="nameTable">LIST BOOK REQUEST DELETED</h2>
         <%--       Write   Body Code--%>
             <table class="table">
                 <thead class="thead-dark" style="font-size: 15px">

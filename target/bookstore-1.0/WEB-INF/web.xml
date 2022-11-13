@@ -48,6 +48,11 @@
         <servlet-name>SellerOrderServlet</servlet-name>
         <servlet-class>com.se1611.servlets.SellerOrderServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>StaffBookDeletedServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.StaffBookDeletedServlet</servlet-class>
+    </servlet>
     <!--MAPPING-->
     <servlet>
         <servlet-name>AuthLogoutServlet</servlet-name>
@@ -136,6 +141,11 @@
     <servlet-mapping>
         <servlet-name>SellerCartServlet</servlet-name>
         <url-pattern>/SellerCartServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>StaffBookDeletedServlet</servlet-name>
+        <url-pattern>/StaffBookDeletedServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

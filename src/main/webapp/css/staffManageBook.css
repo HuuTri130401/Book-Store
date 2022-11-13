@@ -345,3 +345,67 @@ body{
     color: #000000 ;
 }
 /*Page End*/
+.history{
+    position: absolute;
+    margin-left: 95% ;
+    text-align: right;
+    font-size: 30px;
+
+}
+#btnHistory{
+    border: none;
+    color: #ce4426;
+}
+.toastx {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 2px;
+    border-left: 4px solid;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+    border-left-color: #1ace1a;
+    padding: 20px 0px;
+    width: 320px;
+    height: 73px;
+    margin-left: 78%;
+    position: absolute;
+    animation: slideLeft ease .50s,fadeOut linear 1s 3s forwards ;
+}
+/*Animation*/
+@keyframes slideLeft {
+    from {
+        opacity: 0.5;
+        transform: translateX(calc(100% + 20px));
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeOut {
+    to{
+        opacity: 0;
+    }
+}
+/*Toast*/
+.toast-icon {
+    font-size: 25px;
+    color: #1ace1a;
+    padding: 0 13px;
+}
+
+.toast-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1ace1a;
+}
+
+.toast-msg {
+    font-size: 12px;
+}
+
+.toast-body {
+    flex-grow: 1;
+}
+/*End Form*/
+
