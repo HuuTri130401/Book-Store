@@ -170,9 +170,9 @@
                             <div class="overview-tableEmployee">
                                 <h2 id="nameTable">TOTAL ORDER / MONTH</h2>
                                 <div class="tableEmployee">
-                                    <table id="employees">
-                                        <%--<c:set var="listStatisticTotalIn12Month" value="${requestScope.TOTAL_ORDER_EACH_MONTH}"/>--%>
-                                        <%--<c:if test="${not empty statisticTotalIn12Month}">--%>
+                                    <table class="employees">
+                                        <c:set var="listStatisticTotalIn12Month" value="${requestScope.TOTAL_ORDER_EACH_MONTH}"/>
+                                        <c:if test="${not empty listStatisticTotalIn12Month}">
                                             <thead>
                                                 <tr>
                                                     <th>No.</th>
@@ -182,136 +182,79 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%-- <c:forEach var="listTotalDTO" items="${statisticTotalIn12Month}" varStatus="counter">
+                                                <c:forEach var="listTotalDTO" items="${listStatisticTotalIn12Month}" varStatus="counter">
                                                     <tr>
                                                         <td>
                                                             ${counter.count}
                                                         </td>
                                                         <td>
-                                                            ${listTotalDTO.date_To_Order}
+                                                            ${listTotalDTO.date_To_Order_Month}
                                                         </td>
                                                         <td>
-                                                            ${listTotalDTO.date_To_Order}
+                                                            ${listTotalDTO.date_To_Order_Year}
                                                         </td>
                                                         <td>
                                                             ${listTotalDTO.total_Order}
                                                         </td>
                                                     </tr>
-                                                </c:forEach>--%>
-                                                <tr>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            2022
-                                                        </td>
-                                                        <td>
-                                                            3300
-                                                        </td>
-                                                    </tr>
-                                                <tr>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            2022
-                                                        </td>
-                                                        <td>
-                                                            3300
-                                                        </td>
-                                                    </tr>
-                                                <tr>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            2022
-                                                        </td>
-                                                        <td>
-                                                            3300
-                                                        </td>
-                                                    </tr>
-                                                <tr>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            2022
-                                                        </td>
-                                                        <td>
-                                                            3300
-                                                        </td>
-                                                    </tr>
-                                                <tr>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            2022
-                                                        </td>
-                                                        <td>
-                                                            3300
-                                                        </td>
-                                                    </tr>
-                                                <tr>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            2022
-                                                        </td>
-                                                        <td>
-                                                            3300
-                                                        </td>
-                                                    </tr>
-                                                <tr>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            2022
-                                                        </td>
-                                                        <td>
-                                                            3300
-                                                        </td>
-                                                    </tr>
-              
+                                                </c:forEach>
                                             </tbody>
                                         </table>
-                                    <%--</c:if>--%>
-                                    <%-- <c:if test="${empty listImportations}">
-                                         <h2 style="text-align: center;
-                                             align-items: center;
-                                             color: red">
-                                             NOT HAVE THE RECORD !       
-                                         </h2>
-                                     </c:if> --%>
+                                    </c:if>
+                                    <c:if test="${empty listStatisticTotalIn12Month}">
+                                        <h2 style="text-align: center;
+                                            align-items: center;
+                                            color: red">
+                                            NOT HAVE THE RECORD !       
+                                        </h2>
+                                    </c:if> 
                                 </div>
                             </div>
                         </div>
                         <div class="boxShow">
-                            NOT HAVE THE RECORD !    
+                            <div class="overview-tableEmployee">
+                                <h2 id="nameTable">TOTAL BOOKING REQUEST / MONTH</h2>
+                                <div class="tableEmployee">
+                                    <table class="employees">
+                                        <c:set var="listStatisticTotalBookingRequestIn12Month" value="${requestScope.TOTAL_BOOKING_REQUEST_EACH_MONTH}"/>
+                                        <c:if test="${not empty listStatisticTotalBookingRequestIn12Month}">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Month</th>
+                                                    <th>Year</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="listTotalBookingRequestDTO" items="${listStatisticTotalBookingRequestIn12Month}" varStatus="counter">
+                                                    <tr>
+                                                        <td>
+                                                            ${counter.count}
+                                                        </td>
+                                                        <td>
+                                                            ${listTotalBookingRequestDTO.date_To_Order_Month}
+                                                        </td>
+                                                        <td>
+                                                            ${listTotalBookingRequestDTO.date_To_Order_Year}
+                                                        </td>
+                                                        <td>
+                                                            <%--${listTotalBookingRequestDTO.total_Order}--%>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </c:if>
+                                    <c:if test="${empty listStatisticTotalBookingRequestIn12Month}">
+                                        <h2 style="text-align: center;
+                                            align-items: center;
+                                            color: red">
+                                            NOT HAVE THE RECORD !       
+                                        </h2>
+                                    </c:if> 
+                                </div>
+                            </div>  
                         </div>
                     </div>
 

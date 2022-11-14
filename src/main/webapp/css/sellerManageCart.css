@@ -294,6 +294,13 @@ body {
 .price{
     display: flex;
 }
+#nameTable{
+    color: #fab804ea;
+    padding: 1rem;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+}
 .totalCart{
     display: flex;
     font-size: 20px;

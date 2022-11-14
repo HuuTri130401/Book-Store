@@ -19,7 +19,82 @@ import java.util.List;
  * @author tuan vu
  */
 public class BookDAO {
+    //Delete Inventory
+    public boolean StatusBook(int book_Id,boolean check) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = true;
+        int count = 0;
 
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "update Book set status_Book=? where book_Id=?";
+                stm = con.prepareStatement(sql);
+                if(check) {
+                    stm.setBoolean(1, true);
+                }else{
+                    stm.setBoolean(1, false);
+                }
+                stm.setInt(2, book_Id);
+                count = stm.executeUpdate();
+                if (count == 0) {
+                    result = false;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+    //Get Book Deleted
+    public List<BookDTO> getInformationBookDeleted(int first, int last) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<BookDTO> listBook = null;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "select book_Id,name_Book,author_Book,year_Of_Public,category,price_Book,quantity_Book,image\n"
+                        + ",status_Book,description_Book\n"
+                        + "from (\n"
+                        + "	select *, ROW_NUMBER()over(Order by [book_Id]) as Rownum\n"
+                        + "	from Book where status_Book=0)\n"
+                        + "as BookData\n"
+                        + "where BookData.Rownum between ? and ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, first);
+                stm.setInt(2, last);
+                rs = stm.executeQuery();
+                listBook = new ArrayList<>();
+                while (rs.next()) {
+                    BookDTO list = new BookDTO();
+                    list.setBook_Id(rs.getInt("book_Id"));
+                    list.setName(rs.getString("name_Book"));
+                    list.setAuthor(rs.getString("author_Book"));
+                    list.setYear_Of_Public(rs.getInt("year_Of_Public"));
+                    list.setCategory(rs.getInt("category"));
+                    list.setPrice_Book(rs.getFloat("price_Book"));
+                    list.setQuantity_Book(rs.getInt("quantity_Book"));
+                    list.setImage_Book(rs.getString("image"));
+                    list.setStatus(rs.getBoolean("status_Book"));
+                    list.setDescriptionBook(rs.getString("description_Book"));
+                    listBook.add(list);
+                }
+            }
+        } finally {
+                rs.close();
+                stm.close();
+                con.close();
+        }
+        return listBook;
+    }
     public List<BookDTO> getInformationBook(int first, int last) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -32,7 +107,7 @@ public class BookDAO {
                         + ",status_Book,description_Book\n"
                         + "from (\n"
                         + "	select *, ROW_NUMBER()over(Order by [book_Id]) as Rownum\n"
-                        + "	from Book\n"
+                        + "	from Book where status_Book=1\n"
                         + ")as BookData\n"
                         + "where BookData.Rownum between ? and ?";
                 stm = con.prepareStatement(sql);
@@ -171,8 +246,45 @@ public List<BookDTO> SearchBook(int first, int last,String search) throws SQLExc
         return listCategoryBook;
     }
 
+    public boolean UpdateBook(String nameBook, String author, int yearOfPublic, int category, float price,
+            int quantity, int bookId) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = true;
+        int count = 0;
+        boolean status = true;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "update [dbo].[Book] set name_Book=?,author_Book=?,year_Of_Public=?,category=?,price_Book=?,quantity_Book=? where book_Id=?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, nameBook);
+                stm.setString(2, author);
+                stm.setInt(3, yearOfPublic);
+                stm.setInt(4, category);
+                stm.setFloat(5, price);
+                stm.setInt(6, quantity);
+                stm.setInt(7, bookId);
+                count = stm.executeUpdate();
+                if (count == 0) {
+                    result = false;
+                } else {
+                    result = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            stm.close();
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
     public boolean createBook(String nameBook, String author, int yearOfPublic, int category, float price,
-            int quantity, String image, String description) throws SQLException, NamingException {
+                              int quantity, String image, String description) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = true;
@@ -212,7 +324,6 @@ public List<BookDTO> SearchBook(int first, int last,String search) throws SQLExc
         }
         return result;
     }
-
     public List<BookDTO> getListMostInventoryBook()
             throws SQLException, NamingException {
         Connection con = null;

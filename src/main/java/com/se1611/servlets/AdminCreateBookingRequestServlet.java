@@ -6,10 +6,16 @@ package com.se1611.servlets;
 
 import com.se1611.bookingRequest.BookingRequestDAO;
 import com.se1611.bookingRequest.BookingRequestError;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -26,7 +32,7 @@ public class AdminCreateBookingRequestServlet extends HttpServlet {
 
     private final String ADMIN_MANAGE_LIST_BOOK_REQUEST = "adminShowListBookingRequest";
     private final String ADMIN_CREATE_BOOK_REQUEST = "adminCreateBookRequestPage";
-
+    HashMap<String,String> fieldUpload=new HashMap<>();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,17 +45,21 @@ public class AdminCreateBookingRequestServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         //GET SITEMAP
         Properties siteMap = (Properties) request.getServletContext().getAttribute("SITE_MAP");
         //getRequest Parameter
-        String image = request.getParameter("imgImage");
-        String name_Book = request.getParameter("txtBookName");
-        int quantity_Request = Integer.parseInt(request.getParameter("txtQuantityBook"));
-        float price_Request = Float.parseFloat(request.getParameter("txtPrice"));
+        String image = uploadFile(request,response);
+        String name_Book = fieldUpload.get("txtBookName");
+        int quantity_Request = Integer.parseInt(fieldUpload.get("txtQuantityBook"));
+        float price_Request = Float.parseFloat(fieldUpload.get("txtPrice"));
+//        Date date_Request = Date.valueOf(request.getParameter("txtDate"));
+
         LocalDate date_Request = LocalDate.now();
-        String note = request.getParameter("txtNote");
-        int status = Integer.parseInt(request.getParameter("radioStatus"));
-        boolean status_Book_Request = Boolean.parseBoolean(request.getParameter("radioStatusBook"));
+        String note =fieldUpload.get("txtNote");
+        int status = Integer.parseInt(fieldUpload.get("radioStatus"));
+        boolean status_Book_Request = Boolean.parseBoolean(fieldUpload.get("radioStatusBook"));
 
         String url = siteMap.getProperty(ADMIN_CREATE_BOOK_REQUEST);
         boolean errFound = true;
@@ -93,7 +103,47 @@ public class AdminCreateBookingRequestServlet extends HttpServlet {
             rd.forward(request, response);
         }
     }
+    private String uploadFile(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        // Verify the content type
+        String filePath = getServletContext().getInitParameter("file-upload");
+        // Location save Image
+        DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+        fileItemFactory.setRepository(new File(filePath));
+        ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
+        String nameimg = "";
+        try {
+            List<FileItem> fileItems = upload.parseRequest(request);
+            for (FileItem fileItem : fileItems) {
 
+                if (!fileItem.isFormField()) {
+                    // xử lý file
+                    nameimg = fileItem.getName();
+                    if (!nameimg.equals("")) {
+                        String dirUrl = filePath;
+                        File dir = new File(dirUrl);
+                        if (!dir.exists()) {
+                            dir.mkdir();
+                        }
+                        String fileImg = dirUrl + File.separator + nameimg;
+                        File file = new File(fileImg);
+                        try {
+                            fileItem.write(file);
+                            System.out.println("UPLOAD THÀNH CÔNG...!");
+                        } catch (Exception e) {
+                            System.out.println("CÓ LỖI TRONG QUÁ TRÌNH UPLOAD!");
+                            e.printStackTrace();
+                        }
+                    }
+                }else{
+                    //Save cac filed name book, quantity, author.....
+                    fieldUpload.put(fileItem.getFieldName(),fileItem.getString());
+                } //end If
+            }
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        }
+        return nameimg;
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

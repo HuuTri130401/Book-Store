@@ -51,7 +51,21 @@
                 </div>
             </div>
         </div>
-        <%-- Form Delete Request--%>
+        <%-- Form Update --%>
+        <c:set var="toast" value="${update}"></c:set>
+        <c:if test="${toast==1}">
+            <div  class="toastx">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-body">
+                    <h3 class="toast-title">Update Success</h3>
+                    <p class="toast-msg"> Book ${nameBook} Has Been Successfully Update</p>
+                </div>
+            </div>
+        </c:if>
+        <%-- End Form Update --%>
+        <%-- Form Delete --%>
         <c:set var="toast" value="${count}"></c:set>
         <c:if test="${toast==1}">
             <div  class="toastx">
@@ -64,7 +78,7 @@
                 </div>
             </div>
         </c:if>
-        <%-- End Form Delete Request--%>
+        <%-- End Form Delete --%>
     </div>
 
 </div>
@@ -194,6 +208,10 @@
                                     <%--Form --%>
                                 <form action="sellerCartAction?action=modifyCart" method="POST">
                                         <%--  ID BOOK Insert To Inventory SQL--%>
+                                            <input type="hidden" name="update"
+                                                   value="1"/>
+                                            <input type="hidden" name="nameBook"
+                                                   value="${x.bookName}"/>
                                     <input type="hidden" name="bookId" value="${x.bookId}"/>
                                         <%--  DO Quantity Add to Cart --%>
                                     <div class="form-group">

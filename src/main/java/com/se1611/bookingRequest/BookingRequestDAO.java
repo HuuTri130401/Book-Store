@@ -22,6 +22,44 @@ import javax.naming.NamingException;
  */
 public class BookingRequestDAO {
 
+    public List<BookingRequestDTO> getTotalBookingRequestIn12Months()
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<BookingRequestDTO> listTtalBookingRequestIn12Months = new ArrayList<>();
+
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "select Month(date_Request) as m, Year(date_Request) as y, sum(quantity_Request * price_Request) as total\n"
+                        + "From BookingRequest\n"
+                        + "Where Year(GETDATE()) = Year(date_Request)\n"
+                        + "group by Month(date_Request), Year(date_Request)";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int month = rs.getInt("m");
+                    int year = rs.getInt("y");
+                    float totalOrder = rs.getFloat("total");
+                    BookingRequestDTO bookingRequestDTO = new BookingRequestDTO(month, year, totalOrder);
+                    listTtalBookingRequestIn12Months.add(bookingRequestDTO);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return listTtalBookingRequestIn12Months;
+    }
+
     public List<BookingRequestDTO> getListBookingRequest()
             throws SQLException, NamingException {
         Connection con = null;
@@ -31,8 +69,6 @@ public class BookingRequestDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-//                String sql = "Select request_Id, image, name_Book, quantity_Request, price_Request, date_Request, note, status, status_Book_Request\n"
-//                        + "From BookingRequest";
                 String sql = "Select request_Id, image, name_Book, quantity_Request, price_Request, date_Request, date_Request_Done, note, status, status_Book_Request\n"
                         + "From BookingRequest "
                         + "Order by status";
@@ -45,7 +81,7 @@ public class BookingRequestDAO {
                     int quantity_Request = rs.getInt("quantity_Request");
                     float price_Request = rs.getFloat("price_Request");
                     LocalDate date_Request = rs.getDate("date_Request").toLocalDate();
-                    LocalDate date_Request_Done = null;
+                    Date date_Request_Done = rs.getDate("date_Request_Done");
                     String note = rs.getString("note");
                     int status = rs.getInt("status");
                     boolean status_Book_Request = rs.getBoolean("status_Book_Request");
@@ -94,11 +130,12 @@ public class BookingRequestDAO {
                     int quantity_Request = rs.getInt("quantity_Request");
                     float price_Request = rs.getFloat("price_Request");
                     LocalDate date_Request = rs.getDate("date_Request").toLocalDate();
+                    Date date_Request_Done = rs.getDate("date_Request_Done");
                     String note = rs.getString("note");
                     int status = rs.getInt("status");
                     boolean status_Book_Request = rs.getBoolean("status_Book_Request");
 
-                    listBookRequest.add(new BookingRequestDTO(request_Id, image, name_Book, quantity_Request, price_Request, date_Request, note, status, status_Book_Request));
+                    listBookRequest.add(new BookingRequestDTO(request_Id, image, name_Book, quantity_Request, price_Request, date_Request, date_Request_Done, note, status, status_Book_Request));
                 }//end while rs not null
             }//end if con is not null
         } finally {
@@ -164,9 +201,6 @@ public class BookingRequestDAO {
                 String sql = "SELECT SUM(price_Request * quantity_Request)\n"
                         + "FROM BookingRequest\n"
                         + "Where Month(GETDATE()) - 1 = MONTH(date_Request) ";
-//                String sql = "Select SUM(quantity_Request * price_Request)\n"
-//                        + "From [BookingRequest]\n"
-//                        + "Where Month(date_Request) = Month(GETDATE() - 1) ";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 if (rs.next()) {

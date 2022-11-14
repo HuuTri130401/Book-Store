@@ -115,7 +115,7 @@
     <div class="home-section">
         <!-- home-content -->
             <div>
-                <h2 id="nameTable">LIST HISTORY OF ORDER BOOK</h2>
+                <h2 id="nameTable">LIST ORDER BOOK DELETED</h2>
             </div>
         <%--End Home Content--%>
 

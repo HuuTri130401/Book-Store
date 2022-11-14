@@ -10,6 +10,7 @@ D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\Sel
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\StaffImportationServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\AdminCreateBookingRequestServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\bookingRequest\RequestDAO.java
+D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\StaffBookDeletedServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\StaffBookServlet.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\book\BookDAO.java
 D:\Half6_OJT\BOOK_STORE_SWP_TEAM\bookstore\src\main\java\com\se1611\servlets\AdminUpdateBookingRequestServlet.java

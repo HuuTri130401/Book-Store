@@ -76,9 +76,16 @@ public class AdminManageDashboardServlet extends HttpServlet {
             int totalInventoryCurrenyear = inventoryDAO.getSumInventoryInYear();
             request.setAttribute("TOTAL_QUANTITY_INVENTORY_CURRENT_YEAR", totalInventoryCurrenyear);
 
-//            OrderDAO orderEachMonth = new OrderDAO();
-//            List<OrderDTO> orderDTO = orderEachMonth.getTotalOrderOfBookIn12Month();
-//            request.setAttribute("TOTAL_ORDER_EACH_MONTH", orderDTO);
+            //TOTAL_ORDER_EACH_MONTH
+            OrderDAO orderEachMonth = new OrderDAO();
+            List<OrderDTO> orderDTO = orderEachMonth.getTotalOrderIn12Months();
+            request.setAttribute("TOTAL_ORDER_EACH_MONTH", orderDTO);
+            
+            //TOTAL BOOKING REQUEST
+            BookingRequestDAO bookingRequest = new BookingRequestDAO();
+            List<BookingRequestDTO> bookingRequestDTO = bookingRequest.getTotalBookingRequestIn12Months();
+            request.setAttribute("TOTAL_BOOKING_REQUEST_EACH_MONTH", bookingRequestDTO);
+            
             
         } catch (SQLException e) {
             log("AdminManageListEmployeesServlet_SQL_ " + e.getMessage());

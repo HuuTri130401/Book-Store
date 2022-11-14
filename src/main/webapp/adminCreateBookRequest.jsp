@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en" >
     <head>
@@ -18,7 +19,7 @@
 
             <p class='msg'>Create Booking Request</p>
             <div class='form'>
-                <form action="adminCreateBookRequestAction" method="POST">
+                <form action="adminCreateBookRequestAction" method="POST"  enctype="multipart/form-data">
                     <span class='text'>Choose Image: </span><input type="file" name="imgImage" id='Image' required><br>
                     <input type="text" placeholder='Book Name' name="txtBookName" class='text' required  minlength="2" maxlength="60"><br>
                     <input type="number" placeholder='Quantity' name="txtQuantityBook" class='number' required><br>

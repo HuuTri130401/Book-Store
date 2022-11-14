@@ -117,11 +117,14 @@ public class SellerCartServlet extends HttpServlet {
                 case "modifyCart":
                     int quantity = Integer.parseInt(request.getParameter("quantityUpdate"));
                     bookId = Integer.parseInt(request.getParameter("bookId"));
-
+                    int update =Integer.parseInt(request.getParameter("update"));
+                    String nameBook= request.getParameter("nameBook");
                     ArrayList<CartDTO> cartList = (ArrayList<CartDTO>) session.getAttribute("listCart");
                     for (CartDTO cartDTO1 : cartList) {
                         if (cartDTO1.getBookId() == bookId) {
                             cartDTO1.setQuantity(quantity);
+                            request.setAttribute("nameBook",nameBook);
+                            request.setAttribute("update",update);
                         }
                     }
                     url = SELLER_CART_PAGE;
@@ -130,7 +133,7 @@ public class SellerCartServlet extends HttpServlet {
                     bookId = Integer.parseInt(request.getParameter("bookId"));
                     cartList = (ArrayList<CartDTO>) session.getAttribute("listCart");
                     int counts =Integer.parseInt(request.getParameter("count"));
-                    String nameBook= request.getParameter("nameBook");
+                    nameBook= request.getParameter("nameBook");
                     for (CartDTO cartDTO1 : cartList) {
                         if (cartDTO1.getBookId() == bookId) {
                             cartList.remove(cartDTO1);

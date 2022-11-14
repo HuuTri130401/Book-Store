@@ -126,10 +126,10 @@
                                     <ul class="pagination">
                                         <li class="page-item"><a class="page-link" href="staffBookAction?action=${nameCategory}">1</a></li>
                                         <c:if test="${numLastCategory>4}">
-                                            <li class="page-item"><a class="page-link" href="staffBookAction?action=${nameCategory}">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="staffBookAction?action=${nameCategory}2">2</a></li>
                                         </c:if>
                                         <c:if test="${numLastCategory>8}">
-                                            <li class="page-item"><a class="page-link" href="staffBookAction?action=${nameCategory}">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="staffBookAction?action=${nameCategory}3">3</a></li>
                                         </c:if>
                                     </ul>
                                 </div>

@@ -34,10 +34,11 @@ public class OrderDAO {
                         + "group by Month(date_To_Oder), Year(date_To_Oder)";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
-                if (rs.next()) {
-                    Date date_To_Oder = rs.getDate("date_To_Oder");
-                    float totalOrder = rs.getFloat("total_Order");
-                    OrderDTO orderDTO = new OrderDTO(date_To_Oder, totalOrder);
+                while (rs.next()) {
+                    int month = rs.getInt("m");
+                    int year = rs.getInt("y");
+                    float totalOrder = rs.getFloat("total");
+                    OrderDTO orderDTO = new OrderDTO(month, year, totalOrder);
                     listTotalOrder.add(orderDTO);
                 }
             }

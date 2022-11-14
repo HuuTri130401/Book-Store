@@ -92,12 +92,6 @@
                             <span class="links_name">Importation</span>
                         </a>
                     </li>
-                    <!--                    <li>
-                                            <a href="./adminShowListOrders">
-                                                <i class='bx bx-list-ol'></i>
-                                                <span class="links_name">Order</span>
-                                            </a>
-                                        </li>-->
                     <li>
                         <a href="./logoutAction">
                             <i class='bx bx-log-out'></i>
@@ -172,23 +166,6 @@
                             </div>
                         </c:if>
 
-                        <!--Show msg after Insert-->
-                        <%-- <c:set var="insertEmpMsg" value="${requestScope.INSERT_EMPLOYEE_MSG}"/>
-                        <c:if test="${not empty insertEmpMsg}">
-                            <h3 class='text' style="color: green" >${insertEmpMsg}</h3>
-                        </c:if>
-
-                        <!--Show msg after Delete-->
-                        <c:set var="inActiveEmpMsg" value="${requestScope.DELETE_EMPLOYEE_MSG}"/>
-                        <c:if test="${not empty inActiveEmpMsg}">
-                            <h3 class='text' style="color: red" >${inActiveEmpMsg}</h3>
-                        </c:if>   
-                        Show msg after Update
-                        <c:set var="updateEmpMsg" value="${requestScope.UPDATE_EMPLOYEE_MSG}"/>
-                        <c:if test="${not empty updateEmpMsg}">
-                            <h3 class='text' style="color: green" >${updateEmpMsg}</h3>
-                        </c:if>   --%>
-
                         <h2 id="nameTable">LIST OF EMPLOYEES</h2>
                         <div class="tableEmployee">
                             <table id="employees">
@@ -217,7 +194,9 @@
                                                 <td>${counter.count}</td>
                                                 <td>
                                                     ${employeeDTO.employee_Id}
-                                                    <input class="textInforEmployee" type="hidden" name="txtHiddenEmployee_Id" value="${employeeDTO.employee_Id}"/>
+                                                    <input class="textInforEmployee" type="hidden"
+                                                           name="txtHiddenEmployee_Id"
+                                                           value="${employeeDTO.employee_Id}"/>
                                                 </td>
                                                 <td>
                                                     ${employeeDTO.account_Id}
@@ -230,39 +209,77 @@
                                                     <input class="textInforEmployee" type="text" name="txtFullName" value="${employeeDTO.fullName}" required minlength="3"  maxlength="30"/>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="number" name="txtPhone" value="${employeeDTO.phone}" style="width: 8em"/> <%-- minlength="10"  maxlength="11" size="12" --%>
+                                                    <input class="textInforEmployee" type="number" name="txtPhone"
+                                                           value="${employeeDTO.phone}"
+                                                           style="width: 8em"/> <%-- minlength="10"  maxlength="11" size="12" --%>
                                                 </td>
                                                 <td>
                                                     <input class="textInforEmployee" type="text" name="txtAddress" value="${employeeDTO.address}" required minlength="4" maxlength="30"/>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtGender" value="${employeeDTO.gender}" required minlength="4" maxlength="6" size="7"/>
+                                                    <select class="textInforEmployee" name="txtGender">
+                                                        <option value="${employeeDTO.gender}">${employeeDTO.gender}</option>
+                                                        <c:choose>
+                                                            <c:when test="${employeeDTO.gender=='Male'}">
+                                                                <option value="Female">Female</option>
+                                                                <option value="Other">Other</option>
+                                                            </c:when>
+                                                            <c:when test="${employeeDTO.gender=='Female'}">
+                                                                <option value="Male">Male</option>
+                                                                <option value="Other">Other</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="Female">Female</option>
+                                                                <option value="Male">Male</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtRole" value="${employeeDTO.role}" required minlength="4" maxlength="6" size="7" />
+                                                    <select class="textInforEmployee" name="txtRole">
+                                                        <option value="${employeeDTO.role}">${employeeDTO.role}</option>
+                                                        <c:choose>
+                                                            <c:when test="${employeeDTO.role=='Seller'}">
+                                                                <option value="Staff">Staff</option>
+
+                                                            </c:when>
+                                                            <c:when test="${employeeDTO.role=='Staff'}">
+                                                                <option value="Seller">Seller</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                disable
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <c:if test="${employeeDTO.status_Employee eq true}">
-                                                        <input class="textInforEmployee" type="text" name="txtStatus_Employee" 
-                                                               style="color: green" value="${employeeDTO.status_Employee}" minlength="4" maxlength="5" size="6"/>
-                                                    </c:if>
-                                                    <c:if test="${employeeDTO.status_Employee eq false}">
-                                                        <input class="textInforEmployee" type="text" name="txtStatus_Employee" 
-                                                               style="color: red" value="${employeeDTO.status_Employee}" minlength="4" maxlength="5" size="6"/>
-                                                    </c:if>
+                                                    <select class="textInforEmployee" name="txtStatus_Employee">
+                                                        <c:choose>
+                                                            <c:when test="${employeeDTO.status_Employee==false}">
+                                                                <option style="color: red" value="false">Inactive</option>
+                                                                <option style="color: green" value="true">Active</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option style="color: green" value="true">Active</option>
+                                                                <option style="color: red" value="false">Inactive</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <input 
-                                                        <c:if test="${employeeDTO.role eq 'admin'}">disabled style="background: #4a9a4a; color: #333; font-weight:600;"</c:if>
+                                                    <input
+                                                        <c:if test="${employeeDTO.role=='Admin'}">disabled
+                                                            style="background: #4a9a4a; color: #333; font-weight:600;"</c:if>
                                                             class="buttonActionUpdate" type="submit" value="Update"
-                                                            />
-                                                    </td>
-                                                    <td>
+                                                        />
+                                                </td>
+                                                <td>
                                                     <c:url var="urlRewriting" value="adminDeleteEmployeeAction">
                                                         <c:param name="employee_Id" value="${employeeDTO.employee_Id}"/>
                                                     </c:url>
                                                     <a  
-                                                        <c:if test="${employeeDTO.role eq 'admin'}"> style="background: #d04141; color: #333; pointer-events:none; font-weight:600;"</c:if>
+                                                        <c:if test="${employeeDTO.role == 'Admin'}">
+                                                            style="background: #d04141; color: #333; pointer-events:none; font-weight:600;"</c:if>
                                                         class="buttonActionDelete" href=${urlRewriting}>Delete
                                                     </a>
                                                 </td>

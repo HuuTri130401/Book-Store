@@ -20,7 +20,7 @@ com\se1611\orders\OrderDetailDAO.class
 com\se1611\servlets\AdminManageDashboardServlet.class
 com\se1611\bookingRequest\BookingRequestDTO.class
 com\se1611\servlets\AuthLoginServlet.class
-.netbeans_automatic_build
+com\se1611\servlets\StaffBookDeletedServlet.class
 com\se1611\orders\OrderDAO.class
 com\se1611\bookingRequest\BookingRequestDAO.class
 com\se1611\orders\OrderDetailDTO.class

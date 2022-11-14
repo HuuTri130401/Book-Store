@@ -4,8 +4,8 @@
  */
 package com.se1611.bookingRequest;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -19,7 +19,7 @@ public class BookingRequestDTO {
     private int quantity_Request;
     private float price_Request;
     private LocalDate date_Request;
-    private LocalDate date_Request_Done;
+    private Date date_Request_Done;
     private String note;
     private int status;
     private boolean status_Book_Request;
@@ -27,7 +27,7 @@ public class BookingRequestDTO {
     public BookingRequestDTO() {
     }
 
-    public BookingRequestDTO(int request_Id, String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, LocalDate date_Request_Done, String note, int status, boolean status_Book_Request) {
+    public BookingRequestDTO(int request_Id, String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, Date date_Request_Done, String note, int status, boolean status_Book_Request) {
         this.request_Id = request_Id;
         this.image = image;
         this.name_Book = name_Book;
@@ -52,6 +52,42 @@ public class BookingRequestDTO {
         this.status_Book_Request = status_Book_Request;
     }
 
+    private int date_To_Order_Month;
+    private int date_To_Order_Year;
+    private float total_Order = price_Request * quantity_Request;
+
+    public float getTotal_Order() {
+        return total_Order;
+    }
+
+    public void setTotal_Order(float total_Order) {
+        this.total_Order = total_Order;
+    }
+    
+    public int getDate_To_Order_Month() {
+        return date_To_Order_Month;
+    }
+
+    public BookingRequestDTO(int date_To_Order_Month, int date_To_Order_Year, float total) {
+        this.date_To_Order_Month = date_To_Order_Month;
+        this.date_To_Order_Year = date_To_Order_Year;
+        this.total_Order = total;
+    }
+
+    public void setDate_To_Order_Month(int date_To_Order_Month) {
+        this.date_To_Order_Month = date_To_Order_Month;
+    }
+
+    public int getDate_To_Order_Year() {
+        return date_To_Order_Year;
+    }
+
+    public void setDate_To_Order_Year(int date_To_Order_Year) {
+        this.date_To_Order_Year = date_To_Order_Year;
+    }
+
+    
+    
     public int getRequest_Id() {
         return request_Id;
     }
@@ -100,11 +136,11 @@ public class BookingRequestDTO {
         this.date_Request = date_Request;
     }
 
-    public LocalDate getDate_Request_Done() {
+    public Date getDate_Request_Done() {
         return date_Request_Done;
     }
 
-    public void setDate_Request_Done(LocalDate date_Request_Done) {
+    public void setDate_Request_Done(Date date_Request_Done) {
         this.date_Request_Done = date_Request_Done;
     }
 

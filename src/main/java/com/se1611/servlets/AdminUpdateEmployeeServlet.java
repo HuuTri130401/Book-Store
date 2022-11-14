@@ -8,6 +8,9 @@ import com.se1611.employees.CreateEmployeeError;
 import com.se1611.employees.EmployeeDAO;
 import com.se1611.employees.EmployeeDTO;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -58,6 +61,8 @@ public class AdminUpdateEmployeeServlet extends HttpServlet {
         try {
             CreateEmployeeError employeeErrors = new CreateEmployeeError();
             EmployeeDAO employeeDAO = new EmployeeDAO();
+            //Hashing pass
+            password = HashingPass(password);
             int count = String.valueOf(phone).length();
             if (count < 10 || count > 11) {
                 employeeErrors.setPhoneError("Phone length has [10 or 11] chars");
@@ -72,12 +77,24 @@ public class AdminUpdateEmployeeServlet extends HttpServlet {
             }
         } catch (SQLException e) {
             log("Account Update Servlet _ SQLException_ " + e.getMessage());
-        } catch (NamingException e) {
+        } catch (NamingException | NoSuchAlgorithmException e) {
             log("Account Update Servlet _ NamingException_ " + e.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
+    }
+
+    protected String HashingPass(String pass) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] hashByte = md.digest(pass.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashByte) {
+            //in theo hex String format,<2 se in số 0 bên phải
+            sb.append(String.format("%02x", b));
+        }
+        pass = sb.toString();
+        return pass;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -48,6 +48,10 @@
         <servlet-name>SellerOrderServlet</servlet-name>
         <servlet-class>com.se1611.servlets.SellerOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaffBookDeletedServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.StaffBookDeletedServlet</servlet-class>
+    </servlet>
     <!--MAPPING-->
     <servlet>
         <servlet-name>AuthLogoutServlet</servlet-name>
@@ -145,6 +149,10 @@
         <servlet-name>AdminUpdateBookingRequestServlet</servlet-name>
         <url-pattern>/AdminUpdateBookingRequestServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffBookDeletedServlet</servlet-name>
+        <url-pattern>/StaffBookDeletedServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -166,8 +174,8 @@
         <description>Location to store uploaded file</description>
         <param-name>file-upload</param-name>
         <param-value>
-            <!--C:\Users\Nguye\Documents\GitHub\BookStore_SWP\src\main\webapp\images-->
-            \src\main\webapp\images
+            C:\Users\Nguye\Documents\GitHub\BookStore_SWP\src\main\webapp\images
+            <!--            \src\main\webapp\images-->
         </param-value>
     </context-param>
     <!--   End Location save Image when add New Book-->

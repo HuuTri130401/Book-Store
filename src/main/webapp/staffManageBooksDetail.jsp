@@ -16,6 +16,10 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- link file CSS -->
     <link rel="stylesheet" href="./css/staffManageBookDetail.css">
 
@@ -52,6 +56,20 @@
                 </div>
             </div>
         </div>
+        <%-- Form Update --%>
+        <c:set var="toast" value="${update}"></c:set>
+        <c:if test="${toast==1}">
+            <div  class="toastx">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-body">
+                    <h3 class="toast-title">Update Success</h3>
+                    <p class="toast-msg"> Book ${nameBook} Has Been Successfully Update</p>
+                </div>
+            </div>
+        </c:if>
+        <%-- End Form Update --%>
     </div>
 </div>
 
@@ -103,11 +121,22 @@
                     <div class="categoryText">
                         <a style="color: black" href="staffBookAction?action=bookPage1">Category </a> >
                         <a style="color: #17A2B8" href="staffBookAction?action=${nameCategory}"> ${nameCategory}</a>
+
                     </div>
-                    <c:forEach items="${listBook}" var="b">
+                    <c:forEach items="${listBook}" var="b" varStatus="loop">
                         <c:set var="bookId" value="${bookIdServlet}"></c:set>
                         <c:if test="${b.book_Id==bookId}">
-
+                            <!-- Button Update -->
+                                <button class="Check"><i class="fa-regular fa-circle-check"></i></button>
+                            <button  class="btnUpdate" data-toggle="modal"
+                                    data-target="#myModalUpdate${loop.index}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <!-- Button Delete -->
+                            <button  class="btnDelete" data-toggle="modal"
+                                     data-target="#myDelete${loop.index}">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
                             <%--         Item Book Need Show--%>
                             <div class="itemList row">
                                 <div class="border col-lg-4">
@@ -123,18 +152,19 @@
                                     <p class="author">Author: <u>${b.author}</u></p>
                                     <p class="yearPublic">Year Of Public: ${b.year_Of_Public}</p>
 
+
                                         <%--   Button add Inventory and Importation--%>
                                     <div class="button">
+
                                         <button class="inventory btn btn-danger" data-toggle="modal"
                                                 data-target="#myModal">Inventory
                                         </button>
-
                                             <%-- START Check Book In List Request to Display buton Importation--%>
                                         <c:choose>
-                                            <c:when test="${request_status==1}">
+                                            <c:when test="${request_status == 1}">
                                                 <button class="btn btn-info" style="font-size: 30px;"
                                                         data-toggle="modal"
-                                                        data-target="#myModalImportation">Importation
+                                                        data-target="#myModalImportation">Import Book
                                                 </button>
                                             </c:when>
                                             <%-- Chuyển sang button view Request nếu k có id book in List Request--%>
@@ -153,27 +183,173 @@
                                         <%-- End Button add Inventory and Importation --%>
                                 </div>
                             </div>
-                            <%--                            Show Description Book   --%>
+                            <%--   Show Description Book   --%>
                             <div class="boxDescription">
                                 <div class="description">
                                     <strong>Information Detail</strong>
                                     <p class="text">${b.descriptionBook}</p>
                                 </div>
                             </div>
-                            <%--                            End Show Item Book--%>
+                            <%-- End Show Item Book--%>
+
+                            <%--Delete Book --%>
+                            <div class="modal fade" id="myDelete${loop.index}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <header class="head-form">
+                                            <h2 style="margin-top:10px;text-align: center;font-size: 20px;color: #ffae00">Are You Sure To Delete The Book ?</h2>
+                                        </header>
+
+                                        <div class="modal-body">
+                                                <%--Form --%>
+                                            <form action="staffBookAction?action=deleteBook" method="POST">
+                                                <input type="hidden" name="count"
+                                                       value="1"/>
+                                                <input type="hidden" name="bookName"
+                                                       value="${b.name}"/>
+                                                <input type="hidden" name="bookId"
+                                                       value="${b.book_Id}"/>
+                                                    <%-- Are You Sure --%>
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger add">Delete</button>
+                                            </form>
+                                            <button class="btn btn-warning xclose" data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--Delete Book --%>
+
+                            <%--Form Update Book--%>
+                            <div class="modal fade" id="myModalUpdate${loop.index}">
+                                <div style=" margin-top: 70px;" class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <header class="head-form mb-0">
+                                            <h2 style="text-align: center;font-size: 30px;color: #0d8cba">Update Book</h2>
+                                        </header>
+
+                                        <div class="modal-body">
+                                                <%--Form --%>
+                                            <form action="staffBookAction?action=updateBook" method="POST">
+                                                <input type="hidden" name="update"
+                                                       value="1"/>
+                                                <input type="hidden" name="bookId"
+                                                       value="${b.book_Id}"/>
+                                                    <%--  Start Name Book --%>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-book"></i></span>
+                                                        </div>
+                                                        <input type="text" name="bookName" class="form-control input-sm"
+                                                               style="font-size: 20px" value="${b.name}" >
+                                                    </div>
+                                                </div>
+                                                    <%--  End Name Book --%>
+
+                                                    <%--  Start Author --%>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-person"></i></span>
+                                                        </div>
+                                                        <input type="text" name="author" class="form-control input-sm"
+                                                               style="font-size: 20px" placeholder="Author" value="${b.author}" >
+                                                    </div>
+                                                </div>
+                                                    <%--  End Author --%>
+
+                                                    <%--  Start Quantity Book --%>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-arrow-up-9-1"></i></span>
+                                                        </div>
+                                                        <input type="number" name="quantity"
+                                                               class="form-control input-sm"
+                                                               style="font-size: 20px" value="${b.quantity_Book}" >
+                                                    </div>
+                                                </div>
+                                                    <%--  End Quantity Book --%>
+
+                                                    <%--  Start Price Book --%>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-money-bill-wave"></i></span>
+                                                        </div>
+                                                        <input type="number" name="price" class="form-control input-sm"
+                                                               style="font-size: 20px" value="${b.price_Book}" >
+                                                    </div>
+                                                </div>
+                                                    <%--  End Price Book --%>
+
+                                                    <%--  Start Category Book --%>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa fa-briefcase"></i></span>
+                                                        </div>
+                                                        <select style="font-size: 20px" class="form-control"
+                                                                name="categoryId">
+                                                            <option value="${categoryId}">${nameCategory}</option>
+                                                            <option value="1">Romance</option>
+                                                            <option value="2">Self-help</option>
+                                                            <option value="3">Novel</option>
+                                                            <option value="4">Fantasy</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                    <%--  End Category Book --%>
+
+                                                    <%--  Start Public Book --%>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa-solid fa-calendar-days"></i></span>
+                                                        </div>
+                                                        <input type="number" name="publicOfYear"
+                                                               class="form-control input-sm"
+                                                               style="font-size: 20px" placeholder="Public Of Year" value="${b.year_Of_Public}" >
+                                                    </div>
+                                                </div>
+                                                    <%--  End Public Book --%>
+
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-info add">Update</button>
+                                            </form>
+                                            <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--End Form Update Book--%>
                         </c:if>
                     </c:forEach>
 </section>
 
 <script src="./js/script.js"></script>
 
-<%--Form Add to Importation--%>
+
 <div class="modal fade" id="myModalImportation">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <header class="head-form mb-0">
-                <h2 style="padding-left: 120px;font-size: 25px;color: red">Importation Book</h2>
+                <h2 style="padding-left: 120px;font-size: 25px;color: red">Import Book</h2>
             </header>
 
             <div class="modal-body">

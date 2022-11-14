@@ -42,10 +42,14 @@ public class StaffBookServlet extends HttpServlet {
 
     private final String INVALID_PAGE = "invalidPage";
     private final String STAFF_BOOK_PAGE = "staffBookPage";
+    private final String STAFF_BOOK_DELETED_PAGE = " staffBookDeletedPage";
+
     private final String STAFF_BOOK_DETAIL_PAGE = "staffBookDetailPage";
+    private final String STAFF_BOOK_DETAIL_DELETED_PAGE = "staffBookDetailDeletedPage";
     private final String STAFF_BOOK_CATEGOTY_PAGE = "staffBookCategoryPage";
     //Declare Hashmap save information When create Book
-    HashMap<String,String> fieldUpload=new HashMap<>();
+    HashMap<String, String> fieldUpload = new HashMap<>();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -77,6 +81,8 @@ public class StaffBookServlet extends HttpServlet {
             callCaseBookPage1:
             while (true) {
                 switch (action) {
+
+
                     //Search Book
                     case "searchBook":
                         String search=request.getParameter("search");
@@ -94,6 +100,7 @@ public class StaffBookServlet extends HttpServlet {
 
                         //Get Parameter Book
                         String nameBook =request.getParameter("nameBook");
+                        System.out.println(nameBook);
                         String author = request.getParameter("author");
                         int quantity = Integer.parseInt(request.getParameter("quantity"));
                         Float price = Float.parseFloat(request.getParameter("price"));
@@ -103,14 +110,46 @@ public class StaffBookServlet extends HttpServlet {
 
                         //Create Book
                         if (daoBook.createBook(nameBook, author, publicOfYear, category, price, quantity, image, description)) {
-                            if(daoRequest.UpdateStatusNewOld(requestId)) {
+                            if (daoRequest.UpdateStatusNewOld(requestId)) {
                                 action = "bookPage1";
                                 continue callCaseBookPage1;
                             }
                         }
                         break;
-                    //Page Book
 
+                    //Update Book
+                    case "updateBook":
+                        // Upload Book
+                        int bookId = Integer.parseInt(request.getParameter("bookId"));
+                        int update = Integer.parseInt(request.getParameter("update"));
+
+                        //Get Parameter Book
+                        nameBook = request.getParameter("bookName");
+                        author = request.getParameter("author");
+                        quantity = Integer.parseInt(request.getParameter("quantity"));
+                        price = Float.parseFloat(request.getParameter("price"));
+                        category = Integer.parseInt(request.getParameter("categoryId"));
+                        publicOfYear = Integer.parseInt(request.getParameter("publicOfYear"));
+
+                        //Update Book
+                        if (daoBook.UpdateBook(nameBook, author, publicOfYear, category, price, quantity, bookId)) {
+                            action = "bookDetail";
+                            request.setAttribute("nameBook", nameBook);
+                            request.setAttribute("update", update);
+                            listBook = daoBook.getInformationBook(first, last);
+                            continue callCaseBookPage1;
+                        }
+                        //Delete Book
+                    case "deleteBook":
+                        bookId = Integer.parseInt(request.getParameter("bookId"));
+                        int counLoop = Integer.parseInt(request.getParameter("count"));
+                        nameBook = request.getParameter("bookName");
+                        if (daoBook.StatusBook(bookId, false)) {
+                            action = "bookPage1";
+                            request.setAttribute("nameBook", nameBook);
+                            request.setAttribute("count", counLoop);
+                            continue callCaseBookPage1;
+                        }
                     case "bookPage1":
                         first = 1;
                         last = 4;
@@ -281,17 +320,26 @@ public class StaffBookServlet extends HttpServlet {
                         break;
                     // Page Detail Book khi click vào từng book
                     case "bookDetail":
+
                         //Check Status Book to display button
                         String nameBookDetail = request.getParameter("bookName");
                         checkStatusBook(nameBookDetail, listRequest, request);
-                        int bookId = Integer.parseInt(request.getParameter("bookId"));
+                        bookId = GetBookId(nameBookDetail,listBook);
+                        //If book Deleted
+                        if(bookId==0){
+                            listBook=daoBook.getInformationBookDeleted(first,last);
+                            bookId= GetBookId(nameBookDetail,listBook);
+                            url=STAFF_BOOK_DETAIL_DELETED_PAGE;
+                        }else {
+                            url = STAFF_BOOK_DETAIL_PAGE;
+                        }
                         //set Attribute List Book
                         session.setAttribute("listBook", listBook);
                         categoryId = Integer.parseInt(request.getParameter("categoryId"));
                         listBook = daoBook.getCategoryBook(categoryId, first, last);
+                        request.setAttribute("categoryId", categoryId);
                         request.setAttribute("bookIdServlet", bookId);
                         request.setAttribute("nameCategory", listBook.get(0).getCategoryName());
-                        url = STAFF_BOOK_DETAIL_PAGE;
                         break;
                     case "bookDetailRequest":
                         //Get Name Book
@@ -299,6 +347,14 @@ public class StaffBookServlet extends HttpServlet {
                         checkStatusBook(nameBookRequest, listRequest, request);
                         //Get IdBook In List Book
                         int bookIdRequest = GetBookId(nameBookRequest,listBook);
+                        //If book Deleted
+                        if(bookIdRequest==0){
+                            listBook=daoBook.getInformationBookDeleted(first,last);
+                            bookIdRequest= GetBookId(nameBookRequest,listBook);
+                            url=STAFF_BOOK_DETAIL_DELETED_PAGE;
+                        }else {
+                            url = STAFF_BOOK_DETAIL_PAGE;
+                        }
                         //Get Category
                         int categoryIdRequest=GetCatrgoryId(nameBookRequest,listBook);
                         //set Attribute List Book
@@ -306,7 +362,6 @@ public class StaffBookServlet extends HttpServlet {
                         listBook = daoBook.getCategoryBook(categoryIdRequest, first, last);
                         request.setAttribute("bookIdServlet", bookIdRequest);
                         request.setAttribute("nameCategory", listBook.get(0).getCategoryName());
-                        url = STAFF_BOOK_DETAIL_PAGE;
                         break;
 
                 }
