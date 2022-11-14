@@ -247,42 +247,6 @@ body {
     padding: 50rem;
 }
 
-#bookRequest td,
-#bookRequest th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#bookRequest tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-#bookRequest tr:hover {
-    background-color: #ddd;
-}
-
-#bookRequest th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #1d727e;
-    color: white;
-    font-size: 1.5rem;
-}
-
-#bookRequest tr td {
-    text-align: left;
-}
-
-#bookRequest tr td #imageBookRequest {
-    text-align: center;
-}
-
-
-#bookRequest #imageBookRequest {
-    max-width: 8rem;
-    max-height: 8rem;
-}
 
 .overview-tableBookRequest .wraper_addBookingRequest_nameTable {
     display: flex;
@@ -345,6 +309,11 @@ body {
     background-color: goldenrod;
     color: #fff;
     font-weight: 300;
+}
+.btnUpdate{
+    position: absolute;
+    font-size: 20px;
+    border: none;
 }
 /*.select_StatusBook {
     

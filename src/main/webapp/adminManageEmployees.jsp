@@ -203,7 +203,7 @@
                                                     <input class="textInforEmployee" type="hidden" name="txtHiddenAccount_Id" value="${employeeDTO.account_Id}"/>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtPassword" value="${employeeDTO.password}" required minlength="5"  maxlength="20" />
+                                                    <input class="textInforEmployee" type="password" name="txtPassword" value="${employeeDTO.password}" required minlength="5"  maxlength="20" />
                                                 </td>
                                                 <td>
                                                     <input class="textInforEmployee" type="text" name="txtFullName" value="${employeeDTO.fullName}" required minlength="3"  maxlength="30"/>

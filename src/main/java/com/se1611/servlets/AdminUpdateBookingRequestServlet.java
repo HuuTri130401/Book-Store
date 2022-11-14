@@ -36,23 +36,22 @@ public class AdminUpdateBookingRequestServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         //GET SITEMAP
         Properties siteMap = (Properties) request.getServletContext().getAttribute("SITE_MAP");
         //getRequest Parameter
         int request_Id = Integer.parseInt(request.getParameter("txtHiddenRequest_Id"));
-        String image = request.getParameter("imgImage");
         String name_Book = request.getParameter("txtName_Book");
         int quantity_Request = Integer.parseInt(request.getParameter("txtQuantity_Request"));
         float price_Request = Float.parseFloat(request.getParameter("txtPrice_Request"));
-        LocalDate date_Request = LocalDate.now();
         String note = request.getParameter("txtNote");
-        int status = Integer.parseInt(request.getParameter("txtStatus"));
-
+        int status_Book = Integer.parseInt(request.getParameter("txtStatus"));
+        int status = Integer.parseInt(request.getParameter("status"));
         String url = siteMap.getProperty(ADMIN_SHOW_LIST_BOOKING_REQUEST);
 
         try {
             BookingRequestDAO dao = new BookingRequestDAO();
-            dao.updateBookingRequest(request_Id, image, name_Book, quantity_Request, price_Request, date_Request, note, status);
+            dao.updateBookingRequest(request_Id, name_Book,quantity_Request, price_Request, note, status_Book,status);
             request.setAttribute("UPDATE_BOOKING_REQUEST_MSG", "Update Booking Request of:  " + name_Book + " Success");
         } catch (SQLException e) {
             log("Booking Update Servlet _ SQLException_ " + e.getMessage());
