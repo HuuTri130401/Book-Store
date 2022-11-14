@@ -28,16 +28,16 @@ public class OrderDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "SELECT MONTH(date_To_Oder), total_Order\n"
-                        + "FROM [Order]\n"
-                        + "Where Year(GETDATE()) = Year(date_To_Oder)\n"
-                        + "GROUP BY MONTH(date_To_Oder), total_Order";
+                String sql = "select Month(date_To_Oder) as m, Year(date_To_Oder) as y, sum(total_Order) as total\n"
+                        + "From [Order]\n"
+                        + "Where Year(GETDATE()) = Year(date_To_Oder) \n"
+                        + "group by Month(date_To_Oder), Year(date_To_Oder)";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 if (rs.next()) {
-                    Date month = rs.getDate("date_To_Oder");
+                    Date date_To_Oder = rs.getDate("date_To_Oder");
                     float totalOrder = rs.getFloat("total_Order");
-                    OrderDTO orderDTO = new OrderDTO(month, totalOrder);
+                    OrderDTO orderDTO = new OrderDTO(date_To_Oder, totalOrder);
                     listTotalOrder.add(orderDTO);
                 }
             }
@@ -53,12 +53,6 @@ public class OrderDAO {
             }
         }
         return listTotalOrder;
-    }
-    
-    public static void main(String[] args) 
-            throws SQLException, NamingException {
-        OrderDAO dao = new OrderDAO();
-        System.out.println(dao.getTotalOrderIn12Months());
     }
 
     public float getTotalOrderOfBook()
@@ -119,10 +113,10 @@ public class OrderDAO {
         try {
             con = DBHelper.getConnection();
             if (con != null) {
-                String sql = "select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status\n" +
-                        "                        from (select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status, ROW_NUMBER()over(Order by [order_Id]) as Rownum\n" +
-                        "                    from  [dbo].[Order] o inner join Employee e on e.employee_Id=o.employee_Id )as BookData\n" +
-                        "\t\t\t\t\t\twhere BookData.Rownum between ? and ?";
+                String sql = "select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status\n"
+                        + "                        from (select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status, ROW_NUMBER()over(Order by [order_Id]) as Rownum\n"
+                        + "                    from  [dbo].[Order] o inner join Employee e on e.employee_Id=o.employee_Id )as BookData\n"
+                        + "\t\t\t\t\t\twhere BookData.Rownum between ? and ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, first);
                 stm.setInt(2, last);
@@ -165,8 +159,8 @@ public class OrderDAO {
                 listOrder = new ArrayList<>();
                 for (int i = 0; i < orderIdList.size(); i++) {
                     //SQl connect data access
-                    String sql = "select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status\n" +
-                            "from [dbo].[Order] o inner join Employee e on e.employee_Id=o.employee_Id where order_Id = ?";
+                    String sql = "select order_Id,quantity_Order,total_Order,fullName, date_To_Oder,status\n"
+                            + "from [dbo].[Order] o inner join Employee e on e.employee_Id=o.employee_Id where order_Id = ?";
                     stm = con.prepareStatement(sql);
                     stm.setInt(1, orderIdList.get(i));
                     rs = stm.executeQuery();

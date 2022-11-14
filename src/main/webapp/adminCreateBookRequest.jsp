@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" >
     <head>
@@ -12,15 +13,23 @@
             <div class='head'>
                 <h1 class='company'>Phuong Nam Book Store</h1>
             </div>
+            <c:set var="createBookRequestMsgQuantity" value="${requestScope.ERROR_INSERT_QUANTITY_BOOKING_MSG}"/>
+            <c:set var="createBookRequestMsgPrice" value="${requestScope.ERROR_INSERT_PRICE_BOOKING_MSG}"/>
+
             <p class='msg'>Create Booking Request</p>
             <div class='form'>
                 <form action="adminCreateBookRequestAction" method="POST">
                     <span class='text'>Choose Image: </span><input type="file" name="imgImage" id='Image' required><br>
-                    <input type="text" placeholder='Book Name' name="txtBookName" class='text' required><br>
-                    <input type="text" placeholder='Quantity' name="txtQuantityBook" class='text' required><br>
-                    <input type="text" placeholder='Price' name="txtPrice" class='text' required><br>
-                    <!--<span class='text'>Date Create: </span><input type="date" name="txtDate" class='dateImport' required><br>-->
-                    <input type="text" placeholder='Note' name="txtNote" class='text'><br>
+                    <input type="text" placeholder='Book Name' name="txtBookName" class='text' required  minlength="2" maxlength="60"><br>
+                    <input type="number" placeholder='Quantity' name="txtQuantityBook" class='number' required><br>
+                    <c:if test="${not empty createBookRequestMsgQuantity}">
+                        <span class='text' style="color: red" >${createBookRequestMsgQuantity}</span>
+                    </c:if>
+                    <input type="number" placeholder='Price' name="txtPrice" class='number' required><br>
+                    <c:if test="${not empty createBookRequestMsgPrice}">
+                        <span class='text' style="color: red" >${createBookRequestMsgPrice}</span>
+                    </c:if>
+                    <input type="text" placeholder='Note' name="txtNote" class='text' maxlength="60"><br>
                     <table border="0">
                         <tbody class="text">
                             <tr>
@@ -29,8 +38,8 @@
                             </tr>
                             <tr>
                                 <td>Status Of Book</td>
-                                <td><input type="radio" name="radioStatusBook" class="radio" value="New" checked="checked">New<br/></td>
-                                <td><input type="radio" name="radioStatusBook" class="radio" value="Old">Old<br/></td>
+                                <td><input type="radio" name="radioStatusBook" class="radio" value="true" checked="checked">New<br/></td>
+                                <td><input type="radio" name="radioStatusBook" class="radio" value="false">Old<br/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -40,7 +49,7 @@
                     </div>                       
                 </form>
                 <div>
-                    <span class='text' style="color: red" >${requestScope.BOOK_ERROR}</span>
+                    <span class='text' style="color: red" >${requestScope.BOOK_REQUEST_ERROR}</span>
                 </div>
             </div>
         </section>

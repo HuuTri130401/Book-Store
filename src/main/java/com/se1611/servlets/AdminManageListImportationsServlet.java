@@ -43,17 +43,11 @@ public class AdminManageListImportationsServlet extends HttpServlet {
         Properties siteMap = (Properties) context.getAttribute("SITE_MAP");
         String url = (String) siteMap.get(RESULT);
         try {
-//            String searchValue = request.getParameter("txtSearch");
             ImportationDAO importationDAO = new ImportationDAO();
             List<ImportationDTO> listImportations = importationDAO.getImportation();
             if (!listImportations.isEmpty()) {
-                //listEmployees = employeeDAO.getListEmployee();
                 request.setAttribute("LIST_IMPORTATIONS", listImportations);
             } 
-//            if (searchValue != null && searchValue.trim().length() > 0) {
-//                listImportations = importationDAO.searchImportationByEmployee(searchValue);
-//                request.setAttribute("LIST_IMPORTATIONS", listImportations);
-//            }
         } catch (SQLException e) {
             log("AdminManageListEmployeesServlet_SQL_ " + e.getMessage());
         } catch (NamingException e) {

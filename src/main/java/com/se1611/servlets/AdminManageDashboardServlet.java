@@ -7,8 +7,10 @@ package com.se1611.servlets;
 import com.se1611.book.BookDAO;
 import com.se1611.book.BookDTO;
 import com.se1611.bookingRequest.BookingRequestDAO;
+import com.se1611.bookingRequest.BookingRequestDTO;
 import com.se1611.inventory.InventoryDAO;
 import com.se1611.orders.OrderDAO;
+import com.se1611.orders.OrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -47,7 +49,7 @@ public class AdminManageDashboardServlet extends HttpServlet {
         Properties siteMap = (Properties) context.getAttribute("SITE_MAP");
         String url = (String) siteMap.get(RESULT);
         try {
-            
+
             //MOST_INVENTORY_BOOK 
             BookDAO bookDAO = new BookDAO();
             List<BookDTO> inventoryBook = bookDAO.getListMostInventoryBook();
@@ -61,18 +63,22 @@ public class AdminManageDashboardServlet extends HttpServlet {
             //change float to int easy 
             int formatSumInOrder = (int) sumInOrder;
             request.setAttribute("TOTAL_OF_ORDER", formatSumInOrder);
-            
+
             //TOTAL MONEY LAST MONTH OF BOOK REQUEST
             BookingRequestDAO bookRequestDAO = new BookingRequestDAO();
             float sumTotalMoneyLastMonthBookRequest = bookRequestDAO.getTotalMoneyLastMonthBookRequest();
             //change float to int easy 
-            int formatMoney = (int)sumTotalMoneyLastMonthBookRequest;
+            int formatMoney = (int) sumTotalMoneyLastMonthBookRequest;
             request.setAttribute("TOTAL_MONEY_OF_LAST_MONTH", formatMoney);
-            
+
             //TOTAL OF INVENTORY IN CURRENT YEAR
             InventoryDAO inventoryDAO = new InventoryDAO();
             int totalInventoryCurrenyear = inventoryDAO.getSumInventoryInYear();
             request.setAttribute("TOTAL_QUANTITY_INVENTORY_CURRENT_YEAR", totalInventoryCurrenyear);
+
+//            OrderDAO orderEachMonth = new OrderDAO();
+//            List<OrderDTO> orderDTO = orderEachMonth.getTotalOrderOfBookIn12Month();
+//            request.setAttribute("TOTAL_ORDER_EACH_MONTH", orderDTO);
             
         } catch (SQLException e) {
             log("AdminManageListEmployeesServlet_SQL_ " + e.getMessage());
@@ -92,6 +98,8 @@ public class AdminManageDashboardServlet extends HttpServlet {
 //            System.out.println(list);
 //        }
 //    }
+
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

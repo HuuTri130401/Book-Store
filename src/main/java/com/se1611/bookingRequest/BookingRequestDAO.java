@@ -94,16 +94,11 @@ public class BookingRequestDAO {
                     int quantity_Request = rs.getInt("quantity_Request");
                     float price_Request = rs.getFloat("price_Request");
                     LocalDate date_Request = rs.getDate("date_Request").toLocalDate();
-                    LocalDate date_Request_Done = rs.getDate("date_Request_Done").toLocalDate();
                     String note = rs.getString("note");
                     int status = rs.getInt("status");
                     boolean status_Book_Request = rs.getBoolean("status_Book_Request");
 
-                    if (date_Request_Done != null) {
-                        listBookRequest.add(new BookingRequestDTO(request_Id, image, name_Book, quantity_Request, price_Request, date_Request, date_Request_Done, note, status, status_Book_Request));
-                    } else {
-                        listBookRequest.add(new BookingRequestDTO(request_Id, image, name_Book, quantity_Request, price_Request, date_Request, note, status, status_Book_Request));
-                    }
+                    listBookRequest.add(new BookingRequestDTO(request_Id, image, name_Book, quantity_Request, price_Request, date_Request, note, status, status_Book_Request));
                 }//end while rs not null
             }//end if con is not null
         } finally {
@@ -192,4 +187,87 @@ public class BookingRequestDAO {
         }
         return totalMoneyLastMonthBookRequest;
     }
+
+    public BookingRequestDTO getBookQuestByBookId(String bookId)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        BookingRequestDTO bookingRequest = null;
+
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = "Select request_Id, image, name_Book, quantity_Request, price_Request, date_Request, note, status, status_Book_Request \n"
+                        + "From BookingRequest\n"
+                        + "Where request_Id = ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, bookId);
+
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    int request_Id = rs.getInt("request_Id");
+                    String image = rs.getString("image");
+                    String name_Book = rs.getString("name_Book");
+                    int quantity_Request = rs.getInt("quantity_Request");
+                    float price_Request = rs.getFloat("gender");
+                    LocalDate date_Request = rs.getDate("date_Request").toLocalDate();
+                    String note = rs.getString("note");
+                    int status = rs.getInt("status");
+                    boolean status_Book_Request = rs.getBoolean("status_Book_Request");
+                    bookingRequest = new BookingRequestDTO(request_Id, image, name_Book, quantity_Request, price_Request, date_Request, note, status, status_Book_Request);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return bookingRequest;
+    }
+
+    public boolean updateBookingRequest(int request_Id, String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, String note, int status)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.getConnection();
+            if (con != null) {
+                String sql = " Update BookingRequest \n"
+                        + "Set image = ?, name_Book = ?, quantity_Request = ?, price_Request = ?, date_Request = ?, note = ?, status = ? \n"
+                        + "Where request_Id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, image);
+                stm.setString(2, name_Book);
+                stm.setInt(3, quantity_Request);
+                stm.setFloat(4, price_Request);
+                stm.setDate(5, Date.valueOf(date_Request));
+                stm.setString(6, note);
+                stm.setInt(7, status);
+                stm.setInt(8, request_Id);
+
+                int rowEffect = stm.executeUpdate();
+                if (rowEffect > 0) {
+                    return true;
+                } //end if result > 0
+            } //end if con is not null
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return false;
+    }
+
 }//end class

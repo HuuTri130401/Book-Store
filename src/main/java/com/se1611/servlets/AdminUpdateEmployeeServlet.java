@@ -4,7 +4,9 @@
  */
 package com.se1611.servlets;
 
+import com.se1611.employees.CreateEmployeeError;
 import com.se1611.employees.EmployeeDAO;
+import com.se1611.employees.EmployeeDTO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -35,11 +37,14 @@ public class AdminUpdateEmployeeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         //GET SITEMAP
         Properties siteMap = (Properties) request.getServletContext().getAttribute("SITE_MAP");
         //getRequest Parameter
         int employee_Id = Integer.parseInt(request.getParameter("txtHiddenEmployee_Id"));
-        String account_Id = request.getParameter("txtAccount_Id");
+        String account_Id = request.getParameter("txtHiddenAccount_Id");
         String password = request.getParameter("txtPassword");
         String fullName = request.getParameter("txtFullName");
         String phone = request.getParameter("txtPhone");
@@ -51,9 +56,20 @@ public class AdminUpdateEmployeeServlet extends HttpServlet {
         String url = siteMap.getProperty(ADMIN_SHOW_LIST_EMPLOYEES);
 
         try {
-            EmployeeDAO dao = new EmployeeDAO();
-            dao.updateEmployeeAccount(employee_Id, account_Id, password, fullName, phone, address, gender, role, status_Employee);
-            request.setAttribute("UPDATE_EMPLOYEE_MSG", "Update Employee "  + fullName + " Success");  
+            CreateEmployeeError employeeErrors = new CreateEmployeeError();
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            int count = String.valueOf(phone).length();
+            if (count < 10 || count > 11) {
+                employeeErrors.setPhoneError("Phone length has [10 or 11] chars");
+                request.setAttribute("ERROR_UPDATE_EMPLOYEE_MSG", employeeErrors.getPhoneError());
+                url = ADMIN_SHOW_LIST_EMPLOYEES;
+            } else {
+                boolean createEmployee = employeeDAO.updateEmployeeAccount(employee_Id, account_Id, password, fullName, phone, address, gender, role, status_Employee);
+                if (createEmployee) {
+                    request.setAttribute("UPDATE_EMPLOYEE_MSG", "Update Employee " + fullName + " Success");
+                    url = ADMIN_SHOW_LIST_EMPLOYEES;
+                }
+            }
         } catch (SQLException e) {
             log("Account Update Servlet _ SQLException_ " + e.getMessage());
         } catch (NamingException e) {

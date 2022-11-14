@@ -69,6 +69,10 @@
         <servlet-name>AdminManageListImportationsServlet</servlet-name>
         <servlet-class>com.se1611.servlets.AdminManageListImportationsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateBookingRequestServlet</servlet-name>
+        <servlet-class>com.se1611.servlets.AdminUpdateBookingRequestServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthLoginServlet</servlet-name>
         <url-pattern>/AuthLoginServlet</url-pattern>
@@ -136,6 +140,10 @@
     <servlet-mapping>
         <servlet-name>SellerCartServlet</servlet-name>
         <url-pattern>/SellerCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateBookingRequestServlet</servlet-name>
+        <url-pattern>/AdminUpdateBookingRequestServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

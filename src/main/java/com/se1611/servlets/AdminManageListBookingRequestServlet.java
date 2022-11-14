@@ -44,7 +44,7 @@ public class AdminManageListBookingRequestServlet extends HttpServlet {
         String url = (String) siteMap.get((RESULT_BOOKING_REQUEST));
 
         try {
-            String searchValue = request.getParameter("txtSearch");
+            String searchValue = request.getParameter("txtSearchBookRequest");
             BookingRequestDAO bookingRequestDAO = new BookingRequestDAO();
 
             List<BookingRequestDTO> listBookingRequest = bookingRequestDAO.getListBookingRequest();
@@ -66,14 +66,14 @@ public class AdminManageListBookingRequestServlet extends HttpServlet {
 
     }
     
-    public static void main(String[] args)
-            throws NamingException, SQLException {
-        BookingRequestDAO bookingRequestDAO = new BookingRequestDAO();
-        List<BookingRequestDTO> listBookingRequest = bookingRequestDAO.getListBookingRequest();
-        if (!listBookingRequest.isEmpty()) {
-            System.out.println(listBookingRequest);
-        }
-    }
+//    public static void main(String[] args)
+//            throws NamingException, SQLException {
+//        BookingRequestDAO bookingRequestDAO = new BookingRequestDAO();
+//        List<BookingRequestDTO> listBookingRequest = bookingRequestDAO.getListBookingRequest();
+//        if (!listBookingRequest.isEmpty()) {
+//            System.out.println(listBookingRequest);
+//        }
+//    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

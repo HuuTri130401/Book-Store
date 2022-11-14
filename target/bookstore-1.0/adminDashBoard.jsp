@@ -113,7 +113,7 @@
                         <div class="box">
                             <div class="left-side">
                                 <div class="boxtopic">Total Order</div>
-                                <div class="number" style="color: #267871;">${sumOfTotalOrder} VNĐ</div>
+                                <div class="number" style="color: #267871;">${sumOfTotalOrder} Đ</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box1'></i>
                                     <span class="text">During The Current Year</span>
@@ -125,7 +125,7 @@
                         <div class="box">
                             <div class="left-side">
                                 <div class="boxtopic">Total Money Of Request</div>
-                                <div class="number" style="color: #0d8cba;">${sumTotalMoneyLastMonthBookRequest} VNĐ</div>
+                                <div class="number" style="color: #0d8cba;">${sumTotalMoneyLastMonthBookRequest} Đ</div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box2'></i>
                                     <span class="text">Money Book Request Last Month</span>
@@ -163,47 +163,155 @@
 
                     <!-- add chart -->
                     <div class="graphBox">
+                        <!--                        <div class="boxShow">
+                                                    <canvas id="myChart" style="max-height: 440px; width:100%"></canvas>
+                                                </div>-->
                         <div class="boxShow">
-                            <canvas id="myChart" style="max-height: 440px; width:100%"></canvas>
-<!--                            <script>
-                                //var xValues = [${requestScope.LIST_SEMESTER_STRING}];
-                                //const ctx = document.getElementById('myChart').getContext('2d');
-                                //const myChart = new Chart(ctx, {
-                                
-                                //var xValues = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                                var xValues = [120, 109, 30, 50, 200, -200, 120, 190, 300, 300, 200, 300];
-                                var yValues = [120, 109, 30, 50, 200, -200, 120, 190, 300, 300, 200, 300];
-                                
-                                new Chart("myChart", {
-                                    type: "bar",
-                                    data: {
-                                        labels: xValues,
-                                        datasets: [{
-                                                label: '# Statistics For 12 Months',
-                                                data: yValues,
-                                                backgroundColor: [
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                    '#267871',
-                                                ],
-                                                borderWidth: 1
-                                            }]
-                                    },
-                                    options: {
-                                        legend: {display: true},
-                                        responsive: true,
-                                    }
-                                });
-                            </script>-->
+                            <div class="overview-tableEmployee">
+                                <h2 id="nameTable">TOTAL ORDER / MONTH</h2>
+                                <div class="tableEmployee">
+                                    <table id="employees">
+                                        <%--<c:set var="listStatisticTotalIn12Month" value="${requestScope.TOTAL_ORDER_EACH_MONTH}"/>--%>
+                                        <%--<c:if test="${not empty statisticTotalIn12Month}">--%>
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Month</th>
+                                                    <th>Year</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%-- <c:forEach var="listTotalDTO" items="${statisticTotalIn12Month}" varStatus="counter">
+                                                    <tr>
+                                                        <td>
+                                                            ${counter.count}
+                                                        </td>
+                                                        <td>
+                                                            ${listTotalDTO.date_To_Order}
+                                                        </td>
+                                                        <td>
+                                                            ${listTotalDTO.date_To_Order}
+                                                        </td>
+                                                        <td>
+                                                            ${listTotalDTO.total_Order}
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>--%>
+                                                <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            2022
+                                                        </td>
+                                                        <td>
+                                                            3300
+                                                        </td>
+                                                    </tr>
+                                                <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            2022
+                                                        </td>
+                                                        <td>
+                                                            3300
+                                                        </td>
+                                                    </tr>
+                                                <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            2022
+                                                        </td>
+                                                        <td>
+                                                            3300
+                                                        </td>
+                                                    </tr>
+                                                <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            2022
+                                                        </td>
+                                                        <td>
+                                                            3300
+                                                        </td>
+                                                    </tr>
+                                                <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            2022
+                                                        </td>
+                                                        <td>
+                                                            3300
+                                                        </td>
+                                                    </tr>
+                                                <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            2022
+                                                        </td>
+                                                        <td>
+                                                            3300
+                                                        </td>
+                                                    </tr>
+                                                <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            2022
+                                                        </td>
+                                                        <td>
+                                                            3300
+                                                        </td>
+                                                    </tr>
+              
+                                            </tbody>
+                                        </table>
+                                    <%--</c:if>--%>
+                                    <%-- <c:if test="${empty listImportations}">
+                                         <h2 style="text-align: center;
+                                             align-items: center;
+                                             color: red">
+                                             NOT HAVE THE RECORD !       
+                                         </h2>
+                                     </c:if> --%>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxShow">
+                            NOT HAVE THE RECORD !    
                         </div>
                     </div>
 
@@ -212,7 +320,7 @@
         </div>
         <script src="./js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-        <script src="./js/my_chart.js"></script>
+        <!--<script src="./js/my_chart.js"></script>-->
     </body>
 
 </html>

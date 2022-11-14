@@ -7,10 +7,12 @@ com\se1611\servlets\AdminUpdateEmployeeServlet.class
 com\se1611\book\BookDTO.class
 com\se1611\employees\EmployeeDTO.class
 com\se1611\servlets\AdminManageListBookingRequestServlet.class
+com\se1611\bookingRequest\RequestDAO.class
 com\se1611\filters\AuthenticationFilters.class
 com\se1611\employees\EmployeeDAO.class
 com\se1611\orders\OrderDTO.class
 com\se1611\servlets\StaffImportationServlet.class
+com\se1611\bookingRequest\RequestDTO.class
 com\se1611\servlets\SellerOrderServlet.class
 com\se1611\servlets\StaffBookServlet.class
 com\se1611\listeners\ContextListener.class
@@ -18,6 +20,7 @@ com\se1611\orders\OrderDetailDAO.class
 com\se1611\servlets\AdminManageDashboardServlet.class
 com\se1611\bookingRequest\BookingRequestDTO.class
 com\se1611\servlets\AuthLoginServlet.class
+.netbeans_automatic_build
 com\se1611\orders\OrderDAO.class
 com\se1611\bookingRequest\BookingRequestDAO.class
 com\se1611\orders\OrderDetailDTO.class
@@ -28,12 +31,11 @@ com\se1611\servlets\AdminCreateBookingRequestServlet.class
 com\se1611\book\BookDAO.class
 com\se1611\servlets\AdminCreateNewEmployeeServlet.class
 com\se1611\servlets\AdminManageListImportationsServlet.class
-com\se1611\request\RequestDAO.class
 com\se1611\inventory\InventoryDTO.class
-com\se1611\request\RequestDTO.class
 com\se1611\servlets\AdminManageListEmployeesServlet.class
 com\se1611\filters\DispatcherFilter.class
 com\se1611\Cart\CartDTO.class
+com\se1611\servlets\AdminUpdateBookingRequestServlet.class
 com\se1611\servlets\AdminBookServlet.class
 com\se1611\servlets\AdminDeleteEmployeeServlet.class
 com\se1611\Importation\ImportationDTO.class

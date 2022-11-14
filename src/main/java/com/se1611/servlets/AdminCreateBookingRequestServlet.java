@@ -5,6 +5,7 @@
 package com.se1611.servlets;
 
 import com.se1611.bookingRequest.BookingRequestDAO;
+import com.se1611.bookingRequest.BookingRequestError;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -45,54 +46,29 @@ public class AdminCreateBookingRequestServlet extends HttpServlet {
         String name_Book = request.getParameter("txtBookName");
         int quantity_Request = Integer.parseInt(request.getParameter("txtQuantityBook"));
         float price_Request = Float.parseFloat(request.getParameter("txtPrice"));
-//        Date date_Request = Date.valueOf(request.getParameter("txtDate"));
         LocalDate date_Request = LocalDate.now();
         String note = request.getParameter("txtNote");
         int status = Integer.parseInt(request.getParameter("radioStatus"));
         boolean status_Book_Request = Boolean.parseBoolean(request.getParameter("radioStatusBook"));
 
-//        String confirmPassword = request.getParameter("txtConfirmPassword");
-
         String url = siteMap.getProperty(ADMIN_CREATE_BOOK_REQUEST);
         boolean errFound = true;
 
-//        CreateEmployeeError employeeErrors = new CreateEmployeeError();
+        BookingRequestError bookingErrors = new BookingRequestError();
         try {
-//            if (account_Id.trim().length() < 5 || account_Id.trim().length() > 30) {
-//                errFound = false;
-//                employeeErrors.setAccount_IdError("Account ID length has [5..30] chars");
-//            }
-//            if (password.trim().length() < 5 || password.trim().length() > 30) {
-//                errFound = false;
-//                employeeErrors.setPasswordError("Password length has [5..30] chars");
-//            } else if (!confirmPassword.trim().equals(password.trim())) {
-//                errFound = false;
-//                employeeErrors.setConfirmPasswordError("Confirm Password does not match Password");
-//            }
-//            if (fullName.trim().length() < 2 || fullName.trim().length() > 30) {
-//                errFound = false;
-//                employeeErrors.setAccount_IdError("Full Name length has [2..30] chars");
-//            }
-//            int count = String.valueOf(phone).length();
-//            if (count < 10 || count > 11) {
-//                errFound = false;
-//                employeeErrors.setPhoneError("Phone length has [10 or 11] chars");
-//            }
-//            if (address.trim().length() < 2 || address.trim().length() > 20) {
-//                errFound = false;
-//                employeeErrors.setAddressError("Address length has [2..20] chars");
-//            }
-//            if (gender.trim().length() < 1 || gender.trim().length() > 7) {
-//                errFound = false;
-//                employeeErrors.setGenderError("Gender length has [1..7] chars");
-//            }
-//            if (role.trim().length() < 2 || role.trim().length() > 7) {
-//                errFound = false;
-//                employeeErrors.setRoleError("Role length has [2..7] chars");
-//            }
+            if (quantity_Request < 10 || quantity_Request > 400) {
+                errFound = false;
+                bookingErrors.setQuantity_RequestError("Quantity must between [10..400] !");
+                request.setAttribute("ERROR_INSERT_QUANTITY_BOOKING_MSG", bookingErrors.getQuantity_RequestError());
+            }
+            if (price_Request < 0) {
+                errFound = false;
+                bookingErrors.setPrice_RequestError("Price must be > 0 !");
+                request.setAttribute("ERROR_INSERT_PRICE_BOOKING_MSG", bookingErrors.getPrice_RequestError());
+            }
             if (errFound) {
                 BookingRequestDAO bookRequestDAO = new BookingRequestDAO();
-                
+
                 boolean createBookRequest = bookRequestDAO.addNewBookingRequest(image, name_Book, quantity_Request, price_Request, date_Request, note, status, status_Book_Request);
                 if (createBookRequest) {
                     url = ADMIN_MANAGE_LIST_BOOK_REQUEST;
@@ -102,7 +78,7 @@ public class AdminCreateBookingRequestServlet extends HttpServlet {
             } else {
                 url = ADMIN_CREATE_BOOK_REQUEST;
                 //bookError.setMessageError("Can not Create New Book !");
-                request.setAttribute("BOOK_REQUEST_ERROR", "Can not Create New Book Request!");
+                request.setAttribute("BOOK_REQUEST_ERROR", "Can not Create New Book Request !");
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }

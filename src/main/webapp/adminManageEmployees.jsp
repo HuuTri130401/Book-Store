@@ -132,6 +132,19 @@
                                 </div>
                             </div>
                         </c:if>
+                        <!--Show msg after duplicate id-->
+                        <c:set var="errUpdateEmpMsg" value="${requestScope.ERROR_UPDATE_EMPLOYEE_MSG}"/>
+                        <c:if test="${not empty errUpdateEmpMsg}">
+                            <div  class="toastx-inactive">
+                                <div class="toast-icon-inactive">
+                                    <i class="fa-sharp fa-solid fa-exclamation"></i> 
+                                </div>
+                                <div class="toast-body-inactive">
+                                    <h3 class="toast-title-inactive">Error</h3>
+                                    <p class="toast-msg-inactive">${errUpdateEmpMsg}</p>
+                                </div>
+                            </div>
+                        </c:if>
                         <%-- Show message after inactive--%>
                         <c:set var="inActiveEmpMsg" value="${requestScope.DELETE_EMPLOYEE_MSG}"/>
                         <c:if test="${not empty inActiveEmpMsg}">
@@ -148,11 +161,25 @@
                         <!--Show msg after Insert-->
                         <c:set var="insertEmpMsg" value="${requestScope.INSERT_EMPLOYEE_MSG}"/>
                         <c:if test="${not empty insertEmpMsg}">
+                            <div  class="toastx">
+                                <div class="toast-icon">
+                                    <i class="fa-sharp fa-solid fa-circle-check"></i>
+                                </div>
+                                <div class="toast-body">
+                                    <h3 class="toast-title">Successfully</h3>
+                                    <p class="toast-msg">${insertEmpMsg}</p>
+                                </div>
+                            </div>
+                        </c:if>
+
+                        <!--Show msg after Insert-->
+                        <%-- <c:set var="insertEmpMsg" value="${requestScope.INSERT_EMPLOYEE_MSG}"/>
+                        <c:if test="${not empty insertEmpMsg}">
                             <h3 class='text' style="color: green" >${insertEmpMsg}</h3>
                         </c:if>
 
                         <!--Show msg after Delete-->
-                        <%-- <c:set var="inActiveEmpMsg" value="${requestScope.DELETE_EMPLOYEE_MSG}"/>
+                        <c:set var="inActiveEmpMsg" value="${requestScope.DELETE_EMPLOYEE_MSG}"/>
                         <c:if test="${not empty inActiveEmpMsg}">
                             <h3 class='text' style="color: red" >${inActiveEmpMsg}</h3>
                         </c:if>   
@@ -193,25 +220,26 @@
                                                     <input class="textInforEmployee" type="hidden" name="txtHiddenEmployee_Id" value="${employeeDTO.employee_Id}"/>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtAccount_Id" value="${employeeDTO.account_Id}" minlength="4"  maxlength="25"/>
+                                                    ${employeeDTO.account_Id}
+                                                    <input class="textInforEmployee" type="hidden" name="txtHiddenAccount_Id" value="${employeeDTO.account_Id}"/>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtPassword" value="${employeeDTO.password}" minlength="5"  maxlength="20"/>
+                                                    <input class="textInforEmployee" type="text" name="txtPassword" value="${employeeDTO.password}" required minlength="5"  maxlength="20" />
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtFullName" value="${employeeDTO.fullName}" minlength="3"  maxlength="30"/>
+                                                    <input class="textInforEmployee" type="text" name="txtFullName" value="${employeeDTO.fullName}" required minlength="3"  maxlength="30"/>
                                                 </td>
                                                 <td>
                                                     <input class="textInforEmployee" type="number" name="txtPhone" value="${employeeDTO.phone}" style="width: 8em"/> <%-- minlength="10"  maxlength="11" size="12" --%>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtAddress" value="${employeeDTO.address}" minlength="4" maxlength="30"/>
+                                                    <input class="textInforEmployee" type="text" name="txtAddress" value="${employeeDTO.address}" required minlength="4" maxlength="30"/>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtGender" value="${employeeDTO.gender}" minlength="4" maxlength="6" size="7"/>
+                                                    <input class="textInforEmployee" type="text" name="txtGender" value="${employeeDTO.gender}" required minlength="4" maxlength="6" size="7"/>
                                                 </td>
                                                 <td>
-                                                    <input class="textInforEmployee" type="text" name="txtRole" value="${employeeDTO.role}" minlength="4" maxlength="6" size="7" />
+                                                    <input class="textInforEmployee" type="text" name="txtRole" value="${employeeDTO.role}" required minlength="4" maxlength="6" size="7" />
                                                 </td>
                                                 <td>
                                                     <c:if test="${employeeDTO.status_Employee eq true}">

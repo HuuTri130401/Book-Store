@@ -36,7 +36,7 @@
                         <div class="search-box">
                             <!--SEARCH-BOOK-REQUEST-->
                             <form action="adminShowListBookingRequest">
-                                <input type="text" placeholder="Search..." name="txtSearch" value="${param.txtSearch}">
+                                <input type="text" placeholder="Search..." name="txtSearchBookRequest" value="${param.txtSearch}">
                                 <button type="submit"><i class='bx bx-search-alt-2'></i></button>
                             </form>
                         </div>
@@ -91,12 +91,6 @@
                         <span class="links_name">Importation</span>
                     </a>
                 </li>
-                <!--                    <li>
-                                        <a href="./adminShowListOrders">
-                                            <i class='bx bx-list-ol'></i>
-                                            <span class="links_name">Order</span>
-                                        </a>
-                                    </li>-->
                 <li>
                     <a href="./logoutAction">
                         <i class='bx bx-log-out'></i>
@@ -132,42 +126,40 @@
                                         <th>Quantity</th>
                                         <th>Price</th>
                                         <th>Date</th>
-                                        <th>Date Complete</th>
                                         <th>Note</th>
                                         <th>Status</th>
                                         <th>Status_Book</th>
-                                        <!--<th>Update</th>-->
+                                        <th>Update</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="bookRequestDTO" items="${listBookingRequest}" varStatus="counter">
+                                    <form action="adminUpdateBookRequestAction" method="POST">
                                         <tr>
                                             <td>
                                                 ${counter.count}
                                             </td>
                                             <td>
                                                 ${bookRequestDTO.request_Id}
+                                                <input class="textInforEmployee" type="hidden" name="txtHiddenRequest_Id" value="${bookRequestDTO.request_Id}"/>
                                             </td>
                                             <td>
                                                 <img src="./images/${bookRequestDTO.image}" alt="..." id="imageBookRequest">
                                             </td>
                                             <td>
-                                                ${bookRequestDTO.name_Book}
+                                                <input class="textInforEmployee" type="text" name="txtName_Book" value="${bookRequestDTO.name_Book}"/>
                                             </td>
                                             <td>
-                                                ${bookRequestDTO.quantity_Request}
+                                                <input class="textInforEmployee" type="text" name="txtQuantity_Request" value="${bookRequestDTO.quantity_Request}"/>
                                             </td>
                                             <td>
-                                                ${bookRequestDTO.price_Request}
+                                                <input class="textInforEmployee" type="text" name="txtPrice_Request" value="${bookRequestDTO.price_Request}"/>
                                             </td>
                                             <td>
-                                                ${bookRequestDTO.date_Request}
+                                                <input class="textInforEmployee" type="text" name="date_Request" value="${bookRequestDTO.date_Request}"/>
                                             </td>
                                             <td>
-                                                ${bookRequestDTO.date_Request_Done}
-                                            </td>
-                                            <td>
-                                                ${bookRequestDTO.note}
+                                                <input class="textInforEmployee" type="txtNote" name="" value="${bookRequestDTO.note}"/>
                                             </td>
                                             <td id="statusProcess">
                                                 <c:if test="${bookRequestDTO.status == 0}">
@@ -192,14 +184,14 @@
                                                             updateBook
                                                         </c:if>">
                                                     <option class="newBookTmp" 
-                                                            <c:if test="${bookRequestDTO.status_Book_Request eq 'false'}">
+                                                            <c:if test="${bookRequestDTO.status_Book_Request eq 'true'}">
                                                                 selected
                                                             </c:if>
                                                             value="false">
-                                                        New
+                                                        New 
                                                     </option>
                                                     <option class="updateBookTmp" 
-                                                            <c:if test="${bookRequestDTO.status_Book_Request eq 'true'}">
+                                                            <c:if test="${bookRequestDTO.status_Book_Request eq 'false'}">
                                                                 selected
                                                             </c:if>
                                                             value="true">
@@ -207,11 +199,12 @@
                                                     </option>
                                                 </select>
                                             </td>
-<!--                                            <td>
+                                            <td>
                                                 <input class="buttonActionUpdate" type="submit" value="Update"/>
-                                            </td>-->
+                                            </td>
                                         </tr>
-                                    </c:forEach>
+                                    </form>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </c:if>
