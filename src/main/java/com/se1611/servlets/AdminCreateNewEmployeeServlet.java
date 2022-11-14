@@ -8,6 +8,9 @@ import com.se1611.employees.CreateEmployeeError;
 import com.se1611.employees.EmployeeDAO;
 import com.se1611.employees.EmployeeDTO;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -54,6 +57,7 @@ public class AdminCreateNewEmployeeServlet extends HttpServlet {
 
         String confirmPassword = request.getParameter("txtConfirmPassword");
 
+
         String url = siteMap.getProperty(CREATE_NEW_EMPLOYEE);
         boolean errFound = true;
 
@@ -93,6 +97,8 @@ public class AdminCreateNewEmployeeServlet extends HttpServlet {
 //            }
             if (errFound) {
                 EmployeeDAO employeeDAO = new EmployeeDAO();
+                //Hashing pass
+                password=HashingPass(password);
                 EmployeeDTO employeeDTO = new EmployeeDTO(account_Id, password, fullName, phone, address, gender, role, status_Employee);
 
                 boolean checkDuplicateAccountId = employeeDAO.checkAcoountDuplicate(account_Id);
@@ -118,12 +124,23 @@ public class AdminCreateNewEmployeeServlet extends HttpServlet {
             }
         } catch (SQLException e) {
             log("Account Create New Employee Servlet _ SQLException_ " + e.getMessage());
-        } catch (NamingException e) {
+        } catch (NamingException | NoSuchAlgorithmException e) {
             log("Account Create New Employee Servlet _ NamingException_ " + e.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
+    }
+    protected String HashingPass(String pass) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] hashByte = md.digest(pass.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashByte) {
+            //in theo hex String format,<2 se in số 0 bên phải
+            sb.append(String.format("%02x", b));
+        }
+        pass = sb.toString();
+        return pass;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

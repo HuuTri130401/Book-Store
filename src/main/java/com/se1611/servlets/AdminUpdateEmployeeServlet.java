@@ -6,6 +6,9 @@ package com.se1611.servlets;
 
 import com.se1611.employees.EmployeeDAO;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -35,6 +38,7 @@ public class AdminUpdateEmployeeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         //GET SITEMAP
         Properties siteMap = (Properties) request.getServletContext().getAttribute("SITE_MAP");
         //getRequest Parameter
@@ -52,16 +56,29 @@ public class AdminUpdateEmployeeServlet extends HttpServlet {
 
         try {
             EmployeeDAO dao = new EmployeeDAO();
+            //Hashing pass
+            password=HashingPass(password);
             dao.updateEmployeeAccount(employee_Id, account_Id, password, fullName, phone, address, gender, role, status_Employee);
             request.setAttribute("UPDATE_EMPLOYEE_MSG", "Update Employee "  + fullName + " Success");  
         } catch (SQLException e) {
             log("Account Update Servlet _ SQLException_ " + e.getMessage());
-        } catch (NamingException e) {
+        } catch (NamingException | NoSuchAlgorithmException e) {
             log("Account Update Servlet _ NamingException_ " + e.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
+    }
+    protected String HashingPass(String pass) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] hashByte = md.digest(pass.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashByte) {
+            //in theo hex String format,<2 se in số 0 bên phải
+            sb.append(String.format("%02x", b));
+        }
+        pass = sb.toString();
+        return pass;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

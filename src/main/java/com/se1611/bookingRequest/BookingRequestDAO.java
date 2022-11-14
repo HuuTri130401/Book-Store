@@ -45,7 +45,7 @@ public class BookingRequestDAO {
                     int quantity_Request = rs.getInt("quantity_Request");
                     float price_Request = rs.getFloat("price_Request");
                     LocalDate date_Request = rs.getDate("date_Request").toLocalDate();
-                    LocalDate date_Request_Done = null;
+                    Date date_Request_Done =rs.getDate("date_Request_Done") ;
                     String note = rs.getString("note");
                     int status = rs.getInt("status");
                     boolean status_Book_Request = rs.getBoolean("status_Book_Request");
@@ -94,7 +94,7 @@ public class BookingRequestDAO {
                     int quantity_Request = rs.getInt("quantity_Request");
                     float price_Request = rs.getFloat("price_Request");
                     LocalDate date_Request = rs.getDate("date_Request").toLocalDate();
-                    LocalDate date_Request_Done = rs.getDate("date_Request_Done").toLocalDate();
+                    Date date_Request_Done = rs.getDate("date_Request_Done");
                     String note = rs.getString("note");
                     int status = rs.getInt("status");
                     boolean status_Book_Request = rs.getBoolean("status_Book_Request");

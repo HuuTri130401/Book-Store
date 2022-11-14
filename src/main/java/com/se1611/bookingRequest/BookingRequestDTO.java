@@ -4,8 +4,8 @@
  */
 package com.se1611.bookingRequest;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -19,7 +19,7 @@ public class BookingRequestDTO {
     private int quantity_Request;
     private float price_Request;
     private LocalDate date_Request;
-    private LocalDate date_Request_Done;
+    private Date date_Request_Done;
 
     private String note;
     private int status;
@@ -28,7 +28,7 @@ public class BookingRequestDTO {
     public BookingRequestDTO() {
     }
 
-    public BookingRequestDTO(int request_Id, String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, LocalDate date_Request_Done, String note, int status, boolean status_Book_Request) {
+    public BookingRequestDTO(int request_Id, String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, Date date_Request_Done, String note, int status, boolean status_Book_Request) {
         this.request_Id = request_Id;
         this.image = image;
         this.name_Book = name_Book;
@@ -101,11 +101,11 @@ public class BookingRequestDTO {
         this.date_Request = date_Request;
     }
 
-    public LocalDate getDate_Request_Done() {
+    public Date getDate_Request_Done() {
         return date_Request_Done;
     }
 
-    public void setDate_Request_Done(LocalDate date_Request_Done) {
+    public void setDate_Request_Done(Date date_Request_Done) {
         this.date_Request_Done = date_Request_Done;
     }
 

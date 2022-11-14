@@ -7,6 +7,9 @@ package com.se1611.servlets;
 import com.se1611.employees.EmployeeDAO;
 import com.se1611.employees.EmployeeDTO;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -42,6 +45,7 @@ public class AuthLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String url = LOGIN_PAGE;
         //get request parameters
         HttpSession sessionLoginFailed=request.getSession();
@@ -51,6 +55,9 @@ public class AuthLoginServlet extends HttpServlet {
         sessionLoginFailed.setAttribute("countLogin",count);
         try {
             EmployeeDAO dao = new EmployeeDAO();
+            //Hashing password
+            password=HashingPass(password);
+            //Get Account
             EmployeeDTO validEmployee = dao.getAccountByAccoutIdAndPassword(userId, password);
             if (validEmployee != null) {
                 if (validEmployee.getRole().equalsIgnoreCase("admin")) {
@@ -78,13 +85,24 @@ public class AuthLoginServlet extends HttpServlet {
                     response.sendRedirect(url);
                 }
             }//end if validAccount is not null
-        } catch (SQLException e) {
+        } catch (SQLException | NoSuchAlgorithmException e) {
             log("EmployeeLoginServlet _ SQL_" + e.getMessage());
         } catch (NamingException ex) {
             Logger.getLogger(AuthLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             response.sendRedirect(url);
         }
+    }
+    protected String HashingPass(String pass) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] hashByte = md.digest(pass.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashByte) {
+            //in theo hex String format,<2 se in số 0 bên phải
+            sb.append(String.format("%02x", b));
+        }
+        pass = sb.toString();
+        return pass;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

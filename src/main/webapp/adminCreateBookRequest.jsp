@@ -15,7 +15,7 @@
             </div>
             <p class='msg'>Create Booking Request</p>
             <div class='form'>
-                <form action="adminCreateBookRequestAction" method="POST">
+                <form action="adminCreateBookRequestAction" method="POST"  enctype="multipart/form-data">
                     <span class='text'>Choose Image: </span><input type="file" name="imgImage" id='Image' required><br>
                     <input type="text" placeholder='Book Name' name="txtBookName" class='text' required><br>
                     <input type="text" placeholder='Quantity' name="txtQuantityBook" class='text' required><br>
