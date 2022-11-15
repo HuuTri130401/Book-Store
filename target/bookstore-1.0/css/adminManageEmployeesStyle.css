@@ -350,6 +350,10 @@ body {
     border-radius: 6px;
 }
 
+h2 {
+    font-weight: 600;
+}
+
 .home-content   .overview-tableEmployee #nameTable {
     color: #fab804ea;
     padding: 1rem;

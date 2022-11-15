@@ -62,33 +62,29 @@ public class AdminCreateNewEmployeeServlet extends HttpServlet {
             CreateEmployeeError employeeErrors = new CreateEmployeeError();
             EmployeeDAO employeeDAO = new EmployeeDAO();
             boolean checkDuplicateAccountId = employeeDAO.checkAcoountDuplicate(account_Id);
-            //Hashing pass
-//            password = HashingPass(password);
-
             if (checkDuplicateAccountId) {
                 employeeErrors.setAccount_IdError("Duplicate AccountID: " + account_Id + "!");
                 request.setAttribute("ERROR_ACCOUNT_INSERT_EMPLOYEE_MSG", employeeErrors.getAccount_IdError());
                 if (!confirmPassword.trim().equals(password.trim())) {
                     employeeErrors.setConfirmPasswordError("Confirm Password does not match Password");
                     request.setAttribute("ERROR_CONFIRM_INSERT_EMPLOYEE_MSG", employeeErrors.getConfirmPasswordError());
-                    url = ADMIN_MANAGE_LIST_EMPLOYEE;
                 }
-                password = HashingPass(password);
                 int count = String.valueOf(phone).length();
                 if (count < 10 || count > 11) {
                     employeeErrors.setPhoneError("Phone length has [10 or 11] chars");
                     request.setAttribute("ERROR_PHONE_INSERT_EMPLOYEE_MSG", employeeErrors.getPhoneError());
-                } else {
-                    EmployeeDTO employeeDTO = new EmployeeDTO(account_Id, password, fullName, phone, address, gender, role, status_Employee);
-                    boolean createEmployee = employeeDAO.addEmployeeAccount(employeeDTO);
-                    if (createEmployee) {
-                        url = ADMIN_MANAGE_LIST_EMPLOYEE;
-                        request.setAttribute("INSERT_EMPLOYEE_MSG", "Create New Employee Success !");
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
-                    }
                 }
-                url = ADMIN_MANAGE_LIST_EMPLOYEE;
+            } else {
+                //Hashing pass
+                password = HashingPass(password);
+                EmployeeDTO employeeDTO = new EmployeeDTO(account_Id, password, fullName, phone, address, gender, role, status_Employee);
+                boolean createEmployee = employeeDAO.addEmployeeAccount(employeeDTO);
+                if (createEmployee) {
+                    url = ADMIN_MANAGE_LIST_EMPLOYEE;
+                    request.setAttribute("INSERT_EMPLOYEE_MSG", "Create New Employee Success !");
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                }
             }
         } catch (SQLException e) {
             log("Account Create New Employee Servlet _ SQLException_ " + e.getMessage());

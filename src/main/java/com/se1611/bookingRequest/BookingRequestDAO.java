@@ -267,7 +267,7 @@ public class BookingRequestDAO {
         return bookingRequest;
     }
 
-    public boolean updateBookingRequest(int request_Id, String image, String name_Book, int quantity_Request, float price_Request, LocalDate date_Request, String note, int status)
+    public boolean updateBookingRequest(int request_Id,  String name_Book, int quantity_Request, float price_Request,  String note, int status_Book,int status)
             throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -275,17 +275,16 @@ public class BookingRequestDAO {
             con = DBHelper.getConnection();
             if (con != null) {
                 String sql = " Update BookingRequest \n"
-                        + "Set image = ?, name_Book = ?, quantity_Request = ?, price_Request = ?, date_Request = ?, note = ?, status = ? \n"
+                        + "Set name_Book = ?, quantity_Request = ?, price_Request = ?, note = ?, status_Book_Request = ? ,status=?\n"
                         + "Where request_Id = ?";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, image);
-                stm.setString(2, name_Book);
-                stm.setInt(3, quantity_Request);
-                stm.setFloat(4, price_Request);
-                stm.setDate(5, Date.valueOf(date_Request));
-                stm.setString(6, note);
-                stm.setInt(7, status);
-                stm.setInt(8, request_Id);
+                stm.setString(1, name_Book);
+                stm.setInt(2, quantity_Request);
+                stm.setFloat(3, price_Request);
+                stm.setString(4, note);
+                stm.setInt(5, status_Book);
+                stm.setInt(6, status);
+                stm.setInt(7, request_Id);
 
                 int rowEffect = stm.executeUpdate();
                 if (rowEffect > 0) {
