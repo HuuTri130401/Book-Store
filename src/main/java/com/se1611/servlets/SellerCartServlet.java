@@ -66,6 +66,7 @@ public class SellerCartServlet extends HttpServlet {
                         if (orderId == 0) {
                             bookId = Integer.parseInt(request.getParameter("book_Id_Cart"));
                             quantity_Order = Integer.parseInt(request.getParameter("quantity"));
+
                         }
                         if (orderId < 0) {
                             if (count == listBookId.size()) {
@@ -75,6 +76,8 @@ public class SellerCartServlet extends HttpServlet {
                             quantity_Order = 1;
                             count++;
                         }
+                        int quantityBook= Integer.parseInt(request.getParameter("quantityBook"));
+
                         float price = bookDAO.getBookById(bookId).getPrice_Book();
                         String book_Name = bookDAO.getBookById(bookId).getName();
                         String image = bookDAO.getBookById(bookId).getImage_Book();
@@ -82,7 +85,7 @@ public class SellerCartServlet extends HttpServlet {
                         date_to_Order = java.sql.Date.valueOf(localDate);
 
                         total_Order = quantity_Order * price;
-                        CartDTO cartDTO = new CartDTO(bookId, book_Name, quantity_Order, price, image, date_to_Order);
+                        CartDTO cartDTO = new CartDTO(bookId, book_Name,quantity_Order, quantityBook, price, image, date_to_Order);
                         if (session.getAttribute("listCart") == null) {
                             ArrayList<CartDTO> listCart = new ArrayList<>();
                             listCart.add(cartDTO);
