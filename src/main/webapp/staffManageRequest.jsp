@@ -176,7 +176,9 @@
                             </c:if>
                         </td>
                         <td>${i.request_Quantity}</td>
-                        <td>${i.request_Price}</td>
+                        <td><fmt:formatNumber value="${i.request_Price}" type="number"/>
+                            <small style="text-decoration:underline">đ</small>
+                        </td>
                         <td>${i.request_Note}</td>
                         <td>${i.request_Date}</td>
                         <td>${i.request_Date_Done}</td>
@@ -306,7 +308,7 @@
                                                 </div>
                                                 <input type="number" name="quantity"
                                                        class="form-control input-sm"
-                                                       style="font-size: 20px" value="${i.request_Quantity}" readonly="readonly">
+                                                       style="font-size: 20px" value="0" readonly="readonly">
                                             </div>
                                         </div>
                                             <%--  End Quantity Book --%>

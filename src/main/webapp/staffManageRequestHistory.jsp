@@ -160,7 +160,9 @@
                                 </c:if>
                             </td>
                             <td>${i.request_Quantity}</td>
-                            <td>${i.request_Price}</td>
+                            <td><fmt:formatNumber value="${i.request_Price}" type="number"/>
+                                <small style="text-decoration:underline">đ</small>
+                            </td>
                             <td>${i.request_Note}</td>
                             <td>${i.request_Date}</td>
                             <td>${i.request_Date_Done}</td>

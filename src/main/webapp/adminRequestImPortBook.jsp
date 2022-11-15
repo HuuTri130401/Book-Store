@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -161,9 +161,10 @@
                                                 <td>
                                                     <p>${bookRequestDTO.quantity_Request}</p>
                                                 </td>
-                                                <td>
-                                                    <p>${bookRequestDTO.price_Request}</p>
+                                                <td><fmt:formatNumber value="${bookRequestDTO.price_Request}" type="number"/>
+                                                    <small style="text-decoration:underline">đ</small>
                                                 </td>
+
                                                 <td>
                                                     <p>${bookRequestDTO.date_Request}</p>
                                                 </td>
