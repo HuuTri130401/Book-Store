@@ -57,7 +57,7 @@ public class BookingRequestDTO {
     private float total_Order = price_Request * quantity_Request;
 
     public float getTotal_Order() {
-        return total_Order;
+        return price_Request * quantity_Request;
     }
 
     public void setTotal_Order(float total_Order) {

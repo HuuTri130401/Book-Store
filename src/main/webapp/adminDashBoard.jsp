@@ -52,7 +52,7 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
-                        <a href="#">
+                        <a href="./adminOverViewPage">
                             <i class='bx bx-home'></i>
                             <span class="links_name">Overview</span>
                         </a>
@@ -170,7 +170,7 @@
                             <div class="overview-tableEmployee">
                                 <h2 id="nameTable">TOTAL ORDER / MONTH</h2>
                                 <div class="tableEmployee">
-                                    <table class="employees">
+                                    <table id="totalOrder">
                                         <c:set var="listStatisticTotalIn12Month" value="${requestScope.TOTAL_ORDER_EACH_MONTH}"/>
                                         <c:if test="${not empty listStatisticTotalIn12Month}">
                                             <thead>
@@ -215,7 +215,7 @@
                             <div class="overview-tableEmployee">
                                 <h2 id="nameTable">TOTAL BOOKING REQUEST / MONTH</h2>
                                 <div class="tableEmployee">
-                                    <table class="employees">
+                                    <table id="totalBooking">
                                         <c:set var="listStatisticTotalBookingRequestIn12Month" value="${requestScope.TOTAL_BOOKING_REQUEST_EACH_MONTH}"/>
                                         <c:if test="${not empty listStatisticTotalBookingRequestIn12Month}">
                                             <thead>
@@ -239,7 +239,7 @@
                                                             ${listTotalBookingRequestDTO.date_To_Order_Year}
                                                         </td>
                                                         <td>
-                                                            <%--${listTotalBookingRequestDTO.total_Order}--%>
+                                                            ${listTotalBookingRequestDTO.total_Order}
                                                         </td>
                                                     </tr>
                                                 </c:forEach>

@@ -256,7 +256,7 @@ body {
     padding: 2rem 2rem 2rem 2rem;
 }
 
-.addBookingRequest {
+.wraper_addBookingRequest_nameTable .addBookingRequest {
     text-decoration: none;
     color: #fff;
     background-color: green;
