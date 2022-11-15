@@ -346,6 +346,8 @@ public class StaffBookServlet extends HttpServlet {
                         String nameBookRequest = request.getParameter("bookNameRequest");
                         checkStatusBook(nameBookRequest, listRequest, request);
                         //Get IdBook In List Book
+                        int quantityRequset=Integer.parseInt(request.getParameter("qtyRequest"));
+                        float priceRequset=Float.parseFloat(request.getParameter("priceRequest"));
                         int bookIdRequest = GetBookId(nameBookRequest,listBook);
                         //If book Deleted
                         if(bookIdRequest==0){
@@ -360,6 +362,8 @@ public class StaffBookServlet extends HttpServlet {
                         //set Attribute List Book
                         session.setAttribute("listBook", listBook);
                         listBook = daoBook.getCategoryBook(categoryIdRequest, first, last);
+                        request.setAttribute("quantityRequset", quantityRequset);
+                        request.setAttribute("priceRequset", priceRequset);
                         request.setAttribute("bookIdServlet", bookIdRequest);
                         request.setAttribute("nameCategory", listBook.get(0).getCategoryName());
                         break;

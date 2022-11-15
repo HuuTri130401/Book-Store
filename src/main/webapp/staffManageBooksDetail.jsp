@@ -366,7 +366,7 @@
                                 <span class="input-group-text"><i class="fa fa-address-book"></i></span>
                             </div>
                             <input type="text" name="quantityImportation" class="form-control input-sm"
-                                   style="font-size: 15px" placeholder="Quantity">
+                                   style="font-size: 15px" placeholder="Quantity" value="${quantityRequset}">
                         </div>
                     </div>
 
@@ -377,7 +377,7 @@
                                 <span class="input-group-text"><i class="fa fa-address-book"></i></span>
                             </div>
                             <input type="text" name="priceImportation" class="form-control input-sm"
-                                   style="font-size: 15px" placeholder="Price">
+                                   style="font-size: 15px" placeholder="Price" value="${priceRequset}">
                         </div>
                     </div>
 

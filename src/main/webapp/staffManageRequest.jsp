@@ -166,7 +166,7 @@
                                  src="<c:url value="/images/${i.request_Image}"/>"/></td>
                         <td>
                             <c:if test="${i.status_Book_Request==false}">
-                                <a href="staffBookAction?action=bookDetailRequest&bookNameRequest=${i.request_Name_Book}">
+                                <a href="staffBookAction?action=bookDetailRequest&bookNameRequest=${i.request_Name_Book}&qtyRequest=${i.request_Quantity}&priceRequest=${i.request_Price}">
                                         ${i.request_Name_Book}</a>
                             </c:if>
 
