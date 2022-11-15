@@ -173,9 +173,8 @@
                                 <c:if test="${not empty listEmployees}">
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
                                             <th>ID</th>
-                                            <th>AccountID</th>
+                                            <th>Account</th>
                                             <th>Password</th>
                                             <th>Name</th>
                                             <th>Phone</th>
@@ -191,7 +190,6 @@
                                         <c:forEach var="employeeDTO" items="${listEmployees}" varStatus="counter">
                                         <form action="adminUpdateEmployeeAction">
                                             <tr>
-                                                <td>${counter.count}</td>
                                                 <td>
                                                     ${employeeDTO.employee_Id}
                                                     <input class="textInforEmployee" type="hidden"

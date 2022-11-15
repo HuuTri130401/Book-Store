@@ -113,7 +113,10 @@
                         <div class="box">
                             <div class="left-side">
                                 <div class="boxtopic">Total Order</div>
-                                <div class="number" style="color: #267871;">${sumOfTotalOrder} Đ</div>
+                                <div class="number" style="color: #267871;">
+                                   <fmt:formatNumber value="${sumOfTotalOrder}" type="number"/>
+                                        <small style="text-decoration:underline">Đ</small>
+                                   </div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box1'></i>
                                     <span class="text">During The Current Year</span>
@@ -125,7 +128,10 @@
                         <div class="box">
                             <div class="left-side">
                                 <div class="boxtopic">Total Money Of Request</div>
-                                <div class="number" style="color: #0d8cba;">${sumTotalMoneyLastMonthBookRequest} Đ</div>
+                                <div class="number" style="color: #0d8cba;">
+                                <fmt:formatNumber value="${sumTotalMoneyLastMonthBookRequest}" type="number"/>
+                                    <small style="text-decoration:underline">Đ</small>
+                                </div>
                                 <div class="indicator">
                                     <i class='bx bx-up-arrow-alt box2'></i>
                                     <span class="text">Money Book Request Last Month</span>
@@ -193,9 +199,10 @@
                                                         <td>
                                                             ${listTotalDTO.date_To_Order_Year}
                                                         </td>
-                                                        <td>
-                                                            ${listTotalDTO.total_Order}
+                                                        <td><fmt:formatNumber value="${listTotalDTO.total_Order}" type="number"/>
+                                                            <small style="text-decoration:underline">đ</small>
                                                         </td>
+
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -238,8 +245,8 @@
                                                         <td>
                                                             ${listTotalBookingRequestDTO.date_To_Order_Year}
                                                         </td>
-                                                        <td>
-                                                            ${listTotalBookingRequestDTO.total_Order}
+                                                        <td><fmt:formatNumber value="${listTotalBookingRequestDTO.total_Order}" type="number"/>
+                                                            <small style="text-decoration:underline">đ</small>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>

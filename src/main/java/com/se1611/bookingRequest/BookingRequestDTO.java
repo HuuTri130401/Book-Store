@@ -51,6 +51,7 @@ public class BookingRequestDTO {
         this.status = status;
         this.status_Book_Request = status_Book_Request;
     }
+    
     private float total = price_Request * quantity_Request;
     private int date_To_Order_Month;
     private int date_To_Order_Year;
@@ -86,8 +87,6 @@ public class BookingRequestDTO {
         this.date_To_Order_Year = date_To_Order_Year;
     }
 
-    
-    
     public int getRequest_Id() {
         return request_Id;
     }

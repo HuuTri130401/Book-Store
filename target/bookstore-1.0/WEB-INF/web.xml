@@ -175,7 +175,7 @@
         <param-name>file-upload</param-name>
         <param-value>
             C:\Users\Nguye\Documents\GitHub\BookStore_SWP\src\main\webapp\images
-            <!--            \src\main\webapp\images-->
+                        <!--\src\main\webapp\images-->
         </param-value>
     </context-param>
     <!--   End Location save Image when add New Book-->

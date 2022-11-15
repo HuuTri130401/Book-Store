@@ -137,12 +137,13 @@
                                                 <td>
                                                     ${importationDTO.import_Quantity_Request}
                                                 </td>
-                                                <td>
-                                                    ${importationDTO.import_Detail_Price_Book}
+                                                <td><fmt:formatNumber value="${importationDTO.import_Detail_Price_Book}" type="number"/>
+                                                    <small style="text-decoration:underline">đ</small>
                                                 </td>
-                                                <td>
-                                                    ${importationDTO.import_Detail_Total}
+                                                <td><fmt:formatNumber value="${importationDTO.import_Detail_Total}" type="number"/>
+                                                    <small style="text-decoration:underline">đ</small>
                                                 </td>
+
                                                 <td>
                                                     ${importationDTO.import_Date}
                                                 </td>
