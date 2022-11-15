@@ -34,7 +34,7 @@ public class BookingRequestDAO {
             if (con != null) {
                 String sql = "select Month(date_Request) as m, Year(date_Request) as y, sum(quantity_Request * price_Request) as total\n"
                         + "From BookingRequest\n"
-                        + "Where Year(GETDATE()) = Year(date_Request)\n"
+                        + "Where Year(GETDATE()) = Year(date_Request) AND Status = 2\n"
                         + "group by Month(date_Request), Year(date_Request)";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
