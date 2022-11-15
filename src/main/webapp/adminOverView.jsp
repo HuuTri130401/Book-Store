@@ -8,9 +8,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Manage Importations</title>
+        <title>Admin Dashboard</title>
         <!-- link file CSS -->
-        <link rel="stylesheet" href="./css/adminManageImportationsStyle.css">
+        <link rel="stylesheet" href="./css/adminOverViewStyle.css">
         <!-- BoxIcon CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
@@ -32,11 +32,8 @@
                 <div class="seachbox-profile">
                     <div class="wraper_searchbox_profile">
                         <div class="search-box">
-                            <!--SEARCH_EMPLOYEE-->
-                            <form action="adminShowListImportations">
-                                <input type="text" placeholder="Search... " name="txtSearch" value="${param.txtSearch}">
-                                <button type='submit'><i class='bx bx-search-alt-2'></i></button>
-                            </form>
+                            <input type="text" placeholder="Search...">
+                            <button type='submit'><i class='bx bx-search-alt-2'></i></button>
                         </div>
                         <div class="profile_details">
                             <img src="./images/admin1.png" alt="image admin">
@@ -90,12 +87,6 @@
                             <span class="links_name">Importation</span>
                         </a>
                     </li>
-<!--                    <li>
-                        <a href="./adminShowListOrders">
-                            <i class='bx bx-list-ol'></i>
-                            <span class="links_name">Order</span>
-                        </a>
-                    </li>-->
                     <li>
                         <a href="./logoutAction">
                             <i class='bx bx-log-out'></i>
@@ -107,68 +98,70 @@
 
             <!-- home content -->
             <div class="home-section">
+
+                <h2 style="text-align: center;
+                    align-items: center; padding-top: 1.5rem;
+                    color: #fab804ea;">
+                    PHƯƠNG NAM BOOKSTORE MANAGEMENT    
+                </h2>
                 <!-- home-content -->
                 <div class="home-content">
-                    <div class="overview-tableEmployee">
-                        <h2 id="nameTable">LIST OF IMPORTATIONS</h2>
-                        <div class="tableEmployee">
-                            <table id="employees">
-                                <c:set var="listImportations" value="${requestScope.LIST_IMPORTATIONS}"/>
-                                <c:if test="${not empty listImportations}">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>NameBook</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Total</th>
-                                            <th>Date Importation</th>
-                                            <th>Note</th>
-                                            <th>Employee Implement</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="importationDTO" items="${listImportations}" varStatus="counter">
-                                            <tr>
-                                                <td>${counter.count}</td>
-                                                <td>
-                                                    ${importationDTO.import_Name_Book}
-                                                </td>
-                                                <td>
-                                                    ${importationDTO.import_Quantity_Request}
-                                                </td>
-                                                <td>
-                                                    ${importationDTO.import_Detail_Price_Book}
-                                                </td>
-                                                <td>
-                                                    ${importationDTO.import_Detail_Total}
-                                                </td>
-                                                <td>
-                                                    ${importationDTO.import_Date}
-                                                </td>
-                                                <td>
-                                                    ${importationDTO.import_Note}
-                                                </td>
-                                                <td>
-                                                    ${importationDTO.import_Employee}
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </c:if>
-                            <c:if test="${empty listImportations}">
-                                <h2 style="text-align: center;
-                                    align-items: center;
-                                    color: red">
-                                    NOT HAVE THE RECORD !       
-                                </h2>
-                            </c:if>
+
+                    <div class="overview-boxes">
+
+
+                        <div class="box">
+                            <div class="left-side">
+                                <div class="boxtopic">Dashboard</div>
+                                <div class="number"><img class="imageOverview" src="./images/adminDashboard.png" alt="dashboardImg"/></div>
+                                <div class="indicator">
+                                    <i class='bx bx-notepad'></i>
+                                    <span class="text">Show Statistic Values</span>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="box">
+                            <div class="left-side">
+                                <div class="boxtopic">Employees</div>
+                                <div class="number"><img class="imageOverview" src="./images/adminEmployees.png" alt="empImg"/></div>
+                                <div class="indicator">
+                                    <i class='bx bx-notepad'></i>
+                                    <span class="text">Show List Information Of Staffs And Sellers</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <div class="left-side">
+                                <div class="boxtopic">Booking Request</div>
+                                <div class="number"><img class="imageOverview" src="./images/adminBookingRequest.png" alt="BookRequestImg"/></div>
+                                <div class="indicator">
+                                    <i class='bx bx-notepad'></i>
+                                    <span class="text">Show List Booking Request </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <div class="left-side">
+                                <div class="boxtopic">Books</div>
+                                <div class="number"><img class="imageOverview" src="./images/adminBook.png" alt="BookImg"/></div>
+                                <div class="indicator">
+                                    <i class='bx bx-notepad'></i>
+                                    <span class="text">Show Infor Of List Books</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
-            </div>
+            </div>  
         </div>
         <script src="./js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+        <!--<script src="./js/my_chart.js"></script>-->
     </body>
+
 </html>

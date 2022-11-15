@@ -52,7 +52,7 @@
                 <!-- link in sidebar -->
                 <ul class="nav-links">
                     <li>
-                        <a href="#">
+                        <a href="./adminOverViewPage">
                             <i class='bx bx-home'></i>
                             <span class="links_name">Overview</span>
                         </a>
