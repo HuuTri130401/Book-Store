@@ -219,8 +219,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-address-book"></i></span>
                                             </div>
-                                            <input type="text" name="quantityUpdate" class="form-control input-sm"
-                                                   style="font-size: 15px" placeholder="Quantity">
+                                            <input type="number" name="quantityUpdate" class="form-control input-sm"
+                                                   style="font-size: 15px" placeholder="Quantity" required min="1" max="${x.quantity_Book}">
                                         </div>
                                     </div>
                             </div>

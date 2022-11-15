@@ -104,7 +104,7 @@
                         <a style="color: black" href="sellerBookAction?action=bookPage1">Category </a> >
                         <a style="color: #17A2B8" href="sellerBookAction?action=${nameCategory}"> ${nameCategory}</a>
                     </div>
-                    <c:forEach items="${listBook}" var="b">
+                    <c:forEach items="${listBook}" var="b" varStatus="loop">
                         <c:set var="bookId" value="${bookIdServlet}"></c:set>
                         <c:if test="${b.book_Id==bookId}">
 
@@ -125,7 +125,7 @@
                                         <%--   Button add Add Cart and Importation--%>
                                     <div class="button">
                                         <button class="inventory btn btn-info" data-toggle="modal"
-                                                data-target="#myModal">Add Cart
+                                                data-target="#myModal${loop.index}">Add Cart
                                         </button>
 
                                     </div>
@@ -138,6 +138,45 @@
                                 </div>
                             </div>
                             <%--                            End Show Item Book--%>
+                            <%--Form Add Cart--%>
+                            <div class="modal fade" id="myModal${loop.index}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <header class="head-form">
+                                            <h2 style="text-align: center;font-size: 25px;color: red">Add Book To Cart</h2>
+                                        </header>
+
+                                        <div class="modal-body">
+                                                <%--Form --%>
+                                            <form action="sellerCartAction?action=addToCart" method="POST">
+                                                    <%--  ID BOOK Insert To Inventory SQL--%>
+                                                <input type="hidden" name="book_Id_Cart" value="${bookIdServlet}"/>
+                                                <input type="hidden" name="orderId" value="0"/>
+                                                        <input type="hidden" name="quantityBook" value="${b.quantity_Book}"/>
+                                                    <%--  DO Quantity Add to Cart --%>
+
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                                        </div>
+                                                        <input type="number" name="quantity" class="form-control input-sm"
+                                                               style="font-size: 15px" placeholder="Quantity" required min="1" max="${b.quantity_Book}">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer" id="modal-footer">
+                                            <button type="submit" class="btn btn-info add">Add</button>
+                                            </form>
+                                            <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--End Form Add Cart--%>
+
                         </c:if>
                     </c:forEach>
 
@@ -145,44 +184,6 @@
 
 <script src="./js/script.js"></script>
 
-<%--Form Add Cart--%>
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <header class="head-form">
-                <h2 style="text-align: center;font-size: 25px;color: red">Add Book To Cart</h2>
-            </header>
-
-            <div class="modal-body">
-                <%--Form --%>
-                <form action="sellerCartAction?action=addToCart" method="POST">
-                    <%--  ID BOOK Insert To Inventory SQL--%>
-                    <input type="hidden" name="book_Id_Cart" value="${bookIdServlet}"/>
-                        <input type="hidden" name="orderId" value="0"/>
-
-                    <%--  DO Quantity Add to Cart --%>
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-address-book"></i></span>
-                            </div>
-                            <input type="text" name="quantity" class="form-control input-sm"
-                                   style="font-size: 15px" placeholder="Quantity">
-                        </div>
-                    </div>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer" id="modal-footer">
-                <button type="submit" class="btn btn-info add">Add</button>
-                </form>
-                <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<%--End Form Add Cart--%>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

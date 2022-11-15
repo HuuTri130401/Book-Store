@@ -157,7 +157,7 @@
                                     <div class="button">
 
                                         <button class="inventory btn btn-danger" data-toggle="modal"
-                                                data-target="#myModal">Inventory
+                                                data-target="#myModal${loop.index}">Inventory
                                         </button>
                                             <%-- START Check Book In List Request to Display buton Importation--%>
                                         <c:choose>
@@ -337,6 +337,57 @@
                                 </div>
                             </div>
                             <%--End Form Update Book--%>
+
+                            <%--Form Add to Inventory--%>
+                            <div class="modal fade" id="myModal${loop.index}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <header class="head-form">
+                                            <h2 style="padding-left: 96px;font-size: 25px;color: red">Add Book To Inventory</h2>
+                                        </header>
+
+                                        <div class="modal-body">
+                                                <%--Form --%>
+                                            <form action="staffInventoryAction?action=insertInventory" method="POST">
+                                                    <%--  ID BOOK Insert To Inventory SQL--%>
+                                                <input type="hidden" name="book_Id_Inventory" value="${bookIdServlet}"/>
+
+                                                    <%--  DO Note And Quantity Inventory --%>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-briefcase"></i></span>
+                                                        </div>
+                                                        <select style="font-size: 15px" class="form-control" name="note">
+                                                            <option >Reason</option>
+                                                            <option value="Moldy Book">Moldy Book</option>
+                                                            <option value="Book Lose Team">Book Lose Team</option>
+                                                            <option value="Book Is Bent">Book Is Bent</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                                                        </div>
+                                                        <input type="number" name="quantity" class="form-control input-sm"
+                                                               style="font-size: 15px" placeholder="Quantity" required min="1" max="${b.quantity_Book}">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer" id="modal-footer">
+                                            <button type="submit" class="btn btn-info add">Add</button>
+                                            </form>
+                                            <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--End Form Add to Inventory--%>
                         </c:if>
                     </c:forEach>
 </section>
@@ -410,56 +461,7 @@
 </div>
 <%--End Form Add to Importation--%>
 
-<%--Form Add to Inventory--%>
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
 
-            <header class="head-form">
-                <h2 style="padding-left: 96px;font-size: 25px;color: red">Add Book To Inventory</h2>
-            </header>
-
-            <div class="modal-body">
-                <%--Form --%>
-                <form action="staffInventoryAction?action=insertInventory" method="POST">
-                    <%--  ID BOOK Insert To Inventory SQL--%>
-                    <input type="hidden" name="book_Id_Inventory" value="${bookIdServlet}"/>
-
-                    <%--  DO Note And Quantity Inventory --%>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-briefcase"></i></span>
-                            </div>
-                            <select style="font-size: 15px" class="form-control" name="note">
-                                <option >Reason</option>
-                                <option value="Moldy Book">Moldy Book</option>
-                                <option value="Book Lose Team">Book Lose Team</option>
-                                <option value="Book Is Bent">Book Is Bent</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-address-book"></i></span>
-                            </div>
-                            <input type="text" name="quantity" class="form-control input-sm"
-                                  style="font-size: 15px" placeholder="Quantity">
-                        </div>
-                    </div>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer" id="modal-footer">
-                <button type="submit" class="btn btn-info add">Add</button>
-                </form>
-                <button class="btn btn-warning xclose" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<%--End Form Add to Inventory--%>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
