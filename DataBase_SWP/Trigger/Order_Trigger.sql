@@ -86,7 +86,7 @@ from OrderDetail
 where [order_Detail_Id]=5
 
 -- test trigger works on table book
-select [book_Id],[name],[quantity_Book]
+select [book_Id],[name_Book],[quantity_Book]
 from Book 
 where [book_Id]=8
 

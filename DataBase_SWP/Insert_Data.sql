@@ -346,7 +346,7 @@ original Japanese title. In Vietnam, the anime series has been shown on HTV3 sin
 insert BookingRequest (image,name_Book,quantity_Request,price_Request,date_Request,date_Request_Done,note,status,status_Book_Request)
 values ('BGCC.jpg',N'Bài Giảng Cuối Cùng',10,80000,'2022-10-1','2022-10-4',N'Sách có kèm quà lưu niệm',2,0)
 insert BookingRequest (image,name_Book,quantity_Request,price_Request,date_Request,date_Request_Done,note,status,status_Book_Request)
-values ('OGVBC.jpg',N'LOL',10,80000,'2022-10-1','2022-10-5',N'Sách có poster',1,1)
+values ('OGVBC.jpg',N'Ông Già Cô Đơn',10,80000,'2022-10-1','2022-10-5',N'Sách có poster',1,1)
 
 /* Insert Importation*/
 
@@ -358,7 +358,12 @@ values (2,'2022-10-1',1)
 insert ImportationDetail([import_Id],quantity_Import_Detail,
 [price_Import_Detail],[total_Import_Detail],[note],status,[book_Id])
 values (1,10,80000,800000,'importation enough book',1,1)
-
+insert ImportationDetail([import_Id],quantity_Import_Detail,
+[price_Import_Detail],[total_Import_Detail],[note],status,[book_Id])
+values (1,10,80000,800000,'importation enough book',1,7)
+insert ImportationDetail([import_Id],quantity_Import_Detail,
+[price_Import_Detail],[total_Import_Detail],[note],status,[book_Id])
+values (1,10,90000,900000,'importation enough book',1,5)
 /* Insert Invetory*/
 
 insert Inventory (employee_Id,date_Into_Inventory)
@@ -376,7 +381,9 @@ values (1,8,3,N'Book Lose Team',1)
 insert [Order](employee_Id,date_To_Oder,quantity_Order,total_Order,status)
 values (3,'2022-10-4',2,1068000,1)
 insert [Order](employee_Id,date_To_Oder,quantity_Order,total_Order,status)
-values (4,'2022-10-5',1,360000,1)
+values (4,'2022-11-5',1,360000,1)
+insert [Order](employee_Id,date_To_Oder,quantity_Order,total_Order,status)
+values (3,'2022-9-27',2,1068000,1)
 
 /*Insert Order Detail*/
 
@@ -386,3 +393,5 @@ insert OrderDetail([order_Id],[book_Id],[quantity_Order_Detail],[total_Order_Det
 values (1,4,5,912000)
 insert OrderDetail([order_Id],[book_Id],[quantity_Order_Detail],[total_Order_Detail])
 values (2,12,3,360000)
+insert OrderDetail([order_Id],[book_Id],[quantity_Order_Detail],[total_Order_Detail])
+values (3,8,1,106800)
